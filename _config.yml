@@ -82,13 +82,13 @@ analytics:
 # Site Author
 author:
   name             : "Shivam Agarwal"
-  avatar           : "profile.png"
+  avatar           : "profile.jpg"
   bio              : "PhD candidate"
   location         :
-  employer         : "University of Duisburg-Essen, Germany"
+  employer         : "University of Duisburg-Essen"
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=9-ma8xIAAAAJ&hl=en"
-  email            : "shivam.agarwal[at]paluno[dot]uni-due[dot]de"
+  email            : "shivam.agarwal@paluno.uni-due.de"
   researchgate     :  "https://www.researchgate.net/profile/Shivam-Agarwal-4"
   uri              :
   bitbucket        :
@@ -103,7 +103,7 @@ author:
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         :
+  linkedin         :  https://www.linkedin.com/in/shivamlearning/
   orcid            : "https://orcid.org/my-orcid?orcid=0000-0003-3158-2624"
   pinterest        :
   soundcloud       :
