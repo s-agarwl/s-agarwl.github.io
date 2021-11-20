@@ -1,9 +1,9 @@
 ---
-title: "Visualizing AI Playtesting Data of 2D Side-scrolling Games"
+title: "A Design and Application Space for Visualizing User Sessions of Virtual and Mixed Reality Environments"
 collection: publications
 permalink: /publication/2020-09-01-A-Design-and-Application-Space-for-Visualizing-User-Sessions-of-Virtual-and-Mixed-Reality-Environments
 date: 2020-09-01
-venue: 'In the proceedings of IEEE Conference on Games'
+venue: 'In the proceedings of Vision, Modeling, and Visualization'
 paperurl: '/files/Agarwal2020Design.pdf'
 image: '/files/Agarwal2020Design.PNG'
 code: 'https://osf.io/2hstc/'

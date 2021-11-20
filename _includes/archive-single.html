@@ -53,6 +53,9 @@
       <p>
       {% if post.citation %}
         {{ post.citation }}
+        {% if post.doiurl and post.doi %}
+            <a href="{{ post.doiurl }}" target="_blank" title="DOI">{{ post.doi }}</a>
+        {% endif %}
       {% endif %}
       <!-- <br> -->
       {% if post.link %}
@@ -67,9 +70,9 @@
       {% if post.github %}
         <a href="{{ post.github }}" target="_blank" title="GitHub"><i class="fab fa-fw fa-github zoom" aria-hidden="true"></i></a>
       {% endif %}
-      {% if post.doiurl %}
+      <!-- {% if post.doiurl %}
         <a href="{{ post.doiurl }}" target="_blank" target="_blank" title="DOI"><i class="fas fa-fw fa-link zoom" aria-hidden="true" ></i></a>
-      {% endif %}
+      {% endif %} -->
       {% if post.video %}
         <a href="{{ post.video }}" target="_blank" title="Video"><i class="fas fa-fw fa-video zoom" aria-hidden="true" ></i></a>
       {% endif %}

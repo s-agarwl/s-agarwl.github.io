@@ -1,5 +1,5 @@
 ---
-title: "A Design and Application Space for Visualizing User Sessions of Virtual and Mixed Reality Environments"
+title: "Visualizing Sets and Changes in Membership Using Layered Set Intersection Graphs"
 collection: publications
 permalink: /publication/2020-09-01-Visualizing-Sets-and-Changes-in-Membership-Using-Layered-Set-Intersection-Graphs
 date: 2020-09-01
