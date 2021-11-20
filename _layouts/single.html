@@ -42,13 +42,49 @@ layout: default
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
         
+        {% if page.image %}
+        <br/>
+            <img src="{{ page.image }}" alt="Image" width="90%" class="center" />
+        {%endif%}  
 
         {%if page.abstract%}
-          <p><b>Abstract</b>: {{ page.abstract }}</p>
+        <br/>
+        <br/>
+          <p><b>Abstract</b>: 
+            <blockquote>
+                <p>
+                {{ page.abstract }}
+                </p>
+                </blockquote>
+            </p>        
+        <br/>
         {%endif%}  
-        {% if page.citation and page.paperurl%}
-          <p>Recommended citation: {{ page.citation }} <a href="{{ page.paperurl }}"><u>{{ page.paperurl }}</u></a></p>
+
+        {% if page.paperurl %}
+            <span class="list_of_tags"></span><a href="{{ page.paperurl }}" target="_blank" title="PDF"><i class="fas fa-fw fa-file-pdf zoom" aria-hidden="true"></i> Download Paper</a>
+        {% endif %}
+        {% if page.demo %}
+            <span class="list_of_tags"></span><a href="{{ page.demo }}" target="_blank" title="PDF"><i class="fas fa-fw fa-desktop zoom" aria-hidden="true"></i> Hosted Demo</a>
+        {% endif %}
+        {% if page.code %}
+            <span class="list_of_tags"></span><a href="{{ page.code }}" target="_blank" title="PDF"><i class="fas fa-fw fa-code zoom" aria-hidden="true"></i> Code/Supplementary Material</a>
+        {% endif %}
+        {% if page.doiurl %}
+            <span class="list_of_tags"></span><a href="{{ page.doiurl }}" target="_blank" title="DOI"><i class="fas fa-fw fa-link zoom" aria-hidden="true" ></i> DOI</a>
+        {% endif %}
+
+        {% if page.video and page.youtubeid %}
+        <br/>
+        <br/>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ page.youtubeid }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- <a href="{{ page.video }}" target="_blank" title="Video">Watch the video<i class="fas fa-fw fa-video zoom" aria-hidden="true" ></i></a> -->
+        {% endif %}
+
+        {% if page.citation %}
+        <br/>
+          <p>Recommended citation: {{ page.citation }}</p>
         {% elsif page.citation %}
+        <br/>
           <p>Recommended citation: {{ page.citation }} </p>
         {% endif %}
     

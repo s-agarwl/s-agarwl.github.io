@@ -59,19 +59,22 @@
         <a href="{{ post.link }}"><i class="fas fa-fw fa-link zoom" aria-hidden="true"></i></a>
       {% endif %}
       {% if post.paperurl %}
-        <a href="{{ post.paperurl }}" target="_blank"><i class="fas fa-fw fa-file-pdf zoom" aria-hidden="true" ></i></a>
+        <a href="{{ post.paperurl }}" target="_blank" title="PDF"><i class="fas fa-fw fa-file-pdf zoom" aria-hidden="true"></i></a>
       {% endif %}
       {% if post.code %}
-        <a href="{{ post.code }}"><i class="fas fa-fw fa-code zoom" aria-hidden="true"></i></a>
+        <a href="{{ post.code }}" target="_blank" title="Code"><i class="fas fa-fw fa-code zoom" aria-hidden="true"></i></a>
       {% endif %}
       {% if post.github %}
-        <a href="{{ post.github }}"><i class="fab fa-fw fa-github zoom" aria-hidden="true"></i></a>
+        <a href="{{ post.github }}" target="_blank" title="GitHub"><i class="fab fa-fw fa-github zoom" aria-hidden="true"></i></a>
       {% endif %}
       {% if post.doiurl %}
-        <a href="{{ post.doiurl }}" target="_blank"><i class="fas fa-fw fa-link zoom" aria-hidden="true" ></i></a>
+        <a href="{{ post.doiurl }}" target="_blank" target="_blank" title="DOI"><i class="fas fa-fw fa-link zoom" aria-hidden="true" ></i></a>
       {% endif %}
       {% if post.video %}
-        <a href="{{ post.video }}" target="_blank"><i class="fas fa-fw fa-video zoom" aria-hidden="true" ></i></a>
+        <a href="{{ post.video }}" target="_blank" title="Video"><i class="fas fa-fw fa-video zoom" aria-hidden="true" ></i></a>
+      {% endif %}
+      {% if post.demo %}
+        <a href="{{ post.demo }}" target="_blank" title="Demo"><i class="fas fa-fw fa-desktop zoom" aria-hidden="true" ></i></a>
       {% endif %}
       </p>
     {% elsif post.collection == 'posts' and post.date %}
