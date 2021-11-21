@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2020-09-01-Visualizing-Sets-and-Changes-in-Membership-Using-Layered-Set-Intersection-Graphs
 date: 2020-09-01
 venue: 'In the proceedings of Vision, Modeling, and Visualization'
+bibid: 'Agarwal2020VisualizingSets'
 paperurl: '/files/Agarwal2020VisualizingSets.pdf'
 image: '/files/Agarwal2020VisualizingSets.PNG'
 code: 'https://osf.io/3nd9h/'

@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2020-01-01-How-Visualization-PhD-Students-Cope-with-Paper-Rejections
 date: 2020-01-01
 venue: 'In the proceedings of IEEE VIS workshop on Celebrating the Scientific Value of Failure (FailFest)'
+bibid: 'Agarwal2020How'
 paperurl: '/files/Agarwal2020How.pdf'
 image: '/files/Agarwal2020How.PNG'
 code: 'https://osf.io/vgj36/'

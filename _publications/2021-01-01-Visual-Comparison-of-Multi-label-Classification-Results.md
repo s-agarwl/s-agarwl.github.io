@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2021-01-01-Visual-Comparison-of-Multi-label-Classification-Results
 date: 2021-01-01
 venue: 'In the proceedings of Vision, Modeling, and Visualization'
+bibid: 'Krause2021Visual'
 paperurl: '/files/Krause2021Visual.pdf'
 image: '/files/Krause2021Visual.PNG'
 demo: 'https://vis-tools.paluno.uni-due.de/mlc'

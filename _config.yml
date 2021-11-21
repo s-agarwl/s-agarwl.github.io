@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Shivam Agarwal"
+title                    : "About me"
 title_separator          : "-"
 name                     : &name "Shivam Agarwal"
 description              : &description "personal description"
@@ -83,13 +83,13 @@ analytics:
 author:
   name             : "Shivam Agarwal"
   avatar           : "profile2.jpg"
-  bio              : "PhD candidate"
-  location         :
+  bio              : "PhD candidate (2017-)"
+  location         : "Germany"
   employer         : "University of Duisburg-Essen"
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=9-ma8xIAAAAJ&hl=en"
-  email            : "shivam.agarwal@paluno.uni-due.de"
-  researchgate     :  "https://www.researchgate.net/profile/Shivam-Agarwal-4"
+  email            : 
+  researchgate     : "https://www.researchgate.net/profile/Shivam-Agarwal-4"
   uri              :
   bitbucket        :
   codepen          :
@@ -103,8 +103,8 @@ author:
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         :  https://www.linkedin.com/in/shivamlearning/
-  orcid            : "https://orcid.org/my-orcid?orcid=0000-0003-3158-2624"
+  linkedin         : "shivamlearning"
+  orcid            : "https://orcid.org/0000-0003-3158-2624"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username

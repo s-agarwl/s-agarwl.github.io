@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2020-05-01-Set-Streams-Visual-Exploration-of-Dynamic-Overlapping-Sets
 date: 2020-05-01
 venue: 'Computer Graphics Forum'
+bibid: 'Agarwal2020SetStreams'
 paperurl: '/files/Agarwal2020SetStreams.pdf'
 image: '/files/Agarwal2020SetStreams.PNG'
 code: 'https://osf.io/86bkj/'
