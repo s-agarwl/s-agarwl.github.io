@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Shivam Agarwal"
+title: "About me"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
@@ -13,7 +13,7 @@ I am a PhD candidate at University of Duisburg-Essen, Germany. My research inter
 
 I am happy to connect, collaborate, and chat about data visualization. Please feel free to write me an e-mail: shivam[dot]agarwal[at_the_rate]uni-due[dot]de
 
-**Keywords**: data visualization, visual analytics, dynamic set/graph visualization, artificial intelligence (AI), game analytics, AI playtesting, and learning analytics.
+**Keywords**: exploratory data analysis, information visualization, visual analytics, dynamic set/graph visualization, artificial intelligence (AI), and game analytics.
 
 
 {% include gallery.html %}

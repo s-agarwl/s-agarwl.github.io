@@ -1,10 +1,10 @@
 ---
 title: "A Design and Application Space for Visualizing User Sessions of Virtual and Mixed Reality Environments"
 collection: publications
-permalink: /publication/2020-09-01-A-Design-and-Application-Space-for-Visualizing-User-Sessions-of-Virtual-and-Mixed-Reality-Environments
 date: 2020-09-01
 venue: 'In the proceedings of Vision, Modeling, and Visualization'
 bibid: 'Agarwal2020Design'
+permalink: /publication/Agarwal2020Design
 paperurl: '/files/Agarwal2020Design.pdf'
 image: '/files/Agarwal2020Design.PNG'
 code: 'https://osf.io/2hstc/'

@@ -1,10 +1,10 @@
 ---
 title: "Bombalytics: Visualization of Competition and Collaboration Strategies of Players in a Bomb Laying Game"
 collection: publications
-permalink: /publication/2020-05-01-Bombalytics-Visualization-of-Competition-and-Collaboration-Strategies-of-Players-in-a-Bomb-Laying-Game
 date: 2020-05-01
 venue: 'Computer Graphics Forum'
 bibid: 'Agarwal2020Bombalytics'
+permalink: /publication/Agarwal2020Bombalytics
 paperurl: '/files/Agarwal2020Bombalytics.pdf'
 image: '/files/Agarwal2020Bombalytics.PNG'
 code: 'https://osf.io/2vxh4/'

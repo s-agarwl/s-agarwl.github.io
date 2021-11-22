@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "About me"
+title                    : "Shivam Agarwal"
 title_separator          : "-"
 name                     : &name "Shivam Agarwal"
 description              : &description "personal description"
@@ -88,7 +88,7 @@ author:
   employer         : "University of Duisburg-Essen"
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=9-ma8xIAAAAJ&hl=en"
-  email            : 
+  email            : "shivam.agarwal@uni-due.de"
   researchgate     : "https://www.researchgate.net/profile/Shivam-Agarwal-4"
   uri              :
   bitbucket        :
