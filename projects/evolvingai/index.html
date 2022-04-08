@@ -21,7 +21,6 @@
         {
             background-color: rgb(0, 0, 0);
             font-family: system-ui;
-            font-size: 24px;
             position: fixed;
             width: 100%;
             left: 0%;
@@ -486,7 +485,16 @@
         let font2 = "24px system-ui";
         let font3 = "22px system-ui";
         let tickLabelSize =  "14px system-ui"; 
+        let parcoordsAxisLabel =  "14px"; 
 
+        if (window.screen.width<=1920)
+        {
+            font1 = "14px system-ui";  //tick labels
+            font2 = "16px system-ui";
+            font3 = "14px system-ui";
+            tickLabelSize =  "10px system-ui"; 
+            parcoordsAxisLabel =  "11px"; 
+        }
 
         let divFontStyle="";
 
@@ -523,6 +531,9 @@
         let selectedMetricsForScatterPlot = [6,5];
 
         let smallVisAxisColor = "grey";
+
+        d3.select("body").style("font-size", font2);
+        
         
         // Create the 1st SVG for the Linechart
         let svg1 = d3.select("#svg1")
@@ -716,11 +727,14 @@
         function computeCorrelationIntensityText(corrWithWin)
         {
             let corrIntensity = "";
-            if(corrWithWin < -0.5) corrIntensity = "a negative";
-            else if(corrWithWin < -0.25) corrIntensity = "a low negative";
-            else if(corrWithWin < 0.25) corrIntensity = "almost no";
-            else if(corrWithWin < 0.5) corrIntensity = "a low positive";
-            else if(corrWithWin <= 1) corrIntensity = "a positive";
+            if(corrWithWin < -0.7) corrIntensity = "a high negative";
+            if(corrWithWin < -0.4) corrIntensity = "a negative";
+            else if(corrWithWin < -0.1) corrIntensity = "a low negative";
+            // else if(corrWithWin < 0.25) corrIntensity = "almost no";
+            else if(corrWithWin < 0.1) corrIntensity = "almost no";
+            else if(corrWithWin < 0.4) corrIntensity = "a low positive";
+            else if(corrWithWin < 0.7) corrIntensity = "a positive";
+            else if(corrWithWin <= 1) corrIntensity = "a high positive";
 
             return corrIntensity;
         }
@@ -749,7 +763,7 @@
                 // descriptiveText,font2,colorPlot);
             let textElem = bigscatterplotG.append("text")
                 .text("The two behaviors have ")    
-                .attr("x", -40)
+                .attr("x", 0)
                 .attr("y", 60)
                 .attr("fill", colorPlot)
                 .style("font", font2);
@@ -831,7 +845,7 @@
                 }
                 iC++;
             }
-            bigscatterplotG.attr("transform","translate(80 0)");
+            bigscatterplotG.attr("transform","translate(20 -20)");
             highlightSelectedScatterPlot(metric1, metric2);
             highlightScatterPlotCircles(startCycle, endCycle);
         }
@@ -1908,6 +1922,7 @@
     }
 
     parallelplot(rev_data);
+    // d3.select("#parallelplot svg").style("font-size", tickLabelSize);
 
     // $(document).tooltip();
     // $("#pommermanInfo").tooltip({
@@ -1965,19 +1980,25 @@ function parallelplot(data) {
     });
 
     //specify the dimensions and their order
-    // var myDimensions = {
-    // "wmc": { type: "number" },
-    // "max_cc": { type: "number" },
-    // "ca": { type: "number" },
-    // "ce": { type: "number" },
-    // "lcom3": { type: "number" },
-    // "noc": { type: "number" },
-    // "dit": { type: "number" },
-    // "loc": { type: "number" },
-    // "amc": { type: "number" },
-    // "npm": { type: "number" },
-    // "bug": { type: "number" },
-    // };
+    var myDimensions = {
+    "Epochs": { type: "number" },
+    "win": { type: "number" },
+    "loss": { type: "number" },
+    "tie": { type: "number" },
+    "item_friend": { type: "number" },
+    "self_kicker": { type: "number" },
+    "bomb_layer": { type: "number" },
+    "kick_frenzy": { type: "number" },
+    "item_fan": { type: "number" },
+    "chain_killer": { type: "number" },
+    "chain_victim": { type: "number" },
+    "kick_thief": { type: "number" },
+    "item_thief": { type: "number" },
+    "hara_kiri": { type: "number" },
+    "friendly_fire": { type: "number" },
+    "chain_fan": { type: "number" },
+    "slack_king": { type: "number" },
+    };
 
     pcz = d3.parcoords()("#parallelplot")
     .data(data)

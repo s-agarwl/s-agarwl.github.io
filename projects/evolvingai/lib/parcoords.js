@@ -61,7 +61,7 @@ d3.parcoords = function (config) {
       .append("svg")
       .attr("width", __.width)
       .attr("height", __.height)
-      .style("font", "14px sans-serif")
+      .style("font", tickLabelSize)
       .style("position", "absolute")
 
       .append("svg:g")
@@ -785,6 +785,7 @@ d3.parcoords = function (config) {
       });
     axisLabelG.append("svg:text")
       .attr("text-anchor", "middle")
+      .attr("font-size", parcoordsAxisLabel)
       .text(dimensionLabels);
 
     //   underlining the axis label
