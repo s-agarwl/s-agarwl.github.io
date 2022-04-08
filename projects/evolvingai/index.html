@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Visualizing the competetive evolution of game playing AI</title>
+
+    <link rel="stylesheet" type="text/css" href="lib/tooltipster.bundle.css" />
+
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="jquery-ui.js"></script> -->
+    <script type="text/javascript" src="lib/tooltipster.bundle.js"></script>
+    <script type="text/javascript" src="lib/parcoords.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <link rel="stylesheet" href="lib/parcoords.css" type='text/css' media='all'>
+    <!-- <link rel="stylesheet" href="jquery-ui.css" type='text/css' media='all'> -->
+    <link rel="stylesheet" href="lib/tooltipster-sideTip-shadow.min.css" type='text/css' media='all'>
+
+    <style> 
+        body
+        {
+            background-color: rgb(0, 0, 0);
+            font-family: system-ui;
+            font-size: 24px;
+            position: fixed;
+            width: 100%;
+            left: 0%;
+            top: 0%;
+            background-color: white;
+            margin: 0px;
+        }
+        .axislabel
+        {
+            text-anchor: middle;
+        }
+        .trainingEpochLabel{
+            text-anchor: end;
+        }
+        .scatterplotCircle
+        {
+            opacity:0.7;
+        }
+        .grid-container {
+            display: grid;
+            /* padding: 25px; */
+            grid-template-rows: 220px auto;
+            grid-template-columns: 50fr 50fr;
+            grid-gap: 10px;
+            height: 100vh;
+            background-color: #e8e8e8;
+            padding: 10px;
+        }
+        .splomaxislabel
+        {
+            text-anchor: end;
+            
+        }
+        .scatterPlotRect
+        {
+            cursor:pointer;
+        }
+
+        .grid-container2 {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 10px;
+            height: 100vh;
+            background-color: #e8e8e8;
+            /* padding: 10px; */
+        }
+
+        .grid-container3 {
+            display: grid;
+            grid-template-columns: 25fr 25fr  25fr  25fr ;
+            grid-template-rows: auto auto auto auto ;
+            /* grid-gap: 0px; */
+            /* height: 100vh; */
+            background-color: white;
+        }
+
+        .grid-container4 {
+        
+            display:grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto auto ;
+
+        }
+
+        .smalllinechartDivs
+        {
+            float: left;
+            margin: 5px;
+            margin-top:10px;
+            padding: 2px;
+            display: grid;
+            text-align: center;
+            cursor: pointer;
+            
+        }
+        .highlighted{
+            border: 2px solid black;
+        }
+        .dehighlightCircle{
+            fill: grey;
+        }
+        .parcoords{
+            height: 100%;
+            /* width: 100vw; */
+            grid-column: 1 / span 2;
+        }
+        .teamA{
+            color: tomato; 
+            font-weight:700;
+        }
+        .teamB{
+            color: steelblue;
+            font-weight:700;
+        }
+        .dynamicText{
+            font-weight:700;
+        }
+        .computedText{
+            font-style:italic;
+        }
+        #div1{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+
+        /* Use this next selector to style things like font-size and line-height: */
+        .my-custom-theme .tooltipster-content {
+            font-family: Arial, sans-serif;
+            /* font-size: 14px; */
+            line-height: 24px;
+            padding: 8px 10px;
+        }
+
+        .tooltip-image-theme .tooltipster-content{
+            /* height: 300px; */
+            /* width: 250px; */
+            /* font-size: 14px; */
+            display: flex;
+        }
+
+        .tooltip_templates
+        {
+            display:none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="tooltip_templates">
+        <div id="pommermanDetails">
+            A bomb laying game played by two teams of two agents each.
+            <br/>
+            <br/>
+            <img height="200px" src="pommerman.gif" />
+        </div>
+    </div>
+
+    <h3 style="text-align: center; margin: auto">Visualizing Evolution of Multi-agent Game-playing Behaviors</h3>
+    <p style="text-align: center; margin: auto">Training <span class="teamA">Neural Network</span> <span id="NNInfo">ⓘ</span> team (two agents) to play against <span class="teamB">Hakozaki Junctions</span> <span id="hakozakiInfo">ⓘ</span> (fully trained) in the <a href="https://www.pommerman.com/" target="_blank">Pommerman</a>  Game Environment <span id="pommermanInfo" class="" data-tooltip-content="#pommermanDetails">ⓘ</span></p>
+    <!-- Use subtitle -->
+
+    
+    <div class="grid-container">
+        <!-- <div> -->
+            <div id="parallelplot" class="parcoords" ></div>
+        <!-- </div> -->
+        <!-- <div class="grid-container2"> -->
+        <div>
+            <div class="grid-container4" id="lineCharts">
+                <div id="lineChartSmallDiv" class="grid-container3">
+
+                </div>
+                <svg id="svg1">
+                    <g id="bigLineChartGroup">
+
+                    </g>
+                </svg>
+                <div id="div1"></div>
+            </div>
+            
+        </div>
+        <div>
+            <svg id="svg2">
+                <g id="bigscatterplotGroup">
+                </g>
+            </svg>
+        </div>
+        <!-- </div> -->
+    </div>
+    
+    <script>
+
+        let cycle_results=[
+            cycle_01.results["1hakozaki"],cycle_02.results["1hakozaki"],
+            cycle_03.results["1hakozaki"],cycle_04.results["1hakozaki"],
+            cycle_05.results["1hakozaki"],cycle_06.results["1hakozaki"],
+            cycle_07.results["1hakozaki"],cycle_08.results["1hakozaki"],
+            cycle_09.results["1hakozaki"],cycle_10.results["1hakozaki"],
+            cycle_11.results["1hakozaki"],cycle_12.results["1hakozaki"]
+        ];
+        // console.log("cycle_results: ",cycle_results);
+
+
+
+
+
+
+
+
+
+
+        // ########## ANALYSIS ##########
+
+        // Create array of label names
+        let labelNames=[];
+
+        let labelid_NameDictionary = {
+            "Epochs": "Epochs",
+            "win": "Wins",
+            "loss": "Losses",
+            "tie": "Ties",
+            "self_kicker": "Self-bomb Kicks",
+            "kick_frenzy": "Rapid Bomb Kicks",
+            "item_fan": "Self-powerup Pickups",
+            "item_friend": "Team Powerup Pickups",
+            "chain_killer": "Bomb-chain Kills",
+            "chain_victim": "Bomb-chain Deaths",
+            "kick_thief": "Enemy Bomb Kicks",
+            "item_thief": "Enemy Powerup Pickups",
+            "hara_kiri": "Suicides",  //Self-bomb Deaths
+            "friendly_fire": "Friendly Fires",
+            "chain_fan": "Bomb in chains",
+            "slack_king": "Idle Spans",
+            "bomb_layer": "Bombs"
+        };
+        let bindex_id = {
+             0: "win",
+             1: "loss",
+             2: "tie",
+             3: "self_kicker",
+             4: "kick_frenzy",
+             5: "item_fan",
+             6: "item_friend",
+             7: "chain_killer",
+             8: "chain_victim",
+             9: "kick_thief",
+             10: "item_thief",
+             11: "hara_kiri",
+             12: "friendly_fire",
+             13: "chain_fan",
+             14: "slack_king",
+             15: "bomb_layer"
+        };
+        
+        // neutral, competitive, collaborative
+        let labelid_Category = {
+            "Epochs": "neutral",
+            "win": "neutral",
+            "loss": "neutral",
+            "tie": "neutral",
+            "self_kicker": "collaborative",
+            "kick_frenzy": "collaborative",
+            "item_fan": "collaborative",
+            "item_friend": "collaborative",
+            "chain_killer": "collaborative",
+            "chain_victim": "collaborative",
+            "kick_thief": "competitive",
+            "item_thief": "competitive",
+            "hara_kiri": "collaborative",  
+            "friendly_fire": "collaborative",
+            "chain_fan": "collaborative",
+            "slack_king": "collaborative",
+            "bomb_layer": "collaborative"
+        };
+
+        for (i in cycle_01.environment.parameterLabel){
+            labelNames.push(labelid_NameDictionary[i]);
+        }
+        console.log("labelNames: ",labelNames);
+
+        // Create array of behavior definitions
+        let behaviorDefinitions = [
+            "Number of wins.",
+            "Number of loss.",
+            "Number of tie.",
+            "Number of times, an agent kicked his own bomb.",
+            "Number of times, an agent kicked a bomb more than once in a short sequence.",
+            "Number of times the agent uncovered an item and then picked it up itself.",
+            "Number of times the agents picked up an item uncovered by an allied agent.",
+            "Number of kills scored by using chained bombs.",
+            "Number of times agent got killed by bomb chains from other agents.",
+            "Number of times, an agent kicked a bomb of an enemy agent.",
+            "Number of times, an agent picked up an item uncovered by the enemy",
+            "Number of times, an agents got killed by a bomb placed by itself.",
+            "Number of times an agent killed an ally with a bomb place by itself.",
+            "Number of bombs of an agent that were involved in a chain.",
+            "Number of times an agent did not anything for more than 5 timesteps.",
+            "Number of times an agent laid a bomb."
+        ]
+        console.log("behaviorDefinitions: ",behaviorDefinitions);
+
+        // Create array of behavior result arrays for both agents combined
+        let iA=0, iB=0, iC=0;
+        let m00=[], m01=[], m02=[], m03=[], m04=[], m05=[], m06=[], m07=[], 
+            m08=[], m09=[], m10=[], m11=[], m12=[], m13=[], m14=[], m15=[];
+        for (c in cycle_results){ //c = cycles;
+            iA=0;
+            for (a in cycle_results[c]){ //a = agents; cycle[c][a] = agent results (JSON)
+                iB=0;
+                for (b in cycle_results[c][a]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                    if (iB==0){m00.push(cycle_results[c][a][b]);}
+                    if (iB==1){m01.push(cycle_results[c][a][b]);}
+                    if (iB==2){m02.push(cycle_results[c][a][b]);}
+                    if (iB==3){m03.push(cycle_results[c][a][b]);}
+                    if (iB==4){m04.push(cycle_results[c][a][b]);}
+                    if (iB==5){m05.push(cycle_results[c][a][b]);}
+                    if (iB==6){m06.push(cycle_results[c][a][b]);}
+                    if (iB==7){m07.push(cycle_results[c][a][b]);}
+                    if (iB==8){m08.push(cycle_results[c][a][b]);}
+                    if (iB==9){m09.push(cycle_results[c][a][b]);}
+                    if (iB==10){m10.push(cycle_results[c][a][b]);}
+                    if (iB==11){m11.push(cycle_results[c][a][b]);}
+                    if (iB==12){m12.push(cycle_results[c][a][b]);}
+                    if (iB==13){m13.push(cycle_results[c][a][b]);}
+                    if (iB==14){m14.push(cycle_results[c][a][b]);}
+                    if (iB==15){m15.push(cycle_results[c][a][b]);}
+                    iB++;
+                }
+                iA++;          
+            }
+            iC++;
+        }
+        let m = [m00,m01,m02,m03,m04,m05,m06,m07,m08,m09,m10,m11,m12,m13,m14,m15]
+        // console.log("metric results 'm': ",m)
+
+        // Calculate the slope for every behavior and each team
+        let slopesTeamH=[];
+        let slopesTeamN=[];
+        let stepsTeamH = rangeStep(0,46,2);
+        let stepsTeamN = rangeStep(1,47,2);
+        let stepsAgentH = rangeStep(0,46,4);
+        let stepsAgentN = rangeStep(1,47,4);
+        for (i in range(1,16)){
+            if (i==0||i==1||i==2){
+                slopesTeamN.push(slopeSolo(stepsAgentN,m[i]));
+            }
+            else{
+                slopesTeamN.push(slopeTeam(stepsTeamN,m[i]));
+            }
+        }
+        for (i in range(1,16)){
+            if (i==0||i==1||i==2){
+                slopesTeamH.push(slopeSolo(stepsAgentH,m[i]));
+            }
+            else{
+                slopesTeamH.push(slopeTeam(stepsTeamH,m[i]));
+            }
+        }
+        // for (i in range(0,15)){
+        //     console.log("slopes of Team N: "+i,slopesTeamN[i].toFixed(2));
+        //     console.log("slopes of Team H: "+i,slopesTeamH[i].toFixed(2));
+        // }
+
+        // Create array of all correlations between behaviors
+        let correlation = [];
+        for (i in range(0,15)){
+            for (j in range(0,15)){
+                if(i!=j){
+                    correlation.push([i,labelNames[i],j,labelNames[j],pearsonCorrelation([m[i],m[j]],0,1)]);
+                }
+            }
+        }
+        console.log("correlation: ", correlation);
+
+        // Create array with the highest correlation for each behavior
+        let maximalCorr=[0,0,0,0,0];
+        let maxCorr00=[0,0,0,0,0], maxCorr01=[0,0,0,0,0], maxCorr02=[0,0,0,0,0], maxCorr03=[0,0,0,0,0],
+            maxCorr04=[0,0,0,0,0], maxCorr05=[0,0,0,0,0], maxCorr06=[0,0,0,0,0], maxCorr07=[0,0,0,0,0],
+            maxCorr08=[0,0,0,0,0], maxCorr09=[0,0,0,0,0], maxCorr10=[0,0,0,0,0], maxCorr11=[0,0,0,0,0],
+            maxCorr12=[0,0,0,0,0], maxCorr13=[0,0,0,0,0], maxCorr14=[0,0,0,0,0], maxCorr15=[0,0,0,0,0];
+        for (i in correlation){
+            if (correlation[i][0]==0 && correlation[i][2]!=1 && Math.abs(maxCorr00[4]) <= Math.abs(correlation[i][4])){maxCorr00=correlation[i];}
+            if (correlation[i][0]==1 && correlation[i][2]!=0 && Math.abs(maxCorr01[4]) <= Math.abs(correlation[i][4])){maxCorr01=correlation[i];}
+            if (correlation[i][0]==2 && Math.abs(maxCorr02[4]) <= Math.abs(correlation[i][4])){maxCorr02=correlation[i];}
+            if (correlation[i][0]==3 && Math.abs(maxCorr03[4]) <= Math.abs(correlation[i][4])){maxCorr03=correlation[i];}
+            if (correlation[i][0]==4 && Math.abs(maxCorr04[4]) <= Math.abs(correlation[i][4])){maxCorr04=correlation[i];}
+            if (correlation[i][0]==5 && Math.abs(maxCorr05[4]) <= Math.abs(correlation[i][4])){maxCorr05=correlation[i];}
+            if (correlation[i][0]==6 && Math.abs(maxCorr06[4]) <= Math.abs(correlation[i][4])){maxCorr06=correlation[i];}
+            if (correlation[i][0]==7 && Math.abs(maxCorr07[4]) <= Math.abs(correlation[i][4])){maxCorr07=correlation[i];}
+            if (correlation[i][0]==8 && Math.abs(maxCorr08[4]) <= Math.abs(correlation[i][4])){maxCorr08=correlation[i];}
+            if (correlation[i][0]==9 && Math.abs(maxCorr09[4]) <= Math.abs(correlation[i][4])){maxCorr09=correlation[i];}
+            if (correlation[i][0]==10 && Math.abs(maxCorr10[4]) <= Math.abs(correlation[i][4])){maxCorr10=correlation[i];}
+            if (correlation[i][0]==11 && Math.abs(maxCorr11[4]) <= Math.abs(correlation[i][4])){maxCorr11=correlation[i];}
+            if (correlation[i][0]==12 && Math.abs(maxCorr12[4]) <= Math.abs(correlation[i][4])){maxCorr12=correlation[i];}
+            if (correlation[i][0]==13 && Math.abs(maxCorr13[4]) <= Math.abs(correlation[i][4])){maxCorr13=correlation[i];}
+            if (correlation[i][0]==14 && Math.abs(maxCorr14[4]) <= Math.abs(correlation[i][4])){maxCorr14=correlation[i];}
+            if (correlation[i][0]==15 && Math.abs(maxCorr15[4]) <= Math.abs(correlation[i][4])){maxCorr15=correlation[i];}
+            if (Math.abs(maximalCorr[4]) <= Math.abs(correlation[i][4])){maximalCorr=correlation[i];}
+        }
+        let maxCorr = [
+            maxCorr00, maxCorr01, maxCorr02, maxCorr03,
+            maxCorr04, maxCorr05, maxCorr06, maxCorr07,
+            maxCorr08, maxCorr09, maxCorr10, maxCorr11,
+            maxCorr12, maxCorr13, maxCorr14, maxCorr15
+        ]
+        // console.log("maxCorr: ",maxCorr,maximalCorr);
+
+        // Log the maxima and minima for both Teams and behavior seperate
+        // {
+        //     console.log("Max&Min NNT m0: "+maximaMinimaSolo(rangeStep(1,47,4),m[0]));
+        //     console.log("Max&Min NNT m1: "+maximaMinimaSolo(rangeStep(1,47,4),m[1]));
+        //     console.log("Max&Min NNT m2: "+maximaMinimaSolo(rangeStep(1,47,4),m[2]));
+        //     console.log("Max&Min NNT m3: "+maximaMinimaTeam(rangeStep(1,47,2),m[3]));
+        //     console.log("Max&Min NNT m4: "+maximaMinimaTeam(rangeStep(1,47,2),m[4]));
+        //     console.log("Max&Min NNT m5: "+maximaMinimaTeam(rangeStep(1,47,2),m[5]));
+        //     console.log("Max&Min NNT m6: "+maximaMinimaTeam(rangeStep(1,47,2),m[6]));
+        //     console.log("Max&Min NNT m7: "+maximaMinimaTeam(rangeStep(1,47,2),m[7]));
+        //     console.log("Max&Min NNT m8: "+maximaMinimaTeam(rangeStep(1,47,2),m[8]));
+        //     console.log("Max&Min NNT m9: "+maximaMinimaTeam(rangeStep(1,47,2),m[9]));
+        //     console.log("Max&Min NNT m10: "+maximaMinimaTeam(rangeStep(1,47,2),m[10]));
+        //     console.log("Max&Min NNT m11: "+maximaMinimaTeam(rangeStep(1,47,2),m[11]));
+        //     console.log("Max&Min NNT m12: "+maximaMinimaTeam(rangeStep(1,47,2),m[12]));
+        //     console.log("Max&Min NNT m13: "+maximaMinimaTeam(rangeStep(1,47,2),m[13]));
+        //     console.log("Max&Min NNT m14: "+maximaMinimaTeam(rangeStep(1,47,2),m[14]));
+        //     console.log("Max&Min NNT m15: "+maximaMinimaTeam(rangeStep(1,47,2),m[15]));
+            
+        //     console.log("Max&Min HJT m0: "+maximaMinimaSolo(rangeStep(0,46,4),m[0]));
+        //     console.log("Max&Min HJT m1: "+maximaMinimaSolo(rangeStep(0,46,4),m[1]));
+        //     console.log("Max&Min HJT m2: "+maximaMinimaSolo(rangeStep(0,46,4),m[2]));
+        //     console.log("Max&Min HJT m3: "+maximaMinimaTeam(rangeStep(0,46,2),m[3]));
+        //     console.log("Max&Min HJT m4: "+maximaMinimaTeam(rangeStep(0,46,2),m[4]));
+        //     console.log("Max&Min HJT m5: "+maximaMinimaTeam(rangeStep(0,46,2),m[5]));
+        //     console.log("Max&Min HJT m6: "+maximaMinimaTeam(rangeStep(0,46,2),m[6]));
+        //     console.log("Max&Min HJT m7: "+maximaMinimaTeam(rangeStep(0,46,2),m[7]));
+        //     console.log("Max&Min HJT m8: "+maximaMinimaTeam(rangeStep(0,46,2),m[8]));
+        //     console.log("Max&Min HJT m9: "+maximaMinimaTeam(rangeStep(0,46,2),m[9]));
+        //     console.log("Max&Min HJT m10: "+maximaMinimaTeam(rangeStep(0,46,2),m[10]));
+        //     console.log("Max&Min HJT m11: "+maximaMinimaTeam(rangeStep(0,46,2),m[11]));
+        //     console.log("Max&Min HJT m12: "+maximaMinimaTeam(rangeStep(0,46,2),m[12]));
+        //     console.log("Max&Min HJT m13: "+maximaMinimaTeam(rangeStep(0,46,2),m[13]));
+        //     console.log("Max&Min HJT m14: "+maximaMinimaTeam(rangeStep(0,46,2),m[14]));
+        //     console.log("Max&Min HJT m15: "+maximaMinimaTeam(rangeStep(0,46,2),m[15]));
+        // }
+
+
+
+
+
+        // ########## VIS ##########
+        // Configurate Parameters
+        // let width=1920;
+        // let height=1200;
+        let width = window.screen.width;
+        let height = window.screen.height;
+        /*colornames = aqua, aquamarine, beige, bisque, chocolate,
+                    greenyellow, lavenderblush, lemonchiffon, darkcyan,
+                    magenta, peachpuff, plum, turquoise, blueviolet,
+                    darkseagreen, darkslategrey, darkviolet, indigo, lightsalmon, 
+                    olive, orchid, teal, tan, tomato, steelblue*/
+        let colorAgent1="steelblue";
+        let colorAgent2="tomato";
+        let svg1Color="white";
+        let div1Color="white"
+        let divFontColor="black";
+        let svg2Color="white";
+        let svg2Color2="white";
+
+        let positiveColor = "green";
+        let negativeColor = "red";
+        let nuetralColor = "black";
+
+        // let font1 = "18px system-ui";  //tick labels
+        // let font2 = "20px system-ui";
+        // let font3 = "18px system-ui";
+        // let tickLabelSize =  "14px system-ui"; 
+
+        let font1 = "22px system-ui";  //tick labels
+        let font2 = "24px system-ui";
+        let font3 = "22px system-ui";
+        let tickLabelSize =  "14px system-ui"; 
+
+
+        let divFontStyle="";
+
+        let selectWidth=100;
+        let selectHeight=0;
+        let selectMarginTop=0
+        let selectMarginLeft=50;
+
+        // let svg1Width=width*0.5;
+        // let svg1Height=height*0.5;
+        // let svg1Width=width*0.5;
+        // let svg1Width = +d3.select("#lineCharts").style('width').slice(0, -2);
+        let svg1Width = document.getElementById("lineCharts").offsetWidth;
+        let svg1Height=300;
+        let svg1MarginTop=selectHeight;
+        let svg1MarginLeft=0;
+
+        let lineChartHeight=150;
+        let lineChartWidth=svg1Width-90;
+
+        let svg2Width=width*0.5;
+        let svg2Height=height*0.7;
+        let svg2MarginTop=selectHeight+"px";
+        let svg2MarginLeft=svg1Width+"px";
+
+        // let divWidth=(width-svg1Width)+"px";
+        let divWidth = svg1Width;
+        let divHeight=(svg2Height-svg1Height-280)+"px";
+        let div1MarginTop=(svg1Height+selectHeight)+"px";
+        let div1MarginLeft=0+"px";
+
+        let axisLineThickness = "1px";
+
+        let selectedMetricsForScatterPlot = [6,5];
+
+        let smallVisAxisColor = "grey";
+        
+        // Create the 1st SVG for the Linechart
+        let svg1 = d3.select("#svg1")
+            .attr("width",svg1Width)
+            .attr("height",svg1Height)
+            // .style("position","absolute")    
+            // .style("margin-top",svg1MarginTop+"px")
+            // .style("margin-left",svg1MarginLeft+"px")
+            // .style("padding-left","10px")
+            // .style("padding-right","10px")
+            .style('background-color',svg1Color);
+
+        // Create Select1 Button (Filter)
+        let select1 = d3.select("body").append("select")
+            .attr("id","select1")
+            .attr("width",selectWidth)
+            .attr("height",selectHeight)
+            // .style("position","absolute")    
+            .style("direction","ltr")
+            .style("margin-top","0px")
+            .style("margin-left",selectMarginLeft+"px")
+            .style('background-color',"white"); 
+
+        // Create Select2 Button (Filter)
+        let select2 = d3.select("body").append("select")
+            .attr("id","select2")
+            .attr("width",selectWidth)
+            .attr("height",selectHeight)
+            // .style("position","absolute")    
+            .style("direction","ltr")
+            .style("margin-top","0px")
+            .style("margin-left",selectMarginLeft+150+"px")
+            .style('background-color',"white")
+            ; 
+
+        // Create Select3 Button (Filter)
+        let select3 = d3.select("body").append("select")
+            .attr("id","select3")
+            .attr("width",selectWidth)
+            .attr("height",selectHeight)
+            // .style("position","absolute")    
+            .style("direction","ltr")
+            .style("margin-top","0px")
+            .style("margin-left",selectMarginLeft+250+"px")
+            .style('background-color',"white"); 
+
+        // Create the DIV for the dynamic analysis text
+        let div1 = d3.select("#div1")
+            .style("width",divWidth)
+            .style("height",divHeight)
+            // .style("position","absolute")
+            // .style("margin-top",div1MarginTop)
+            // .style("padding-left","10px")
+            // .style("padding-right","10px")
+            // .style("margin-left",div1MarginLeft)
+            .style('background-color',div1Color)
+            .style("text-align","justify");
+            
+        // Create the 2nd SVG for the Scatterplot-matrix
+        let svg2 = d3.select("#svg2")
+            // .attr("width",svg2Width)
+            .attr("width","100%")
+            .attr("height",svg2Height)
+            // .style("position","absolute")    
+            // .style("margin-left",svg2MarginLeft)
+            .style("margin-top",svg2MarginTop)
+            .style('background-color',svg2Color);
+
+        // Draw the Linechart
+        let startCycle=1, endCycle=cycle_results.length;
+        let xRoot=50;
+        let yRoot=svg1Height;
+        let metric=0;
+        let numberOfBattles=50;
+        let numberOfTrainings=1000;
+        appendLineChart(cycle_results,xRoot,yRoot,metric);
+        appendLineChartSmall(cycle_results);
+
+
+
+        // Write the Analysis
+        analysis(cycle_results,metric,startCycle,endCycle);
+
+        // Draw the Scatterplot Matrix
+        let agent=0;
+        let xRoot2=5;
+        let yRoot2=svg2Height-120;
+        appendScatterplotMatrix(cycle_results,xRoot2,yRoot2);
+
+        // Fill select1 with the behavior labels
+            // https://www.d3-graph-gallery.com/graph/line_select.html
+        d3.select("#select1").selectAll("PerformanceLabels")
+            .data(labelNames)
+            .enter()
+                .append("option")
+                .text(function(d){return d;})
+                .attr("value",function(d){return d;});
+
+        // Fill select2 with the startcycle labels
+        d3.select("#select2").selectAll("startCycles")
+            .data(rangeStep(1*1000,cycle_results.length*1000,1000))
+            .enter()
+                .append("option")
+                .text(function(d){return d;})
+                .attr("value",function(d){return d;});
+
+        // Fill select3 with the startcycle labels
+        d3.select("#select3").selectAll("endCycles")
+            .data(rangeStep(1*1000,cycle_results.length*1000,1000))
+            .enter()
+                .append("option")
+                .text(function(d){return d;})
+                .attr("value",function(d){return d;})
+                .attr("selected",true);
+
+        // Update svg1 and div1 when using select1
+        let selectedOption = 0;
+        d3.select("#select1").on("change", function(d){
+            d3.select("#bigLineChartGroup").selectAll("*").remove();    
+            div1.selectAll("*").remove();
+            selectedOption=d3.select(this).property("value");
+            let iO=0;
+            for (i in labelNames){
+                if (labelNames[i]==selectedOption){
+                    selectedOption=iO;
+                }
+                iO++;
+            }
+            appendLineChartUpdate(cycle_results,xRoot,yRoot,selectedOption,startCycle,endCycle);
+            analysis(cycle_results,selectedOption,startCycle,endCycle);
+        }) 
+
+        // Update svg1 and div1 when using select1
+        d3.select("#select2").on("change", function(d){
+            d3.select("#bigLineChartGroup").selectAll("*").remove();    
+            div1.selectAll("*").remove();
+            startCycle=d3.select(this).property("value")/1000;
+            appendLineChartUpdate(cycle_results,xRoot,yRoot,selectedOption,startCycle,endCycle);
+            analysis(cycle_results,selectedOption,startCycle,endCycle);
+            endCycle=cycle_results.length;
+            select3.selectAll("*").remove();
+            d3.select("#select3").selectAll("endCycles")
+                .data(rangeStep(startCycle*1000,endCycle*1000,1000))
+                .enter()
+                    .append("option")
+                    .text(function(d){return d;})
+                    .attr("value",function(d){return d;})
+                    .attr("selected",true);
+        }) 
+
+        // Update svg1 and div1 when using select1
+        d3.select("#select3").on("change", function(d){
+            d3.select("#bigLineChartGroup").selectAll("*").remove();    
+            div1.selectAll("*").remove();
+            endCycle=d3.select(this).property("value")/1000;
+            appendLineChartUpdate(cycle_results,xRoot,yRoot,selectedOption,startCycle,endCycle);
+            analysis(cycle_results,selectedOption,startCycle,endCycle);
+            startCycle=1;
+            select2.selectAll("*").remove();
+            d3.select("#select2").selectAll("endCycles")
+                .data(rangeStep(startCycle*1000,endCycle*1000,1000))
+                .enter()
+                    .append("option")
+                    .text(function(d){return d;})
+                    .attr("value",function(d){return d;});
+        }) 
+
+        // Draw the big detailed Scatterplot
+        let scatterplotZoomX1=50;
+        let scatterplotZoomY1=300;
+        let scatterplotZoomX2=250;
+        let scatterplotZoomY2=100;
+        // appendRect(svg2,0,scatterplotZoomY1,scatterplotZoomX2,0,svg2Color)
+        appendScatterplotUpdate(cycle_results,scatterplotZoomX1,scatterplotZoomY1,selectedMetricsForScatterPlot[0],selectedMetricsForScatterPlot[1]);
+
+
+
+
+
+
+        function computeCorrelation(metric1, metric2)
+        {
+            let maxMetric1=roundOff(m[metric1].reduce(function(a,b){return Math.max(a,b);}));
+            let maxMetric2=roundOff(m[metric2].reduce(function(a,b){return Math.max(a,b);}));
+            let iC=0, iA=0, iB=0;
+            let data = new Array(m[metric1],m[metric2]);
+            let corr = pearsonCorrelation(data,0,1);
+            return corr;
+        }
+
+        function computeCorrelationIntensityText(corrWithWin)
+        {
+            let corrIntensity = "";
+            if(corrWithWin < -0.5) corrIntensity = "a negative";
+            else if(corrWithWin < -0.25) corrIntensity = "a low negative";
+            else if(corrWithWin < 0.25) corrIntensity = "almost no";
+            else if(corrWithWin < 0.5) corrIntensity = "a low positive";
+            else if(corrWithWin <= 1) corrIntensity = "a positive";
+
+            return corrIntensity;
+        }
+
+
+        // ########## FUNCTIONS ##########
+        function appendScatterplotUpdate(cycle,x,y,metric1,metric2){
+            d3.select("#bigscatterplotGroup").selectAll("*").remove();
+            
+            let plotWidth=300, plotHeight=svg2Height=200;
+            let colorPlot="black";
+            let circleSize=3;
+            let x1=x, x2=x, y1=y, y2=y;
+            let maxMetric1=roundOff(m[metric1].reduce(function(a,b){return Math.max(a,b);}));
+            let maxMetric2=roundOff(m[metric2].reduce(function(a,b){return Math.max(a,b);}));
+            let iC=0, iA=0, iB=0;
+            // let data = new Array(m[metric1],m[metric2]);
+            let corr = computeCorrelation(metric1, metric2);
+            let corrIntensity = computeCorrelationIntensityText(corr);
+            // Write Legend
+            let bigscatterplotG = d3.select("#bigscatterplotGroup");
+            appendRect(bigscatterplotG,0,y+15,x+130,0,svg2Color);
+            
+            // let descriptiveText = `The two behaviors show ${corrIntensity} correlation between them (r=${corr.toFixed(3)})`;
+            // appendText(bigscatterplotG,-40,60,
+                // descriptiveText,font2,colorPlot);
+            let textElem = bigscatterplotG.append("text")
+                .text("The two behaviors have ")    
+                .attr("x", -40)
+                .attr("y", 60)
+                .attr("fill", colorPlot)
+                .style("font", font2);
+                textElem.append("tspan").text(corrIntensity).attr("class", "computedText")
+                textElem.append("tspan").text(` correlation between them (r=${corr.toFixed(3)})`);
+
+            // appendText(svg2,x,55,
+            //     "x-Axis: Number of displayed behavior '"+labelNames[metric1]+"'",font3,colorPlot);
+            appendText(bigscatterplotG,x + plotWidth/2,y+40,
+                "# "+labelNames[metric1]+"",font2,colorPlot,'',"axislabel scatterplotlabel");
+            let ylabelx = x-50;
+            let ylabely = svg2Height;
+            appendText(bigscatterplotG,ylabelx,ylabely,
+                "# "+ labelNames[metric2]+"",font2,colorPlot, `rotate(-90 ${ylabelx} ${ylabely})`, "axislabel scatterplotlabel");
+            // Draw y-Axis 
+            let iY=0;
+            let ySteps=2;
+            for (iY in range(1,ySteps+1)){
+                // appendCircle(svg2,x,(y-(plotHeight/ySteps*iY)),colorPlot,circleSize);
+                appendTickMark(bigscatterplotG,x,(y-(plotHeight/ySteps*iY)),colorPlot, 0);
+                // appendText(bigscatterplotG,(x-30),(y-(plotHeight/ySteps*iY)),(maxMetric2/ySteps*iY).toFixed(0),font1,colorPlot);
+                bigscatterplotG.append("text")
+                .text((maxMetric2/ySteps*iY).toFixed(0))    
+                .attr("x", x-10)
+                .attr("y", (y-(plotHeight/ySteps*iY)))
+                .attr("fill", colorPlot)
+                .style("font", tickLabelSize)
+                .style("text-anchor","end")
+                .style("dominant-baseline", "central");
+            }
+            appendLine(bigscatterplotG,x,y,x,(y-plotHeight),colorPlot,axisLineThickness);
+            // Draw x-Axis 
+            let iX=0;
+            let xSteps=2;
+            for (iX in range(1,xSteps+1)){
+                // appendCircle(svg2,x+(plotWidth/xSteps*iX),y,colorPlot,circleSize);
+                appendTickMark(bigscatterplotG,x+(plotWidth/xSteps*iX),y,colorPlot, -90);
+
+                // appendText(bigscatterplotG,x+(plotWidth/xSteps*iX),(y+15),
+                    // (maxMetric1/xSteps*iX).toFixed(0), 
+                    // font1, colorPlot);
+                bigscatterplotG.append("text").text((maxMetric1/xSteps*iX).toFixed(0)) 
+                    .attr("x", x+(plotWidth/xSteps*iX))
+                    .attr("y", y+15)
+                    .attr("fill", colorPlot)
+                    .style("font", tickLabelSize)
+                    .style("text-anchor","middle")
+                    .style("dominant-baseline", "central")
+                    ;
+            }
+            appendLine(bigscatterplotG,x,y,x+plotWidth,y,colorPlot, axisLineThickness);
+            // Draw Circles
+            iC=0;
+            for (c in cycle){ //c = cycles;
+                iA=0;
+                for (a in cycle[c]){ //a = agents; cycle[c][a] = agent results (JSON)
+                    iB=0;
+                    let xval = -1;
+                    let yval = -1;
+                    for (b in cycle[c][a]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                        if (iB==metric1){
+                            x1=x+(plotWidth/maxMetric1)*cycle[c][a][b];
+                            xval = cycle[c][a][b];
+                        }
+                        if (iB==metric2){
+                            y1=y-(plotHeight/maxMetric2)*cycle[c][a][b];
+                            yval = cycle[c][a][b];
+                        }
+                        iB++;
+                    }
+                    let cycleNum = parseInt(c)+1;
+                    if (iA==0||iA==2){
+                        appendCircleOnHover(bigscatterplotG,x1,y1,colorAgent1,circleSize, `x: ${xval}, y: ${yval}` ,"teamA scatterplotCircle cycle"+cycleNum);
+                    }
+                    if (iA==1||iA==3){
+                        appendCircleOnHover(bigscatterplotG,x1,y1,colorAgent2,circleSize, `x: ${xval}, y: ${yval}` ,"teamB scatterplotCircle cycle"+cycleNum);
+                    }
+                    iA++;          
+                }
+                iC++;
+            }
+            bigscatterplotG.attr("transform","translate(80 0)");
+            highlightSelectedScatterPlot(metric1, metric2);
+            highlightScatterPlotCircles(startCycle, endCycle);
+        }
+
+        function appendScatterplotMatrix(cycle,x,y){
+            let x1=x;
+            let y1=y;
+            let scatterplotWidth=svg2Width*0.9;
+            let scatterplotHeight=svg2Height*0.9;
+            let xStep=scatterplotWidth/16;
+            let yStep=scatterplotHeight/16;
+            let iL1=0;
+            for (l1 in labelNames){
+                y1=y-(yStep*iL1);
+                let iL2=0;
+                for (l2 in labelNames){
+                    x1=x+(xStep*iL2);
+                    if(iL1==iL2){
+                        let t_x = x1 + svg2Height/17;
+                        let t_y = y1-svg2Height/40;
+                        if(labelNames[l1] == "Bombs")
+                            t_y = y1-svg2Height/60;
+                        appendText(svg2,t_x ,t_y,labelNames[l1],font1,"black", `rotate(0 ${t_x} ${t_y})`, 'splomaxislabel')
+                    }
+                    if(iL1!=iL2 && iL1<iL2){
+                        appendScatterplot(cycle,x1,y1,iL2,iL1);
+                    }
+                    iL2++;
+                }
+                iL1++;
+            }
+        }
+
+        function appendScatterplot(cycle,x,y,metric1,metric2){
+            let plotWidth=svg2Width/20, plotHeight=svg2Height/20;
+            let colorPlot="gray";
+            let circleSize=1;
+            let lineSize="1px";
+            let x1=x, x2=x, y1=y, y2=y;
+            let maxMetric1=m[metric1].reduce(function(a,b){return Math.max(a,b);});
+            let maxMetric2=m[metric2].reduce(function(a,b){return Math.max(a,b);});
+            let iC=0, iA=0, iB=0;
+            // Draw Rect
+            appendRectOnClickScatterplot(svg2,x,y,(x+plotWidth),(y-plotHeight),svg2Color2,metric1,metric2);
+            // Draw y-Axis 
+            appendLine(svg2,x,y,x,(y-plotHeight),smallVisAxisColor,axisLineThickness);
+            // Draw x-Axis
+            appendLine(svg2,x,y,(x+plotWidth),y,smallVisAxisColor,axisLineThickness);
+            // Draw Circles
+            iC=0;
+            for (c in cycle){ //c = cycles;
+                iA=0;
+                for (a in cycle[c]){ //a = agents; cycle[c][a] = agent results (JSON)
+                    iB=0;
+                    for (b in cycle[c][a]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                        if (iB==metric1){
+                            x1=x+(plotWidth/maxMetric1)*cycle[c][a][b];
+                        }
+                        if (iB==metric2){
+                            y1=y-(plotHeight/maxMetric2)*cycle[c][a][b];
+                        }
+                        iB++;
+                    }
+                    if (iA==0||iA==2){
+                        appendCircle(svg2,x1,y1,colorAgent1,circleSize,"teamA scatterplotCircle cycle"+c);
+                    }
+                    if (iA==1||iA==3){
+                        appendCircle(svg2,x1,y1,colorAgent2,circleSize,"teamB scatterplotCircle cycle"+c);
+                    }
+                    iA++;          
+                }
+                iC++;
+            }
+        }
+
+        function analysis(cycle,metric,startCycle,endCycle){
+            metric = +metric;
+            let sumAgentH=0, sumAgentN=0;
+            let sumTeamH=0, sumTeamN=0;
+            let startRange=(startCycle-1)*4;
+            let endRange=(endCycle*4)-1;
+
+            let stepsTeamH = rangeStep(startRange,endRange-1,2);
+            let stepsAgentH = rangeStep(startRange,endRange-1,4);
+            let stepsTeamN = rangeStep(startRange+1,endRange,2);
+            let stepsAgentN = rangeStep(startRange+1,endRange,4);
+
+            for (i in stepsTeamH){
+                sumTeamH+=m[metric][stepsTeamH[i]];
+            }
+            for (i in stepsAgentH){
+                sumAgentH+=m[metric][stepsAgentH[i]];
+            }
+            for (i in stepsTeamN){
+                sumTeamN+=m[metric][stepsTeamN[i]];
+            }
+            for (i in stepsAgentN){
+                sumAgentN+=m[metric][stepsAgentN[i]];
+            }
+            let avgAgentH=sumAgentH/(endCycle-startCycle+1);
+            let avgAgentN=sumAgentN/(endCycle-startCycle+1);;
+            let avgTeamH=sumTeamH/(endCycle-startCycle+1);;
+            let avgTeamN=sumTeamN/(endCycle-startCycle+1);;
+
+            div1.selectAll("*").remove();
+
+            let corrWithWin = computeCorrelation(0,metric);
+            let corrIntensity = computeCorrelationIntensityText(corrWithWin);
+           
+
+            let appendedText =  `<span class='teamA'>Neural Network</span> vs <span class='teamB'>Hakozaki Junctions</span>: Line chart shows evolution of <span class='dynamicText '>${maxCorr[metric][1]}</span> <span class="infoIcon behavior" title="${behaviorDefinitions[metric]}">ⓘ</span> behavior (sampled from 50 battles at every 1000 training epochs). 
+                    In 600 battles, the selected behavior <span class='dynamicText'>${maxCorr[metric][1]}</span> <span class="infoIcon behavior" title="${behaviorDefinitions[metric]}">ⓘ</span> was exhibited <span class='dynamicText'>${sumTeamN.toFixed(0)}</span> times by <span class='teamA'>Neural Network</span> and <span class='dynamicText'>${sumTeamH.toFixed(0)}</span> times by <span class='teamB'>Hakozaki Junctions</span>. 
+                    The behavior shows the highest pearson-correlation with <span class="dynamicText">${maxCorr[metric][3]}</span> </span> <span class="infoIcon behavior" title="${behaviorDefinitions[maxCorr[metric][2]]}">ⓘ</span> behavior (r=${maxCorr[metric][4].toFixed(3)}).`;
+            let extraText = "";
+            if(metric > 2)
+            {
+                extraText = ` The selected behavior <span class="dynamicText">${maxCorr[metric][1]}</span>  <span class="infoIcon behavior" title="${behaviorDefinitions[maxCorr[metric][0]]}">ⓘ</span> has <span class="computedText">${corrIntensity}</span> correlation (r=${corrWithWin.toFixed(3)}) with the <span class="dynamicText">Wins</span>  <span class="infoIcon behavior" title="${behaviorDefinitions[0]}">ⓘ</span> behavior.`;
+            }
+
+            div1.append("text").html(`<p>${appendedText}${extraText}</p>`)
+                // .style("font-size",divFontSize)
+                .style("font-style",divFontStyle)
+                .style("color",divFontColor);
+
+            $('.infoIcon').tooltipster({
+                theme: 'my-custom-theme'
+            });
+
+        }
+        function roundOff(val)
+        {
+            let rem = val%5;
+            return (val + (5-rem));
+        }
+
+        function appendLineChart(cycle,x,y,metric)
+        {     
+
+            appendLindeChartDetails(cycle, x, y, metric, startCycle, endCycle);
+        
+            
+        };
+
+        function appendLineChartSmall(cycle){
+            d3.select("#lineChartSmallDiv").selectAll("*").remove();
+        // Parameters
+        
+        for(let metric=0; metric<labelNames.length; metric++)
+        {
+            let maxMetric0_2=m[metric].reduce(function(a,b){return Math.max(a,b);});
+            maxMetric0_2 = roundOff(maxMetric0_2);
+            let maxMetric3_15=m[metric].reduce(function(a,b){return Math.max(a,b);})*2;
+            let iCC=0, iAA=0, iBB=0;
+            let colorChart="black";
+
+            let chartHeight=30;
+            let chartWidth=270;
+            let x=5;
+            let y=chartHeight;
+
+            let x1_agent1=x, x2_agent1=x, y1_agent1=y, y2_agent1=y;
+            let x1_agent2=x, x2_agent2=x, y1_agent2=y, y2_agent2=y;
+            let colorCnb = colorChart;
+            let colorCnt = "grey";
+            let circleSize=2;
+            let lineWidth = 1.5;
+            
+            let headerTeamNameXpos = x+130;
+        // Draw Chart Root
+            // appendCircle(svg1,x,y,colorChart,circleSize);
+        // Draw Header Description
+            let tempDiv = d3.select("#lineChartSmallDiv").append("div").attr("class", "smalllinechartDivs")
+            .attr("selectedOption", metric)
+            .on("click", function(){
+                d3.select("#bigLineChartGroup").selectAll("*").remove();    
+                d3.select("#div1").selectAll("*").remove();
+                
+                selectedOption= +d3.select(this).attr("selectedOption");
+                let iO=0;
+                for (i in labelNames){
+                    if (labelNames[i]==selectedOption){
+                        selectedOption=iO;
+                    }
+                    iO++;
+                selectedMetricHighlight();
+            }
+            appendLineChartUpdate(cycle_results,xRoot,yRoot,selectedOption,1,12);
+            analysis(cycle_results,selectedOption,startCycle,endCycle);
+            });
+            tempDiv.text(labelNames[metric]);
+            // const chartWidth = "100%";
+            // chartWidth = tempDiv.style("width");
+            // chartWidth = +chartWidth.substr(0,chartWidth.length-2);
+            chartWidth = +tempDiv.style('width').slice(0, -2);
+            let svg1 = tempDiv.append("svg").attr("height", chartHeight).attr("width",chartWidth)
+            .append("g");
+           
+        // Draw x-Axis
+           
+            appendLine(svg1,x,y,(x+chartWidth),y,smallVisAxisColor,axisLineThickness);
+        // Draw y-Axis 
+           
+            appendLine(svg1,x,y,x,(y-chartHeight),smallVisAxisColor,axisLineThickness);
+        //Draw Agent Results
+            if (metric==0 || metric==1 || metric==2){
+                iCC=0;
+                for (cc in cycle){ //c = cycles;
+                    iAA=0;
+                    if (iCC>=(startCycle-1)&&iCC<=(endCycle-1)){
+                        for (aa in cycle[cc]){ //a = agents; cycle[c][a] = agent results (JSON)
+                            iBB=0;
+                            if (iAA==0){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent1=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent1=(y-(chartHeight/maxMetric0_2*cycle[cc][aa][bb]))
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent1,y1_agent1,x2_agent1,y2_agent1,colorAgent1,lineWidth);
+                                        }
+                                        // appendCircleOnHover(svg1,x2_agent1,y2_agent1,colorAgent1,circleSize,cycle[cc][aa][bb]);
+                                        x1_agent1=x2_agent1;
+                                        y1_agent1=y2_agent1;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==1){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent2=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent2=(y-(chartHeight/maxMetric0_2*cycle[cc][aa][bb]))
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent2,y1_agent2,x2_agent2,y2_agent2,colorAgent2,lineWidth);
+                                        }
+                                        // appendCircleOnHover(svg1,x2_agent2,y2_agent2,colorAgent2,circleSize,cycle[cc][aa][bb]);
+                                        x1_agent2=x2_agent2;
+                                        y1_agent2=y2_agent2;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            iAA++;       
+                        }
+                    }
+                    iCC++;
+                }
+            }
+            if (metric!=0 && metric!=1 && metric!=2){
+                iCC=0;
+                for (cc in cycle){ //c = cycles;
+                    iAA=0;
+                    if (iCC>=(startCycle-1)&&iCC<=(endCycle-1)){
+                        for (aa in cycle[cc]){ //a = agents; cycle[c][a] = agent results (JSON)
+                            iBB=0;
+                            if (iAA==0){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        y2_agent1=(y-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==1){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        y2_agent2=(y-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==2){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent1=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent1=(y2_agent1-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        // console.log("y2_agent1: "+y2_agent1);
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent1,y1_agent1,x2_agent1,y2_agent1,colorAgent1,lineWidth);
+                                        }
+                                        // appendCircleOnHover(svg1,x2_agent1,y2_agent1,colorAgent1,circleSize,cycle[cc][aa][bb]);
+                                        x1_agent1=x2_agent1;
+                                        y1_agent1=y2_agent1;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==3){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent2=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent2=(y2_agent2-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent2,y1_agent2,x2_agent2,y2_agent2,colorAgent2,lineWidth);
+                                        }
+                                        // appendCircleOnHover(svg1,x2_agent2,y2_agent2,colorAgent2,circleSize,cycle[cc][aa][bb]);
+                                        x1_agent2=x2_agent2;
+                                        y1_agent2=y2_agent2;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            iAA++;       
+                        }
+                    }
+                    iCC++;
+                }
+            }
+            
+        }
+    };
+
+    function appendLindeChartDetails(cycle, x, y, metric, start, end)
+    {
+            // Parameters
+            let maxMetric0_2=m[metric].reduce(function(a,b){return Math.max(a,b);});
+            let maxMetric3_15=m[metric].reduce(function(a,b){return Math.max(a,b);})*2;
+            let iCC=0, iAA=0, iBB=0;
+            let colorChart="black";
+            let x1_agent1=x, x2_agent1=x, y1_agent1=y, y2_agent1=y;
+            let x1_agent2=x, x2_agent2=x, y1_agent2=y, y2_agent2=y;
+            let colorCnb = colorChart;
+            let colorCnt = "grey";
+            let circleSize=5;
+            let chartHeight=lineChartHeight;
+            let chartWidth=lineChartWidth;
+            let headerTeamNameXpos = x+130;
+            let startCycle = start;
+            let endCycle = end;
+            
+            let maxMetricVal = -1;
+            if(metric >=3) maxMetricVal = maxMetric3_15;
+            else maxMetricVal = maxMetric0_2;
+
+            maxMetricVal = roundOff(maxMetricVal);
+
+            // Draw Header Description
+            let svg1 = d3.select("#bigLineChartGroup");
+            // appendRect(svg1,headerTeamNameXpos,(y-10-chartHeight),headerTeamNameXpos+10,(y-10-chartHeight)-10,colorAgent2);
+            
+           
+            // appendRect(svg1,(x+chartWidth*0.5),(y-10-chartHeight),(x+chartWidth*0.5)+10,(y-10-chartHeight)-10,colorAgent1);
+            // appendText(svg1,(x+chartWidth*0.5)+15,(y-10-chartHeight),"Team 2: Hakozaki-Junctions",font2,colorChart);
+            // appendText(svg1,x+chartWidth/2,(y+60),
+            //     "Neural Network vs Hakozaki Junctions: Evolution of '' Behavior (Sampled from 50 battles at every 1000 training epochs)", 
+            //     font3, colorChart, '', "axislabel");
+            let ylabelx = x-40;
+            let ylabely = chartHeight+80;
+            appendText(svg1,ylabelx,ylabely,
+                "# " +labelNames[metric]+"", 
+                font3, colorChart, `rotate(-90 ${ylabelx} ${ylabely})`, "axislabel");
+        // Draw x-Axis
+            appendText(svg1,(x-30),(y+20),"# Battles: ",font1,colorCnb);
+            appendText(svg1,(x-30),(y+40),"# Epochs: ",font1,colorCnb);
+            appendLine(svg1,(x-30),(y+25),(x+chartWidth+20),(y+25),"lightgray",1);
+            for (iX in range(start,end+1)){
+                // appendCircle(svg1,(x+(chartWidth/cycle_results.length*iX)),y,colorChart,circleSize);
+
+                appendTickMark(svg1,(x+(chartWidth/cycle_results.length*iX)),y,colorChart,-90);
+
+                let xpos = x+(chartWidth/cycle_results.length*iX);
+                if(iX>=1)
+                    svg1.append("line")
+                    .style("stroke", "lightgray")
+                    .style("stroke-width", "1px")
+                    .attr("x1", xpos)
+                    .attr("y1", y+5)
+                    .attr("x2", xpos)
+                    .attr("y2", y+40)
+                
+
+                if (iX>=1){
+                    appendText(svg1,(x+(chartWidth/cycle_results.length*iX)+2),(y+20),
+                        numberOfBattles*iX, 
+                        tickLabelSize, colorCnb);
+                    appendText(svg1,(x+(chartWidth/cycle_results.length*iX)-2),(y+40),
+                        numberOfTrainings*iX, 
+                        tickLabelSize, colorCnb,'','trainingEpochLabel');
+                }
+            }
+            appendLine(svg1,x,y,(x+chartWidth),y,colorChart,axisLineThickness);
+        // Draw y-Axis 
+            let tick=0;
+            let ySteps=5;
+            let yscaleTicks = d3.scale.linear().domain([0, maxMetricVal]).range([0, chartHeight]);
+            let incrementValue = roundOff(maxMetricVal/ySteps);
+
+            while (tick <=maxMetricVal){
+                // appendCircle(svg1,x,(y-(chartHeight/ySteps*iY)),colorChart,circleSize);
+                console.log(tick, y-yscaleTicks(tick), incrementValue, maxMetricVal);
+                appendTickMark(svg1,x,(y-chartHeight/maxMetricVal*tick),colorChart,0);
+                appendText(svg1,(x-30),(y-chartHeight/maxMetricVal*tick), (tick), tickLabelSize, colorChart);
+                tick = tick + incrementValue;
+            }
+            appendLine(svg1,x,y,x,(y-chartHeight),colorChart,axisLineThickness);
+        //Draw Agent Results
+            if (metric==0 || metric==1 || metric==2){
+                iCC=0;
+                for (cc in cycle){ //c = cycles;
+                    iAA=0;
+                    if (iCC>=(startCycle-1)&&iCC<=(endCycle-1)){
+                        for (aa in cycle[cc]){ //a = agents; cycle[c][a] = agent results (JSON)
+                            iBB=0;
+                            if (iAA==0){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent1=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent1=(y-(chartHeight/maxMetric0_2*cycle[cc][aa][bb]))
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent1,y1_agent1,x2_agent1,y2_agent1,colorAgent1,circleSize);
+                                        }
+                                        appendCircleOnHover(svg1,x2_agent1,y2_agent1,colorAgent1,circleSize,cycle[cc][aa][bb], maxMetric0_2);
+                                        x1_agent1=x2_agent1;
+                                        y1_agent1=y2_agent1;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==1){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent2=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent2=(y-(chartHeight/maxMetric0_2*cycle[cc][aa][bb]))
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent2,y1_agent2,x2_agent2,y2_agent2,colorAgent2,circleSize);
+                                        }
+                                        appendCircleOnHover(svg1,x2_agent2,y2_agent2,colorAgent2,circleSize,cycle[cc][aa][bb], maxMetric0_2);
+                                        x1_agent2=x2_agent2;
+                                        y1_agent2=y2_agent2;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            iAA++;       
+                        }
+                    }
+                    iCC++;
+                }
+            }
+            if (metric!=0 && metric!=1 && metric!=2){
+                iCC=0;
+                for (cc in cycle){ //c = cycles;
+                    iAA=0;
+                    if (iCC>=(startCycle-1)&&iCC<=(endCycle-1)){
+                        for (aa in cycle[cc]){ //a = agents; cycle[c][a] = agent results (JSON)
+                            iBB=0;
+                            if (iAA==0){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        y2_agent1=(y-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==1){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        y2_agent2=(y-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==2){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent1=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent1=(y2_agent1-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        console.log("y2_agent1: "+y2_agent1);
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent1,y1_agent1,x2_agent1,y2_agent1,colorAgent1,circleSize);
+                                        }
+                                        appendCircleOnHover(svg1,x2_agent1,y2_agent1,colorAgent1,circleSize,cycle[cc][aa][bb]);
+                                        x1_agent1=x2_agent1;
+                                        y1_agent1=y2_agent1;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            if (iAA==3){
+                                for (bb in cycle[cc][aa]){ //b = behaviors; cycle[c][a][b] = behavior results (Int)
+                                    if (iBB==metric){
+                                        x2_agent2=(x+(chartWidth/cycle_results.length*(iCC+1)));
+                                        y2_agent2=(y2_agent2-(chartHeight/maxMetric3_15*cycle[cc][aa][bb]))
+                                        if (iCC>0){ //change to >=0 if line for epoche_0 should be drawn
+                                            appendLine(svg1,x1_agent2,y1_agent2,x2_agent2,y2_agent2,colorAgent2,circleSize);
+                                        }
+                                        appendCircleOnHover(svg1,x2_agent2,y2_agent2,colorAgent2,circleSize,cycle[cc][aa][bb]);
+                                        x1_agent2=x2_agent2;
+                                        y1_agent2=y2_agent2;
+                                        break;
+                                    }
+                                    iBB++;
+                                }
+                            }
+                            iAA++;       
+                        }
+                    }
+                    iCC++;
+                }
+            }
+
+            // draw Agent's lines
+            agentLineChartGroup = svg1.append("g").attr("class", "agentLineChart");
+            x1_agent = x;
+            y1_agent = y;
+            let headerypos = (y-chartHeight-20);
+            
+            let agents = ["1hakozaki", "2hakozaki", "1ppo", "2ppo"];
+            for(let a in agents)
+            {   
+                let agent = agents[a];
+                let xpos = headerTeamNameXpos + parseInt(a)*220;
+                if(metric>2)
+                {
+                    svg1.append("line")
+                        .attr("x1", xpos)
+                        .attr("y1", headerypos)
+                        .attr("x2", xpos+30)
+                        .attr("y2", headerypos)
+                        .style("stroke-width", 1)
+                        .style("stroke", colorAgent(agent))
+                        .style("stroke-dasharray", agentLineStroke(agent))
+
+                    // appendText(svg1,xpos+45,headerypos,agentName(agent),font2,colorAgent(agent));
+                    svg1.append("text")
+                        .text(agentName(agent))    
+                        .attr("x", xpos+45)
+                        .attr("y", headerypos)
+                        .attr("fill", colorAgent(agent))
+                        .style("font", font2)
+                        .style("dominant-baseline", "central")
+                }
+
+                for(let i in cycle)
+                {
+                    let cc = parseInt(i);
+                    
+                    if(metric>2)
+                    {
+                        let metricVal = cycle[cc][agent][bindex_id[metric]];
+                        x2_agent=(x+(chartWidth/cycle_results.length*(cc+1)));
+                        y2_agent=(y-(chartHeight/maxMetric3_15*metricVal))
+                        if(parseInt(cc)>=1)
+                        {
+                            // appendLine(agentLineChartGroup,x1_agent,y1_agent,x2_agent,y2_agent,colorAgent(agent),1);
+                            agentLineChartGroup.append("line")
+                                .style("stroke", colorAgent(agent))
+                                .style("opacity", 0.7)
+                                .style("stroke-width", 1)
+                                .style("stroke-dasharray", function(){
+                                    return agentLineStroke(agent);
+                                })
+                                .attr("x1", x1_agent)
+                                .attr("y1", y1_agent)
+                                .attr("x2", x2_agent)
+                                .attr("y2", y2_agent);
+                                
+                        }
+                        appendCircleOnHover(agentLineChartGroup,x2_agent,y2_agent,colorAgent(agent),2,metricVal);
+                        x1_agent=x2_agent;
+                        y1_agent=y2_agent;
+
+                    }
+                }
+            }
+
+            svg1.attr("transform", "translate(5 -80)");
+            // enableBrushing();
+    }
+
+    function agentName(agent)
+    {
+        if( agent == "1hakozaki" || agent == "1ppo")
+            return "Agent 1";
+        else if( agent == "2hakozaki" || agent == "2ppo")
+            return "Agent 2";
+    }
+
+    function colorAgent(agent)
+    {
+        if(agent == "1hakozaki" || agent == "2hakozaki")
+            return colorAgent1;
+        else if (agent == "1ppo" || agent == "2ppo")
+            return colorAgent2;
+
+        else
+            return "black";
+    }
+
+    function agentLineStroke(agent)
+    {
+        if(agent == "2hakozaki" || agent == "2ppo")
+            return "5,5";
+        else
+            return "5,0";
+    }
+
+        function appendLineChartUpdate(cycle,x,y,metric,startCycle,endCycle)
+        {
+
+            // appendLindeChartDetails(cycle, x, y, metric, startCycle, endCycle);
+            appendLindeChartDetails(cycle, x, y, metric, 1, 12);
+            
+        };  
+
+        function appendRect(svg,x1,y1,x2,y2,color){
+            svg.append("rect")
+                .attr("x",x1)
+                .attr("y",y1-(y1-y2))
+                .attr("width",Math.abs(x2-x1))
+                .attr("height",Math.abs(y2-y1))
+                .attr("fill", color)
+        }
+
+        function appendRectOnClickScatterplot(svg,x1,y1,x2,y2,color,metric1,metric2){
+            let padding = 5;
+            svg.append("rect")
+                .attr("x",x1-padding/2)
+                .attr("y",y1-(y1-y2)-padding/2)
+                .attr("width",Math.abs(x2-x1)+padding)
+                .attr("height",Math.abs(y2-y1)+padding)
+                .attr("fill", color)
+                .attr("stroke-opacity", 0)
+                .attr("stroke", "black")
+                .attr("stroke-width", "1px")
+                .attr("fill-opacity", 0)
+                .attr("id", "scatterRect"+metric1+"_"+metric2)
+                .attr("class", "scatterPlotRect")
+                .on("click", function() {
+                    
+                    appendScatterplotUpdate(cycle_results,scatterplotZoomX1,scatterplotZoomY1,metric1,metric2);
+                    // i - identifier or index
+                    // this - the rect that was clicked
+                });
+        
+        }
+
+        function appendCircle(svg,cx,cy,color,r, circleclass){
+            svg.append("circle")
+                .attr("cx", cx)
+                .attr("cy", cy)
+                .attr("r", r)
+                .attr("class", circleclass)
+                .style("fill", color);
+        }
+
+        function appendCircleOnHover(svg,cx,cy,color,r,value, circleclass){
+            svg.append("circle")
+                .attr("cx", cx)
+                .attr("cy", cy)
+                .attr("r", r)
+                .attr("fill", color)
+                .attr("cursor", "pointer")
+                .attr("class", circleclass)
+                .append("title").text(value)
+                // .attr("title", value)
+                // .on("mouseover", function onMouseOver() {
+                //     appendTextOnHover(svg1,(xRoot+20),cy,value,"8px times",color);
+                // })
+                ;
+        }
+
+
+        function appendText(svg,x,y,text,font,color, transform, textclass){
+            svg.append("text")
+                .text(text)    
+                .attr("x", x)
+                .attr("y", y)
+                .attr("fill", color)
+                .style("font", font)
+                .attr("transform", function(){
+                    if(transform !=null)
+                        return transform;
+                    else
+                        return "";
+                }).attr("class", function(){
+                    if(textclass !=null)
+                        return textclass;
+                });
+                
+
+        }
+
+        function appendTextOnHover(svg,x,y,text,font,color){
+            svg.append("text")
+                .text(text)    
+                .attr("x", x)
+                .attr("y", y)
+                .attr("fill", color)
+                .style("font", font)
+                .transition()
+                    .duration(1500)
+                .style("opacity", 0)
+                .remove();
+        }
+
+        function appendLine(svg,x1,y1,x2,y2,color,width){
+            svg.append("line")
+                .style("stroke", color)
+                .style("stroke-width", width)
+                .attr("x1", x1)
+                .attr("y1", y1)
+                .attr("x2", x2)
+                .attr("y2", y2)
+                .on("mouseover", function onMouseOver() {
+                })
+        }
+
+        function appendTickMark(svg,x1,y1,color,rotate){
+            svg.append("line")
+                .style("stroke", color)
+                .style("stroke-width", axisLineThickness)
+                .attr("x1", x1)
+                .attr("y1", y1)
+                .attr("x2", x1-5)
+                .attr("y2", y1)
+                .attr("transform", `rotate(${rotate} ${x1} ${y1})`);
+        }
+
+        function range(start, end) {
+            var rangeArray = [];
+            for (let i = start; i <= end; i++) {
+                rangeArray.push(i);
+            }
+            return rangeArray;
+        }
+
+        function rangeStep(start, end, step) {
+            var rangeArray = [];
+            for (let i=start; i<=end; i++) {
+                rangeArray.push(i);
+                i=i+step-1;
+            }
+            return rangeArray;
+        }
+
+        // Pearson correlation from https://gist.github.com/matt-west/6500993
+        function pearsonCorrelation(prefs, p1, p2) {
+            var si = [];
+        
+            for (var key in prefs[p1]) {
+            if (prefs[p2][key]) si.push(key);
+            }
+        
+            var n = si.length;
+        
+            if (n == 0) return 0;
+        
+            var sum1 = 0;
+            for (var i = 0; i < si.length; i++) sum1 += prefs[p1][si[i]];
+        
+            var sum2 = 0;
+            for (var i = 0; i < si.length; i++) sum2 += prefs[p2][si[i]];
+        
+            var sum1Sq = 0;
+            for (var i = 0; i < si.length; i++) {
+            sum1Sq += Math.pow(prefs[p1][si[i]], 2);
+            }
+        
+            var sum2Sq = 0;
+            for (var i = 0; i < si.length; i++) {
+            sum2Sq += Math.pow(prefs[p2][si[i]], 2);
+            }
+        
+            var pSum = 0;
+            for (var i = 0; i < si.length; i++) {
+            pSum += prefs[p1][si[i]] * prefs[p2][si[i]];
+            }
+        
+            var num = pSum - (sum1 * sum2 / n);
+            var den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) *
+                (sum2Sq - Math.pow(sum2, 2) / n));
+        
+            if (den == 0) return 0;
+        
+            return num / den;
+        }
+
+        // https://www.crashkurs-statistik.de/einfache-lineare-regression
+        function appendRegressionLine(metric1values,metric2values){
+            let sum1=0, sum2=0;
+            let maxMetric1=0, maxMetric2=0;
+            for (i in metric1values){
+                if (metric1values[i]>=maxMetric1){
+                    maxMetric1=metric1values[i];
+                }
+                if (metric2values[i]>=maxMetric2){
+                    maxMetric2=metric2values[i];
+                }
+                sum1=(metric1values[i]-avg(metric1values))*(metric2values[i]-avg(metric2values));
+                sum2=Math.pow(metric1values[i]-avg(metric1values),2);
+                b+=(sum1/sum2);
+            }
+            let b=sum1/sum2;
+            let a=avg(metric2values)-(b*avg(metric1values));
+            let x1=0;
+            let y1=a+(b*x1)
+            let x2=maxMetric1;
+            let y2=a+(b*x2);
+            let results=[x1,y1,x2,y2];
+            return results;
+        }
+
+        function avg(array){
+            let avg=0;
+            let count=0;
+            for (i in array){
+                avg+=array[i];
+                count++;
+            }
+            avg=(avg/count);
+            return avg;
+        }
+
+        // https://stackoverflow.com/questions/6195335/linear-regression-in-javascript
+        function linearRegression(y,x){
+            var lr = {};
+            var n = y.length;
+            var sum_x = 0;
+            var sum_y = 0;
+            var sum_xy = 0;
+            var sum_xx = 0;
+            var sum_yy = 0;
+
+            for (var i = 0; i < y.length; i++) {
+                sum_x += x[i];
+                sum_y += y[i];
+                sum_xy += (x[i]*y[i]);
+                sum_xx += (x[i]*x[i]);
+                sum_yy += (y[i]*y[i]);
+            } 
+
+            lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
+            lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
+            lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
+
+            return lr;
+        }
+
+        function isEven(value) {
+            if (value%2 == 0)
+            return true;
+            else
+            return false;
+        }
+
+        function slopeTeam(steps, metricArray){
+            let x=[], y=[];
+            let count=0;
+            let sumTeam=0;
+            for (i in steps){
+                if (isEven(i)==true){
+                    /*console.log("i: "+i)
+                    console.log("stepsi: "+steps[i])
+                    console.log("metricarraystepsi: "+metricArray[steps[i]])*/
+                    sumTeam=metricArray[steps[i]];
+                }
+                if (isEven(i)==false){
+                    sumTeam+=metricArray[steps[i]];
+                    count++;
+                    x.push(count);
+                    y.push(sumTeam);
+                }
+            }
+            return linearRegression(y,x).slope;
+        }
+
+        function slopeSolo(steps, metricArray){
+            let x=[], y=[];
+            let count=0;
+            for (i in steps){
+                count++;
+                x.push(count);
+                y.push(metricArray[steps[i]]);
+            }
+            return linearRegression(y,x).slope;
+        }
+
+        // Calculate maxima and minima for each behavior and team over all intervals 
+        function maximaMinimaSolo(steps,metricArray){
+            let maxi=0, mini=999999;
+            let maxima=[],minima=[];
+            let count=0;
+            let value=0;
+            for (i in steps){
+                value=metricArray[steps[i]];
+                if (value>=maxi){
+                    maxi=value;
+                    maxima=["maximal number of "+maxi+" times during interval "+(count+1)];
+                }
+                if (value<=mini){
+                    mini=value;
+                    minima=[", and minimal number of "+mini," times during interval "+(count+1)];
+                }
+                count++;
+                value=0;
+            }
+            return [maxima,minima];
+        }
+
+        function maximaMinimaTeam(steps,metricArray){
+            let maxi=0, mini=999999;
+            let maxima=[],minima=[];
+            let count=0;
+            let sumTeam=0;
+            for (i in steps){
+                if (isEven(i)==true){
+                    sumTeam+=metricArray[steps[i]];
+                }
+                if (isEven(i)==false){
+                    sumTeam+=metricArray[steps[i]];
+                    if (sumTeam>=maxi){
+                        maxi=sumTeam;
+                        maxima=["max",count+1,maxi];
+                    }
+                    if (sumTeam<=mini){
+                        mini=sumTeam;
+                        minima=["min",count+1,mini];
+                    }
+                    count++;
+                    sumTeam=0;
+                }
+            }
+            return [maxima,minima];
+        }
+
+        function enableBrushing()
+    {
+        // d3.select("#svg1")
+        //         .call( d3.brushX()                     // Add the brush feature using the d3.brush function
+        //             .extent( [ [50, 70], [lineChartWidth+80,svg1Height-30] ] )       // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+        //             .on("start end", updateChart)
+        //         );
+
+                function updateChart() {
+                // Get the selection coordinate
+                    extent = d3.event.selection   // looks like [ [12,11], [132,178]]
+                    // console.log(extent);
+                    // let eachIntervalWidth = lineChartWidth/(cycle_results.length+1);
+                    // let rangeBegin = extent[0]/eachIntervalWidth
+                    if(extent !=null)
+                    {
+                        let scale = d3.scale.linear().domain([50, lineChartWidth+50]).range([0, cycle_results.length]);
+                        let rangeBegin = Math.ceil(scale(extent[0]));
+                        let rangeEnd = Math.floor(scale(extent[1]));
+                        console.log(rangeBegin, rangeEnd);
+                        // selectedOption=d3.select("#select1").property("value");
+                        let iO=0;
+                            for (i in labelNames){
+                                if (labelNames[i]==selectedOption){
+                                    selectedOption=iO;
+                                }
+                                iO++;
+                            }
+                        startCycle = rangeBegin;
+                        endCycle = rangeEnd;
+                        analysis(cycle_results,selectedOption,rangeBegin,rangeEnd);
+                        highlightScatterPlotCircles(rangeBegin, rangeEnd);
+                    }
+                    else if(extent == null || extent[0] == extent[1]){
+                        startCycle = 1;
+                        endCycle = 12;
+                        analysis(cycle_results,selectedOption,1,12);
+                        dehighlightScatterplotCircles();
+                    }
+                    else{
+                        startCycle = 1;
+                        endCycle = 12;
+                        analysis(cycle_results,selectedOption,rangeBegin,rangeEnd);
+                        dehighlightScatterplotCircles();
+                    }
+                }
+    }
+
+    function selectedMetricHighlight()
+    {
+        d3.selectAll(".smalllinechartDivs").each(function(d){
+            let val = +d3.select(this).attr("selectedOption");
+            if(val == selectedOption)
+            {
+                d3.select(this).classed("highlighted", true);
+            }
+            else
+                d3.select(this).classed("highlighted", false);
+
+
+        })
+
+    }
+
+    function highlightSelectedScatterPlot(metric1, metric2)
+    {
+        d3.selectAll(".scatterPlotRect").attr("stroke-opacity", 0);
+        d3.select("#scatterRect"+metric1+"_"+metric2).attr("stroke-opacity", 1);
+    }
+
+    function dehighlightScatterplotCircles()
+    {
+        d3.selectAll(".teamA").style("fill", colorAgent1).style("opacity", 0.7);
+        d3.selectAll(".teamB").style("fill", colorAgent2).style("opacity", 0.7);
+    }
+
+    function highlightScatterPlotCircles(rangeBegin, rangeEnd)
+    {
+        d3.selectAll(".scatterplotCircle").style("fill", "grey").style("opacity", 0.2);
+        for(let i=rangeBegin; i<=rangeEnd;i++)
+        {
+            d3.selectAll(".teamA.cycle"+i).style("fill", colorAgent1).style("opacity", 0.7);
+            d3.selectAll(".teamB.cycle"+i).style("fill", colorAgent2).style("opacity", 0.7);
+        }
+    }
+            
+
+    </script>
+
+<script>
+    // function zoomPage(){
+    //         d3.select("#select2").style("display", "none");
+    //         d3.select("#select3").style("display", "none");
+    //         var screenWidth = document.body.clientWidth;
+    //         window.zoomFactor = screenWidth/1920;
+    //         d3.select("body").style("zoom", window.zoomFactor);
+    // }
+    //  $(window).resize(function() {
+    //         zoomPage();
+    //     });
+
+    
+    window.onload = function() 
+{
+    selectedMetricHighlight();
+
+    let rev_data = [];
+    for (const [epochid, value] of Object.entries(cycle_results)) 
+    {
+        for(const [agentid, value2] of Object.entries(value))
+        {
+            
+            let agentID = agentid.substr(0,1);
+            let teamId = -1;
+            if(agentid.includes("hakozaki"))
+                teamId = 2;
+            else if(agentid.includes("ppo"))
+                teamId = 1;
+            else
+                console.log("Unrecognized team name");
+
+            let epochVal = (parseInt(epochid)+1)*1000;
+            let temp_data_pont = {"Epochs": +(epochVal), "agentId": +agentID, "teamId":teamId, ...value2};
+            // for(const [behavid, val] of Object.entries(value2))
+            // {
+            //     if(behavid in labelid_NameDictionary)
+            //     {
+            //         temp_data_pont[labelid_NameDictionary[behavid]] = val;
+            //     }
+            //     else
+            //     temp_data_pont[behavid] = val;
+
+            // }
+            // console.log(temp_data_pont);
+            rev_data.push(temp_data_pont);
+
+        }   
+    }
+
+    parallelplot(rev_data);
+
+    // $(document).tooltip();
+    // $("#pommermanInfo").tooltip({
+    //     content: '<img src = "./pommerman.png"/>'
+    // });
+    $(document).ready(function() {
+            $('.infoIcon').tooltipster({
+                // theme: 'tooltipster-shadow',
+                theme: 'my-custom-theme'
+            });
+            $('#pommermanInfo').tooltipster({
+                theme: 'tooltip-image-theme'
+            });
+            $('#hakozakiInfo').tooltipster({
+                theme: 'my-custom-theme',
+                content: $('<span>Best team in Pommerman. It is based on a tree search based technique.</span>')
+            });
+            $('#NNInfo').tooltipster({
+                theme: 'my-custom-theme',
+                content: $('<span>An existing deep reinforcement learning based team (<i>Skynet955</i>), which we train from scratch.</span>')
+            });
+        });
+//    zoomPage();
+}
+
+function colorBehavior(behaviorId)
+{
+    if(labelid_Category[behaviorId] == "positive")
+    {
+        return positiveColor;
+    }
+    else if(labelid_Category[behaviorId] == "negative")
+    {
+        return negativeColor;
+    }
+    else if(labelid_Category[behaviorId] == "neutral")
+    {
+        return nuetralColor;
+    }
+    else
+        console.log("unrecognized behavior type");
+        return "grey";
+    
+    
+}
+
+function parallelplot(data) {
+
+    data.forEach(function (d, i) {
+    // delete d.win;
+    // delete d.loss;
+    // delete d.tie;
+    // delete d.agentId;
+    // delete d.teamId;
+    });
+
+    //specify the dimensions and their order
+    // var myDimensions = {
+    // "wmc": { type: "number" },
+    // "max_cc": { type: "number" },
+    // "ca": { type: "number" },
+    // "ce": { type: "number" },
+    // "lcom3": { type: "number" },
+    // "noc": { type: "number" },
+    // "dit": { type: "number" },
+    // "loc": { type: "number" },
+    // "amc": { type: "number" },
+    // "npm": { type: "number" },
+    // "bug": { type: "number" },
+    // };
+
+    pcz = d3.parcoords()("#parallelplot")
+    .data(data)
+    // .hideAxis(["agentId"])
+    .hideAxis(["teamId", "agentId"])
+    // .composite("darken")
+    .color(function (d) {
+        if(d["teamId"] == 1)
+            return colorAgent2;
+        else return colorAgent1;
+        // return "#AAAAAAAA";
+    })
+    // .dimensions(myDimensions)
+    .render()
+    .brushMode("1D-axes")  // enable brushing
+    .interactive() // command line mode
+    // .brushedColor("black");
+
+    // adding axis labels
+    pcz.svg.selectAll(".dimension")
+    .selectAll(".label")
+    .style("font-size", "14px");
+
+    pcz.on("brush", function (d) {
+    // var sAxis = pcz.brushExtents();
+    // var sAxisName = Object.keys(sAxis);
+    // var content = 'The current selection is drawn in black <span class="boxBlack"></span> and contains ' + num2word(d.length) + ' class' + (d.length == 1 ? '' : 'es');
+    
+    // if (d.length == 1) {
+    //     content += ': ' + printList([createClassSpan(d[0].cname) + ' (' + generateShortMetricSpan(sAxisName) + ': '+d[0][sAxisName].toFixed()+')']);
+    // }
+    // else if (d.length == 2) {
+    //     content += ': ' + printList([createClassSpan(d[0].cname) + ' (' + generateShortMetricSpan(sAxisName) + ': '+d[0][sAxisName].toFixed()+')', createClassSpan(d[1].cname) + ' (' + generateShortMetricSpan(sAxisName) + ': '+d[1][sAxisName].toFixed()+')']);
+    // }
+    // else if (d.length == 3) {
+    //     content += ': ' + printList([createClassSpan(d[0].cname) + ' (' + generateShortMetricSpan(sAxisName) + ': '+d[0][sAxisName].toFixed()+')', createClassSpan(d[1].cname)+ ' (' + generateShortMetricSpan(sAxisName) + ': '+d[1][sAxisName].toFixed()+')', createClassSpan(d[2].cname) + ' (' + generateShortMetricSpan(sAxisName) + ': '+d[2][sAxisName].toFixed()+')']);
+    // }
+    // else if (d.length > 3 && sAxis[sAxisName] != undefined) {
+    //     content += '. The values of ' + generateShortMetricSpan(sAxisName)  + ' for this selection range between '+ sAxis[sAxisName][0].toFixed(2) + ' and '+sAxis[sAxisName][1].toFixed(2);
+    // }
+
+    // var newdata=Array(fullData.length).fill(false);
+    // d.forEach(function (d){
+    //     newdata[d.index]=true;
+    // });
+    // scatterfilter(newdata);
+    // updateCaption(content + '. <span class="pcpBrushInfo infoIcon" title="">ⓘ</span>'); 
+    // $(".pcpBrushInfo").tooltip({
+    //     content: 'To reset the manual brushing, click on the brushed axis anywhere outside the rectangle.'
+    // });
+
+    // //TODO: !!CRUCIAL!!!! not a neat solution, it's more like a hack at the moment
+    // if (d.length == 293 || d.length == 0) {
+    //     resetScatterplot();
+    //     updateCaption('');
+    // }
+    // haveClassToPersist = true;
+    });
+}
+
+</script>
+
+</body>
+
+</html>
