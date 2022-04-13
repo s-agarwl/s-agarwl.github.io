@@ -64,10 +64,13 @@ layout: default
             <span class="list_of_tags"></span><a href="{{ page.paperurl }}" target="_blank" title="PDF"><i class="fas fa-fw fa-file-pdf zoom" aria-hidden="true"></i> Download Paper</a>
         {% endif %}
         {% if page.demo %}
-            <span class="list_of_tags"></span><a href="{{ page.demo }}" target="_blank" title="PDF"><i class="fas fa-fw fa-desktop zoom" aria-hidden="true"></i> Hosted Demo</a>
+            <span class="list_of_tags"></span><a href="{{ page.demo }}" target="_blank" title="Demo"><i class="fas fa-fw fa-desktop zoom" aria-hidden="true"></i> Hosted Demo</a>
         {% endif %}
         {% if page.code %}
-            <span class="list_of_tags"></span><a href="{{ page.code }}" target="_blank" title="PDF"><i class="fas fa-fw fa-code zoom" aria-hidden="true"></i> Code/Supplementary Material</a>
+            <span class="list_of_tags"></span><a href="{{ page.code }}" target="_blank" title=""><i class="fas fa-fw fa-code zoom" aria-hidden="true"></i> Code/Supplementary Material</a>
+        {% endif %}
+        {% if page.poster %}
+            <span class="list_of_tags"></span><a href="{{ page.poster }}" target="_blank" title="PDF"><i class="fas fa-fw fa-file-pdf zoom" aria-hidden="true"></i> Poster</a>
         {% endif %}
         {% if page.doiurl %}
             <span class="list_of_tags"></span><a href="{{ page.doiurl }}" target="_blank" title="DOI"><i class="ai ai-doi ai-fw" aria-hidden="true" ></i> DOI</a>
