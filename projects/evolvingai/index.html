@@ -37,7 +37,7 @@
         }
         .scatterplotCircle
         {
-            opacity:0.7;
+            opacity:0.5;
         }
         .grid-container {
             display: grid;
@@ -107,11 +107,19 @@
             /* width: 100vw; */
             grid-column: 1 / span 2;
         }
-        .teamA{
+        .teamA {
             color: tomato; 
             font-weight:700;
         }
-        .teamB{
+        .teamAA{
+            color: tomato; 
+            font-weight:700;
+        }
+        .teamB {
+            color: steelblue;
+            font-weight:700;
+        }
+        .teamBB{
             color: steelblue;
             font-weight:700;
         }
@@ -150,6 +158,9 @@
         .tooltip_templates
         {
             display:none;
+        }
+        .infoIcon{
+            cursor:pointer;
         }
 
     </style>
@@ -690,7 +701,7 @@
         // Draw the Scatterplot Matrix
         let agent=0;
         let xRoot2=0;
-        let yRoot2=svg2Height;
+        let yRoot2=svg2Height-120;
         appendScatterplotMatrix(cycle_results,xRoot2,yRoot2);
 
         // Fill select1 with the behavior labels
@@ -833,7 +844,18 @@
 
             let iC=0, iA=0, iB=0;
             // let data = new Array(m[metric1],m[metric2]);
-            let corr = computeCorrelation(metric1, metric2);
+            let m1=-1, m2=-1;
+            if(metric1<metric2)
+            {
+                m1= metric1;
+                m2= metric2;
+            }
+            else
+            {
+                m1= metric2;
+                m2= metric1;
+            }
+            let corr = computeCorrelation(m1, m2);
             let corrIntensity = computeCorrelationIntensityText(corr);
             // Write Legend
             let bigscatterplotG = d3.select("#bigscatterplotGroup");
@@ -908,10 +930,10 @@
                 let y1=y-(plotHeight/maxMetric2)*yvalue;
 
                 if (teamId == 2){
-                    appendCircleOnHover(bigscatterplotG,x1,y1,colorAgent1,circleSize, `x: ${xvalue}, y: ${yvalue}` ,"teamA scatterplotCircle cycle"+epochid);
+                    appendCircleOnHover(bigscatterplotG,x1,y1,colorAgent1,circleSize, `x: ${xvalue}, y: ${yvalue}` ,"teamAA scatterplotCircle cycle"+epochid);
                 }
                 else if (teamId == 1){
-                    appendCircleOnHover(bigscatterplotG,x1,y1,colorAgent2,circleSize, `x: ${xvalue}, y: ${yvalue}` ,"teamB scatterplotCircle cycle"+epochid);
+                    appendCircleOnHover(bigscatterplotG,x1,y1,colorAgent2,circleSize, `x: ${xvalue}, y: ${yvalue}` ,"teamBB scatterplotCircle cycle"+epochid);
                 }
 
             }
@@ -933,6 +955,14 @@
             for (l1 in labelNames){
                 y1=y-(yStep*iL1);
                 let iL2=0;
+                // splomGroup.append("rect").attr({
+                //     x:x+(xStep*iL1),
+                //     y: y1 - scatterplotHeight*(iL1)-scatterplotHeight,
+                //     width: 100,
+                //     height: scatterplotHeight,
+                //     fill: "grey",
+                //     "fill-opacity": 0.3
+                // });
                 for (l2 in labelNames){
                     x1=x+(xStep*iL2);
                     if(iL1==iL2){
@@ -952,11 +982,12 @@
         }
 
         function appendScatterplot(svg2, cycle,x,y,metric1,metric2){
-            let splomPadding = 6;
+            let splomPadding = 12;
 
             let plotWidth=svg2Width/scatterplotScaleRatio - splomPadding, plotHeight=svg2Height/scatterplotScaleRatio - splomPadding;
             let colorPlot="gray";
-            let circleSize=1;
+            let reduceAxisLineBy = 0;
+            let circleSize=2.5;
             let lineSize="1px";
             let x1=x, x2=x, y1=y, y2=y;
             let maxMetric1 = maxMetricCount(window.aggregatedData, bindex_id[metric1]);
@@ -965,9 +996,9 @@
             // Draw Rect
             appendRectOnClickScatterplot(svg2,x,y,(x+plotWidth),(y-plotHeight),svg2Color2,metric1,metric2);
             // Draw y-Axis 
-            appendLine(svg2,x,y,x,(y-plotHeight),smallVisAxisColor,axisLineThickness);
+            appendLine(svg2,x,y,x,(y-plotHeight-reduceAxisLineBy),smallVisAxisColor,axisLineThickness);
             // Draw x-Axis
-            appendLine(svg2,x,y,(x+plotWidth),y,smallVisAxisColor,axisLineThickness);
+            appendLine(svg2,x,y,(x+plotWidth-reduceAxisLineBy),y,smallVisAxisColor,axisLineThickness);
             // Draw Circles
             for( var i=0; i<window.aggregatedData.length; i++)
             {
@@ -1025,6 +1056,12 @@
             let corrWithWin = computeCorrelation(0,metric);
             let corrIntensity = computeCorrelationIntensityText(corrWithWin);
            
+            let PositiveOrNegativeCorelation = (maxCorr[metric][4]<0)?"negative":"positive";
+
+            let highestCorrelatedMetric = parseInt(maxCorr[metric][2]);
+            let metricText = computeMetricText;
+            
+
 
             // let appendedText =  `<span class='teamA'>Skynet955</span> vs <span class='teamB'>Hakozaki Junctions</span>: Line chart shows evolution of <span class='dynamicText '>${maxCorr[metric][1]}</span> <span class="infoIcon behavior" title="${behaviorDefinitions[metric]}">ⓘ</span> behavior (sampled from 50 battles at every 1000 training epochs). 
                     // In 600 battles, the selected behavior <span class='dynamicText'>${maxCorr[metric][1]}</span> <span class="infoIcon behavior" title="${behaviorDefinitions[metric]}">ⓘ</span> was exhibited <span class='dynamicText'>${sumTeamN.toFixed(0)}</span> times by <span class='teamA'>Skynet955</span> and <span class='dynamicText'>${sumTeamH.toFixed(0)}</span> times by <span class='teamB'>Hakozaki Junctions</span>. 
@@ -1032,12 +1069,12 @@
                     // The data is sampled from 50 battles between the two teams at every 1000 training epochs
 
             let freqText = computeRelativeFrequencyText(sumTeamN, sumTeamH);
-            let appendedText =  `In 600 battles <span class="infoIcon" title="The data is sampled from 50 battles between the two teams at every 1000 training epochs">ⓘ</span>, overall, the <span class='dynamicText'>${maxCorr[metric][1]}</span> <span class="infoIcon behavior" title="${behaviorDefinitions[metric]}">ⓘ</span> behavior was exhibited ${freqText} 
-                    The behavior shows the highest pearson-correlation with <span class="dynamicText">${maxCorr[metric][3]}</span> </span> <span class="infoIcon behavior" title="${behaviorDefinitions[maxCorr[metric][2]]}">ⓘ</span> behavior (r=${maxCorr[metric][4].toFixed(3)}).`;
+            let appendedText =  `In 600 matches <span class="infoIcon" title="The data is sampled from 50 matches between the two teams at every 1000 training epochs">ⓘ</span>, overall, the <span class='dynamicText'>${maxCorr[metric][1]}</span> <span class="infoIcon behavior" title="${behaviorDefinitions[metric]}">ⓘ</span> ${computeMetricText(maxCorr[metric][0])} was exhibited ${freqText} 
+                    The ${computeMetricText(maxCorr[metric][0])} shows the highest absolute Pearson correlation coefficient with <span class="dynamicText">${maxCorr[metric][3]}</span> </span> <span class="infoIcon behavior" title="${behaviorDefinitions[maxCorr[metric][2]]}">ⓘ</span> ${computeMetricText(maxCorr[metric][2])}, which is <span class="computedText">${PositiveOrNegativeCorelation}</span> (r=${maxCorr[metric][4].toFixed(3)}).`;
             let extraText = "";
             if(metric > 2 && maxCorr[metric][2] != 0)
             {
-                extraText = ` <span class="dynamicText">${maxCorr[metric][1]}</span>  <span class="infoIcon behavior" title="${behaviorDefinitions[maxCorr[metric][0]]}">ⓘ</span> has <span class="computedText">${corrIntensity}</span> correlation (r=${corrWithWin.toFixed(3)}) with the <span class="dynamicText">Wins</span>  <span class="infoIcon behavior" title="${behaviorDefinitions[0]}">ⓘ</span> behavior.`;
+                extraText = ` <span class="dynamicText">${maxCorr[metric][1]}</span>  <span class="infoIcon behavior" title="${behaviorDefinitions[maxCorr[metric][0]]}">ⓘ</span> has <span class="computedText">${corrIntensity}</span> correlation (r=${corrWithWin.toFixed(3)}) with the <span class="dynamicText">Wins</span>  <span class="infoIcon behavior" title="${behaviorDefinitions[0]}">ⓘ</span> ${computeMetricText(0)}.`;
             }
 
             div1.append("text").html(`<p>${appendedText}${extraText}</p>`)
@@ -1050,6 +1087,17 @@
             });
 
         }
+        function computeMetricText(metricIndex)
+        {
+            let metricText="";
+            metricIndex = parseInt(metricIndex);
+            if(metricIndex>=0 && metricIndex<=2)
+                metricText = "metric";
+            else
+                metricText = "behavior";
+                return metricText;
+        }
+
         function roundOffCustom(val)
         {
             let rem = val%5;
@@ -1279,7 +1327,7 @@
                 font3, colorChart, `rotate(-90 ${ylabelx} ${ylabely})`, "axislabel");
         // Draw x-Axis
             let xscale = d3.scale.linear().domain([0,cycle_results.length]).range([0,chartWidth]);
-            appendText(svg1,(x-30),(y+20),"#battles: ",tickLabelSize,colorCnb);
+            appendText(svg1,(x-30),(y+20),"#matches: ",tickLabelSize,colorCnb);
             appendText(svg1,(x-30),(y+40),"#epochs: ",tickLabelSize,colorCnb);
             appendLine(svg1,(x-30),(y+25),(x+chartWidth+20),(y+25),"lightgray",1);
 
@@ -1876,8 +1924,10 @@
         d3.selectAll(".scatterplotCircle").style("fill", "grey").style("opacity", 0.2);
         for(let i=rangeBegin; i<=rangeEnd;i++)
         {
-            d3.selectAll(".teamA.cycle"+i).style("fill", colorAgent1).style("opacity", 0.7);
-            d3.selectAll(".teamB.cycle"+i).style("fill", colorAgent2).style("opacity", 0.7);
+            d3.selectAll(".teamAA.cycle"+i).style("fill", colorAgent1).style("opacity", 0.7);
+            d3.selectAll(".teamBB.cycle"+i).style("fill", colorAgent2).style("opacity", 0.7);
+            d3.selectAll(".teamA.cycle"+i).style("fill", colorAgent1).style("opacity", 0.4);
+            d3.selectAll(".teamB.cycle"+i).style("fill", colorAgent2).style("opacity", 0.4);
         }
     }
             
