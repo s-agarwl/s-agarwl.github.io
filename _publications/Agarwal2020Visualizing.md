@@ -19,7 +19,7 @@ bibtexCode: '@inproceedings{Agarwal2020Visualizing,
 
     author = {Agarwal, Shivam and Herrmann, Christian and Wallner, Günter and Beck, Fabian},
 
-    title = {Visualizing AI Playtesting Data of 2D Side-scrolling Games},
+    title = {Visualizing {AI} Playtesting Data of 2D Side-scrolling Games},
 
     booktitle = {IEEE Conference on Games},
 

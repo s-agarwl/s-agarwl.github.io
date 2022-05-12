@@ -17,7 +17,7 @@ bibtexCode: '@InProceedings{Agarwal2017Nodetrix,
 
     author = {Agarwal, Shivam and Tomar, Amit and Sreevalsan-Nair, Jaya},
 
-    title = {NodeTrix-Multiplex: Visual Analytics of Multiplex Small World Networks},
+    title = {{NodeTrix-Multiplex}: Visual Analytics of Multiplex Small World Networks},
 
     booktitle = {Complex Networks \&amp; Their Applications},
 

@@ -16,7 +16,7 @@ bibtexCode: '@conference{Nair2017Nodetrix,
 
     author = {Sreevalsan-Nair, Jaya and Agarwal, Shivam},
 
-    title = {NodeTrix-CommunityHierarchy: Techniques for Finding Hierarchical Communities for Visual Analytics of Small-world Networks},
+    title = {{NodeTrix-CommunityHierarchy}: Techniques for Finding Hierarchical Communities for Visual Analytics of Small-world Networks},
 
     booktitle = {12th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications - Volume 3: IVAPP, (VISIGRAPP 2017)},
 

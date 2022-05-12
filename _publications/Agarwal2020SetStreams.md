@@ -21,7 +21,7 @@ bibtexCode: '@article{Agarwal2020SetStreams,
 
     author = {Agarwal, Shivam and Beck, Fabian},
 
-    title = {Set Streams: Visual Exploration of Dynamic Overlapping Sets},
+    title = {{Set Streams}: Visual Exploration of Dynamic Overlapping Sets},
 
     pages = {383--391},
 

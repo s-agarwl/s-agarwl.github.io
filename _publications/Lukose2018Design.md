@@ -16,7 +16,7 @@ bibtexCode: '@conference{Lukose2018Design,
 
     author = {Lukose, Kuruvilla and Agarwal, Shivam and Rao, Vidyashankar Nagesha and Sreevalsan-Nair, Jaya},
 
-    title = {Design Study for Creating Pathfinder: A Visualization Tool for Generating Software Test Plans using Model based Testing},
+    title = {Design Study for Creating {Pathfinder}: A Visualization Tool for Generating Software Test Plans using Model based Testing},
 
     booktitle = {13th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications - Volume 2: IVAPP,},
 
