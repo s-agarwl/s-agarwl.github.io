@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Visualizing the competetive evolution of game playing AI</title>
+    <title>Visualizing the Evolution of Multi-agent Game-playing Behaviors</title>
 
     <link rel="stylesheet" type="text/css" href="lib/tooltipster.bundle.css" />
 
@@ -163,6 +163,10 @@
             cursor:pointer;
         }
 
+        #scatterPlotDiv{
+            overflow-y: scroll;
+        }
+
     </style>
 
 </head>
@@ -178,7 +182,7 @@
         </div>
     </div>
 
-    <h3 style="text-align: center; margin: auto">Visualizing Evolution of Multi-agent Game-playing Behaviors</h3>
+    <h3 style="text-align: center; margin: auto">Visualizing the Evolution of Multi-agent Game-playing Behaviors</h3>
     <p style="text-align: center; margin: auto">Training <span class="teamA">Skynet955</span> <span id="NNInfo">ⓘ</span> team (two agents) to play against <span class="teamB">Hakozaki Junctions</span> <span id="hakozakiInfo">ⓘ</span> (fully trained) in the <a href="https://www.pommerman.com/" target="_blank">Pommerman</a>  Game Environment <span id="pommermanInfo" class="" data-tooltip-content="#pommermanDetails">ⓘ</span></p>
     <!-- Use subtitle -->
 
@@ -313,7 +317,7 @@
             "Number of kills scored by using chained bombs.",
             "Number of times agent got killed by bomb chains from other agents.",
             "Number of times, an agent kicked a bomb of an enemy agent.",
-            "Number of times, an agent picked up an item uncovered by the enemy",
+            "Number of times, an agent picked up an item uncovered by the enemy.",
             "Number of times, an agents got killed by a bomb placed by itself.",
             "Number of times an agent killed an ally with a bomb place by itself.",
             "Number of bombs of an agent that were involved in a chain.",
@@ -611,7 +615,7 @@
 
         let smallVisAxisColor = "grey";
 
-        let scatterplotScaleRatio = 20.1;
+        let scatterplotScaleRatio = 16;
 
         d3.select("body").style("font-size", font2);
         
@@ -701,7 +705,7 @@
         // Draw the Scatterplot Matrix
         let agent=0;
         let xRoot2=0;
-        let yRoot2=svg2Height-120;
+        let yRoot2=svg2Height;
         appendScatterplotMatrix(cycle_results,xRoot2,yRoot2);
 
         // Fill select1 with the behavior labels
@@ -833,9 +837,13 @@
         }
         // ########## FUNCTIONS ##########
         function appendScatterplotUpdate(cycle,x,y,metric1,metric2){
+            
             d3.select("#bigscatterplotGroup").selectAll("*").remove();
             
-            let plotWidth=300, plotHeight=svg2Height=200;
+            // let plotWidth=300, plotHeight=svg2Height=200;
+            let tempWidth = document.getElementById("scatterPlotDiv").offsetWidth;
+            let plotWidth = tempWidth*0.25, plotHeight=svg2Height=plotWidth;
+            x=0, y=plotWidth;
             let colorPlot="black";
             let circleSize=5;
             let x1=x, x2=x, y1=y, y2=y;
@@ -867,7 +875,7 @@
             let textElem = bigscatterplotG.append("text")
                 .text("The two behaviors have ")    
                 .attr("x", 0)
-                .attr("y", 80)
+                .attr("y", -10)
                 .attr("fill", colorPlot)
                 .style("font", font2);
                 textElem.append("tspan").text(corrIntensity).attr("class", "computedText")
@@ -878,7 +886,7 @@
             appendText(bigscatterplotG,x + plotWidth/2,y+40,
                 "# "+labelNames[metric1]+"",font2,colorPlot,'',"axislabel scatterplotlabel");
             let ylabelx = x-50;
-            let ylabely = svg2Height;
+            let ylabely = plotWidth/2;
             appendText(bigscatterplotG,ylabelx,ylabely,
                 "# "+ labelNames[metric2]+"",font2,colorPlot, `rotate(-90 ${ylabelx} ${ylabely})`, "axislabel scatterplotlabel");
             // Draw y-Axis 
@@ -938,7 +946,7 @@
 
             }
 
-            bigscatterplotG.attr("transform","translate(20 -60)");
+            bigscatterplotG.attr("transform","translate(70 30)");
             highlightSelectedScatterPlot(metric1, metric2);
             highlightScatterPlotCircles(startCycle, endCycle);
         }
@@ -946,8 +954,8 @@
         function appendScatterplotMatrix(cycle,x,y){
             let x1=x;
             let y1=y;
-            let scatterplotWidth=svg2Width/scatterplotScaleRatio;
-            let scatterplotHeight=svg2Height/scatterplotScaleRatio;
+            let scatterplotWidth=svg2Width/(scatterplotScaleRatio+0.4);
+            let scatterplotHeight=svg2Height/(scatterplotScaleRatio+1);
             let xStep=scatterplotWidth;
             let yStep=scatterplotHeight;
             let iL1=0;
