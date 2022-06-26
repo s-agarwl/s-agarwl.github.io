@@ -8,6 +8,8 @@ permalink: /publication/Agarwal2022Visualizing
 paperurl: '/files/Agarwal2022Visualizing.pdf'
 image: '/files/Agarwal2022Visualizing.png'
 demo: 'https://s-agarwl.github.io/projects/evolvingai/'
+doi: '10.2312/evp.20221111'
+doiurl: 'https://dx.doi.org/10.2312/evp.20221111'
 abstract: 'Analyzing the training evolution of AI agents in a multi-agent environment helps to understand changes in learned behaviors, as well as the sequence in which they are learned. We train an existing Pommerman team from scratch and, at regular intervals, let it battle against another top-performing team. We define thirteen game-specific behaviors and compute their occurrences in 600 matches. To investigate the evolution of these behaviors, we propose a visualization approach and showcase its usefulness in an application example.'
 video: 'https://www.youtube.com/watch?v=L4hXKtc-VaU'
 youtubeid: 'L4hXKtc-VaU'
@@ -25,7 +27,11 @@ bibtexCode: '@inproceedings{Agarwal2022Visualizing,
 
     abstract = {Analyzing the training evolution of AI agents in a multi-agent environment helps to understand changes in learned behaviors, as well as the sequence in which they are learned. We train an existing Pommerman team from scratch and, at regular intervals, let it battle against another top-performing team. We define thirteen game-specific behaviors and compute their occurrences in 600 matches. To investigate the evolution of these behaviors, we propose a visualization approach and showcase its usefulness in an application example.},
 
-    year = {2022}
+    year = {2022},
+
+    ISBN = {978-3-03868-185-4},
+
+    DOI = {10.2312/evp.20221111}
 
 }
 
