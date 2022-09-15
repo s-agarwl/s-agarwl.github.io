@@ -598,8 +598,12 @@
         let lineChartHeight=150;
         let lineChartWidth=svg1Width-90;
 
-        let svg2Width=width*0.5;
-        let svg2Height=document.getElementById("scatterPlotDiv").offsetHeight;;
+        // let svg2Width=width*0.5;
+        let svg2Width = document.getElementById("scatterPlotDiv").offsetWidth;
+        let svg2Height=document.getElementById("scatterPlotDiv").offsetHeight;
+
+        if (svg2Height > 956) svg2Height = 956;
+        
         let svg2MarginTop=selectHeight+"px";
         let svg2MarginLeft=svg1Width+"px";
 
@@ -706,6 +710,9 @@
         let agent=0;
         let xRoot2=0;
         let yRoot2=svg2Height;
+        
+        
+
         appendScatterplotMatrix(cycle_results,xRoot2,yRoot2);
 
         // Fill select1 with the behavior labels
