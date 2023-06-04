@@ -16,7 +16,7 @@ video: 'https://www.youtube.com/watch?v=hUenXnU5Adk'
 youtubeid: 'hUenXnU5Adk'
 year: '2020'
 github: 'https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/vr_mr_vis'
-citation: ' <u>Shivam Agarwal</u>,  Jonas Auda,  Stefan Schneegaß,  Fabian Beck, <i>&quot;A Design and Application Space for Visualizing User Sessions of Virtual and Mixed Reality Environments&quot;</i> In the proceedings of Vision, Modeling, and Visualization, 2020. '
+citation: ' Shivam Agarwal,  Jonas Auda,  Stefan Schneegaß,  Fabian Beck, <i>&quot;A Design and Application Space for Visualizing User Sessions of Virtual and Mixed Reality Environments&quot;</i> In the proceedings of Vision, Modeling, and Visualization, 2020. '
 authors: ' <u>Shivam Agarwal</u>,  Jonas Auda,  Stefan Schneegaß,  and Fabian Beck'
 bibtexCode: '@inproceedings{Agarwal2020Design,
 

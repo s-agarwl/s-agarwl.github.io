@@ -13,7 +13,7 @@ abstract: 'Knowledge graphs store information about historical figures and their
 video: 'https://www.youtube.com/watch?v=FG69qFHicYE'
 youtubeid: 'FG69qFHicYE'
 year: '2021'
-citation: ' Shahid Latif,  <u>Shivam Agarwal</u>,  Simon Gottschalk,  Carina Chrosch,  Felix Feit,  Johannes Jahn,  Tobias Braun,  Yannick Tchenko,  Elena Demidova,  Fabian Beck, <i>&quot;Visually Connecting Historical Figures Through Event Knowledge Graphs&quot;</i> In the proceedings of IEEE VIS, 2021. '
+citation: ' Shahid Latif,  Shivam Agarwal,  Simon Gottschalk,  Carina Chrosch,  Felix Feit,  Johannes Jahn,  Tobias Braun,  Yannick Tchenko,  Elena Demidova,  Fabian Beck, <i>&quot;Visually Connecting Historical Figures Through Event Knowledge Graphs&quot;</i> In the proceedings of IEEE VIS, 2021. '
 authors: ' Shahid Latif,  <u>Shivam Agarwal</u>,  Simon Gottschalk,  Carina Chrosch,  Felix Feit,  Johannes Jahn,  Tobias Braun,  Yannick Tchenko,  Elena Demidova,  and Fabian Beck'
 bibtexCode: '@inproceedings{Latif2021Visually,
 

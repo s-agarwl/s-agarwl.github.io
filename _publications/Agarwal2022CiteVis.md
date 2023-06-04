@@ -14,7 +14,7 @@ youtubeid: 'NUtGWdCgTzM'
 year: '2022'
 poster: '/files/Agarwal2022CiteVis_Poster.pdf'
 github: 'https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/citevis'
-citation: ' <u>Shivam Agarwal</u>,  Uttiya Ghosh,  Fabian Beck,  Jaya Sreevalsan-Nair, <i>&quot;CiteVis: Visual Analysis of Overlapping Citation Intents as Dynamic Sets&quot;</i> In the proceedings of IEEE Pacific Visualization Symposium (PacificVis - Poster), 2022. '
+citation: ' Shivam Agarwal,  Uttiya Ghosh,  Fabian Beck,  Jaya Sreevalsan-Nair, <i>&quot;CiteVis: Visual Analysis of Overlapping Citation Intents as Dynamic Sets&quot;</i> In the proceedings of IEEE Pacific Visualization Symposium (PacificVis - Poster), 2022. '
 authors: ' <u>Shivam Agarwal</u>,  Uttiya Ghosh,  Fabian Beck,  and Jaya Sreevalsan-Nair'
 bibtexCode: '@inproceedings{Agarwal2022CiteVis,
 

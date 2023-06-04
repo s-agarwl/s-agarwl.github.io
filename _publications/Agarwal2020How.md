@@ -14,7 +14,7 @@ abstract: 'We conducted a questionnaire study aimed towards PhD students in the 
 video: 'https://www.youtube.com/watch?v=YLQFBNQAEFI'
 youtubeid: 'YLQFBNQAEFI'
 year: '2020'
-citation: ' <u>Shivam Agarwal</u>,  Shahid Latif,  Fabian Beck, <i>&quot;How Visualization PhD Students Cope with Paper Rejections&quot;</i> In the proceedings of IEEE VIS workshop on Celebrating the Scientific Value of Failure (FailFest), 2020. '
+citation: ' Shivam Agarwal,  Shahid Latif,  Fabian Beck, <i>&quot;How Visualization PhD Students Cope with Paper Rejections&quot;</i> In the proceedings of IEEE VIS workshop on Celebrating the Scientific Value of Failure (FailFest), 2020. '
 authors: ' <u>Shivam Agarwal</u>,  Shahid Latif,  and Fabian Beck'
 bibtexCode: '@inproceedings{Agarwal2020How,
 

@@ -16,7 +16,7 @@ video: 'https://www.youtube.com/watch?v=PpswyIDFAeg'
 youtubeid: 'PpswyIDFAeg'
 year: '2020'
 github: 'https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/bombalytics'
-citation: ' <u>Shivam Agarwal</u>,  Günter Wallner,  Fabian Beck, <i>&quot;Bombalytics: Visualization of Competition and Collaboration Strategies of Players in a Bomb Laying Game&quot;</i> Computer Graphics Forum, 2020. '
+citation: ' Shivam Agarwal,  Günter Wallner,  Fabian Beck, <i>&quot;Bombalytics: Visualization of Competition and Collaboration Strategies of Players in a Bomb Laying Game&quot;</i> Computer Graphics Forum, 2020. '
 authors: ' <u>Shivam Agarwal</u>,  Günter Wallner,  and Fabian Beck'
 bibtexCode: '@article{Agarwal2020Bombalytics,
 

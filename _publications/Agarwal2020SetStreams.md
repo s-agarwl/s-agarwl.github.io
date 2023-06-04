@@ -16,7 +16,7 @@ video: 'https://www.youtube.com/watch?v=Un0GUCn-H7c'
 youtubeid: 'Un0GUCn-H7c'
 year: '2020'
 github: 'https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/setstreams'
-citation: ' <u>Shivam Agarwal</u>,  Fabian Beck, <i>&quot;Set Streams: Visual Exploration of Dynamic Overlapping Sets&quot;</i> Computer Graphics Forum, 2020. '
+citation: ' Shivam Agarwal,  Fabian Beck, <i>&quot;Set Streams: Visual Exploration of Dynamic Overlapping Sets&quot;</i> Computer Graphics Forum, 2020. '
 authors: ' <u>Shivam Agarwal</u>,  and Fabian Beck'
 bibtexCode: '@article{Agarwal2020SetStreams,
 

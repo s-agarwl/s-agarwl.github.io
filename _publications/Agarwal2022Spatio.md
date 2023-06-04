@@ -16,7 +16,7 @@ video: 'https://www.youtube.com/watch?v=olQw9bw2KR4'
 youtubeid: 'olQw9bw2KR4'
 year: '2022'
 github: 'https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/fv'
-citation: ' <u>Shivam Agarwal</u>,  Günter Wallner,  Jeremy Watson,  Fabian Beck, <i>&quot;Spatio-temporal Analysis of Multi-agent Scheduling Behaviors on Fixed-track Networks&quot;</i> In the proceedings of IEEE Pacific Visualization Symposium (PacificVis), 2022. '
+citation: ' Shivam Agarwal,  Günter Wallner,  Jeremy Watson,  Fabian Beck, <i>&quot;Spatio-temporal Analysis of Multi-agent Scheduling Behaviors on Fixed-track Networks&quot;</i> In the proceedings of IEEE Pacific Visualization Symposium (PacificVis), 2022. '
 authors: ' <u>Shivam Agarwal</u>,  Günter Wallner,  Jeremy Watson,  and Fabian Beck'
 bibtexCode: '@inproceedings{Agarwal2022Spatio,
 

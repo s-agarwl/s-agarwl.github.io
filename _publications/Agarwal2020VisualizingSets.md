@@ -16,7 +16,7 @@ video: 'https://www.youtube.com/watch?v=hG_ioaZ2DEg'
 youtubeid: 'hG_ioaZ2DEg'
 year: '2020'
 github: 'https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/dsv'
-citation: ' <u>Shivam Agarwal</u>,  Gleb Tkachev,  Michel Wermelinger,  Fabian Beck, <i>&quot;Visualizing Sets and Changes in Membership Using Layered Set Intersection Graphs&quot;</i> In the proceedings of Vision, Modeling, and Visualization, 2020. '
+citation: ' Shivam Agarwal,  Gleb Tkachev,  Michel Wermelinger,  Fabian Beck, <i>&quot;Visualizing Sets and Changes in Membership Using Layered Set Intersection Graphs&quot;</i> In the proceedings of Vision, Modeling, and Visualization, 2020. '
 authors: ' <u>Shivam Agarwal</u>,  Gleb Tkachev,  Michel Wermelinger,  and Fabian Beck'
 bibtexCode: '@inproceedings{Agarwal2020VisualizingSets,
 

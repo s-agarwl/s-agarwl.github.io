@@ -15,7 +15,7 @@ video: 'https://www.youtube.com/watch?v=L4hXKtc-VaU'
 youtubeid: 'L4hXKtc-VaU'
 year: '2022'
 poster: '/files/Agarwal2022Visualizing_Poster.pdf'
-citation: ' <u>Shivam Agarwal</u>,  Shahid Latif,  Aristide Rothweiler,  Fabian Beck, <i>&quot;Visualizing the Evolution of Multi-agent Game-playing Behaviors&quot;</i> In the proceedings of EuroVis - Poster, 2022. '
+citation: ' Shivam Agarwal,  Shahid Latif,  Aristide Rothweiler,  Fabian Beck, <i>&quot;Visualizing the Evolution of Multi-agent Game-playing Behaviors&quot;</i> In the proceedings of EuroVis - Poster, 2022. '
 authors: ' <u>Shivam Agarwal</u>,  Shahid Latif,  Aristide Rothweiler,  and Fabian Beck'
 bibtexCode: '@inproceedings{Agarwal2022Visualizing,
 

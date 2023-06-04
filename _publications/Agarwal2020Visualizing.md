@@ -13,7 +13,7 @@ abstract: 'Human playtesting is a useful step in the game development process, b
 video: 'https://www.youtube.com/watch?v=H6q7kLKfqRw'
 youtubeid: 'H6q7kLKfqRw'
 year: '2020'
-citation: ' <u>Shivam Agarwal</u>,  Christian Herrmann,  Günter Wallner,  Fabian Beck, <i>&quot;Visualizing AI Playtesting Data of 2D Side-scrolling Games&quot;</i> In the proceedings of IEEE Conference on Games, 2020. '
+citation: ' Shivam Agarwal,  Christian Herrmann,  Günter Wallner,  Fabian Beck, <i>&quot;Visualizing AI Playtesting Data of 2D Side-scrolling Games&quot;</i> In the proceedings of IEEE Conference on Games, 2020. '
 authors: ' <u>Shivam Agarwal</u>,  Christian Herrmann,  Günter Wallner,  and Fabian Beck'
 bibtexCode: '@inproceedings{Agarwal2020Visualizing,
 

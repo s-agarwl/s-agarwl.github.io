@@ -14,7 +14,7 @@ abstract: 'In multi-label classification, we do not only want to analyze individ
 video: 'https://www.youtube.com/watch?v=Jut9xVr3jsk'
 youtubeid: 'Jut9xVr3jsk'
 year: '2021'
-citation: ' Cedric Krause,  <u>Shivam Agarwal</u>,  Mohammad Ghoniem,  Fabian Beck, <i>&quot;Visual Comparison of Multi-label Classification Results&quot;</i> In the proceedings of Vision, Modeling, and Visualization, 2021. '
+citation: ' Cedric Krause,  Shivam Agarwal,  Mohammad Ghoniem,  Fabian Beck, <i>&quot;Visual Comparison of Multi-label Classification Results&quot;</i> In the proceedings of Vision, Modeling, and Visualization, 2021. '
 authors: ' Cedric Krause,  <u>Shivam Agarwal</u>,  Mohammad Ghoniem,  and Fabian Beck'
 bibtexCode: '@inproceedings{Krause2021Visual,
 
