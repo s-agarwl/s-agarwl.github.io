@@ -14,8 +14,8 @@
 
 <div class=" {{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="itemwrapper">
-        <div >
+    <div class="row">
+        <div class="col-2">
         {% if post.image %}
             {% if post.collection == 'publications' %}
                 <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="pubTitle">
@@ -24,13 +24,13 @@
             {% else %}
                 <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="pubTitle">
             {% endif %}
-            <img src= "{{post.image}}" style="position:relative; top:25%;"
+            <img src= "{{post.image}}" style="position:relative; top:25%;" class="img-responsive"
             alt="{{post.image}}" href="{{ base_path }}{{ post.url }}" rel="permalink" />
             </a>
         {% endif %}
         </div>
-    <div style="margin-left:5px; margin-top:15px;">
-    <h2 class="archive__item-title" itemprop="headline" >
+    <div class="col-10">
+    <p class="archive__item-title" itemprop="headline" >
       {% if post.collection == 'publications' %}
         <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="pubTitle">{{ title }}</a>
       {% elsif post.link %}
@@ -38,7 +38,7 @@
       {% else %}
         <a href="{{ base_path }}{{ post.url }}" rel="permalink" class="pubTitle">{{ title }}</a>
       {% endif %}
-    </h2>
+    </p>
     
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
@@ -49,7 +49,7 @@
     {% elsif post.collection == 'publications' %}
             
       <!-- citation and icon code -->
-      <p>
+      <p class="postDescription">
         {% if post.authors %}
             {{ post.authors }}
             <br />
