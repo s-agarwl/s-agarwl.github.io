@@ -24,13 +24,13 @@ bibtexCode: '@article{Agarwal2020SetStreams,
 
     title = {{Set Streams}: Visual Exploration of Dynamic Overlapping Sets},
 
-    pages = {383--391},
-
     journal = {Computer Graphics Forum},
 
     volume = {39},
 
     number = {3},
+
+    pages = {383-391},
 
     issn = {1467-8659},
 

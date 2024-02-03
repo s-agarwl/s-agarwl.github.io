@@ -23,6 +23,12 @@ bibtexCode: '@article{Liebers2023Viscomet,
 
     journal = {Computer Graphics Forum},
 
+    volume = {42},
+
+    number = {3},
+
+    pages = {149-160},
+
     year = {2023},
 
     ISSN = {1467-8659},

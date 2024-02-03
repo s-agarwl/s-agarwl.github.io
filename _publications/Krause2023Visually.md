@@ -23,9 +23,9 @@ bibtexCode: '@article{Krause2023Visually,
 
     journal = {Computer Graphics Forum},
 
-    volume = {},
+    volume = {42},
 
-    number = {},
+    number = {6},
 
     pages = {},
 
