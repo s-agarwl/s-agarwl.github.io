@@ -78,6 +78,10 @@ layout: default
         {% if page.github %}
             <span class="list_of_tags"></span><a href="{{ page.github }}" target="_blank" title="GitHub"><i class="fab fa-fw fa-github zoom" aria-hidden="true"></i> GitHub</a>
         {% endif %}
+        {% if page.slides %}
+            <span class="list_of_tags"></span><a href="{{ page.slides }}" target="_blank" title="Slides"><i class="fab fa-slideshare zoom" aria-hidden="true"></i> Slides</a>
+        {% endif %}
+
 
         {% if page.video and page.youtubeid %}
         <br/>
