@@ -18,7 +18,7 @@ bibtexCode: '@PhdThesis{Agarwal2023Dissertation,
 
     author = {Agarwal, Shivam},
 
-    booktitle = {PhD Dissertation},
+    type = {PhD Dissertation},
 
     title = {Exploring Complex Group Dynamics: Visual Analysis of Overlapping Groups and Interactions Over Time},
 
