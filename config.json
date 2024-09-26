@@ -155,8 +155,7 @@
     "FeaturedPublications",
     "Contact",
     "AllPublications",
-    "PhdThesis",
-    "Documentation"
+    "PhdThesis"
   ],
   "specialSections": {
     "allPublications": {
