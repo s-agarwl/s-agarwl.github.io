@@ -1,0 +1,16 @@
+# robots.txt for example.com
+
+# Allow all search engines to crawl the main content
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /login/
+Disallow: /register/
+Disallow: /settings/
+Disallow: /api/
+
+# Allow all search engines to crawl everything else
+Allow: /
+
+# Specify the location of the sitemap
+Sitemap: https://www.example.com/sitemap.xml

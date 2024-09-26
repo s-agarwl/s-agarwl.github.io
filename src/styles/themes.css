@@ -1,0 +1,74 @@
+body.light {
+  --bg-color: #ffffff;
+  --text-color: rgba(0, 0, 0, 1);
+  --text-color-light: rgba(0, 0, 0, 0.7);
+  --header-bg-color: #2c2c2c;
+  --header-text-color: #ffffff;
+  --abstract-bg-color: #f8f9fa;
+}
+
+body.dark {
+  --bg-color: #1a1a1a;
+  --text-color: rgba(255, 255, 255, 1);
+  --text-color-light: rgba(255, 255, 255, 0.7);
+  --header-bg-color: #2c2c2c;
+  --header-text-color: #ffffff;
+  --abstract-bg-color: #2c2c2c;
+}
+
+body.blue {
+  --bg-color: #e6f2ff;
+  --text-color: rgba(0, 54, 109, 1);
+  --text-color-light: rgba(0, 54, 109, 0.7);
+  --header-bg-color: #0056b3;
+  --header-text-color: #e6f2ff;
+  --abstract-bg-color: #cce5ff;
+}
+
+body.green {
+  --bg-color: #e6ffe6;
+  --text-color: rgba(0, 54, 0, 1);
+  --text-color-light: rgba(0, 54, 0, 0.7);
+  --header-bg-color: #049626;
+  --header-text-color: #e6ffe6;
+  --abstract-bg-color: #c3e6cb;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.bg-theme {
+  background-color: var(--bg-color);
+}
+
+.text-theme {
+  color: var(--text-color);
+}
+
+.text-theme-light {
+  color: var(--text-color-light);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-header {
+  background-color: var(--header-bg-color);
+}
+
+.bg-abstract {
+  background-color: var(--abstract-bg-color);
+}
+
+.bg-footer {
+  background-color: var(--footer-bg-color);
+}
+
+.text-header {
+  color: var(--header-text-color);
+}
+
+/* Add more theme-specific styles as needed */

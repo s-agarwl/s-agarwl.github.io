@@ -1,0 +1,180 @@
+{
+  "researcherName": "John Doe",
+  "institution": "{Institution Name}",
+  "email": "{email@example.com}",
+  "theme": "light",
+  "links": {
+    "googleScholar": "https://scholar.google.com/citations?user={user_id}",
+    "linkedin": "https://www.linkedin.com/in/{username}/",
+    "github": "",
+    "orcid": "",
+    "researchGate": "",
+    "academiaEdu": "",
+    "webOfScience": "",
+    "scopus": "",
+    "dblp": "",
+    "universityProfile": "",
+    "twitter": "",
+    "publons": "",
+    "arxiv": "",
+    "semanticScholar": "",
+    "microsoftAcademic": "",
+    "youTube": "",
+    "slideshare": "",
+    "figshare": "",
+    "mendeley": "",
+    "zotero": "",
+    "impactStory": ""
+  },
+  "bibtexPath": "/pubs.bib",
+  "profilePhotoPath": "/profile-photo.png",
+  "sections": {
+    "about": {
+      "id": "About",
+      "headerText": "About Me",
+      "subHeading": "{Job Title}",
+      "content": "<p className='mb-4'>Hi, I'm {First Name}.<p>{A short bio. You can use html tags in the content string}</p></p>"
+    },
+    "education": {
+      "id": "Education",
+      "headerText": "Education",
+      "sectionHeading": "Educational Background",
+      "content": [
+        {
+          "degree": "{Degree Name}",
+          "honors": "{Honors}",
+          "institution": "{Institution Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}"
+        },
+        {
+          "degree": "{Degree Name}",
+          "honors": "{Honors}",
+          "institution": "{Institution Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}"
+        },
+        {
+          "degree": "{Degree Name}",
+          "honors": "{Honors}",
+          "institution": "{Institution Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}"
+        }
+      ]
+    },
+    "workExperience": {
+      "id": "WorkExperience",
+      "headerText": "Work Experience",
+      "sectionHeading": "Professional Journey",
+      "content": [
+        {
+          "title": "{Job Title}",
+          "company": "{Company Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}",
+          "description": "{Job Description}"
+        },
+        {
+          "title": "{Job Title}",
+          "company": "{Company Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}",
+          "description": "{Job Description}"
+        },
+        {
+          "title": "{Job Title}",
+          "company": "{Company Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}",
+          "description": "{Job Description}"
+        },
+        {
+          "title": "{Job Title}",
+          "company": "{Company Name}",
+          "location": "{Country}",
+          "period": "{Start Date} – {End Date}",
+          "description": "{Job Description}"
+        }
+      ]
+    },
+    "awards": {
+      "id": "Awards",
+      "headerText": "Awards",
+      "sectionHeading": "Honors and Achievements",
+      "content": [
+        {
+          "title": "{Award Title}",
+          "description": "{Award Description}",
+          "icon": "FaTrophy",
+          "details": "{Link to Details - /publication/citationkeyofpublication}"
+        },
+        {
+          "title": "{Award Title}",
+          "description": "{Award Description}",
+          "icon": "FaMedal",
+          "details": "{Link to Details}"
+        },
+        {
+          "title": "{Award Title}",
+          "description": "{Award Description}",
+          "icon": "FaTrophy",
+          "details": "{Link to Details}"
+        }
+      ]
+    },
+    "featuredPublications": {
+      "id": "FeaturedPublications",
+      "headerText": "Featured",
+      "sectionHeading": "Featured Research",
+      "content": [
+        "Doe2023Dissertation",
+        "Doe2020AIAnalysis",
+        "Doe2020DataStreams",
+        "Doe2020Visualizing",
+        "Doe2020Design",
+        "Doe2020VisualizingSets",
+        "Doe2022SpatioTemporal"
+      ]
+    },
+    "contact": {
+      "id": "Contact",
+      "headerText": "Contact",
+      "sectionHeading": "Get in Touch",
+      "content": {
+        "intro": "{Introduction text}",
+        "linksToDisplay": ["linkedin", "email"],
+        "outro": "{Outro text}"
+      }
+    }
+  },
+  "orderOfSectionsInHeader": [
+    "About",
+    "Education",
+    "WorkExperience",
+    "Awards",
+    "FeaturedPublications",
+    "Contact",
+    "AllPublications",
+    "Documentation"
+  ],
+  "specialSections": {
+    "allPublications": {
+      "id": "AllPublications",
+      "headerText": "All Publications",
+      "path": "/publications",
+      "sectionHeading": "My Publications",
+      "content": "{Description of publications}"
+    },
+    "phdThesis": {
+      "id": "PhdThesis",
+      "headerText": "My PhD Thesis",
+      "path": "/publication/Doe2023Dissertation"
+    },
+    "documentation": {
+      "id": "Documentation",
+      "headerText": "[Docs]",
+      "path": "/documentation"
+    }
+  }
+}
