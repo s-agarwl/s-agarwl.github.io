@@ -1,1 +1,1 @@
-# This is my personal website. It is built using the repository: https://github.com/s-agarwl/easyAcademicPortfolio
+This is my website. It is built using the repository: https://github.com/s-agarwl/easyAcademicPortfolio
