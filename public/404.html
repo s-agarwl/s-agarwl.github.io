@@ -61,14 +61,18 @@
       // Display the current URL
       document.getElementById('current-url').textContent = window.location.pathname;
 
-      if (!window.location.pathname.includes('#')) {
-        window.location.assign(window.location.hostname + '/#' + window.location.pathname);
+      if (!window.location.pathname.includes('s-agarwl.github.io/publication/')) {
+        let path = window.location.pathname.split('/publication/');
+        window.location.assign(path[0] + '/#/publication/' + path[1]);
+      }
+      elseif (!window.location.pathname.includes('#')) {
+        window.location.assign(window.location.hostname + '/#/' + window.location.pathname);
       } else {
-        document.getElementById('newURL').textContent = '/#' + window.location.pathname;
+        document.getElementById('newURL').textContent = '/#/' + window.location.pathname;
         // Redirect to the homepage with a hash if using HashRouter
         document.getElementById('newURL').addEventListener('click', function (e) {
           e.preventDefault();
-          window.location.href = '/#' + window.location.pathname;
+          window.location.href = '/#/' + window.location.pathname;
         });
       }
     </script>
