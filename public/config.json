@@ -33,7 +33,7 @@
       "id": "About",
       "headerText": "About Me",
       "subHeading": "Computer Science Researcher (Dr.)",
-      "content": "<p className='mb-4'>Hi, I'm Shivam.<p>I'm passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>11 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for data analysis.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>"
+      "content": "<p className='mb-4'>Hi, I'm Shivam.<p>I'm passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>11 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for real-world problems.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>"
     },
 
     "education": {
