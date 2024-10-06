@@ -27,8 +27,12 @@ const Footer = ({ config }) => {
             {iconMap.email && <iconMap.email size={20} />}
           </a>
         </div>
-        <p>
+        <p className="mb-2">
           &copy; {new Date().getFullYear()} {config.researcherName}
+        </p>
+        {/* Add the GitHub repository link */}
+        <p className="text-sm">
+          Built with <a href="https://github.com/s-agarwl/easyPortfolioBuilder" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-300">GitHub repository</a>
         </p>
       </div>
     </footer>

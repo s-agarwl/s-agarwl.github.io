@@ -168,7 +168,7 @@ function App({ config }) {
                 }
               />
             ))}
-            <Route path="/documentation" element={<Documentation />} />
+            <Route path="/docs" element={<Documentation />} />
             <Route path="*" element={<NotFound config={config} />} />
           </Routes>
         </main>
