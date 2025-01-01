@@ -60,7 +60,20 @@
     <script>
       let hashPath = window.location.hash;
       let pathName = window.location.pathname;
-      if (hashPath === '' && pathName === '/') {
+      if (pathName.includes('files')) {
+        const match = pathname.match(/^\/files\/(.+)\.pdf$/);
+        const match2 = pathname.match(/^\/files\/(.+)$/);
+
+        // Store [somename] in a variable if it matches
+        let fileId = match ? match[1] : null;
+        let fileExtension = match2 ? match2[1] : null;
+        console.log(fileId, fileExtension);
+        if (!fileId) {
+          window.location.assign(
+            window.location.origin + '/publications/' + fileId + '/' + fileExtension,
+          );
+        }
+      } else if (hashPath === '' && pathName === '/') {
         console.log('Homepage');
       } else if (hashPath === '' && pathName !== '/') {
         console.log('subpage url does not contain hash');
