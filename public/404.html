@@ -60,17 +60,14 @@
     <script>
       let hashPath = window.location.hash;
       let pathName = window.location.pathname;
-      if (pathName.includes('files')) {
-        const match = pathname.match(/^\/files\/(.+)\.pdf$/);
-        const match2 = pathname.match(/^\/files\/(.+)$/);
-
-        // Store [somename] in a variable if it matches
-        let fileId = match ? match[1] : null;
-        let fileExtension = match2 ? match2[1] : null;
-        console.log(fileId, fileExtension);
-        if (!fileId) {
+      if (pathName.includes('/files/')) {
+        // Extract filename from the path
+        const match = pathName.match(/^\/files\/(.+)\.pdf$/);
+        if (match) {
+          const fileId = match[1];
+          // Redirect to new publications folder structure
           window.location.assign(
-            window.location.origin + '/publications/' + fileId + '/' + fileExtension,
+            window.location.origin + '/publications/' + fileId + '/' + fileId + '.pdf',
           );
         }
       } else if (hashPath === '' && pathName === '/') {
