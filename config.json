@@ -33,7 +33,7 @@
       "id": "About",
       "headerText": "About Me",
       "subHeading": "Computer Science Researcher (Dr.)",
-      "content": "<p className='mb-4'>Hi, I'm Shivam.<p>I'm passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>11 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for real-world problems.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>"
+      "content": "<p className='mb-4'>Hi, I'm Shivam.<p>I'm passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>12 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for real-world problems.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>"
     },
 
     "education": {
@@ -68,14 +68,21 @@
       "sectionHeading": "Professional Journey",
       "content": [
         {
+          "title": "Senior Software Developer",
+          "company": "GraphPolaris",
+          "location": "Germany",
+          "period": "Feb 2025",
+          "description": "Contributed in curating an ETL pipeline (Python) for clients to model their existing data into graph database for analytics."
+        },
+        {
           "title": "Senior Research Associate (PostDoc)",
           "company": "University of Bamberg",
           "location": "Germany",
-          "period": "May 2022 – Present",
+          "period": "May 2022 – Jan 2025",
           "description": "Built effective solutions to analyze complex datasets, e.g., for cooperative AI behavior analysis in multi-agent scenarios. Led and collaborated on 8 multidisciplinary projects, proposing advanced techniques for analyzing AI behavior, temporal group memberships, and text cohesion in technical writing."
         },
         {
-          "title": "Research Associate",
+          "title": "Research Associate (PhD)",
           "company": "University of Duisburg-Essen",
           "location": "Germany",
           "period": "June 2017 – April 2022",
