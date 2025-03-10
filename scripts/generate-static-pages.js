@@ -7,6 +7,7 @@ import bibtexParse from 'bibtex-parse-js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '../dist');
 const publicDir = path.resolve(__dirname, '../public');
+const rootDir = path.resolve(__dirname, '../');
 
 // Function to clean BibTeX entry tags (simplified version of your utils function)
 function cleanEntryTags(entryTags, citationKey) {
@@ -364,7 +365,8 @@ async function generateStaticPages() {
     }
 
     // Update sitemap.xml with publication URLs
-    const sitemapPath = path.join(distDir, 'sitemap.xml');
+    const sitemapPath = path.join(rootDir, 'sitemap.xml');
+    const sitemapPathDist = path.join(distDir, 'sitemap.xml');
     let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -398,6 +400,7 @@ async function generateStaticPages() {
 </urlset>`;
 
     fs.writeFileSync(sitemapPath, sitemapContent);
+    fs.writeFileSync(sitemapPathDist, sitemapContent);
     console.log('Updated sitemap.xml');
 
     console.log('Static page generation completed successfully!');
