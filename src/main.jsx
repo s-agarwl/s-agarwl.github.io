@@ -18,6 +18,12 @@ function Root() {
       if (config.theme) {
         document.body.className = config.theme;
       }
+
+      // Remove prerendered content after React has hydrated
+      const prerenderedContent = document.getElementById('prerendered-content');
+      if (prerenderedContent) {
+        prerenderedContent.style.display = 'none';
+      }
     }
   }, [config]);
 

@@ -62,6 +62,22 @@ function App({ config }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Check if we have prerendered publication data
+    const publicationDataElement = document.getElementById('publication-data');
+    if (publicationDataElement) {
+      try {
+        const prerenderedData = JSON.parse(publicationDataElement.textContent);
+        if (prerenderedData.entry && prerenderedData.config) {
+          // We're on a publication page with prerendered data
+          setEntries([prerenderedData.entry]);
+          setIsLoading(false);
+          return;
+        }
+      } catch (e) {
+        console.error('Error parsing prerendered data:', e);
+      }
+    }
+
     if (!config || !config.bibtexPath) {
       setError('Invalid configuration: bibtexPath is missing');
       setIsLoading(false);
@@ -117,8 +133,8 @@ function App({ config }) {
   }
 
   // Update this section mapping
-  const sectionComponents = Object.entries(config.sections)
-    .map(([key, section]) => ({
+  const sectionComponents = Object.values(config.sections)
+    .map((section) => ({
       id: section.id,
       component: sectionIdToComponent(section.id),
       config: section,
@@ -182,6 +198,7 @@ App.propTypes = {
   config: PropTypes.shape({
     researcherName: PropTypes.string.isRequired,
     bibtexPath: PropTypes.string.isRequired,
+    sections: PropTypes.object,
     // Add other config properties as needed
   }).isRequired,
 };

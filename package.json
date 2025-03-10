@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run generate-static",
+    "generate-static": "node scripts/generate-static-pages.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -46,6 +47,7 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "gh-pages": "^6.1.1",
     "globals": "^15.9.0",
+    "jsdom": "^24.0.0",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.12",
