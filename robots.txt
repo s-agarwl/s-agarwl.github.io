@@ -1,0 +1,24 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Specific rules for Google Scholar
+User-agent: Googlebot
+Allow: /publication/
+Allow: /publications/
+Allow: /*.pdf$
+
+# Specific rules for Semantic Scholar
+User-agent: SemanticScholarBot
+Allow: /publication/
+Allow: /publications/
+Allow: /*.pdf$
+
+# Specific rules for Microsoft Academic
+User-agent: bingbot
+Allow: /publication/
+Allow: /publications/
+Allow: /*.pdf$
+
+# Point to sitemap
+Sitemap: https://s-agarwl.github.io/sitemap.xml 
