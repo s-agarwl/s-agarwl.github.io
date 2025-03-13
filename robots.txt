@@ -1,0 +1,14 @@
+# robots.txt for s-agarwl.github.io
+
+# Allow all search engines to crawl the main content
+User-agent: *
+Disallow: 
+
+# Allow all search engines to crawl everything
+Allow: /
+Allow: /#/publication/
+Allow: /#/publications/
+Allow: /*.pdf$
+
+# Specify the location of the sitemap
+Sitemap: https://s-agarwl.github.io/sitemap.xml
