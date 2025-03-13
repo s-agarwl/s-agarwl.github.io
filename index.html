@@ -38,6 +38,21 @@
     />
     <meta property="twitter:image" content="https://s-agarwl.github.io/logo.svg" />
 
+    <!-- Redirect Script - Added to head for earlier execution -->
+    <script>
+      // Handle hash-based URL redirects immediately
+      if (window.location.hash === '#/publications') {
+        window.location.replace('/publications');
+      }
+      // Handle publication detail redirects - #/publication/[id] to /publication/[id]
+      else if (window.location.hash.startsWith('#/publication/')) {
+        // Extract the publication ID from the hash
+        const publicationId = window.location.hash.replace('#/publication/', '');
+        // Redirect to the clean URL
+        window.location.replace('/publication/' + publicationId);
+      }
+    </script>
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8CMNGL0EH7"></script>
     <script>
