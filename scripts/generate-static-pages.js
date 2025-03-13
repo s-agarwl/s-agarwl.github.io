@@ -1,3 +1,22 @@
+/**
+ * Static Pages Generator Script
+ *
+ * This script generates pre-rendered HTML pages for publications to improve SEO.
+ * It creates static HTML files with:
+ * - Proper metadata for search engines
+ * - Open Graph tags for social media sharing
+ * - JSON-LD structured data for rich search results
+ * - Pre-rendered content that search engines can index without JavaScript
+ *
+ * The script also handles:
+ * - Creating directory structures for each publication
+ * - Setting up redirects for short URLs
+ * - Adding Dublin Core and citation metadata for academic search engines
+ *
+ * This comprehensive approach ensures that publication content is fully
+ * discoverable by search engines even without JavaScript execution.
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -366,7 +385,6 @@ async function generateStaticPages() {
 
     // Update sitemap.xml with publication URLs
     const sitemapPath = path.join(rootDir, 'sitemap.xml');
-    const sitemapPathDist = path.join(distDir, 'sitemap.xml');
     let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -388,7 +406,7 @@ async function generateStaticPages() {
     }
 
     // Add short URL redirects to sitemap
-    for (const [shortUrl, citationKey] of Object.entries(shortUrlMap)) {
+    for (const [shortUrl] of Object.entries(shortUrlMap)) {
       sitemapContent += `
   <url>
     <loc>${config.baseUrl || 'https://example.com'}/${shortUrl}/</loc>
@@ -400,6 +418,8 @@ async function generateStaticPages() {
 </urlset>`;
 
     fs.writeFileSync(sitemapPath, sitemapContent);
+    // Write sitemap to dist directory as well
+    const sitemapPathDist = path.join(distDir, 'sitemap.xml');
     fs.writeFileSync(sitemapPathDist, sitemapContent);
     console.log('Updated sitemap.xml');
 

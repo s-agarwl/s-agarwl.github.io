@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ReactPlayer from 'react-player';
 import PublicationLinks from './PublicationLinks';
+import { updateMetaTags } from '../utils/utils';
 
 const renderAuthors = (authors, yourName) => {
   return authors.split(', ').map((author, index) => (
@@ -21,6 +22,13 @@ const PublicationDetailsById = ({ entries, id, config }) => {
   const [showFullAbstract, setShowFullAbstract] = useState(false);
 
   const entry = entries.find((e) => e.citationKey === id);
+
+  useEffect(() => {
+    if (entry) {
+      // Update meta tags for SEO when the publication entry is loaded
+      updateMetaTags(entry, window.location.origin);
+    }
+  }, [entry]);
 
   useEffect(() => {
     if (entry && entry.entryTags.blogpost) {

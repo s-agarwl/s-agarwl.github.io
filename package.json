@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run generate-static",
+    "build": "vite build && npm run generate-static && npm run generate-sitemap",
     "generate-static": "node scripts/generate-static-pages.js",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",

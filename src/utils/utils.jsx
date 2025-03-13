@@ -1,5 +1,4 @@
 import DOMPurify from 'dompurify';
-import React from 'react';
 import {
   FaLinkedin,
   FaGithub,
@@ -114,4 +113,128 @@ export const iconMap = {
   microsoftAcademic: MdScience,
   impactStory: FaNewspaper,
   email: MdEmail,
+};
+
+// Function to update meta tags for SEO
+export const updateMetaTags = (publication, baseUrl = 'https://s-agarwl.github.io') => {
+  if (!publication) return;
+
+  // Update basic meta tags
+  document.title = `${publication.entryTags.title} | Research Publication`;
+
+  // Find or create meta description
+  let metaDescription = document.querySelector('meta[name="description"]');
+  if (!metaDescription) {
+    metaDescription = document.createElement('meta');
+    metaDescription.name = 'description';
+    document.head.appendChild(metaDescription);
+  }
+  metaDescription.content = publication.entryTags.abstract
+    ? publication.entryTags.abstract.substring(0, 160) + '...'
+    : `Research publication: ${publication.entryTags.title}`;
+
+  // Update Open Graph tags
+  updateOrCreateMetaTag('og:title', publication.entryTags.title);
+  updateOrCreateMetaTag(
+    'og:description',
+    publication.entryTags.abstract
+      ? publication.entryTags.abstract.substring(0, 160) + '...'
+      : `Research publication: ${publication.entryTags.title}`,
+  );
+  updateOrCreateMetaTag('og:type', 'article');
+
+  // Create canonical URL and set it for Open Graph
+  const canonicalUrl = `${baseUrl}/publication/${publication.citationKey}`;
+  updateOrCreateMetaTag('og:url', canonicalUrl);
+  setCanonicalUrl(canonicalUrl);
+
+  if (publication.entryTags.image) {
+    updateOrCreateMetaTag('og:image', publication.entryTags.image);
+  }
+
+  // Update Twitter Card tags
+  updateOrCreateMetaTag('twitter:title', publication.entryTags.title);
+  updateOrCreateMetaTag(
+    'twitter:description',
+    publication.entryTags.abstract
+      ? publication.entryTags.abstract.substring(0, 160) + '...'
+      : `Research publication: ${publication.entryTags.title}`,
+  );
+  updateOrCreateMetaTag('twitter:card', 'summary_large_image');
+
+  if (publication.entryTags.image) {
+    updateOrCreateMetaTag('twitter:image', publication.entryTags.image);
+  }
+
+  // Add publication-specific schema.org metadata
+  addSchemaOrgMetadata(publication);
+};
+
+// Helper function to update or create meta tags
+const updateOrCreateMetaTag = (property, content) => {
+  let metaTag = document.querySelector(`meta[property="${property}"]`);
+  if (!metaTag) {
+    metaTag = document.createElement('meta');
+    metaTag.setAttribute('property', property);
+    document.head.appendChild(metaTag);
+  }
+  metaTag.content = content;
+};
+
+// Add schema.org metadata for publications
+const addSchemaOrgMetadata = (publication) => {
+  // Remove any existing schema
+  const existingSchema = document.querySelector('script[type="application/ld+json"]');
+  if (existingSchema) {
+    existingSchema.remove();
+  }
+
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@type': 'ScholarlyArticle',
+    headline: publication.entryTags.title,
+    author: publication.entryTags.author.split(', ').map((name) => ({
+      '@type': 'Person',
+      name: name,
+    })),
+    datePublished: publication.entryTags.year,
+    description: publication.entryTags.abstract || '',
+    keywords: publication.entryTags.keywords || '',
+  };
+
+  // Add optional fields if they exist
+  if (publication.entryTags.doi) {
+    schemaData.identifier = publication.entryTags.doi;
+  }
+
+  if (publication.entryTags.journal) {
+    schemaData.isPartOf = {
+      '@type': 'Periodical',
+      name: publication.entryTags.journal,
+    };
+  }
+
+  if (publication.entryTags.url) {
+    schemaData.url = publication.entryTags.url;
+  }
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.text = JSON.stringify(schemaData);
+  document.head.appendChild(script);
+};
+
+// Function to set canonical URL
+export const setCanonicalUrl = (url) => {
+  // Remove any existing canonical link
+  const existingCanonical = document.querySelector('link[rel="canonical"]');
+  if (existingCanonical) {
+    existingCanonical.remove();
+  }
+
+  // Create and add the canonical link
+  const canonicalLink = document.createElement('link');
+  canonicalLink.rel = 'canonical';
+  canonicalLink.href = url;
+  document.head.appendChild(canonicalLink);
 };

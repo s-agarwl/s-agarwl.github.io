@@ -1,16 +1,14 @@
-# robots.txt for example.com
+# robots.txt for s-agarwl.github.io
 
 # Allow all search engines to crawl the main content
 User-agent: *
-Disallow: /admin/
-Disallow: /private/
-Disallow: /login/
-Disallow: /register/
-Disallow: /settings/
-Disallow: /api/
+Disallow: 
 
-# Allow all search engines to crawl everything else
+# Allow all search engines to crawl everything
 Allow: /
+Allow: /#/publication/
+Allow: /#/publications/
+Allow: /*.pdf$
 
 # Specify the location of the sitemap
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://s-agarwl.github.io/sitemap.xml
