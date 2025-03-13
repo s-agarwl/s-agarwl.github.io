@@ -70,14 +70,16 @@
             window.location.origin + '/publications/' + fileId + '/' + fileId + '.pdf',
           );
         }
-      } else if (hashPath === '' && pathName === '/') {
-        console.log('Homepage');
-      } else if (hashPath === '' && pathName !== '/') {
-        console.log('subpage url does not contain hash');
-        window.location.assign(window.location.origin + '/#' + pathName);
-      } else if (hashPath !== '' && pathName !== '/') {
-        console.log('page not found');
-      } else {
+      }
+      // else if (hashPath === '' && pathName === '/') {
+      //   console.log('Homepage');
+      // } else if (hashPath === '' && pathName !== '/') {
+      //   console.log('subpage url does not contain hash');
+      //   window.location.assign(window.location.origin + '/#' + pathName);
+      // } else if (hashPath !== '' && pathName !== '/') {
+      //   console.log('page not found');
+      // }
+      else {
         console.log('other conditions');
       }
 
