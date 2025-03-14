@@ -70,29 +70,14 @@
             window.location.origin + '/publications/' + fileId + '/' + fileId + '.pdf',
           );
         }
-      }
-      // Handle hash-based URL redirects immediately
-      else if (window.location.hash === '#/publications') {
-        // window.location.replace('/publications');
-        window.location.assign(window.location.origin + '/publications');
-      }
-      // Handle publication detail redirects - #/publication/[id] to /publication/[id]
-      else if (window.location.hash.startsWith('#/publication/')) {
-        // Extract the publication ID from the hash
-        const publicationId = window.location.hash.replace('#/publication/', '');
-        // Redirect to the clean URL
-        // window.location.replace('/publication/' + publicationId);
-        window.location.assign(window.location.origin + '/publication/' + publicationId);
-      }
-      // else if (hashPath === '' && pathName === '/') {
-      //   console.log('Homepage');
-      // } else if (hashPath === '' && pathName !== '/') {
-      //   console.log('subpage url does not contain hash');
-      //   window.location.assign(window.location.origin + '/#' + pathName);
-      // } else if (hashPath !== '' && pathName !== '/') {
-      //   console.log('page not found');
-      // }
-      else {
+      } else if (hashPath === '' && pathName === '/') {
+        console.log('Homepage');
+      } else if (hashPath === '' && pathName !== '/') {
+        console.log('subpage url does not contain hash');
+        window.location.assign(window.location.origin + '/#' + pathName);
+      } else if (hashPath !== '' && pathName !== '/') {
+        console.log('page not found');
+      } else {
         console.log('other conditions');
       }
 

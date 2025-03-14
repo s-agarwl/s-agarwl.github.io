@@ -38,39 +38,6 @@
     />
     <meta property="twitter:image" content="https://s-agarwl.github.io/logo.svg" />
 
-    <!-- GitHub Pages SPA Routing Script -->
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // Modified from https://github.com/rafgraph/spa-github-pages
-      (function (l) {
-        if (l.search[1] === '/') {
-          var decoded = l.search
-            .slice(1)
-            .split('&')
-            .map(function (s) {
-              return s.replace(/~and~/g, '&');
-            })
-            .join('?');
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-        }
-      })(window.location);
-    </script>
-
-    <!-- Redirect Script - Added to head for earlier execution -->
-    <script>
-      // Handle hash-based URL redirects immediately
-      if (window.location.hash === '#/publications') {
-        window.location.assign(window.location.origin + '/publications');
-      }
-      // Handle publication detail redirects - #/publication/[id] to /publication/[id]
-      else if (window.location.hash.startsWith('#/publication/')) {
-        // Extract the publication ID from the hash
-        const publicationId = window.location.hash.replace('#/publication/', '');
-        // Redirect to the clean URL
-        window.location.assign(window.location.origin + '/publication/' + publicationId);
-      }
-    </script>
-
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8CMNGL0EH7"></script>
     <script>
