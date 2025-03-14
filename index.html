@@ -8,6 +8,84 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- Specific Hash URL Redirects -->
+    <script type="text/javascript">
+      (function () {
+        // Map of specific hash URLs to their clean URL destinations
+        var hashRedirectMap = {
+          '#/publications': '/publications',
+          '#/publications/': '/publications/', // Handle trailing slash version
+          '#/publication/': '/publication/', // This will be a prefix match for publication URLs
+          // '#/docs': '/docs',
+          // Add more specific redirects as needed
+        };
+
+        // Get the current hash
+        var hash = window.location.hash;
+        console.log('Current hash:', hash); // Debug log
+
+        // Check if this hash is in our redirect map
+        if (hash) {
+          // First check for exact matches
+          if (hashRedirectMap[hash]) {
+            console.log('Exact match found, redirecting to:', hashRedirectMap[hash]); // Debug log
+            window.location.replace(window.location.origin + hashRedirectMap[hash]);
+          }
+          // Then check for prefix matches (for dynamic routes like publications)
+          else {
+            var matchFound = false;
+            for (var prefix in hashRedirectMap) {
+              if (hash.startsWith(prefix) && prefix.endsWith('/')) {
+                var cleanPrefix = hashRedirectMap[prefix];
+                var suffix = hash.substring(prefix.length);
+                var redirectUrl = window.location.origin + cleanPrefix + suffix;
+                console.log('Prefix match found, redirecting to:', redirectUrl); // Debug log
+                window.location.replace(redirectUrl);
+                matchFound = true;
+                break;
+              }
+            }
+
+            // If no match found but starts with #/, use the path directly
+            if (!matchFound && hash.startsWith('#/')) {
+              var cleanPath = hash.substring(1); // Remove the # character
+              console.log('No match found, using direct path:', cleanPath); // Debug log
+              window.location.replace(window.location.origin + cleanPath);
+            }
+          }
+        }
+      })();
+    </script>
+    <!-- End Specific Hash URL Redirects -->
+
     <meta
       name="description"
       content="Academic portfolio showcasing research publications and scholarly work"

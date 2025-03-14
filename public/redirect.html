@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      // Map of specific hash URLs to their clean URL destinations
+      var hashRedirectMap = {
+        '#/publications': '/publications',
+        '#/publications/': '/publications/', // Handle trailing slash version
+        '#/publication/': '/publication/', // This will be a prefix match for publication URLs
+        // '#/docs': '/docs',
+        // Add more specific redirects as needed
+      };
+
+      // Get the hash path from the URL and map it to a clean URL
+      function getRedirectPath() {
+        // Check if there's a hash in the URL
+        const hash = window.location.hash;
+        console.log('Current hash:', hash); // Debug log
+
+        if (hash) {
+          // First check for exact matches
+          if (hashRedirectMap[hash]) {
+            console.log('Exact match found, redirecting to:', hashRedirectMap[hash]); // Debug log
+            return hashRedirectMap[hash];
+          }
+          // Then check for prefix matches (for dynamic routes like publications)
+          else {
+            var matchFound = false;
+            for (var prefix in hashRedirectMap) {
+              if (hash.startsWith(prefix) && prefix.endsWith('/')) {
+                var cleanPrefix = hashRedirectMap[prefix];
+                var suffix = hash.substring(prefix.length);
+                var redirectPath = cleanPrefix + suffix;
+                console.log('Prefix match found, redirecting to:', redirectPath); // Debug log
+                matchFound = true;
+                return redirectPath;
+              }
+            }
+
+            // If no match found but starts with #/, use the path directly
+            if (!matchFound && hash.startsWith('#/')) {
+              var cleanPath = hash.substring(1); // Remove the # character
+              console.log('No match found, using direct path:', cleanPath); // Debug log
+              return cleanPath;
+            }
+          }
+        }
+
+        return null;
+      }
+
+      // Get the path from query parameter
+      function getPathFromQuery() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('path');
+      }
+
+      // Redirect to the clean URL
+      window.onload = function () {
+        // First check for hash path
+        let path = getRedirectPath();
+
+        // If no hash path, check query parameter
+        if (!path) {
+          path = getPathFromQuery();
+        }
+
+        // If we have a path, redirect to it
+        if (path) {
+          window.location.replace(window.location.origin + path);
+        } else {
+          // If no path found, redirect to homepage
+          window.location.replace(window.location.origin);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div style="text-align: center; padding: 20px">
+      <h1>Redirecting...</h1>
+      <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+    </div>
+  </body>
+</html>

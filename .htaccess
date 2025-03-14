@@ -1,13 +1,18 @@
 # Enable URL rewriting
 RewriteEngine On
 
-# Handle direct access to publication pages
-RewriteRule ^publication/([^/]+)/?$ index.html [L]
+# If an existing asset or directory is requested, serve it
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
 
-# Handle direct access to publications page
-RewriteRule ^publications/?$ index.html [L]
+# Handle legacy hash URLs - redirect requests with query param 'hashUrl'
+# This is for server-side handling of hash URLs
+RewriteCond %{QUERY_STRING} ^hashUrl=(.*)$
+RewriteRule ^$ %1? [R=301,L]
 
-# Redirect all other non-file requests to index.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.html [L]
+# Special handling for PDF files in the /files/ directory
+RewriteRule ^files/(.+)\.pdf$ /publications/$1/$1.pdf [R=301,L]
+
+# If the requested resource doesn't exist, serve index.html
+RewriteRule ^ index.html [L]
