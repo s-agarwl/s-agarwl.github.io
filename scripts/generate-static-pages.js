@@ -38,16 +38,16 @@ function cleanEntryTags(entryTags, citationKey) {
 
   // Add image and paper paths
   if (cleanedTags.image) {
-    cleanedTags.image = `/#/publications/${citationKey}/${cleanedTags.image}`;
+    cleanedTags.image = `/publications/${citationKey}/${cleanedTags.image}`;
   }
   if (cleanedTags.paperurl) {
-    cleanedTags.paperurl = `/#/publications/${citationKey}/${cleanedTags.paperurl}`;
+    cleanedTags.paperurl = `/publications/${citationKey}/${cleanedTags.paperurl}`;
   }
   if (cleanedTags.blogpost) {
-    cleanedTags.blogpost = `/#/publications/${citationKey}/${cleanedTags.blogpost}`;
+    cleanedTags.blogpost = `/publications/${citationKey}/${cleanedTags.blogpost}`;
   }
   if (cleanedTags.slides) {
-    cleanedTags.slides = `/#/publications/${citationKey}/${cleanedTags.slides}`;
+    cleanedTags.slides = `/publications/${citationKey}/${cleanedTags.slides}`;
   }
   return cleanedTags;
 }
@@ -370,11 +370,11 @@ async function generateStaticPages() {
         <!DOCTYPE html>
         <html>
           <head>
-            <meta http-equiv="refresh" content="0;url=/#/publication/${citationKey}/">
+            <meta http-equiv="refresh" content="0;url=/publication/${citationKey}/">
             <title>Redirecting...</title>
           </head>
           <body>
-            <p>Redirecting to <a href="/#/publication/${citationKey}/">/#/publication/${citationKey}/</a></p>
+            <p>Redirecting to <a href="/publication/${citationKey}/">/publication/${citationKey}/</a></p>
           </body>
         </html>
       `;
@@ -392,7 +392,7 @@ async function generateStaticPages() {
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>${config.baseUrl || 'https://example.com'}/#/publications</loc>
+    <loc>${config.baseUrl || 'https://example.com'}/publications</loc>
     <priority>0.8</priority>
   </url>`;
 
@@ -400,7 +400,7 @@ async function generateStaticPages() {
     for (const entry of sortedEntries) {
       sitemapContent += `
   <url>
-    <loc>${config.baseUrl || 'https://example.com'}/#/publication/${entry.citationKey}/</loc>
+    <loc>${config.baseUrl || 'https://example.com'}/publication/${entry.citationKey}/</loc>
     <priority>0.7</priority>
   </url>`;
     }
