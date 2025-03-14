@@ -3,101 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Page Not Found</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-      }
-      .container {
-        text-align: center;
-        padding: 2rem;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        color: #e53e3e;
-        margin-bottom: 1rem;
-      }
-      p {
-        color: #4a5568;
-        margin-bottom: 1rem;
-      }
-      .url {
-        font-family: monospace;
-        background-color: #edf2f7;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-      }
-      a {
-        color: #3182ce;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    </style>
+    <title>Page Not Found</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script takes the current URL and converts the path and query
+      // string into just a query string, and then redirects the browser
+      // to the new URL with only a query string and hash fragment
+
+      // If you're creating a Project Pages site and NOT using a custom domain,
+      // then set pathSegmentsToKeep to 1 (enterprise users may need to set this to > 1).
+      // This way the code will only replace the route part of the path, and not
+      // the real directory in which the app resides, for example:
+      // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
+      // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
+      // Otherwise, leave pathSegmentsToKeep as 0.
+      var pathSegmentsToKeep = 0;
+
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          '//' +
+          l.hostname +
+          (l.port ? ':' + l.port : '') +
+          l.pathname
+            .split('/')
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join('/') +
+          '/?/' +
+          l.pathname
+            .slice(1)
+            .split('/')
+            .slice(pathSegmentsToKeep)
+            .join('/')
+            .replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash,
+      );
+    </script>
   </head>
   <body>
-    <div class="container">
-      <h1>404 - Page Not Found</h1>
-      <!-- <p>The page you are looking for doesn't exist.</p> -->
-      <p>
-        The website has been upgraded to a new version and
-        <b> some links may require using the hash (#) prefix.</b>
-      </p>
-      <p>Entered URL: <span id="current-url" class="url"></span></p>
-      <h2>Go to the updated url:</h2>
-      <a href="/" id="newURL"></a>
+    <div style="text-align: center; padding: 20px">
+      <h1>Redirecting...</h1>
+      <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
     </div>
-
-    <script>
-      let hashPath = window.location.hash;
-      let pathName = window.location.pathname;
-      if (pathName.includes('/files/')) {
-        // Extract filename from the path
-        const match = pathName.match(/^\/files\/(.+)\.pdf$/);
-        if (match) {
-          const fileId = match[1];
-          // Redirect to new publications folder structure
-          window.location.assign(
-            window.location.origin + '/publications/' + fileId + '/' + fileId + '.pdf',
-          );
-        }
-      } else if (hashPath === '' && pathName === '/') {
-        console.log('Homepage');
-      } else if (hashPath === '' && pathName !== '/') {
-        console.log('subpage url does not contain hash');
-        window.location.assign(window.location.origin + '/#' + pathName);
-      } else if (hashPath !== '' && pathName !== '/') {
-        console.log('page not found');
-      } else {
-        console.log('other conditions');
-      }
-
-      // Display the current URL
-      // document.getElementById('current-url').textContent = window.location.pathname;
-      // let path = window.location.pathname;
-
-      // if (!window.location.pathname.includes('s-agarwl.github.io/publication/')) {
-      //   path = window.location.pathname.split('/publication/');
-      //   window.location.assign(path[0] + '/#/publication/' + path[1]);
-      // } else if (!path.includes('#')) {
-      //   window.location.assign(window.location.hostname + '/#/' + window.location.pathname);
-      // } else {
-      //   document.getElementById('newURL').textContent = '/#' + window.location.pathname;
-      //   // Redirect to the homepage with a hash if using HashRouter
-      //   document.getElementById('newURL').addEventListener('click', function (e) {
-      //     e.preventDefault();
-      //     window.location.href = '/#' + window.location.pathname;
-      //   });
-      // }
-    </script>
   </body>
 </html>
