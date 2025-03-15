@@ -168,14 +168,14 @@
   "specialSections": {
     "allPublications": {
       "id": "AllPublications",
-      "headerText": "All Publications",
+      "headerText": "Publications",
       "path": "/publications",
-      "sectionHeading": "My Publications",
-      "content": "Explore my collection of publications, where data, visualization, and AI intersect to drive innovation. From groundbreaking research to practical applications, eachpiece reflects my passion for unraveling complex datasets and advancing AI understanding. Dive in and discover insights that shape the future of technology!"
+      "sectionHeading": "Publications",
+      "content": "Explore my collection of publications. From groundbreaking research to practical applications, each piece reflects my passion for unraveling complex datasets and advancing AI understanding."
     },
     "phdThesis": {
       "id": "PhdThesis",
-      "headerText": "My PhD Thesis",
+      "headerText": "PhD Thesis",
       "path": "/publication/Agarwal2023Dissertation"
     },
     "documentation": {
