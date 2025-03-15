@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import ReactPlayer from 'react-player';
 import PublicationLinks from './PublicationLinks';
 import { updateMetaTags } from '../utils/utils';
+import { generateBibTexEntry, copyBibTexToClipboard } from '../utils/bibTexUtils';
 
 const renderAuthors = (authors, yourName) => {
   return authors.split(', ').map((author, index) => (
@@ -20,6 +21,8 @@ const PublicationDetailsById = ({ entries, id, config }) => {
   const [blogContent, setBlogContent] = useState('');
   const [themeColor, setThemeColor] = useState('');
   const [showFullAbstract, setShowFullAbstract] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [showBibTeX, setShowBibTeX] = useState(false);
 
   const entry = entries.find((e) => e.citationKey === id);
 
@@ -67,6 +70,14 @@ const PublicationDetailsById = ({ entries, id, config }) => {
     return words.slice(0, abstractPreviewLength).join(' ') + '...';
   };
 
+  // Generate BibTeX once when component mounts or entry changes
+  const bibTexEntry = entry ? generateBibTexEntry(entry) : '';
+
+  // Function to copy BibTeX to clipboard
+  const copyBibTeX = () => {
+    copyBibTexToClipboard(bibTexEntry, setCopySuccess);
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">{entry.entryTags.title}</h1>
@@ -99,6 +110,44 @@ const PublicationDetailsById = ({ entries, id, config }) => {
             </button>
           )}
         </div>
+      </div>
+
+      {/* BibTeX Citation Section */}
+      <div className="mt-6">
+        <button
+          onClick={() => setShowBibTeX(!showBibTeX)}
+          className="flex items-center text-theme-light hover:underline mb-2"
+        >
+          <span className="mr-2">{showBibTeX ? '▼' : '►'}</span>
+          <span>BibTeX Citation</span>
+        </button>
+
+        {showBibTeX && (
+          <div className="bg-gray-100 p-4 rounded-lg relative">
+            <pre className="text-sm overflow-x-auto whitespace-pre-wrap pb-10">{bibTexEntry}</pre>
+            <button
+              onClick={copyBibTeX}
+              className="absolute bottom-2 right-2 bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 flex items-center shadow-md border border-blue-700"
+              title="Copy to clipboard"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                />
+              </svg>
+              {copySuccess ? 'Copied!' : 'Copy BibTeX'}
+            </button>
+          </div>
+        )}
       </div>
 
       {entry.entryTags.video && (

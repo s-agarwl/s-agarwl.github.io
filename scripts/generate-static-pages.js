@@ -22,6 +22,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { JSDOM } from 'jsdom';
 import bibtexParse from 'bibtex-parse-js';
+import { generateEnhancedBibTexEntry } from '../src/utils/bibTexUtils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '../dist');
@@ -304,6 +305,54 @@ async function generateStaticPages() {
         };
       }
 
+      // Add additional resources as schema.org properties
+      const resources = [];
+
+      if (entry.entryTags.paperurl) {
+        resources.push({
+          '@type': 'CreativeWork',
+          name: 'Full Paper',
+          url: new URL(entry.entryTags.paperurl, config.baseUrl || 'https://example.com').href,
+          encodingFormat: 'application/pdf',
+        });
+      }
+
+      if (entry.entryTags.github) {
+        resources.push({
+          '@type': 'SoftwareSourceCode',
+          name: 'Source Code',
+          codeRepository: entry.entryTags.github,
+        });
+      }
+
+      if (entry.entryTags.demo) {
+        resources.push({
+          '@type': 'WebApplication',
+          name: 'Demo',
+          url: entry.entryTags.demo,
+        });
+      }
+
+      if (entry.entryTags.poster) {
+        resources.push({
+          '@type': 'CreativeWork',
+          name: 'Research Poster',
+          url: new URL(entry.entryTags.poster, config.baseUrl || 'https://example.com').href,
+        });
+      }
+
+      if (entry.entryTags.slides) {
+        resources.push({
+          '@type': 'PresentationDigitalDocument',
+          name: 'Presentation Slides',
+          url: new URL(entry.entryTags.slides, config.baseUrl || 'https://example.com').href,
+        });
+      }
+
+      if (resources.length > 0) {
+        jsonLD.associatedMedia = resources;
+      }
+
       scriptLD.textContent = JSON.stringify(jsonLD);
       head.appendChild(scriptLD);
 
@@ -320,32 +369,49 @@ async function generateStaticPages() {
       // Add a prerendered version of the publication content for SEO
       const contentDiv = document.createElement('div');
       contentDiv.setAttribute('id', 'prerendered-content');
+
+      // Generate resource links HTML
+      let resourceLinksHtml = '';
+      if (
+        entry.entryTags.paperurl ||
+        entry.entryTags.github ||
+        entry.entryTags.demo ||
+        entry.entryTags.poster ||
+        entry.entryTags.slides
+      ) {
+        resourceLinksHtml = '<h2>Resources</h2><ul>';
+
+        if (entry.entryTags.paperurl) {
+          resourceLinksHtml += `<li><a href="${entry.entryTags.paperurl}">Paper PDF</a></li>`;
+        }
+
+        if (entry.entryTags.github) {
+          resourceLinksHtml += `<li><a href="${entry.entryTags.github}">Source Code</a></li>`;
+        }
+
+        if (entry.entryTags.demo) {
+          resourceLinksHtml += `<li><a href="${entry.entryTags.demo}">Demo</a></li>`;
+        }
+
+        if (entry.entryTags.poster) {
+          resourceLinksHtml += `<li><a href="${entry.entryTags.poster}">Poster</a></li>`;
+        }
+
+        if (entry.entryTags.slides) {
+          resourceLinksHtml += `<li><a href="${entry.entryTags.slides}">Slides</a></li>`;
+        }
+
+        resourceLinksHtml += '</ul>';
+      }
+
       contentDiv.innerHTML = `
         <h1>${entry.entryTags.title}</h1>
         <p><strong>Authors:</strong> ${entry.entryTags.author}</p>
         <p><strong>Year:</strong> ${entry.entryTags.year}</p>
         ${entry.entryTags.abstract ? `<h2>Abstract</h2><p>${entry.entryTags.abstract}</p>` : ''}
+        ${resourceLinksHtml}
         <h2>Citation</h2>
-        <pre><code class="language-bibtex">@${entry.entryType}{${entry.citationKey},
-  title = {${entry.entryTags.title}},
-  author = {${entry.entryTags.author}},
-  year = {${entry.entryTags.year}}${
-    entry.entryTags.journal
-      ? `,
-  journal = {${entry.entryTags.journal}}`
-      : ''
-  }${
-    entry.entryTags.booktitle
-      ? `,
-  booktitle = {${entry.entryTags.booktitle}}`
-      : ''
-  }${
-    entry.entryTags.doi
-      ? `,
-  doi = {${entry.entryTags.doi}}`
-      : ''
-  }
-}</code></pre>
+        <pre><code class="language-bibtex">${generateEnhancedBibTexEntry(entry)}</code></pre>
       `;
 
       // Add the content div to the body before the root div
