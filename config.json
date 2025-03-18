@@ -1,9 +1,53 @@
 {
   "researcherName": "Shivam Agarwal",
-  "institution": "University of Bamberg",
   "email": "shivamworking@gmail.com",
   "theme": "light",
   "baseUrl": "https://s-agarwl.github.io",
+  "navigation": {
+    "mainItems": [
+      {
+        "id": "Profile",
+        "text": "Profile",
+        "dropdown": true,
+        "items": [
+          {
+            "id": "About",
+            "text": "About Me"
+          },
+          {
+            "id": "Education",
+            "text": "Education"
+          },
+          {
+            "id": "WorkExperience",
+            "text": "Work Experience"
+          },
+          {
+            "id": "Awards",
+            "text": "Awards"
+          },
+          {
+            "id": "FeaturedPublications",
+            "text": "Featured Research"
+          },
+          {
+            "id": "Contact",
+            "text": "Contact"
+          }
+        ]
+      },
+      {
+        "id": "Publications",
+        "text": "Publications",
+        "path": "/publications"
+      },
+      {
+        "id": "PhdThesis",
+        "text": "PhD Thesis",
+        "path": "/publication/Agarwal2023Dissertation"
+      }
+    ]
+  },
   "links": {
     "googleScholar": "https://scholar.google.com/citations?user=9-ma8xIAAAAJ",
     "linkedin": "https://www.linkedin.com/in/shivamlearning/",
@@ -30,16 +74,13 @@
   "bibtexPath": "/pubs.bib",
   "profilePhotoPath": "/profile-photo.png",
   "sections": {
-    "about": {
+    "About": {
       "id": "About",
-      "headerText": "About Me",
-      "subHeading": "Computer Science Researcher (Dr.)",
-      "content": "<p className='mb-4'>Hi, I'm Shivam.<p>I'm passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>12 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for real-world problems.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>"
+      "content": "<p className='mb-4'>Hi,<p>I am passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>12 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for real-world problems.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>",
+      "subHeading": "Computer Science Researcher (Dr.)"
     },
-
-    "education": {
+    "Education": {
       "id": "Education",
-      "headerText": "Education",
       "sectionHeading": "Educational Background",
       "content": [
         {
@@ -63,9 +104,8 @@
         }
       ]
     },
-    "workExperience": {
+    "WorkExperience": {
       "id": "WorkExperience",
-      "headerText": "Work Experience",
       "sectionHeading": "Professional Journey",
       "content": [
         {
@@ -105,9 +145,8 @@
         }
       ]
     },
-    "awards": {
+    "Awards": {
       "id": "Awards",
-      "headerText": "Awards",
       "sectionHeading": "Honors and Achievements",
       "content": [
         {
@@ -130,9 +169,8 @@
         }
       ]
     },
-    "featuredPublications": {
+    "FeaturedPublications": {
       "id": "FeaturedPublications",
-      "headerText": "Featured",
       "sectionHeading": "Featured Research",
       "content": [
         "Agarwal2023Dissertation",
@@ -144,43 +182,27 @@
         "Agarwal2022Spatio"
       ]
     },
-    "contact": {
+    "Contact": {
       "id": "Contact",
-      "headerText": "Contact",
       "sectionHeading": "Get in Touch",
       "content": {
         "intro": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out to me through any of the following channels:",
         "linksToDisplay": ["linkedin", "email"],
         "outro": "Whether you have a question about my research, want to collaborate on a project, or just want to say hello, Let's get in touch!"
       }
-    }
-  },
-  "sectionsToShowInThisOrder": [
-    "About",
-    "Education",
-    "WorkExperience",
-    "Awards",
-    "FeaturedPublications",
-    "Contact",
-    "AllPublications",
-    "PhdThesis"
-  ],
-  "specialSections": {
-    "allPublications": {
-      "id": "AllPublications",
-      "headerText": "Publications",
+    },
+    "Publications": {
+      "id": "Publications",
       "path": "/publications",
       "sectionHeading": "Publications",
       "content": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding."
     },
-    "phdThesis": {
+    "PhdThesis": {
       "id": "PhdThesis",
-      "headerText": "PhD Thesis",
       "path": "/publication/Agarwal2023Dissertation"
     },
-    "documentation": {
+    "Documentation": {
       "id": "Documentation",
-      "headerText": "Docs",
       "path": "/documentation"
     }
   }
