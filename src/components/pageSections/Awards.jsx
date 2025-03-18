@@ -11,12 +11,12 @@ const iconMap = {
 
 const Awards = ({ config }) => {
   return (
-    <Section id={config.sections.awards.id}>
+    <Section id={config.sections.Awards.id}>
       <h2 className="text-3xl font-bold mb-6 text-center ">
-        {config.sections.awards.sectionHeading}
+        {config.sections.Awards.sectionHeading}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {config.sections.awards.content.map((award, index) => {
+        {config.sections.Awards.content.map((award, index) => {
           const IconComponent = iconMap[award.icon];
           return (
             <div

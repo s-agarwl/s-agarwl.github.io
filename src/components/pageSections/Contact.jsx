@@ -3,14 +3,14 @@ import { iconMap } from '../../utils/utils'; // Update the import path as needed
 
 const Contact = ({ config }) => {
   return (
-    <section id={config.sections.contact.id} className="py-16 ">
+    <section id={config.sections.Contact.id} className="py-16 ">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-center">
-          {config.sections.contact.sectionHeading}
+          {config.sections.Contact.sectionHeading}
         </h2>
-        <p className="text-center mb-8">{config.sections.contact.content.intro}</p>
+        <p className="text-center mb-8">{config.sections.Contact.content.intro}</p>
         <div className="flex justify-center space-x-4 mb-8">
-          {config.sections.contact.content.linksToDisplay.map((key) => {
+          {config.sections.Contact.content.linksToDisplay.map((key) => {
             const Icon = iconMap[key];
             const url = key === 'email' ? `mailto:${config.email}` : config.links[key];
 
@@ -29,7 +29,7 @@ const Contact = ({ config }) => {
             );
           })}
         </div>
-        <p className="text-center">{config.sections.contact.content.outro}</p>
+        <p className="text-center">{config.sections.Contact.content.outro}</p>
       </div>
     </section>
   );

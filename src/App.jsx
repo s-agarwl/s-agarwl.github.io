@@ -132,14 +132,22 @@ function App({ config }) {
     return <div>Error: {error}</div>;
   }
 
-  // Update this section mapping
-  const sectionComponents = Object.values(config.sections)
-    .map((section) => ({
-      id: section.id,
-      component: sectionIdToComponent(section.id),
-      config: section,
-    }))
-    .filter((section) => section.component !== null);
+  // Get profile section IDs from navigation
+  const profileDropdown = config.navigation?.mainItems?.find((item) => item.id === 'Profile');
+  const profileSectionIds = profileDropdown?.items?.map((item) => item.id) || [];
+
+  // Get section components in the order defined in the navigation
+  const sectionComponents = profileSectionIds
+    .map((sectionId) => {
+      const section = config.sections[sectionId];
+      if (!section) return null;
+      return {
+        id: sectionId,
+        component: sectionIdToComponent(sectionId),
+        config: section,
+      };
+    })
+    .filter((section) => section && section.component !== null);
 
   return (
     <Router>
@@ -199,7 +207,9 @@ App.propTypes = {
     researcherName: PropTypes.string.isRequired,
     bibtexPath: PropTypes.string.isRequired,
     sections: PropTypes.object,
-    // Add other config properties as needed
+    navigation: PropTypes.shape({
+      mainItems: PropTypes.array,
+    }),
   }).isRequired,
 };
 

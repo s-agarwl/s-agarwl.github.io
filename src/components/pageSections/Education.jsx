@@ -4,12 +4,12 @@ import Section from '../Section';
 
 const Education = ({ config }) => {
   return (
-    <Section id={config.sections.education.id}>
+    <Section id={config.sections.Education.id}>
       <h2 className="text-3xl font-bold mb-8 text-center text-theme">
-        {config.sections.education.sectionHeading}
+        {config.sections.Education.sectionHeading}
       </h2>
       <div className="education-list space-y-6">
-        {config.sections.education.content.map((edu, index) => (
+        {config.sections.Education.content.map((edu, index) => (
           <div key={index} className="education-item bg-white shadow-md rounded-lg p-6">
             <div className="flex items-center mb-4">
               <FaGraduationCap className="text-2xl text-blue-500 mr-4" />

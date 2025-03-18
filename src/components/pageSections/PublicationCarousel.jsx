@@ -25,7 +25,7 @@ const PrevArrow = ({ onClick }) => (
 const PublicationCarousel = ({ entries, config }) => {
   // Filter entries based on the keys specified in config
   const carouselEntries = entries.filter((entry) =>
-    config.sections.featuredPublications.content.includes(entry.citationKey),
+    config.sections.FeaturedPublications.content.includes(entry.citationKey),
   );
 
   const settings = {
@@ -53,9 +53,9 @@ const PublicationCarousel = ({ entries, config }) => {
   };
 
   return (
-    <Section id={config.sections.featuredPublications.id} className="w-full">
+    <Section id={config.sections.FeaturedPublications.id} className="w-full">
       <h2 className="text-3xl font-bold mb-8 text-center">
-        {config.sections.featuredPublications.sectionHeading}
+        {config.sections.FeaturedPublications.sectionHeading}
       </h2>
       <div className="w-full px-4">
         <Slider {...settings}>

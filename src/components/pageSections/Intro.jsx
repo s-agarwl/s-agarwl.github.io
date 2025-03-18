@@ -4,7 +4,7 @@ import Section from '../Section';
 
 const Intro = ({ config }) => {
   return (
-    <Section id={config.sections.about.id}>
+    <Section id={config.sections.About.id}>
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
         {config.profilePhotoPath && (
           <div className="w-full md:w-1/3 flex justify-center md:justify-start">
@@ -20,11 +20,11 @@ const Intro = ({ config }) => {
             {config.researcherName}
           </h2>
           <h3 className="text-xl sm:text-1xl font-medium text-theme-light mb-8">
-            {config.sections.about.subHeading}
+            {config.sections.About.subHeading}
           </h3>
           <p
             className="text-lg text-theme mb-12"
-            dangerouslySetInnerHTML={parseHtml(config.sections.about.content)}
+            dangerouslySetInnerHTML={parseHtml(config.sections.About.content)}
           />
         </div>
       </div>

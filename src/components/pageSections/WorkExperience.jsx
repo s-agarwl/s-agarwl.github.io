@@ -4,12 +4,12 @@ import Section from '../Section';
 
 const WorkExperience = ({ config }) => {
   return (
-    <Section id={config.sections.workExperience.id}>
+    <Section id={config.sections.WorkExperience.id}>
       <h2 className="text-3xl font-bold mb-12 text-center text-theme">
-        {config.sections.workExperience.sectionHeading}
+        {config.sections.WorkExperience.sectionHeading}
       </h2>
       <div className="relative">
-        {config.sections.workExperience.content.map((exp, index) => (
+        {config.sections.WorkExperience.content.map((exp, index) => (
           <div key={index} className="mb-12 flex">
             <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
               <FaBriefcase className="text-white" />
