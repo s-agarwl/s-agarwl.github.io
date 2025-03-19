@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PublicationCard from './PublicationCard';
 import PublicationListItem from './PublicationListItem';
@@ -12,7 +12,15 @@ const AllPublications = ({ entries, config }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [yearFilter, setYearFilter] = useState('');
   // const [typeFilter, setTypeFilter] = useState(''); // For future use when type filtering is enabled
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState(() => {
+    // Initialize from localStorage, default to 'grid' if not found
+    return localStorage.getItem('publicationsViewMode') || 'grid';
+  });
+
+  // Update localStorage when viewMode changes
+  useEffect(() => {
+    localStorage.setItem('publicationsViewMode', viewMode);
+  }, [viewMode]);
 
   const fuse = useMemo(() => {
     const options = {
