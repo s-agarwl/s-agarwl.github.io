@@ -17,14 +17,20 @@ const AllPublications = ({ entries, config }) => {
   const fuse = useMemo(() => {
     const options = {
       keys: [
-        'entryTags.title',
-        'entryTags.author',
-        'entryTags.booktitle',
-        'entryTags.journal',
-        'entryTags.abstract',
+        { name: 'entryTags.title', weight: 2 },
+        { name: 'entryTags.abstract', weight: 1 },
+        { name: 'entryTags.author', weight: 1 },
+        { name: 'entryTags.booktitle', weight: 1 },
+        { name: 'entryTags.journal', weight: 1 },
+        { name: 'entryTags.awards', weight: 1 },
       ],
-      threshold: 0.4,
+      threshold: 1,
       includeScore: true,
+      ignoreLocation: true,
+      minMatchCharLength: 3,
+      shouldSort: true,
+      findAllMatches: true,
+      useExtendedSearch: true,
     };
     return new Fuse(entries, options);
   }, [entries]);
