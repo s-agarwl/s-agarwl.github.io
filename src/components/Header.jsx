@@ -108,7 +108,12 @@ const Header = ({ config }) => {
       `}</style>
 
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-xl font-bold">{config.researcherName}</div>
+        <HashLink
+          to="/"
+          className="text-xl font-bold ml-8 sm:ml-4 cursor-pointer hover:text-gray-300 transition-colors duration-200"
+        >
+          {config.researcherName}
+        </HashLink>
         <button className="text-2xl md:hidden" onClick={handleMenuClick} aria-label="Toggle menu">
           {isMenuOpen ? '×' : '☰'}
         </button>
