@@ -2,138 +2,206 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://s-agarwl.github.io/</loc>
-    <priority>1.0</priority>
+    <lastmod>2025-03-19</lastmod>
+    <priority>1</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://s-agarwl.github.io/publications</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Pron2024Comparative/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2017Nodetrix</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Krause2023Visually/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2018Computer</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Liebers2023Viscomet/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2020Bombalytics</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2023Visualizing/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2020Design</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Liebers2023CohExplore/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2020How</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2023Dissertation/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2020SetStreams</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2022Spatio/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2020Visualizing</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2022CiteVis/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2020VisualizingSets</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2022Visualizing/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2022CiteVis</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Krause2021Visual/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2022Spatio</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Latif2021Visually/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2022Visualizing</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Laurent2021Flatland/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2023Dissertation</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2020Bombalytics/</loc>
+    <loc>https://s-agarwl.github.io/publication/Agarwal2023Visualizing</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2020SetStreams/</loc>
+    <loc>https://s-agarwl.github.io/publication/Krause2021Visual</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2020Visualizing/</loc>
+    <loc>https://s-agarwl.github.io/publication/Krause2023Visually</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2020Design/</loc>
+    <loc>https://s-agarwl.github.io/publication/Latif2021Visually</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2020VisualizingSets/</loc>
+    <loc>https://s-agarwl.github.io/publication/Laurent2021Flatland</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2020How/</loc>
+    <loc>https://s-agarwl.github.io/publication/Liebers2023CohExplore</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Lukose2018Design/</loc>
+    <loc>https://s-agarwl.github.io/publication/Liebers2023Viscomet</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2018Computer/</loc>
+    <loc>https://s-agarwl.github.io/publication/Lukose2018Design</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Agarwal2017Nodetrix/</loc>
+    <loc>https://s-agarwl.github.io/publication/Nair2017Nodetrix</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Nair2017Nodetrix/</loc>
+    <loc>https://s-agarwl.github.io/publication/Pron2024Comparative</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/publication/Sreevalsan2017Collaborative/</loc>
+    <loc>https://s-agarwl.github.io/publication/Sreevalsan2017Collaborative</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/sets_interactions/</loc>
+    <loc>https://s-agarwl.github.io/sets_interactions</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/dissertation/</loc>
+    <loc>https://s-agarwl.github.io/dissertation</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/fv/</loc>
+    <loc>https://s-agarwl.github.io/fv</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/citevis/</loc>
+    <loc>https://s-agarwl.github.io/citevis</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/evolvingai/</loc>
+    <loc>https://s-agarwl.github.io/evolvingai</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/bombalytics/</loc>
+    <loc>https://s-agarwl.github.io/bombalytics</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/setstreams/</loc>
+    <loc>https://s-agarwl.github.io/setstreams</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/mrsessions/</loc>
+    <loc>https://s-agarwl.github.io/mrsessions</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://s-agarwl.github.io/dynamicsets/</loc>
+    <loc>https://s-agarwl.github.io/dynamicsets</loc>
+    <lastmod>2025-03-19</lastmod>
     <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
