@@ -19,6 +19,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import bibtexParse from 'bibtex-parse-js';
+import { format } from 'date-fns';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -54,55 +55,71 @@ const config = {
   ],
 };
 
+// Add this helper function before generateSitemap()
+function getFileLastModifiedDate(filePath) {
+  try {
+    const stats = fs.statSync(filePath);
+    return format(stats.mtime, 'yyyy-MM-dd');
+  } catch (error) {
+    // If file doesn't exist or other error, return today's date as fallback
+    return format(new Date(), 'yyyy-MM-dd');
+  }
+}
+
 // Generate sitemap XML
 function generateSitemap() {
   console.log('Generating sitemap.xml...');
 
-  // Start XML content
+  // Get last modified dates for main pages
+  const indexLastMod = getFileLastModifiedDate(path.join(__dirname, '../dist/index.html'));
+  const publicationsLastMod = getFileLastModifiedDate(
+    path.join(__dirname, '../dist/publications/index.html'),
+  );
+
   let xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>${config.baseUrl}/</loc>
+    <lastmod>${indexLastMod}</lastmod>
     <priority>${config.priorities.home}</priority>
     <changefreq>${config.changeFrequencies.home}</changefreq>
   </url>
   <url>
     <loc>${config.baseUrl}/publications</loc>
+    <lastmod>${publicationsLastMod}</lastmod>
     <priority>${config.priorities.publications}</priority>
     <changefreq>${config.changeFrequencies.publications}</changefreq>
   </url>`;
 
-  // Add publication URLs from BibTeX file
   try {
-    // Check if the BibTeX file exists
-    if (!fs.existsSync(config.bibtexPath)) {
-      // Try alternative path (pubs.bib instead of publications.bib)
-      const altPath = path.join(__dirname, '../public/pubs.bib');
-      if (fs.existsSync(altPath)) {
-        config.bibtexPath = altPath;
-        console.log(`Using alternative BibTeX file: ${altPath}`);
-      } else {
-        throw new Error(`BibTeX file not found at ${config.bibtexPath} or ${altPath}`);
-      }
-    }
+    // Read the publication directory
+    const publicationsDir = path.join(__dirname, '../dist/publication');
+    const publications = fs.readdirSync(publicationsDir);
 
-    const bibtexContent = fs.readFileSync(config.bibtexPath, 'utf8');
-    const entries = bibtexParse.toJSON(bibtexContent);
-
-    entries.forEach((entry) => {
-      xmlContent += `
+    // Add each publication found in the dist directory
+    publications.forEach((pubDir) => {
+      const indexPath = path.join(publicationsDir, pubDir, 'index.html');
+      console.log(indexPath);
+      if (fs.existsSync(indexPath)) {
+        const lastMod = getFileLastModifiedDate(indexPath);
+        xmlContent += `
   <url>
-    <loc>${config.baseUrl}/publication/${entry.citationKey}</loc>
+    <loc>${config.baseUrl}/publication/${pubDir}</loc>
+    <lastmod>${lastMod}</lastmod>
     <priority>${config.priorities.publication}</priority>
     <changefreq>${config.changeFrequencies.publication}</changefreq>
   </url>`;
+      }
     });
 
-    // Add additional URLs
+    // Add additional URLs with their file-specific last modified dates
     config.additionalUrls.forEach((item) => {
+      const pagePath = path.join(__dirname, `../dist${item.url}/index.html`);
+      const lastMod = getFileLastModifiedDate(pagePath);
       xmlContent += `
   <url>
     <loc>${config.baseUrl}${item.url}</loc>
+    <lastmod>${lastMod}</lastmod>
     <priority>${item.priority}</priority>
     <changefreq>${item.changefreq}</changefreq>
   </url>`;
