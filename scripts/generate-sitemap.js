@@ -28,7 +28,7 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const config = {
   baseUrl: 'https://s-agarwl.github.io',
-  bibtexPath: path.join(__dirname, '../public/publications.bib'),
+  bibtexPath: path.join(__dirname, '../public/pubs.bib'),
   outputPath: path.join(__dirname, '../public/sitemap.xml'),
   priorities: {
     home: 1.0,

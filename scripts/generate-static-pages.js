@@ -450,44 +450,44 @@ async function generateStaticPages() {
     }
 
     // Update sitemap.xml with publication URLs
-    const sitemapPath = path.join(rootDir, 'sitemap.xml');
-    let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${config.baseUrl || 'https://example.com'}/</loc>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>${config.baseUrl || 'https://example.com'}/publications</loc>
-    <priority>0.8</priority>
-  </url>`;
+    //     const sitemapPath = path.join(rootDir, 'sitemap.xml');
+    //     let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+    // <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    //   <url>
+    //     <loc>${config.baseUrl || 'https://example.com'}/</loc>
+    //     <priority>1.0</priority>
+    //   </url>
+    //   <url>
+    //     <loc>${config.baseUrl || 'https://example.com'}/publications</loc>
+    //     <priority>0.8</priority>
+    //   </url>`;
 
-    // Add publication URLs to sitemap
-    for (const entry of sortedEntries) {
-      sitemapContent += `
-  <url>
-    <loc>${config.baseUrl || 'https://example.com'}/publication/${entry.citationKey}/</loc>
-    <priority>0.7</priority>
-  </url>`;
-    }
+    //     // Add publication URLs to sitemap
+    //     for (const entry of sortedEntries) {
+    //       sitemapContent += `
+    //   <url>
+    //     <loc>${config.baseUrl || 'https://example.com'}/publication/${entry.citationKey}/</loc>
+    //     <priority>0.7</priority>
+    //   </url>`;
+    //     }
 
-    // Add short URL redirects to sitemap
-    for (const [shortUrl] of Object.entries(shortUrlMap)) {
-      sitemapContent += `
-  <url>
-    <loc>${config.baseUrl || 'https://example.com'}/${shortUrl}/</loc>
-    <priority>0.6</priority>
-  </url>`;
-    }
+    //     // Add short URL redirects to sitemap
+    //     for (const [shortUrl] of Object.entries(shortUrlMap)) {
+    //       sitemapContent += `
+    //   <url>
+    //     <loc>${config.baseUrl || 'https://example.com'}/${shortUrl}/</loc>
+    //     <priority>0.6</priority>
+    //   </url>`;
+    //     }
 
-    sitemapContent += `
-</urlset>`;
+    //     sitemapContent += `
+    // </urlset>`;
 
-    fs.writeFileSync(sitemapPath, sitemapContent);
+    // fs.writeFileSync(sitemapPath, sitemapContent);
     // Write sitemap to dist directory as well
-    const sitemapPathDist = path.join(distDir, 'sitemap.xml');
-    fs.writeFileSync(sitemapPathDist, sitemapContent);
-    console.log('Updated sitemap.xml');
+    // const sitemapPathDist = path.join(distDir, 'sitemap.xml');
+    // fs.writeFileSync(sitemapPathDist, sitemapContent);
+    // console.log('Updated sitemap.xml');
 
     console.log('Static page generation completed successfully!');
   } catch (error) {
