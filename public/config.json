@@ -37,6 +37,11 @@
         ]
       },
       {
+        "id": "MyStory",
+        "text": "My Story",
+        "path": "/my-story"
+      },
+      {
         "id": "Publications",
         "text": "Publications",
         "path": "/publications"
@@ -190,6 +195,11 @@
         "linksToDisplay": ["linkedin", "email"],
         "outro": "Whether you have a question about my research, want to collaborate on a project, or just want to say hello, Let's get in touch!"
       }
+    },
+    "MyStory": {
+      "id": "MyStory",
+      "path": "/my-story",
+      "sectionHeading": "My Story"
     },
     "Publications": {
       "id": "Publications",

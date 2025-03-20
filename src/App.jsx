@@ -18,6 +18,7 @@ import bibtexParse from 'bibtex-parse-js';
 import * as utils from './utils/utils';
 import DynamicSection from './components/pageSections/DynamicSection';
 import Documentation from './components/pageSections/Documentation';
+import MyStoryComponent from './components/pageSections/MyStoryComponent';
 
 // Update this mapping function
 const sectionIdToComponent = (sectionId) => {
@@ -173,6 +174,7 @@ function App({ config }) {
               path="/publications"
               element={<AllPublications entries={entries} config={config} />}
             />
+            <Route path="/my-story" element={<MyStoryComponent config={config} />} />
             <Route
               path="/publication/:id"
               element={<PublicationDetails entries={entries} config={config} />}
