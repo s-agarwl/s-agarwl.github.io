@@ -82,7 +82,15 @@
     "About": {
       "id": "About",
       "content": "<p className='mb-4'>Hi,<p>I am passionate about using <b>analytics</b> and <b>AI</b> to unlock insights from complex datasets. With over <b>12 years of experience</b> (in data analysis and software development), I specialize in creating and optimizing <b>practical solutions</b> for real-world problems.</p><p>Additionally, I bring a <b>strong academic background (PhD)</b> and enjoy contributing to the design and delivery of training programs to share knowledge with others.</p></p>",
-      "subHeading": "Computer Science Researcher (Dr.)"
+      "subHeading": "Computer Science Researcher (Dr.)",
+      "animationPrefix": "I am a ",
+      "animationPhrases": [
+        "systems engineer?",
+        "full stack developer?",
+        "data scientist?",
+        "<other fancy titles?>",
+        " human who is passionate about data and AI."
+      ]
     },
     "Education": {
       "id": "Education",

@@ -1,8 +1,15 @@
-import React from 'react';
 import { parseHtml } from '../../utils/utils';
 import Section from '../Section';
+import TypedAnimation from '../TypedAnimation';
+import PropTypes from 'prop-types';
 
 const Intro = ({ config }) => {
+  // Define the content for TypedAnimation
+  const animationContent = {
+    prefix: config.sections.About.animationPrefix || 'I am ',
+    phrases: config.sections.About.animationPhrases || [config.sections.About.subHeading],
+  };
+
   return (
     <Section id={config.sections.About.id}>
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -19,9 +26,18 @@ const Intro = ({ config }) => {
           <h2 className="text-4xl sm:text-3xl font-bold text-theme mb-4">
             {config.researcherName}
           </h2>
-          <h3 className="text-xl sm:text-1xl font-medium text-theme-light mb-8">
-            {config.sections.About.subHeading}
-          </h3>
+
+          {/* TypedAnimation component replaces the static subHeading */}
+          <div className="mb-8">
+            <TypedAnimation
+              content={animationContent}
+              containerClassName="h-16 flex items-center justify-center md:justify-start text-xl sm:text-1xl text-theme-light"
+              prefixClassName="font-medium"
+              textClassName="font-medium"
+              cursorClassName="animate-blink text-theme-light"
+            />
+          </div>
+
           <p
             className="text-lg text-theme mb-12"
             dangerouslySetInnerHTML={parseHtml(config.sections.About.content)}
@@ -30,6 +46,22 @@ const Intro = ({ config }) => {
       </div>
     </Section>
   );
+};
+
+Intro.propTypes = {
+  config: PropTypes.shape({
+    researcherName: PropTypes.string,
+    profilePhotoPath: PropTypes.string,
+    sections: PropTypes.shape({
+      About: PropTypes.shape({
+        id: PropTypes.string,
+        subHeading: PropTypes.string,
+        content: PropTypes.string,
+        animationPrefix: PropTypes.string,
+        animationPhrases: PropTypes.arrayOf(PropTypes.string),
+      }),
+    }),
+  }).isRequired,
 };
 
 Intro.displayName = 'Home';

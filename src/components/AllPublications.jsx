@@ -5,15 +5,12 @@ import PublicationListItem from './PublicationListItem';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fuse from 'fuse.js';
 import { XCircleIcon } from '@heroicons/react/24/solid';
-import { Switch } from '@headlessui/react';
 import { FaThLarge, FaList } from 'react-icons/fa';
 
 const AllPublications = ({ entries, config }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [yearFilter, setYearFilter] = useState('');
-  // const [typeFilter, setTypeFilter] = useState(''); // For future use when type filtering is enabled
   const [viewMode, setViewMode] = useState(() => {
-    // Initialize from localStorage, default to 'grid' if not found
     return localStorage.getItem('publicationsViewMode') || 'grid';
   });
 
@@ -54,20 +51,12 @@ const AllPublications = ({ entries, config }) => {
       result = result.filter((entry) => entry.entryTags.year === yearFilter);
     }
 
-    // if (typeFilter) {
-    //   result = result.filter((entry) => entry.entryType === typeFilter);
-    // }
-
     return result;
   }, [entries, searchTerm, yearFilter, fuse]);
 
   const years = useMemo(() => {
     return [...new Set(entries.map((entry) => entry.entryTags.year))].sort().reverse();
   }, [entries]);
-
-  // const types = useMemo(() => {
-  //   return [...new Set(entries.map((entry) => entry.entryType))];
-  // }, [entries]); // For future use when type filtering is enabled
 
   const clearSearch = () => {
     setSearchTerm('');
@@ -112,18 +101,6 @@ const AllPublications = ({ entries, config }) => {
               </option>
             ))}
           </select>
-          {/* <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">All Types</option>
-            {types.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select> */}
         </div>
 
         <div className="flex items-center justify-end w-full sm:w-auto ml-4">
@@ -135,34 +112,28 @@ const AllPublications = ({ entries, config }) => {
             <button
               type="button"
               onClick={() => setViewMode('grid')}
+              aria-label="Grid View"
               className={`${
                 viewMode === 'grid'
                   ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50'
-              } relative inline-flex items-center px-3 py-2 text-sm font-medium rounded-l-md border border-gray-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } tooltip-container relative inline-flex items-center px-3 py-2 text-sm font-medium rounded-l-md border border-gray-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             >
-              <div className="relative group">
-                <FaThLarge className="h-5 w-5" />
-                <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  Grid View
-                </div>
-              </div>
+              <FaThLarge className="h-5 w-5" />
+              <span className="tooltip">Grid View</span>
             </button>
             <button
               type="button"
               onClick={() => setViewMode('list')}
+              aria-label="Compact View"
               className={`${
                 viewMode === 'list'
                   ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50'
-              } relative inline-flex items-center px-3 py-2 text-sm font-medium rounded-r-md border border-gray-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } tooltip-container relative inline-flex items-center px-3 py-2 text-sm font-medium rounded-r-md border border-gray-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             >
-              <div className="relative group">
-                <FaList className="h-5 w-5" />
-                <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  Compact View
-                </div>
-              </div>
+              <FaList className="h-5 w-5" />
+              <span className="tooltip">Compact View</span>
             </button>
           </div>
         </div>
