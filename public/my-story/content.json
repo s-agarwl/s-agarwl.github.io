@@ -4,7 +4,7 @@
     "markdownContent": "/my-story/story.md"
   },
   "settings": {
-    "showAnimation": false
+    "showAnimation": true
   },
   "banner": {
     "subtitle": "Visual Data Analytics and AI"

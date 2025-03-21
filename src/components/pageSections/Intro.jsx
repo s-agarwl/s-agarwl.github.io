@@ -29,13 +29,16 @@ const Intro = ({ config }) => {
 
           {/* TypedAnimation component replaces the static subHeading */}
           <div className="mb-8">
-            <TypedAnimation
+            {/* <TypedAnimation
               content={animationContent}
               containerClassName="h-16 flex items-center justify-center md:justify-start text-xl sm:text-1xl text-theme-light"
               prefixClassName="font-medium"
               textClassName="font-medium"
               cursorClassName="animate-blink text-theme-light"
-            />
+            /> */}
+            <h3 className="font-mono h-16 flex items-center justify-center md:justify-start text-xl sm:text-1xl text-theme-light">
+              {config.sections.About.subHeading}
+            </h3>
           </div>
 
           <p
