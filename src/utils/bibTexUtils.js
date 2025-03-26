@@ -16,7 +16,6 @@ export const generateBibTexEntry = (entry) => {
   const excludedFields = [
     'image', // Visual element, not relevant for citation
     'video', // Visual element, not relevant for citation
-    'blogpost', // Website-specific content
     'paperurl', // Website-specific URL
     'shorturl', // Website-specific redirect
     'demo', // Demo URL
@@ -24,6 +23,9 @@ export const generateBibTexEntry = (entry) => {
     'slides', // Slides URL
     'github', // GitHub URL
     'type', // Internal classification
+    'abstract',
+    'markdownContent',
+    'supplementary',
   ];
 
   // Standard BibTeX field order (common fields first, then alphabetical)

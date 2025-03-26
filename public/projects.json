@@ -1,0 +1,78 @@
+[
+  {
+    "id": "project-1",
+    "title": "Interactive Data Visualization Dashboard",
+    "authors": "Shivam Agarwal, Jane Doe",
+    "year": "2022",
+    "status": "Completed",
+    "technologies": "React, D3.js, TailwindCSS",
+    "collaborators": "Data Science Lab, University of Example",
+    "description": "Developed an interactive web-based dashboard for visualizing complex multi-dimensional datasets. The tool provides intuitive exploration capabilities including filtering, clustering, and pattern detection.\n\nUsers can upload their own datasets in various formats and gain insights through customizable visualizations. The project received positive feedback from both academic and industry users.",
+    "image": "https://via.placeholder.com/800x450?text=Interactive+Dashboard",
+    "links": {
+      "GitHub": "https://github.com/example/dashboard-project",
+      "Demo": "https://example.com/dashboard-demo",
+      "Documentation": "https://example.com/dashboard-docs"
+    },
+    "awards": "Best Demo Award"
+  },
+  {
+    "id": "project-2",
+    "title": "Machine Learning for Time Series Analysis",
+    "authors": "Shivam Agarwal, John Smith, Mark Johnson",
+    "year": "2021",
+    "status": "Completed",
+    "technologies": "Python, TensorFlow, Scikit-learn, Pandas",
+    "collaborators": "Financial Analytics Group",
+    "description": "Implemented a suite of machine learning models for time series forecasting with applications in financial markets. The project includes models for anomaly detection, trend prediction, and volatility estimation.\n\nThe system has been deployed in a production environment and has demonstrated a 15% improvement in prediction accuracy compared to traditional statistical methods.",
+    "image": "https://via.placeholder.com/800x450?text=ML+Time+Series",
+    "links": {
+      "Paper": "https://example.com/paper.pdf",
+      "Code": "https://github.com/example/timeseries-ml"
+    }
+  },
+  {
+    "id": "project-3",
+    "title": "Natural Language Processing for Document Analysis",
+    "authors": "Shivam Agarwal, Sarah Williams",
+    "year": "2023",
+    "status": "In Progress",
+    "technologies": "Python, PyTorch, Transformers, NLTK",
+    "collaborators": "AI Research Team",
+    "description": "Building an advanced NLP system for automated document understanding and information extraction. The project focuses on identifying key information from unstructured text documents like contracts, reports, and research papers.\n\nCurrent development includes fine-tuning large language models for domain-specific tasks and creating a user-friendly interface for document processing workflows.",
+    "image": "https://via.placeholder.com/800x450?text=NLP+Document+Analysis",
+    "links": {
+      "Progress Report": "https://example.com/nlp-progress.pdf"
+    }
+  },
+  {
+    "id": "project-4",
+    "title": "IoT Monitoring System",
+    "authors": "Shivam Agarwal, Alex Johnson",
+    "year": "2020",
+    "status": "Completed",
+    "technologies": "Arduino, Raspberry Pi, MQTT, Node.js, MongoDB",
+    "description": "Designed and implemented a scalable IoT monitoring system for environmental tracking in smart buildings. The system collects data from various sensors including temperature, humidity, air quality, and occupancy.\n\nA real-time dashboard provides visualization and alerting capabilities. The system was deployed across three buildings and has been operational for over two years with 99.9% uptime.",
+    "image": "https://via.placeholder.com/800x450?text=IoT+Monitoring",
+    "links": {
+      "Architecture": "https://example.com/iot-architecture.pdf",
+      "GitHub": "https://github.com/example/iot-monitor"
+    }
+  },
+  {
+    "id": "project-5",
+    "title": "Blockchain for Supply Chain Tracking",
+    "authors": "Shivam Agarwal, Emma Chen, Robert Brown",
+    "year": "2022",
+    "status": "Completed",
+    "technologies": "Ethereum, Solidity, Web3.js, React",
+    "skills": "project management, Leadership, Team Management",
+    "collaborators": "Logistics Innovation Lab",
+    "description": "Implemented a blockchain-based solution for transparent supply chain tracking and verification. The system provides immutable records of product journey from manufacturer to consumer.\n\nThe project includes smart contracts for automated verification and a user-friendly web interface for all stakeholders. A successful pilot was conducted with three manufacturing companies.",
+    "image": "https://via.placeholder.com/800x450?text=Blockchain+Supply+Chain",
+    "links": {
+      "Whitepaper": "https://example.com/blockchain-whitepaper.pdf",
+      "Demo": "https://example.com/blockchain-demo"
+    }
+  }
+]

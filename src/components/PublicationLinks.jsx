@@ -4,16 +4,17 @@ import {
   FaExternalLinkAlt,
   FaFile,
   FaVideo,
-  FaCode,
   FaDesktop,
   FaGithub,
   FaSlideshare,
+  FaPlusSquare,
 } from 'react-icons/fa';
 
 const LinkItem = ({ href, title, icon: Icon, text, showText }) => (
   <a
     href={href}
     title={title}
+    target="_blank"
     className="text-theme hover:text-blue-700 flex flex-col items-center space-y-1"
   >
     <Icon />
@@ -37,57 +38,67 @@ const PublicationLinks = ({ entryTags, showText = false }) => {
           showText={showText}
         />
       )}
-      {entryTags.paperurl && (
+      {entryTags.links.pdf && (
         <LinkItem
-          href={entryTags.paperurl}
+          href={entryTags.links.pdf}
           title="Paper"
           icon={FaFile}
           text="PDF"
           showText={showText}
         />
       )}
-      {entryTags.video && (
+      {entryTags.links.poster && (
         <LinkItem
-          href={entryTags.video}
+          href={entryTags.links.poster}
+          title="Paper"
+          icon={FaFile}
+          text="Poster"
+          showText={showText}
+        />
+      )}
+      {entryTags.links.video && (
+        <LinkItem
+          href={entryTags.links.video}
           title="Video"
           icon={FaVideo}
           text="Video"
           showText={showText}
         />
       )}
-      {entryTags.code && (
+
+      {entryTags.links.github && (
         <LinkItem
-          href={entryTags.code}
-          title="Code"
-          icon={FaCode}
-          text="Code"
-          showText={showText}
-        />
-      )}
-      {entryTags.demo && (
-        <LinkItem
-          href={entryTags.demo}
-          title="Demo"
-          icon={FaDesktop}
-          text="Demo"
-          showText={showText}
-        />
-      )}
-      {entryTags.github && (
-        <LinkItem
-          href={entryTags.github}
+          href={entryTags.links.github}
           title="GitHub"
           icon={FaGithub}
           text="GitHub"
           showText={showText}
         />
       )}
-      {entryTags.slides && (
+      {entryTags.links.slides && (
         <LinkItem
-          href={entryTags.slides}
+          href={entryTags.links.slides}
           title="Slides"
           icon={FaSlideshare}
           text="Slides"
+          showText={showText}
+        />
+      )}
+      {entryTags.links.demo && (
+        <LinkItem
+          href={entryTags.links.demo}
+          title="Demo"
+          icon={FaDesktop}
+          text="Demo"
+          showText={showText}
+        />
+      )}
+      {entryTags.links.supplementary && (
+        <LinkItem
+          href={entryTags.links.supplementary}
+          title="Code"
+          icon={FaPlusSquare}
+          text="Suppl. Info"
           showText={showText}
         />
       )}

@@ -1,24 +1,20 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Intro from './components/pageSections/Intro';
 import PublicationCarousel from './components/pageSections/PublicationCarousel';
 import Contact from './components/pageSections/Contact';
-import AllPublications from './components/AllPublications';
-import PublicationDetails from './components/PublicationDetails';
 import Education from './components/pageSections/Education';
 import WorkExperience from './components/pageSections/WorkExperience';
 import Section from './components/Section';
 import Awards from './components/pageSections/Awards';
 import NotFound from './components/NotFound';
-import PublicationDetailsById from './components/PublicationDetailsById';
 import PropTypes from 'prop-types';
-import bibtexParse from 'bibtex-parse-js';
-import * as utils from './utils/utils';
 import DynamicSection from './components/pageSections/DynamicSection';
 import Documentation from './components/pageSections/Documentation';
 import MyStoryComponent from './components/pageSections/MyStoryComponent';
+import { ContentPage, ContentDetails } from './GenericContentPage';
 
 // Update this mapping function
 const sectionIdToComponent = (sectionId) => {
@@ -44,12 +40,7 @@ const renderAlternatingSections = (components, entries, config, sectionConfigs) 
   return components.map((Component, index) => {
     const sectionConfig = sectionConfigs[index];
     return (
-      <Section
-        key={index}
-        id={sectionConfig.id}
-        // className={index % 2 === 0 ? 'bg-primary' : 'bg-gray-50'}
-        className={'bg-primary'}
-      >
+      <Section key={index} id={sectionConfig.id} className={'bg-primary'}>
         <Component entries={entries} config={config} sectionConfig={sectionConfig} />
       </Section>
     );
@@ -57,8 +48,6 @@ const renderAlternatingSections = (components, entries, config, sectionConfigs) 
 };
 
 function App({ config }) {
-  const [entries, setEntries] = useState([]);
-  const [shortUrlMap, setShortUrlMap] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -70,7 +59,6 @@ function App({ config }) {
         const prerenderedData = JSON.parse(publicationDataElement.textContent);
         if (prerenderedData.entry && prerenderedData.config) {
           // We're on a publication page with prerendered data
-          setEntries([prerenderedData.entry]);
           setIsLoading(false);
           return;
         }
@@ -79,54 +67,11 @@ function App({ config }) {
       }
     }
 
-    if (!config || !config.bibtexPath) {
-      setError('Invalid configuration: bibtexPath is missing');
-      setIsLoading(false);
-      return;
-    }
-
-    fetch(config.bibtexPath)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to fetch BibTeX file: ${response.statusText}`);
-        }
-        return response.text();
-      })
-      .then((data) => {
-        const parsedEntries = bibtexParse.toJSON(data);
-        const cleanedEntries = parsedEntries.map((entry) => ({
-          ...entry,
-          entryTags: utils.cleanEntryTags(entry.entryTags, entry.citationKey),
-        }));
-
-        const formattedEntries = utils.formatAuthorNames(cleanedEntries);
-
-        const sortedEntries = formattedEntries.sort((a, b) => {
-          const yearA = parseInt(a.entryTags.year, 10);
-          const yearB = parseInt(b.entryTags.year, 10);
-          return yearB - yearA;
-        });
-
-        const urlMap = {};
-        sortedEntries.forEach((entry) => {
-          if (entry.entryTags.shorturl) {
-            urlMap[entry.entryTags.shorturl] = entry.citationKey;
-          }
-        });
-
-        setEntries(sortedEntries);
-        setShortUrlMap(urlMap);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error loading or parsing BibTeX:', error);
-        setError(`Error loading or parsing BibTeX: ${error.message}`);
-        setIsLoading(false);
-      });
-  }, [config]);
+    setIsLoading(false);
+  }, []);
 
   if (isLoading) {
-    return <div>Loading publications...</div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -162,7 +107,7 @@ function App({ config }) {
                 <>
                   {renderAlternatingSections(
                     sectionComponents.map((section) => section.component),
-                    entries,
+                    [],
                     config,
                     sectionComponents.map((section) => section.config),
                   )}
@@ -170,31 +115,23 @@ function App({ config }) {
               }
             />
 
-            <Route
-              path="/publications"
-              element={<AllPublications entries={entries} config={config} />}
-            />
+            {/* Other existing routes */}
             <Route path="/my-story" element={<MyStoryComponent config={config} />} />
-            <Route
-              path="/publication/:id"
-              element={<PublicationDetails entries={entries} config={config} />}
-            />
-            {/* Dynamically create routes for each short URL */}
-            {Object.keys(shortUrlMap).map((shortUrl) => (
-              <Route
-                key={shortUrl}
-                path={`/${shortUrl}`}
-                element={
-                  <PublicationDetailsById
-                    entries={entries}
-                    yourName={config.researcherName}
-                    id={shortUrlMap[shortUrl]}
-                    config={config}
-                  />
-                }
-              />
-            ))}
             <Route path="/docs" element={<Documentation />} />
+
+            {/* Dynamically create routes for all content types */}
+            {config.contentTypes.map((type) => (
+              <Fragment key={type.id}>
+                <Route
+                  path={`/${type.id}`}
+                  element={<ContentPage config={config} contentType={type.id} />}
+                />
+                <Route
+                  path={`/${type.id}/:id`}
+                  element={<ContentDetails config={config} contentType={type.id} />}
+                />
+              </Fragment>
+            ))}
             <Route path="*" element={<NotFound config={config} />} />
           </Routes>
         </main>
@@ -207,11 +144,19 @@ function App({ config }) {
 App.propTypes = {
   config: PropTypes.shape({
     researcherName: PropTypes.string.isRequired,
-    bibtexPath: PropTypes.string.isRequired,
     sections: PropTypes.object,
     navigation: PropTypes.shape({
       mainItems: PropTypes.array,
     }),
+    contentTypes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        dataSource: PropTypes.string.isRequired,
+        view: PropTypes.oneOf(['grid', 'list']).isRequired,
+      }),
+    ).isRequired,
   }).isRequired,
 };
 

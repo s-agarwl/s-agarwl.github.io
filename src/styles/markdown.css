@@ -1,0 +1,77 @@
+/* Base markdown styles */
+.markdown-content {
+  @apply prose max-w-none;
+}
+
+/* Headings */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  @apply text-gray-800;
+}
+
+/* Paragraphs */
+.markdown-content p {
+  @apply text-gray-600;
+}
+
+/* Links */
+.markdown-content a {
+  @apply text-blue-600 hover:text-blue-800;
+}
+
+/* Strong/Bold text */
+.markdown-content strong {
+  @apply text-gray-800;
+}
+
+/* Code */
+.markdown-content code {
+  @apply text-gray-800;
+}
+
+.markdown-content pre {
+  @apply bg-gray-50 text-gray-800;
+}
+
+/* Lists */
+.markdown-content ul,
+.markdown-content ol {
+  @apply text-gray-600;
+}
+
+.markdown-content li {
+  @apply text-gray-600;
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  @apply text-gray-600 border-l-4 border-gray-300 pl-4 italic;
+}
+
+/* Tables */
+.markdown-content table {
+  @apply w-full border-collapse;
+}
+
+.markdown-content th,
+.markdown-content td {
+  @apply border border-gray-300 px-4 py-2 text-gray-600;
+}
+
+.markdown-content th {
+  @apply bg-gray-50 text-gray-800;
+}
+
+/* Images */
+.markdown-content img {
+  @apply rounded-lg shadow-md;
+}
+
+/* Horizontal rules */
+.markdown-content hr {
+  @apply border-gray-300 my-8;
+}

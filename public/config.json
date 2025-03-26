@@ -37,22 +37,75 @@
         ]
       },
       {
-        "id": "MyStory",
-        "text": "My Story",
-        "path": "/my-story"
-      },
-      {
         "id": "Publications",
         "text": "Publications",
         "path": "/publications"
       },
       {
-        "id": "PhdThesis",
-        "text": "PhD Thesis",
-        "path": "/publication/Agarwal2023Dissertation"
+        "id": "Projects",
+        "text": "Projects",
+        "path": "/projects"
+      },
+      {
+        "id": "Talks",
+        "text": "Talks",
+        "path": "/talks"
+      },
+      {
+        "id": "Teaching",
+        "text": "Teaching",
+        "path": "/teaching"
+      },
+      {
+        "id": "Blog",
+        "text": "Blog",
+        "path": "/blog"
+      },
+      {
+        "id": "MyStory",
+        "text": "My Story",
+        "path": "/my-story"
       }
     ]
   },
+  "contentTypes": [
+    {
+      "id": "publications",
+      "title": "Publications",
+      "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.",
+      "dataSource": "/pubs.bib",
+      "view": "grid",
+      "dataType": "bibtex"
+    },
+    {
+      "id": "projects",
+      "title": "Projects",
+      "description": "Explore my projects and work",
+      "dataSource": "/projects.json",
+      "view": "grid"
+    },
+    {
+      "id": "talks",
+      "title": "Talks & Presentations",
+      "description": "Presentations and speaking engagements",
+      "dataSource": "/talks.json",
+      "view": "list"
+    },
+    {
+      "id": "teaching",
+      "title": "Teaching",
+      "description": "Courses and educational activities",
+      "dataSource": "/teaching.json",
+      "view": "list"
+    },
+    {
+      "id": "blog",
+      "title": "Blog",
+      "description": "Articles and thoughts",
+      "dataSource": "/blog.json",
+      "view": "list"
+    }
+  ],
   "links": {
     "googleScholar": "https://scholar.google.com/citations?user=9-ma8xIAAAAJ",
     "linkedin": "https://www.linkedin.com/in/shivamlearning/",
@@ -76,7 +129,7 @@
     "zotero": "",
     "impactStory": ""
   },
-  "bibtexPath": "/pubs.bib",
+  "bibtexPath": "",
   "profilePhotoPath": "/profile-photo.png",
   "sections": {
     "About": {
@@ -206,8 +259,31 @@
     "Publications": {
       "id": "Publications",
       "path": "/publications",
-      "sectionHeading": "Publications",
-      "content": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding."
+      "sectionHeading": "Publications"
+    },
+    "Projects": {
+      "id": "Projects",
+      "path": "/projects",
+      "sectionHeading": "Projects",
+      "content": "Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities."
+    },
+    "Talks": {
+      "id": "Talks",
+      "path": "/talks",
+      "sectionHeading": "Talks & Presentations",
+      "content": "Browse my conference presentations, workshops, and invited talks on various topics related to my research and professional interests."
+    },
+    "Teaching": {
+      "id": "Teaching",
+      "path": "/teaching",
+      "sectionHeading": "Teaching",
+      "content": "Discover the courses I've taught, educational resources I've developed, and my approach to teaching various subjects in computer science and related fields."
+    },
+    "Blog": {
+      "id": "Blog",
+      "path": "/blog",
+      "sectionHeading": "Blog",
+      "content": "Read my thoughts, tutorials, and insights on technology, research, and professional development in this collection of articles and essays."
     },
     "PhdThesis": {
       "id": "PhdThesis",
