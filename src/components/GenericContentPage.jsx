@@ -9,7 +9,7 @@ import Fuse from 'fuse.js';
 import convertBibtexToJson from '../utils/bibtexToJson';
 import '../styles/markdown.css';
 
-const GenericContentPage = ({ config, contentType }) => {
+const GenericContentPage = ({ config, section }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,20 +26,18 @@ const GenericContentPage = ({ config, contentType }) => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        // Find the content type configuration
-        const typeConfig = config.contentTypes.find((type) => type.id === contentType);
-        if (!typeConfig) {
-          throw new Error(`Content type ${contentType} not found in configuration`);
+        if (!section.dataSource) {
+          throw new Error(`Section ${section.id} does not have a dataSource defined`);
         }
 
         // Fetch the data
-        const response = await fetch(typeConfig.dataSource);
+        const response = await fetch(section.dataSource);
         if (!response.ok) {
-          throw new Error(`Failed to fetch ${contentType} data`);
+          throw new Error(`Failed to fetch data for ${section.id}`);
         }
 
         let data;
-        if (typeConfig.dataType === 'bibtex') {
+        if (section.dataType === 'bibtex') {
           // Handle BibTeX data
           const bibtexData = await response.text();
           data = convertBibtexToJson(bibtexData);
@@ -64,7 +62,7 @@ const GenericContentPage = ({ config, contentType }) => {
     };
 
     fetchContent();
-  }, [config, contentType]);
+  }, [section]);
 
   const fuse = useMemo(() => {
     const options = {
@@ -105,13 +103,14 @@ const GenericContentPage = ({ config, contentType }) => {
     return <div>Error: {error}</div>;
   }
 
-  const typeConfig = config.contentTypes.find((type) => type.id === contentType);
   const Component = viewMode === 'grid' ? GenericCard : GenericListItem;
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">{typeConfig.title}</h1>
-      <p className="text-gray-600 mb-8">{typeConfig.description}</p>
+      <h1 className="text-3xl font-bold mb-4">
+        {section.title || section.sectionHeading || section.id}
+      </h1>
+      <p className="text-gray-600 mb-8">{section.description || ''}</p>
 
       <p>
         <span className="font-bold">Total: </span>
@@ -119,7 +118,7 @@ const GenericContentPage = ({ config, contentType }) => {
       </p>
 
       <ContentControls
-        contentType={contentType}
+        contentType={section.id}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         onClearSearch={clearSearch}
@@ -139,7 +138,7 @@ const GenericContentPage = ({ config, contentType }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <Component item={item} contentType={contentType} config={config} />
+                <Component item={item} contentType={section.id} config={config} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -156,7 +155,7 @@ const GenericContentPage = ({ config, contentType }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <Component item={item} contentType={contentType} config={config} />
+                <Component item={item} contentType={section.id} config={config} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -166,7 +165,7 @@ const GenericContentPage = ({ config, contentType }) => {
   );
 };
 
-const ContentDetails = ({ config, contentType }) => {
+const ContentDetails = ({ config, section }) => {
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -174,23 +173,21 @@ const ContentDetails = ({ config, contentType }) => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        // Find the content type configuration
-        const typeConfig = config.contentTypes.find((type) => type.id === contentType);
-        if (!typeConfig) {
-          throw new Error(`Content type ${contentType} not found in configuration`);
+        if (!section.dataSource) {
+          throw new Error(`Section ${section.id} does not have a dataSource defined`);
         }
 
         // Get the item ID from the URL
         const itemId = window.location.pathname.split('/').pop();
 
         // Fetch the data
-        const response = await fetch(typeConfig.dataSource);
+        const response = await fetch(section.dataSource);
         if (!response.ok) {
-          throw new Error(`Failed to fetch ${contentType} data`);
+          throw new Error(`Failed to fetch data for ${section.id}`);
         }
 
         let data;
-        if (typeConfig.dataType === 'bibtex') {
+        if (section.dataType === 'bibtex') {
           // Handle BibTeX data
           const bibtexData = await response.text();
           data = convertBibtexToJson(bibtexData);
@@ -213,7 +210,7 @@ const ContentDetails = ({ config, contentType }) => {
     };
 
     fetchContent();
-  }, [config, contentType]);
+  }, [section]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -225,43 +222,33 @@ const ContentDetails = ({ config, contentType }) => {
 
   return (
     <div>
-      <GenericItemDetails item={item} contentType={contentType} config={config} />
+      <GenericItemDetails item={item} contentType={section.id} config={config} />
     </div>
   );
 };
 
 GenericContentPage.propTypes = {
-  config: PropTypes.shape({
-    contentTypes: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        dataSource: PropTypes.string.isRequired,
-        dataType: PropTypes.oneOf(['json', 'bibtex']),
-        markdownTemplate: PropTypes.string,
-        view: PropTypes.oneOf(['grid', 'list']).isRequired,
-      }),
-    ).isRequired,
+  config: PropTypes.object.isRequired,
+  section: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    sectionHeading: PropTypes.string,
+    description: PropTypes.string,
+    dataSource: PropTypes.string.isRequired,
+    dataType: PropTypes.oneOf(['json', 'bibtex']),
   }).isRequired,
-  contentType: PropTypes.string.isRequired,
 };
 
 ContentDetails.propTypes = {
-  config: PropTypes.shape({
-    contentTypes: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        dataSource: PropTypes.string.isRequired,
-        dataType: PropTypes.oneOf(['json', 'bibtex']),
-        markdownTemplate: PropTypes.string,
-        view: PropTypes.oneOf(['grid', 'list']).isRequired,
-      }),
-    ).isRequired,
+  config: PropTypes.object.isRequired,
+  section: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    sectionHeading: PropTypes.string,
+    description: PropTypes.string,
+    dataSource: PropTypes.string.isRequired,
+    dataType: PropTypes.oneOf(['json', 'bibtex']),
   }).isRequired,
-  contentType: PropTypes.string.isRequired,
 };
 
 export { GenericContentPage, ContentDetails };

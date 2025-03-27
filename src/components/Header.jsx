@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
@@ -9,6 +9,14 @@ const Header = ({ config }) => {
   const isHomePage = location.pathname === '/';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+
+  // Get the homepage section ID - simpler approach
+  const homepageSectionId = useMemo(() => {
+    const homepageSection = Object.entries(config.sections || {}).find(
+      ([, section]) => section.path === '/',
+    );
+    return homepageSection ? homepageSection[0] : null;
+  }, [config.sections]);
 
   // Close dropdown when clicking outside
   const dropdownRef = useRef(null);
@@ -38,7 +46,7 @@ const Header = ({ config }) => {
     if (section) {
       return {
         id,
-        text: section.navigationText || section.sectionHeading || id,
+        text: section.title || section.sectionHeading || id,
         path: section.path || `/#${id}`,
       };
     }
@@ -50,8 +58,9 @@ const Header = ({ config }) => {
         const subsection = section.subsections[id];
         return {
           id,
-          text: subsection.navigationText || subsection.title || id,
+          text: subsection.title || id,
           path: subsection.path || `/#${id}`,
+          parentId: sectionId,
         };
       }
     }
@@ -60,22 +69,35 @@ const Header = ({ config }) => {
     return { id, text: id, path: `/#${id}` };
   };
 
-  // Helper function to check if a nav item is active
-  const isNavItemActive = (item) => {
-    const sectionDetails = typeof item === 'string' ? getSectionDetails(item) : item;
-    const itemPath = sectionDetails.path || `/#${sectionDetails.id}`;
-
-    if (itemPath.startsWith('/')) {
-      return location.pathname === itemPath;
+  // Simplified function to check if a dropdown should be highlighted
+  const shouldHighlightDropdown = (dropdownItems) => {
+    // On homepage, check if any dropdown item is the homepage section
+    if (isHomePage && homepageSectionId) {
+      return dropdownItems.includes(homepageSectionId);
     }
 
-    if (itemPath.startsWith('#')) {
-      const hash = location.hash.replace('#', '');
-      return hash === sectionDetails.id;
+    // For other pages, check for direct path match in dropdown items
+    for (const itemId of dropdownItems) {
+      const details = getSectionDetails(itemId);
+      if (details.path === location.pathname) {
+        return true;
+      }
     }
 
-    // Check if it's the Profile item and we're on the home page
-    if (sectionDetails.id === 'Profile' && isHomePage) {
+    return false;
+  };
+
+  // Simple function to check if a nav item is active
+  const isNavItemActive = (itemId) => {
+    const details = getSectionDetails(itemId);
+
+    // Simple path match
+    if (details.path === location.pathname) {
+      return true;
+    }
+
+    // Homepage special case
+    if (isHomePage && itemId === homepageSectionId) {
       return true;
     }
 
@@ -104,23 +126,12 @@ const Header = ({ config }) => {
     isActive: PropTypes.bool,
   };
 
-  // Unified event handler for both click and touch events
-  const handleInteraction = (e, callback) => {
-    if (e.type === 'touchend') {
-      e.preventDefault();
-    }
-    callback();
-  };
-
-  const handleMenuToggle = (e) => {
-    handleInteraction(e, () => setIsMenuOpen(!isMenuOpen));
-  };
-
+  // Event handlers
+  const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
   const handleLinkClick = () => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
   };
-
   const toggleDropdown = (id) => {
     setOpenDropdown(openDropdown === id ? null : id);
   };
@@ -178,7 +189,6 @@ const Header = ({ config }) => {
         <button
           className={`text-2xl md:hidden ${isMenuOpen ? 'fixed top-4 right-4 z-50' : ''}`}
           onClick={handleMenuToggle}
-          onTouchEnd={handleMenuToggle}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           style={{ touchAction: 'none' }}
         >
@@ -192,27 +202,29 @@ const Header = ({ config }) => {
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0 cursor-pointer">
             {mainNavItems.map((navItem) => {
-              // If navItem is just a string ID, get the details from sections
+              // Process the navigation item
               const item =
                 typeof navItem === 'string'
-                  ? getSectionDetails(navItem)
+                  ? { id: navItem, ...getSectionDetails(navItem) }
                   : {
+                      id: navItem.id,
                       ...getSectionDetails(navItem.id),
                       dropdown: navItem.dropdown,
                       items: navItem.items,
                     };
+
+              // For dropdown, check if it should be highlighted
+              const isDropdownHighlighted =
+                item.dropdown && item.items ? shouldHighlightDropdown(item.items) : false;
 
               return (
                 <li key={item.id} className="relative">
                   {item.dropdown ? (
                     <div>
                       <button
-                        onClick={(e) => handleInteraction(e, () => toggleDropdown(item.id))}
-                        onTouchEnd={(e) => handleInteraction(e, () => toggleDropdown(item.id))}
+                        onClick={() => toggleDropdown(item.id)}
                         className={`flex items-center text-lg hover:text-gray-300 transition-colors duration-200 ${
-                          (item.items || []).some((subItemId) => isNavItemActive(subItemId))
-                            ? 'text-primary border-b-2 border-primary'
-                            : ''
+                          isDropdownHighlighted ? 'text-primary border-b-2 border-primary' : ''
                         }`}
                         aria-expanded={openDropdown === item.id}
                         aria-haspopup="true"
@@ -229,9 +241,7 @@ const Header = ({ config }) => {
                               <li key={subItemId}>
                                 <NavLink
                                   to={subItem.path}
-                                  className={`block px-4 py-2 text-sm hover:text-gray-300 transition-colors duration-200 ${
-                                    isActive ? 'text-primary' : ''
-                                  }`}
+                                  className="block px-4 py-2 text-sm hover:text-gray-300 transition-colors duration-200"
                                   onClick={handleLinkClick}
                                   isActive={isActive}
                                 >
@@ -248,7 +258,7 @@ const Header = ({ config }) => {
                       to={item.path}
                       className="text-lg hover:text-gray-300 transition-colors duration-200"
                       onClick={handleLinkClick}
-                      isActive={isNavItemActive(item)}
+                      isActive={isNavItemActive(item.id)}
                     >
                       {item.text}
                     </NavLink>

@@ -15,48 +15,9 @@
       "Talks",
       "Teaching",
       "Blog",
-      "MyStory",
-      "Documentation"
+      "MyStory"
     ]
   },
-  "contentTypes": [
-    {
-      "id": "publications",
-      "title": "Publications",
-      "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.",
-      "dataSource": "/pubs.bib",
-      "view": "grid",
-      "dataType": "bibtex"
-    },
-    {
-      "id": "projects",
-      "title": "Projects",
-      "description": "Explore my projects and work",
-      "dataSource": "/projects.json",
-      "view": "grid"
-    },
-    {
-      "id": "talks",
-      "title": "Talks & Presentations",
-      "description": "Presentations and speaking engagements",
-      "dataSource": "/talks.json",
-      "view": "list"
-    },
-    {
-      "id": "teaching",
-      "title": "Teaching",
-      "description": "Courses and educational activities",
-      "dataSource": "/teaching.json",
-      "view": "list"
-    },
-    {
-      "id": "blog",
-      "title": "Blog",
-      "description": "Articles and thoughts",
-      "dataSource": "/blog.json",
-      "view": "list"
-    }
-  ],
   "links": {
     "googleScholar": "https://scholar.google.com/citations?user=9-ma8xIAAAAJ",
     "linkedin": "https://www.linkedin.com/in/shivamlearning/",
@@ -86,14 +47,14 @@
     "Profile": {
       "id": "Profile",
       "path": "/",
+      "title": "Profile",
       "sectionHeading": "Profile",
-      "navigationText": "Profile",
       "subsections": {
         "About": {
           "id": "About",
           "template": "text-with-image",
           "order": 1,
-          "navigationText": "About Me",
+          "title": "About Me",
           "content": {
             "title": "Shivam Agarwal",
             "subtitle": "Computer Science Researcher (Dr.)",
@@ -106,7 +67,7 @@
           "id": "Education",
           "template": "timeline",
           "order": 2,
-          "navigationText": "Education",
+          "title": "Education",
           "content": {
             "title": "Educational Background",
             "iconType": "education",
@@ -137,7 +98,7 @@
           "id": "WorkExperience",
           "template": "timeline",
           "order": 3,
-          "navigationText": "Work Experience",
+          "title": "Work Experience",
           "content": {
             "title": "Work Experience",
             "iconType": "work",
@@ -184,9 +145,9 @@
           "id": "Awards",
           "template": "grid",
           "order": 4,
-          "navigationText": "Awards",
+          "title": "Awards",
           "content": {
-            "title": "Honors and Achievements",
+            "title": "Awards",
             "columns": 3,
             "items": [
               {
@@ -217,7 +178,7 @@
           "id": "FeaturedWorks",
           "template": "carousel",
           "order": 5,
-          "navigationText": "Featured Works",
+          "title": "Featured Works",
           "content": {
             "title": "Featured",
             "itemsType": "publication",
@@ -236,7 +197,7 @@
           "id": "Contact",
           "template": "contact",
           "order": 6,
-          "navigationText": "Contact",
+          "title": "Contact",
           "content": {
             "title": "Get in Touch",
             "text": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out to me through any of the following channels:",
@@ -249,55 +210,67 @@
     "Publications": {
       "id": "Publications",
       "path": "/publications",
+      "title": "Publications",
       "sectionHeading": "Publications",
-      "navigationText": "Publications",
-      "template": "listOfItems"
+      "template": "listOfItems",
+      "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.",
+      "dataSource": "/pubs.bib",
+      "dataType": "bibtex"
     },
     "Projects": {
       "id": "Projects",
       "path": "/projects",
+      "title": "Projects",
       "sectionHeading": "Projects",
-      "navigationText": "Projects",
       "template": "listOfItems",
+      "description": "Explore my projects and work",
+      "dataSource": "/projects.json",
       "content": "Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities."
     },
     "Talks": {
       "id": "Talks",
       "path": "/talks",
-      "sectionHeading": "Talks & Presentations",
-      "navigationText": "Talks",
+      "title": "Talks",
+      "sectionHeading": "Talks",
       "template": "listOfItems",
+      "description": "Presentations and speaking engagements",
+      "dataSource": "/talks.json",
       "content": "Browse my conference presentations, workshops, and invited talks on various topics related to my research and professional interests."
     },
     "Teaching": {
       "id": "Teaching",
       "path": "/teaching",
+      "title": "Teaching",
       "sectionHeading": "Teaching",
-      "navigationText": "Teaching",
       "template": "listOfItems",
+      "description": "Courses and educational activities",
+      "dataSource": "/teaching.json",
       "content": "Discover the courses I've taught, educational resources I've developed, and my approach to teaching various subjects in computer science and related fields."
     },
+
     "Blog": {
       "id": "Blog",
       "path": "/blog",
+      "title": "Blog",
       "sectionHeading": "Blog",
-      "navigationText": "Blog",
       "template": "listOfItems",
+      "description": "Articles and thoughts",
+      "dataSource": "/blog.json",
       "content": "Read my thoughts, tutorials, and insights on technology, research, and professional development in this collection of articles and essays."
     },
     "MyStory": {
       "id": "MyStory",
       "path": "/my-story",
-      "navigationText": "My Story"
+      "title": "My Story"
     },
     "PhdThesis": {
       "id": "PhdThesis",
       "path": "/publication/Agarwal2023Dissertation"
     },
     "Documentation": {
-      "id": "Documentation",
+      "id": "Help",
       "path": "/help",
-      "navigationText": "Help"
+      "title": "Help"
     }
   }
 }
