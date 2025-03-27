@@ -1,52 +1,82 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import GenericCard from './GenericCard';
 import GenericListItem from './GenericListItem';
+import GenericItemDetails from './GenericItemDetails';
+import ContentControls from './ContentControls';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fuse from 'fuse.js';
-import { XCircleIcon } from '@heroicons/react/24/solid';
-import { FaThLarge, FaList } from 'react-icons/fa';
+import convertBibtexToJson from '../utils/bibtexToJson';
+import '../styles/markdown.css';
 
-const GenericContentPage = ({ items, contentType, config, pageTitle, pageDescription }) => {
+const GenericContentPage = ({ config, contentType }) => {
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [yearFilter, setYearFilter] = useState('');
   const [viewMode, setViewMode] = useState(() => {
-    return localStorage.getItem(`${contentType}ViewMode`) || 'grid';
+    return localStorage.getItem('contentViewMode') || 'grid';
   });
 
   // Update localStorage when viewMode changes
   useEffect(() => {
-    localStorage.setItem(`${contentType}ViewMode`, viewMode);
-  }, [viewMode, contentType]);
+    localStorage.setItem('contentViewMode', viewMode);
+  }, [viewMode]);
 
-  // Define search keys based on content type
-  const getSearchKeys = () => {
-    const baseKeys = [
-      { name: 'title', weight: 2 },
-      { name: 'description', weight: 1 },
-      { name: 'awards', weight: 1 },
-    ];
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        // Find the content type configuration
+        const typeConfig = config.contentTypes.find((type) => type.id === contentType);
+        if (!typeConfig) {
+          throw new Error(`Content type ${contentType} not found in configuration`);
+        }
 
-    // Add content type specific keys
-    if (['publications', 'projects', 'talks'].includes(contentType)) {
-      baseKeys.push({ name: 'authors', weight: 1 });
-    }
+        // Fetch the data
+        const response = await fetch(typeConfig.dataSource);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${contentType} data`);
+        }
 
-    if (contentType === 'talks') {
-      baseKeys.push({ name: 'venue', weight: 1 });
-    }
+        let data;
+        if (typeConfig.dataType === 'bibtex') {
+          // Handle BibTeX data
+          const bibtexData = await response.text();
+          data = convertBibtexToJson(bibtexData);
+        } else {
+          // Handle JSON data
+          data = await response.json();
+        }
 
-    if (contentType === 'teaching') {
-      baseKeys.push({ name: 'institution', weight: 1 });
-      baseKeys.push({ name: 'course', weight: 1 });
-    }
+        // Sort items by date/year if available
+        data.sort((a, b) => {
+          const dateA = a.date || a.year || '';
+          const dateB = b.date || b.year || '';
+          return dateB.localeCompare(dateA);
+        });
 
-    return baseKeys;
-  };
+        setItems(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchContent();
+  }, [config, contentType]);
 
   const fuse = useMemo(() => {
     const options = {
-      keys: getSearchKeys(),
+      keys: [
+        { name: 'title', weight: 2 },
+        { name: 'description', weight: 1 },
+        { name: 'authors', weight: 1 },
+        { name: 'tags', weight: 1 },
+        { name: 'abstract', weight: 1 },
+        { name: 'journal', weight: 1 },
+        { name: 'booktitle', weight: 1 },
+      ],
       threshold: 1,
       includeScore: true,
       ignoreLocation: true,
@@ -56,136 +86,46 @@ const GenericContentPage = ({ items, contentType, config, pageTitle, pageDescrip
       useExtendedSearch: true,
     };
     return new Fuse(items, options);
-  }, [items, contentType]);
+  }, [items]);
 
   const filteredItems = useMemo(() => {
-    let result = items;
-
-    if (searchTerm) {
-      result = fuse.search(searchTerm).map((r) => r.item);
-    }
-
-    if (yearFilter) {
-      result = result.filter((item) => {
-        // Check both year and date fields
-        if (item.year) {
-          return item.year === yearFilter;
-        }
-        if (item.date) {
-          // Extract year from date string
-          const dateYear = item.date.split('-')[0];
-          return dateYear === yearFilter;
-        }
-        return false;
-      });
-    }
-
-    return result;
-  }, [items, searchTerm, yearFilter, fuse]);
-
-  // Get all years from items
-  const years = useMemo(() => {
-    const yearsSet = new Set();
-
-    items.forEach((item) => {
-      if (item.year) {
-        yearsSet.add(item.year);
-      }
-      if (item.date && item.date.includes('-')) {
-        // Extract year from date (assuming format YYYY-MM-DD or similar)
-        const year = item.date.split('-')[0];
-        if (year.length === 4 && !isNaN(parseInt(year))) {
-          yearsSet.add(year);
-        }
-      }
-    });
-
-    return [...yearsSet].sort().reverse();
-  }, [items]);
+    if (!searchTerm) return items;
+    return fuse.search(searchTerm).map((r) => r.item);
+  }, [items, searchTerm, fuse]);
 
   const clearSearch = () => {
     setSearchTerm('');
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const typeConfig = config.contentTypes.find((type) => type.id === contentType);
+  const Component = viewMode === 'grid' ? GenericCard : GenericListItem;
+
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold mb-8 text-center">{pageTitle}</h2>
-      <p className="mb-6">{pageDescription}</p>
-      <p className="mb-6">
-        <b>Total {pageTitle}:</b> {items.length}
+    <div>
+      <h1 className="text-3xl font-bold mb-4">{typeConfig.title}</h1>
+      <p className="text-gray-600 mb-8">{typeConfig.description}</p>
+
+      <p>
+        <span className="font-bold">Total: </span>
+        {items.length}
       </p>
 
-      <div className="mb-8 flex flex-wrap items-center justify-between space-y-4 sm:space-y-0">
-        <div className="w-full sm:w-auto flex-grow flex flex-wrap items-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <div className="relative w-full sm:w-auto flex-grow">
-            <input
-              type="text"
-              placeholder={`Search ${contentType}...`}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            {searchTerm && (
-              <button
-                onClick={clearSearch}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              >
-                <XCircleIcon className="h-5 w-5" />
-              </button>
-            )}
-          </div>
-
-          {years.length > 0 && (
-            <select
-              value={yearFilter}
-              onChange={(e) => setYearFilter(e.target.value)}
-              className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">All Years</option>
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          )}
-        </div>
-
-        <div className="flex items-center justify-end w-full sm:w-auto ml-4">
-          <div
-            className="inline-flex items-center rounded-md shadow-sm"
-            role="group"
-            aria-label="View mode"
-          >
-            <button
-              type="button"
-              onClick={() => setViewMode('grid')}
-              aria-label="Grid View"
-              className={`${
-                viewMode === 'grid'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50'
-              } tooltip-container relative inline-flex items-center px-3 py-2 text-sm font-medium rounded-l-md border border-gray-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            >
-              <FaThLarge className="h-5 w-5" />
-              <span className="tooltip">Grid View</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewMode('list')}
-              aria-label="Compact View"
-              className={`${
-                viewMode === 'list'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50'
-              } tooltip-container relative inline-flex items-center px-3 py-2 text-sm font-medium rounded-r-md border border-gray-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            >
-              <FaList className="h-5 w-5" />
-              <span className="tooltip">Compact View</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <ContentControls
+        contentType={contentType}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        onClearSearch={clearSearch}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+      />
 
       {viewMode === 'grid' ? (
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -199,7 +139,7 @@ const GenericContentPage = ({ items, contentType, config, pageTitle, pageDescrip
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <GenericCard item={item} contentType={contentType} config={config} />
+                <Component item={item} contentType={contentType} config={config} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -216,7 +156,7 @@ const GenericContentPage = ({ items, contentType, config, pageTitle, pageDescrip
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <GenericListItem item={item} contentType={contentType} config={config} />
+                <Component item={item} contentType={contentType} config={config} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -226,12 +166,102 @@ const GenericContentPage = ({ items, contentType, config, pageTitle, pageDescrip
   );
 };
 
-GenericContentPage.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  contentType: PropTypes.string.isRequired,
-  config: PropTypes.object.isRequired,
-  pageTitle: PropTypes.string.isRequired,
-  pageDescription: PropTypes.string,
+const ContentDetails = ({ config, contentType }) => {
+  const [item, setItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        // Find the content type configuration
+        const typeConfig = config.contentTypes.find((type) => type.id === contentType);
+        if (!typeConfig) {
+          throw new Error(`Content type ${contentType} not found in configuration`);
+        }
+
+        // Get the item ID from the URL
+        const itemId = window.location.pathname.split('/').pop();
+
+        // Fetch the data
+        const response = await fetch(typeConfig.dataSource);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${contentType} data`);
+        }
+
+        let data;
+        if (typeConfig.dataType === 'bibtex') {
+          // Handle BibTeX data
+          const bibtexData = await response.text();
+          data = convertBibtexToJson(bibtexData);
+        } else {
+          // Handle JSON data
+          data = await response.json();
+        }
+
+        const foundItem = data.find((i) => i.id === itemId);
+
+        if (!foundItem) {
+          throw new Error(`Item with ID ${itemId} not found`);
+        }
+        setItem(foundItem);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchContent();
+  }, [config, contentType]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div>
+      <GenericItemDetails item={item} contentType={contentType} config={config} />
+    </div>
+  );
 };
 
-export default GenericContentPage;
+GenericContentPage.propTypes = {
+  config: PropTypes.shape({
+    contentTypes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        dataSource: PropTypes.string.isRequired,
+        dataType: PropTypes.oneOf(['json', 'bibtex']),
+        markdownTemplate: PropTypes.string,
+        view: PropTypes.oneOf(['grid', 'list']).isRequired,
+      }),
+    ).isRequired,
+  }).isRequired,
+  contentType: PropTypes.string.isRequired,
+};
+
+ContentDetails.propTypes = {
+  config: PropTypes.shape({
+    contentTypes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        dataSource: PropTypes.string.isRequired,
+        dataType: PropTypes.oneOf(['json', 'bibtex']),
+        markdownTemplate: PropTypes.string,
+        view: PropTypes.oneOf(['grid', 'list']).isRequired,
+      }),
+    ).isRequired,
+  }).isRequired,
+  contentType: PropTypes.string.isRequired,
+};
+
+export { GenericContentPage, ContentDetails };

@@ -48,13 +48,11 @@ const MyStoryComponent = ({ config }) => {
   // Only show loading UI if we're still loading
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="flex justify-center items-center h-96">
-          <div className="animate-pulse flex space-x-4">
-            <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
-            <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
-            <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
-          </div>
+      <div className="flex justify-center items-center h-96">
+        <div className="animate-pulse flex space-x-4">
+          <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
+          <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
+          <div className="h-5 w-5 bg-gray-300 rounded-full"></div>
         </div>
       </div>
     );
@@ -63,46 +61,42 @@ const MyStoryComponent = ({ config }) => {
   // Show error UI if we encountered an error
   if (error) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="text-red-500 py-4 text-center">
-          Error loading content: {error}. Please refresh the page or try again later.
-        </div>
+      <div className="text-red-500 py-4 text-center">
+        Error loading content: {error}. Please refresh the page or try again later.
       </div>
     );
   }
 
+  const pageTitle = config.sections.MyStory.sectionHeading || 'My Story';
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div>
       {/* Hero Banner with Background Image */}
       <div
-        className="relative w-full h-64 md:h-80 lg:h-96 mb-12 rounded-lg overflow-hidden shadow-lg"
+        className="relative w-full h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden"
         style={{
           backgroundImage: `url('${jsonContent.files.backgroundImage}')`,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/60 to-blue-900/60 flex flex-col justify-center items-center px-4">
+        {/* Hidden heading for reference
+        <div className="absolute inset-0 flex flex-col justify-center items-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">
             {config.sections.MyStory.sectionHeading}
           </h1>
           <p className="text-xl text-white text-center max-w-2xl">{jsonContent.banner.subtitle}</p>
-        </div>
+        </div> */}
       </div>
-
+      <div className="flex flex-col md:flex-row content-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-center">{pageTitle}</h1>
+      </div>
       {/* Only show animation if enabled in settings */}
       {jsonContent.settings.showAnimation && <TypedAnimation content={jsonContent.animation} />}
 
-      <div className="prose lg:prose-xl max-w-none mt-8">
-        <ReactMarkdown
-          components={{
-            h1: ({ ...props }) => <h2 className="!text-2xl font-semibold mb-4" {...props} />,
-            h2: ({ ...props }) => <h2 className="!text-2xl font-semibold mt-8 mb-4" {...props} />,
-            a: ({ ...props }) => <a className="font-mono" {...props} />,
-          }}
-        >
-          {storyContent}
-        </ReactMarkdown>
+      <div className="prose lg:prose-xl max-w-none">
+        <ReactMarkdown className="markdown-content">{storyContent}</ReactMarkdown>
       </div>
     </div>
   );

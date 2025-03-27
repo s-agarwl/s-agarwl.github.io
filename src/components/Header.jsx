@@ -6,7 +6,6 @@ import { FaChevronDown } from 'react-icons/fa';
 
 const Header = ({ config }) => {
   const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
   const isHomePage = location.pathname === '/';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -22,18 +21,76 @@ const Header = ({ config }) => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
   }, []);
 
   // Get navigation items from the config
   const mainNavItems = config.navigation?.mainItems || [];
 
-  // Simple link component
-  const NavLink = ({ to, children, className, onClick }) => {
+  // Helper function to get section details by ID
+  const getSectionDetails = (id) => {
+    // Check if it's a main section
+    const section = config.sections[id];
+    if (section) {
+      return {
+        id,
+        text: section.navigationText || section.sectionHeading || id,
+        path: section.path || `/#${id}`,
+      };
+    }
+
+    // If not a main section, check if it's a subsection
+    for (const sectionId in config.sections) {
+      const section = config.sections[sectionId];
+      if (section.subsections && section.subsections[id]) {
+        const subsection = section.subsections[id];
+        return {
+          id,
+          text: subsection.navigationText || subsection.title || id,
+          path: subsection.path || `/#${id}`,
+        };
+      }
+    }
+
+    // Fallback if not found
+    return { id, text: id, path: `/#${id}` };
+  };
+
+  // Helper function to check if a nav item is active
+  const isNavItemActive = (item) => {
+    const sectionDetails = typeof item === 'string' ? getSectionDetails(item) : item;
+    const itemPath = sectionDetails.path || `/#${sectionDetails.id}`;
+
+    if (itemPath.startsWith('/')) {
+      return location.pathname === itemPath;
+    }
+
+    if (itemPath.startsWith('#')) {
+      const hash = location.hash.replace('#', '');
+      return hash === sectionDetails.id;
+    }
+
+    // Check if it's the Profile item and we're on the home page
+    if (sectionDetails.id === 'Profile' && isHomePage) {
+      return true;
+    }
+
+    return false;
+  };
+
+  // Simple link component with active state
+  const NavLink = ({ to, children, className, onClick, isActive }) => {
     return (
-      <HashLink to={to} smooth className={className} onClick={onClick}>
+      <HashLink
+        to={to}
+        smooth
+        className={`${className} ${isActive ? 'text-primary border-b-2 border-primary' : ''}`}
+        onClick={onClick}
+      >
         {children}
       </HashLink>
     );
@@ -44,10 +101,19 @@ const Header = ({ config }) => {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    isActive: PropTypes.bool,
   };
 
-  const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
+  // Unified event handler for both click and touch events
+  const handleInteraction = (e, callback) => {
+    if (e.type === 'touchend') {
+      e.preventDefault();
+    }
+    callback();
+  };
+
+  const handleMenuToggle = (e) => {
+    handleInteraction(e, () => setIsMenuOpen(!isMenuOpen));
   };
 
   const handleLinkClick = () => {
@@ -57,11 +123,6 @@ const Header = ({ config }) => {
 
   const toggleDropdown = (id) => {
     setOpenDropdown(openDropdown === id ? null : id);
-  };
-
-  // Get section by ID helper
-  const getSectionById = (id) => {
-    return config.sections[id];
   };
 
   return (
@@ -114,67 +175,87 @@ const Header = ({ config }) => {
         >
           {config.researcherName}
         </HashLink>
-        <button className="text-2xl md:hidden" onClick={handleMenuClick} aria-label="Toggle menu">
+        <button
+          className={`text-2xl md:hidden ${isMenuOpen ? 'fixed top-4 right-4 z-50' : ''}`}
+          onClick={handleMenuToggle}
+          onTouchEnd={handleMenuToggle}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          style={{ touchAction: 'none' }}
+        >
           {isMenuOpen ? '×' : '☰'}
         </button>
         <nav
-          className={`fixed md:relative top-0 right-0 h-full md:h-auto w-64 md:w-auto bg-header md:bg-transparent transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out md:flex md:items-center`}
+          className={`fixed md:relative top-0 right-0 h-full md:h-auto w-64 md:w-auto bg-header md:bg-transparent transform ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          } md:translate-x-0 transition-transform duration-300 ease-in-out md:flex md:items-center`}
           ref={dropdownRef}
         >
-          <button
-            className="absolute top-4 right-4 text-2xl md:hidden"
-            onClick={handleMenuClick}
-            aria-label="Close menu"
-          >
-            ×
-          </button>
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0 cursor-pointer">
-            {mainNavItems.map((item) => (
-              <li key={item.id} className="relative">
-                {item.dropdown ? (
-                  // Dropdown menu
-                  <div>
-                    <button
-                      onClick={() => toggleDropdown(item.id)}
-                      className="flex items-center text-lg hover:text-gray-300 transition-colors duration-200"
-                      aria-expanded={openDropdown === item.id}
-                      aria-haspopup="true"
-                    >
-                      {item.text} <FaChevronDown className="ml-1 h-3 w-3" />
-                    </button>
-                    {openDropdown === item.id && (
-                      <ul className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-header text-header py-1 z-10">
-                        {item.items.map((subItem) => {
-                          const section = getSectionById(subItem.id);
-                          if (!section) return null;
+            {mainNavItems.map((navItem) => {
+              // If navItem is just a string ID, get the details from sections
+              const item =
+                typeof navItem === 'string'
+                  ? getSectionDetails(navItem)
+                  : {
+                      ...getSectionDetails(navItem.id),
+                      dropdown: navItem.dropdown,
+                      items: navItem.items,
+                    };
 
-                          return (
-                            <li key={subItem.id}>
-                              <NavLink
-                                to={section.path || `/#${section.id}`}
-                                className="block px-4 py-2 text-sm hover:text-gray-300 transition-colors duration-200"
-                                onClick={handleLinkClick}
-                              >
-                                {subItem.text}
-                              </NavLink>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-                  </div>
-                ) : (
-                  // Regular link
-                  <NavLink
-                    to={item.path || `/#${item.id}`}
-                    className="text-lg hover:text-gray-300 transition-colors duration-200"
-                    onClick={handleLinkClick}
-                  >
-                    {item.text}
-                  </NavLink>
-                )}
-              </li>
-            ))}
+              return (
+                <li key={item.id} className="relative">
+                  {item.dropdown ? (
+                    <div>
+                      <button
+                        onClick={(e) => handleInteraction(e, () => toggleDropdown(item.id))}
+                        onTouchEnd={(e) => handleInteraction(e, () => toggleDropdown(item.id))}
+                        className={`flex items-center text-lg hover:text-gray-300 transition-colors duration-200 ${
+                          (item.items || []).some((subItemId) => isNavItemActive(subItemId))
+                            ? 'text-primary border-b-2 border-primary'
+                            : ''
+                        }`}
+                        aria-expanded={openDropdown === item.id}
+                        aria-haspopup="true"
+                      >
+                        {item.text} <FaChevronDown className="ml-1 h-3 w-3" />
+                      </button>
+                      {openDropdown === item.id && (
+                        <ul className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-header text-header py-1 z-10">
+                          {(item.items || []).map((subItemId) => {
+                            const subItem = getSectionDetails(subItemId);
+                            const isActive = isNavItemActive(subItemId);
+
+                            return (
+                              <li key={subItemId}>
+                                <NavLink
+                                  to={subItem.path}
+                                  className={`block px-4 py-2 text-sm hover:text-gray-300 transition-colors duration-200 ${
+                                    isActive ? 'text-primary' : ''
+                                  }`}
+                                  onClick={handleLinkClick}
+                                  isActive={isActive}
+                                >
+                                  {subItem.text}
+                                </NavLink>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
+                    </div>
+                  ) : (
+                    <NavLink
+                      to={item.path}
+                      className="text-lg hover:text-gray-300 transition-colors duration-200"
+                      onClick={handleLinkClick}
+                      isActive={isNavItemActive(item)}
+                    >
+                      {item.text}
+                    </NavLink>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>
@@ -188,18 +269,14 @@ Header.propTypes = {
     researcherName: PropTypes.string.isRequired,
     navigation: PropTypes.shape({
       mainItems: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          text: PropTypes.string.isRequired,
-          dropdown: PropTypes.bool,
-          items: PropTypes.arrayOf(
-            PropTypes.shape({
-              id: PropTypes.string.isRequired,
-              text: PropTypes.string.isRequired,
-            }),
-          ),
-          path: PropTypes.string,
-        }),
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            dropdown: PropTypes.bool,
+            items: PropTypes.arrayOf(PropTypes.string),
+          }),
+        ]),
       ),
     }),
   }).isRequired,

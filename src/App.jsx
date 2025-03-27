@@ -1,55 +1,78 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Intro from './components/pageSections/Intro';
-import PublicationCarousel from './components/pageSections/PublicationCarousel';
-import Contact from './components/pageSections/Contact';
-import Education from './components/pageSections/Education';
-import WorkExperience from './components/pageSections/WorkExperience';
-import Section from './components/Section';
-import Awards from './components/pageSections/Awards';
 import NotFound from './components/NotFound';
 import PropTypes from 'prop-types';
-import DynamicSection from './components/pageSections/DynamicSection';
 import Documentation from './components/pageSections/Documentation';
 import MyStoryComponent from './components/pageSections/MyStoryComponent';
-import { ContentPage, ContentDetails } from './GenericContentPage';
-
-// Update this mapping function
-const sectionIdToComponent = (sectionId) => {
-  switch (sectionId) {
-    case 'About':
-      return Intro;
-    case 'FeaturedPublications':
-      return PublicationCarousel;
-    case 'Education':
-      return Education;
-    case 'WorkExperience':
-      return WorkExperience;
-    case 'Awards':
-      return Awards;
-    case 'Contact':
-      return Contact;
-    default:
-      return DynamicSection;
-  }
-};
-
-const renderAlternatingSections = (components, entries, config, sectionConfigs) => {
-  return components.map((Component, index) => {
-    const sectionConfig = sectionConfigs[index];
-    return (
-      <Section key={index} id={sectionConfig.id} className={'bg-primary'}>
-        <Component entries={entries} config={config} sectionConfig={sectionConfig} />
-      </Section>
-    );
-  });
-};
+import { GenericContentPage, ContentDetails } from './components/GenericContentPage';
+import HomeSections from './components/HomeSections';
+import DynamicSectionRenderer from './components/DynamicSectionRenderer';
 
 function App({ config }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Extract sections that have paths defined (for routing)
+  const sectionRoutes = useMemo(() => {
+    const routes = [];
+
+    // Go through all section configs and find those with paths
+    for (const [id, sectionConfig] of Object.entries(config.sections)) {
+      if (sectionConfig.path && sectionConfig.path !== '/') {
+        // Normalize the section config to ensure it has all required properties
+        routes.push({
+          // Ensure section has an id
+          id,
+          // Ensure section has a title
+          title: sectionConfig.title || sectionConfig.sectionHeading || id,
+          // Pass along the path
+          path: sectionConfig.path,
+          // Include the template if specified
+          template: sectionConfig.template,
+          // Ensure content is an object if it exists
+          content: sectionConfig.content || {},
+          // Pass along any subsections
+          subsections: sectionConfig.subsections || {},
+          // Pass any additional properties
+          ...sectionConfig,
+        });
+      }
+    }
+
+    return routes;
+  }, [config.sections]);
+
+  // Map content type IDs to their routes to avoid duplication
+  const contentTypeRoutes = useMemo(() => {
+    return (config.contentTypes || []).map((type) => ({
+      id: type.id,
+      path: `/${type.id}`,
+      detailPath: `/${type.id}/:id`,
+    }));
+  }, [config.contentTypes]);
+
+  // Create a map of section IDs to content type IDs for sections using listOfItems template
+  const sectionToContentTypeMap = useMemo(() => {
+    const map = {};
+
+    // Map section IDs to corresponding content type IDs
+    if (config.contentTypes) {
+      config.contentTypes.forEach((type) => {
+        // Match section ID with content type ID (case insensitive)
+        const matchingSection = Object.keys(config.sections).find(
+          (sectionId) => sectionId.toLowerCase() === type.id.toLowerCase(),
+        );
+
+        if (matchingSection) {
+          map[matchingSection] = type.id;
+        }
+      });
+    }
+
+    return map;
+  }, [config.sections, config.contentTypes]);
 
   useEffect(() => {
     // Check if we have prerendered publication data
@@ -64,6 +87,7 @@ function App({ config }) {
         }
       } catch (e) {
         console.error('Error parsing prerendered data:', e);
+        setError(`Failed to parse prerendered data: ${e.message}`);
       }
     }
 
@@ -78,62 +102,75 @@ function App({ config }) {
     return <div>Error: {error}</div>;
   }
 
-  // Get profile section IDs from navigation
-  const profileDropdown = config.navigation?.mainItems?.find((item) => item.id === 'Profile');
-  const profileSectionIds = profileDropdown?.items?.map((item) => item.id) || [];
+  // Helper function to render the appropriate component for a section
+  const renderSectionComponent = (section) => {
+    // Special handling for known custom components
+    if (section.id === 'MyStory') {
+      return <MyStoryComponent config={config} />;
+    } else if (section.id === 'Documentation') {
+      return <Documentation />;
+    }
 
-  // Get section components in the order defined in the navigation
-  const sectionComponents = profileSectionIds
-    .map((sectionId) => {
-      const section = config.sections[sectionId];
-      if (!section) return null;
-      return {
-        id: sectionId,
-        component: sectionIdToComponent(sectionId),
-        config: section,
-      };
-    })
-    .filter((section) => section && section.component !== null);
+    // For sections with template "listOfItems", use GenericContentPage
+    if (section.template === 'listOfItems') {
+      const contentType = sectionToContentTypeMap[section.id];
+      if (contentType) {
+        return <GenericContentPage config={config} contentType={contentType} />;
+      }
+      // If no matching content type, log warning and fall through to default rendering
+      console.warn(`No matching content type found for section: ${section.id}`);
+    }
+
+    // For sections with subsections or other templates, use DynamicSectionRenderer
+    if ((section.subsections && Object.keys(section.subsections).length > 0) || section.template) {
+      return <DynamicSectionRenderer section={section} config={config} />;
+    }
+
+    // Fall back to a simple rendering for sections without templates or subsections
+    return (
+      <div className="py-8">
+        <h1 className="text-3xl font-bold mb-6">{section.title}</h1>
+        {typeof section.content === 'string' ? (
+          <p>{section.content}</p>
+        ) : (
+          <p>Section content not available</p>
+        )}
+      </div>
+    );
+  };
 
   return (
     <Router>
       <div className="App flex flex-col min-h-screen">
         <Header config={config} />
         <main className="flex-grow pt-16">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  {renderAlternatingSections(
-                    sectionComponents.map((section) => section.component),
-                    [],
-                    config,
-                    sectionComponents.map((section) => section.config),
-                  )}
-                </>
-              }
-            />
+          <div className="container mx-auto px-4 py-8 max-w-6xl">
+            <Routes>
+              {/* Home page route */}
+              <Route path="/" element={<HomeSections config={config} />} />
 
-            {/* Other existing routes */}
-            <Route path="/my-story" element={<MyStoryComponent config={config} />} />
-            <Route path="/docs" element={<Documentation />} />
-
-            {/* Dynamically create routes for all content types */}
-            {config.contentTypes.map((type) => (
-              <Fragment key={type.id}>
+              {/* Dynamically create routes for sections that have defined paths */}
+              {sectionRoutes.map((section) => (
                 <Route
-                  path={`/${type.id}`}
-                  element={<ContentPage config={config} contentType={type.id} />}
+                  key={section.id}
+                  path={section.path}
+                  element={renderSectionComponent(section)}
                 />
+              ))}
+
+              {/* Dynamically create routes for all content types detail pages */}
+              {contentTypeRoutes.map((type) => (
                 <Route
-                  path={`/${type.id}/:id`}
+                  key={`${type.id}-detail`}
+                  path={type.detailPath}
                   element={<ContentDetails config={config} contentType={type.id} />}
                 />
-              </Fragment>
-            ))}
-            <Route path="*" element={<NotFound config={config} />} />
-          </Routes>
+              ))}
+
+              {/* 404 route */}
+              <Route path="*" element={<NotFound config={config} />} />
+            </Routes>
+          </div>
         </main>
         <Footer config={config} />
       </div>

@@ -1,4 +1,4 @@
-# My Journey into Visualization and AI
+# My Journey into Data Visualization and AI
 
 My path has been a fascinating evolution from a systems engineer to a computer science researcher with a focus on visual analytics and artificial intelligence. This journey has been marked by a persistent curiosity about how we can make complex data more accessible and actionable through visualization.
 
@@ -19,7 +19,3 @@ My research has been recognized with several prestigious awards. I'm particularl
 Today, while exploring the path ahead, I remain committed to bridging the gap between advanced technology and human understanding, creating tools that empower people to derive actionable insights from complex data.
 
 My academic background, coupled with practical experience across various domains, has equipped me with a unique perspective on how data visualization and AI can be leveraged to solve complex problems. I'm excited about the future possibilities in this rapidly evolving field.
-
-# Have a job for me?
-
-I am on the job market. If you are looking for a human being who is passionate and skilled in visual data analytics and AI, please reach out to me: shivamworking@gmail.com.

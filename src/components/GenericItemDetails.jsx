@@ -140,6 +140,12 @@ const GenericItemDetails = ({ item, contentType, config }) => {
                 className="w-3/4  mb-4 mx-auto"
               />
             )}
+            {item.awards && (
+              <div className="mt-1 inline-flex items-center text-white bg-blue-600 rounded-md px-4 py-0.5 mb-2">
+                <TrophyIcon className="h-3 w-3 mr-0.5" />
+                <span>{item.awards}</span>
+              </div>
+            )}
             <p className="text-theme-light mb-4">
               <b>Authors:</b> {renderAuthors(item.authors, yourName)} | Year: {item.year}
             </p>
@@ -213,14 +219,8 @@ const GenericItemDetails = ({ item, contentType, config }) => {
               )}
             </div>
 
-            {item.awards && (
-              <div className="mt-1 inline-flex items-center text-white bg-blue-600 rounded-md px-4 py-0.5">
-                <TrophyIcon className="h-3 w-3 mr-0.5" />
-                <span>{item.awards}</span>
-              </div>
-            )}
             {item.links.video && (
-              <div className="mb-4">
+              <div className="mb-4 mt-4">
                 {/* <h2 className="text-2xl font-semibold mb-2">Video</h2> */}
                 <div className="flex justify-center items-center">
                   <ReactPlayer url={item.links.video} controls />
