@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import TypedAnimation from '../TypedAnimation';
+import { findSectionById } from '../../utils/sectionUtils';
 
 const MyStoryComponent = ({ config }) => {
   const [storyContent, setStoryContent] = useState('');
   const [jsonContent, setJsonContent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Find the MyStory section
+  const myStorySection = findSectionById(config.sections, 'MyStory');
 
   // Default content paths that will be overridden by JSON config when loaded
   const contentJsonPath = '/my-story/content.json';
@@ -67,7 +71,7 @@ const MyStoryComponent = ({ config }) => {
     );
   }
 
-  const pageTitle = config.sections.MyStory.sectionHeading || 'My Story';
+  const pageTitle = myStorySection?.sectionHeading || 'My Story';
 
   return (
     <div>
@@ -84,7 +88,7 @@ const MyStoryComponent = ({ config }) => {
         {/* Hidden heading for reference
         <div className="absolute inset-0 flex flex-col justify-center items-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">
-            {config.sections.MyStory.sectionHeading}
+            {myStorySection?.sectionHeading}
           </h1>
           <p className="text-xl text-white text-center max-w-2xl">{jsonContent.banner.subtitle}</p>
         </div> */}
@@ -104,7 +108,7 @@ const MyStoryComponent = ({ config }) => {
 
 MyStoryComponent.propTypes = {
   config: PropTypes.shape({
-    sections: PropTypes.object.isRequired,
+    sections: PropTypes.array.isRequired,
   }).isRequired,
 };
 

@@ -11,46 +11,44 @@ const HomeSections = ({ config }) => {
     const sections = [];
 
     // Find the home page section (section with path '/')
-    const homeSection = Object.values(config.sections).find((section) => section.path === '/');
+    const homeSection = config.sections.find((section) => section.path === '/');
 
     // If we have a dedicated home section with subsections, use those
     if (homeSection && homeSection.subsections) {
-      for (const [id, sectionConfig] of Object.entries(homeSection.subsections)) {
+      for (const subsection of homeSection.subsections) {
         // Skip if it's not supposed to be on the home page
-        if (sectionConfig.excludeFromHome) {
+        if (subsection.excludeFromHome) {
           continue;
         }
 
         // Skip if no template is specified
-        if (!sectionConfig.template) {
-          console.warn(`Subsection "${id}" has no template specified, skipping`);
+        if (!subsection.template) {
+          console.warn(`Subsection "${subsection.id}" has no template specified, skipping`);
           continue;
         }
 
         // Add section to the list of sections to render
         sections.push({
-          ...sectionConfig,
-          id,
+          ...subsection,
         });
       }
     } else {
       // Fallback to old behavior - look for sections without paths
-      for (const [id, sectionConfig] of Object.entries(config.sections)) {
+      for (const section of config.sections) {
         // Skip if it has a path (it's a separate page) or if it's not supposed to be on the home page
-        if (sectionConfig.path || sectionConfig.excludeFromHome) {
+        if (section.path || section.excludeFromHome) {
           continue;
         }
 
         // Skip if no template is specified
-        if (!sectionConfig.template) {
-          console.warn(`Section "${id}" has no template specified, skipping`);
+        if (!section.template) {
+          console.warn(`Section "${section.id}" has no template specified, skipping`);
           continue;
         }
 
         // Add section to the list of sections to render
         sections.push({
-          ...sectionConfig,
-          id,
+          ...section,
         });
       }
     }
@@ -72,7 +70,7 @@ const HomeSections = ({ config }) => {
   return (
     <div>
       {homeSections.map((section) => (
-        <DynamicSectionRenderer key={section.id} section={section} />
+        <DynamicSectionRenderer key={section.id} section={section} config={config} />
       ))}
     </div>
   );

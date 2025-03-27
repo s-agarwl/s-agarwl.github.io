@@ -1,6 +1,7 @@
 /**
  * Content loader utility to fetch various types of content data
  */
+import { findSectionById } from './sectionUtils';
 
 /**
  * Load content from a specified JSON file
@@ -51,12 +52,13 @@ export const getContentPageConfig = (contentType, config) => {
   };
 
   // If there's a specific config for this content type in the site config, use it
-  if (
-    config.sections &&
-    config.sections[contentType.charAt(0).toUpperCase() + contentType.slice(1)]
-  ) {
-    const sectionConfig =
-      config.sections[contentType.charAt(0).toUpperCase() + contentType.slice(1)];
+  // Try to find section with case-sensitive match first, then try with capitalized first letter
+  const formattedContentType = contentType.charAt(0).toUpperCase() + contentType.slice(1);
+  const sectionConfig =
+    findSectionById(config.sections, contentType) ||
+    findSectionById(config.sections, formattedContentType);
+
+  if (sectionConfig) {
     return {
       pageTitle: sectionConfig.sectionHeading || defaultConfig.pageTitle,
       pageDescription: sectionConfig.content || defaultConfig.pageDescription,

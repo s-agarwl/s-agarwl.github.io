@@ -43,14 +43,16 @@
   },
   "bibtexPath": "",
   "profilePhotoPath": "/profile-photo.png",
-  "sections": {
-    "Profile": {
+  "abstractPreviewLength": 10,
+  "descriptionPreviewLength": 20,
+  "sections": [
+    {
       "id": "Profile",
       "path": "/",
       "title": "Profile",
       "sectionHeading": "Profile",
-      "subsections": {
-        "About": {
+      "subsections": [
+        {
           "id": "About",
           "template": "text-with-image",
           "order": 1,
@@ -63,7 +65,7 @@
             "imageShape": "circle"
           }
         },
-        "Education": {
+        {
           "id": "Education",
           "template": "timeline",
           "order": 2,
@@ -94,7 +96,7 @@
             ]
           }
         },
-        "WorkExperience": {
+        {
           "id": "WorkExperience",
           "template": "timeline",
           "order": 3,
@@ -141,7 +143,7 @@
             ]
           }
         },
-        "Awards": {
+        {
           "id": "Awards",
           "template": "grid",
           "order": 4,
@@ -174,7 +176,7 @@
             ]
           }
         },
-        "FeaturedWorks": {
+        {
           "id": "FeaturedWorks",
           "template": "carousel",
           "order": 5,
@@ -193,7 +195,7 @@
             ]
           }
         },
-        "Contact": {
+        {
           "id": "Contact",
           "template": "contact",
           "order": 6,
@@ -202,12 +204,15 @@
             "title": "Get in Touch",
             "text": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out to me through any of the following channels:",
             "links": ["linkedin", "email"],
-            "outro": "Whether you have a question about my research, want to collaborate on a project, or just want to say hello, Let's get in touch!"
+            "outro": "Whether you have a question about my research, want to collaborate on a project, or just want to say hello, Let's get in touch!",
+            "useIcons": true,
+            "useLabels": true,
+            "layout": "horizontal"
           }
         }
-      }
+      ]
     },
-    "Publications": {
+    {
       "id": "Publications",
       "path": "/publications",
       "title": "Publications",
@@ -215,9 +220,113 @@
       "template": "listOfItems",
       "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.",
       "dataSource": "/pubs.bib",
-      "dataType": "bibtex"
+      "dataType": "bibtex",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "authors",
+              "component": "AuthorList",
+              "label": "Authors"
+            },
+            {
+              "field": "venue",
+              "component": "Text",
+              "format": "{journal|booktitle}, {year}",
+              "variant": "venueList"
+            },
+            {
+              "field": "keywords",
+              "component": "Tags"
+            },
+            {
+              "field": "awards",
+              "component": "Award"
+            }
+          ],
+          "showImage": true
+        },
+        "card": {
+          "metadata": [
+            { "key": "authors", "label": "Authors" },
+            { "key": "year", "label": "Year" }
+          ],
+          "description": { "key": "abstract", "limit": "abstractPreviewLength" },
+          "tags": "keywords",
+          "award": "awards",
+          "links": true
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "image",
+              "component": "Image",
+              "condition": "image"
+            },
+            {
+              "field": "awards",
+              "component": "Award",
+              "condition": "awards"
+            },
+            {
+              "field": "authors",
+              "component": "AuthorList",
+              "label": "Authors"
+            },
+            {
+              "field": "year",
+              "component": "Text",
+              "label": "Year"
+            },
+            {
+              "field": "journal",
+              "component": "Text",
+              "label": "Journal",
+              "condition": "journal"
+            },
+            {
+              "field": "booktitle",
+              "component": "Text",
+              "label": "Conference",
+              "condition": "booktitle"
+            },
+            {
+              "field": "links",
+              "component": "PublicationLinks",
+              "options": { "showText": true }
+            },
+            {
+              "field": "abstract",
+              "component": "ExpandableMarkdown",
+              "heading": "Abstract",
+              "options": { "truncate": 30 },
+              "condition": "abstract"
+            },
+            {
+              "field": "keywords",
+              "component": "Tags",
+              "heading": "Keywords",
+              "condition": "keywords"
+            }
+          ],
+          "actions": [
+            { "type": "BibTeX", "condition": "entryType" },
+            { "type": "Video", "condition": "links.video" }
+          ]
+        }
+      }
     },
-    "Projects": {
+    {
       "id": "Projects",
       "path": "/projects",
       "title": "Projects",
@@ -225,9 +334,73 @@
       "template": "listOfItems",
       "description": "Explore my projects and work",
       "dataSource": "/projects.json",
-      "content": "Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities."
+      "content": "Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities.",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "technologies",
+              "component": "Tags",
+              "condition": "technologies"
+            }
+          ],
+          "showImage": true
+        },
+        "card": {
+          "metadata": [],
+          "description": { "key": "description", "limit": "descriptionPreviewLength" },
+          "tags": "technologies",
+          "award": null
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "status",
+              "component": "Section",
+              "heading": "Status",
+              "condition": "status"
+            },
+            {
+              "field": "technologies",
+              "component": "Tags",
+              "heading": "Technologies",
+              "condition": "technologies"
+            },
+            {
+              "field": "collaborators",
+              "component": "Text",
+              "heading": "Collaborators",
+              "condition": "collaborators"
+            },
+            {
+              "field": "links",
+              "component": "LinkButtons",
+              "heading": "Links",
+              "condition": "links"
+            }
+          ]
+        }
+      }
     },
-    "Talks": {
+    {
       "id": "Talks",
       "path": "/talks",
       "title": "Talks",
@@ -235,9 +408,82 @@
       "template": "listOfItems",
       "description": "Presentations and speaking engagements",
       "dataSource": "/talks.json",
-      "content": "Browse my conference presentations, workshops, and invited talks on various topics related to my research and professional interests."
+      "content": "Browse my conference presentations, workshops, and invited talks on various topics related to my research and professional interests.",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "venue",
+              "component": "Text",
+              "format": "{venue}, {date}",
+              "variant": "venueList"
+            }
+          ],
+          "showImage": true
+        },
+        "card": {
+          "metadata": [
+            { "key": "date", "label": "Date" },
+            { "key": "venue", "label": "Venue" }
+          ],
+          "description": { "key": "description", "limit": "descriptionPreviewLength" },
+          "tags": null,
+          "award": null
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "date",
+              "component": "Text",
+              "label": "Date"
+            },
+            {
+              "field": "venue",
+              "component": "Text",
+              "label": "Venue",
+              "condition": "venue"
+            },
+            {
+              "field": "talkType",
+              "component": "Text",
+              "label": "Type",
+              "condition": "talkType"
+            },
+            {
+              "field": "duration",
+              "component": "Text",
+              "label": "Duration",
+              "condition": "duration"
+            },
+            {
+              "field": "links",
+              "component": "LinkButtons",
+              "heading": "Links",
+              "condition": "links"
+            }
+          ]
+        }
+      }
     },
-    "Teaching": {
+    {
       "id": "Teaching",
       "path": "/teaching",
       "title": "Teaching",
@@ -245,10 +491,86 @@
       "template": "listOfItems",
       "description": "Courses and educational activities",
       "dataSource": "/teaching.json",
-      "content": "Discover the courses I've taught, educational resources I've developed, and my approach to teaching various subjects in computer science and related fields."
+      "content": "Discover the courses I've taught, educational resources I've developed, and my approach to teaching various subjects in computer science and related fields.",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "institution",
+              "component": "Text",
+              "format": "{institution}, {period}"
+            }
+          ],
+          "showImage": true
+        },
+        "card": {
+          "metadata": [
+            { "key": "institution", "label": "Institution" },
+            { "key": "period", "label": "Period" }
+          ],
+          "description": { "key": "description", "limit": "descriptionPreviewLength" },
+          "tags": null,
+          "award": null
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "institution",
+              "component": "Text",
+              "label": "Institution"
+            },
+            {
+              "field": "period",
+              "component": "Text",
+              "label": "Period"
+            },
+            {
+              "field": "course",
+              "component": "Text",
+              "label": "Course",
+              "condition": "course"
+            },
+            {
+              "field": "semester",
+              "component": "Text",
+              "label": "Semester",
+              "condition": "semester"
+            },
+            {
+              "field": "level",
+              "component": "Text",
+              "label": "Level",
+              "condition": "level"
+            },
+            {
+              "field": "links",
+              "component": "LinkButtons",
+              "heading": "Links",
+              "condition": "links"
+            }
+          ]
+        }
+      }
     },
-
-    "Blog": {
+    {
       "id": "Blog",
       "path": "/blog",
       "title": "Blog",
@@ -256,21 +578,75 @@
       "template": "listOfItems",
       "description": "Articles and thoughts",
       "dataSource": "/blog.json",
-      "content": "Read my thoughts, tutorials, and insights on technology, research, and professional development in this collection of articles and essays."
+      "content": "Read my thoughts, tutorials, and insights on technology, research, and professional development in this collection of articles and essays.",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "date",
+              "component": "Text"
+            },
+            {
+              "field": "tags",
+              "component": "Tags",
+              "condition": "tags"
+            }
+          ],
+          "showImage": true
+        },
+        "card": {
+          "metadata": [{ "key": "date", "label": "Date" }],
+          "description": { "key": "description", "limit": "descriptionPreviewLength" },
+          "tags": "tags",
+          "award": null
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "date",
+              "component": "Text"
+            },
+            {
+              "field": "tags",
+              "component": "Tags",
+              "condition": "tags"
+            },
+            {
+              "field": "content",
+              "component": "Markdown",
+              "condition": "content"
+            }
+          ]
+        }
+      }
     },
-    "MyStory": {
+    {
       "id": "MyStory",
       "path": "/my-story",
       "title": "My Story"
     },
-    "PhdThesis": {
-      "id": "PhdThesis",
-      "path": "/publication/Agarwal2023Dissertation"
-    },
-    "Documentation": {
+    {
       "id": "Help",
       "path": "/help",
       "title": "Help"
     }
-  }
+  ]
 }

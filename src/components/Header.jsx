@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import { FaChevronDown } from 'react-icons/fa';
+import { getSectionDetails } from '../utils/sectionUtils';
 
 const Header = ({ config }) => {
   const location = useLocation();
@@ -12,10 +13,8 @@ const Header = ({ config }) => {
 
   // Get the homepage section ID - simpler approach
   const homepageSectionId = useMemo(() => {
-    const homepageSection = Object.entries(config.sections || {}).find(
-      ([, section]) => section.path === '/',
-    );
-    return homepageSection ? homepageSection[0] : null;
+    const homepageSection = config.sections.find((section) => section.path === '/');
+    return homepageSection ? homepageSection.id : null;
   }, [config.sections]);
 
   // Close dropdown when clicking outside
@@ -39,36 +38,6 @@ const Header = ({ config }) => {
   // Get navigation items from the config
   const mainNavItems = config.navigation?.mainItems || [];
 
-  // Helper function to get section details by ID
-  const getSectionDetails = (id) => {
-    // Check if it's a main section
-    const section = config.sections[id];
-    if (section) {
-      return {
-        id,
-        text: section.title || section.sectionHeading || id,
-        path: section.path || `/#${id}`,
-      };
-    }
-
-    // If not a main section, check if it's a subsection
-    for (const sectionId in config.sections) {
-      const section = config.sections[sectionId];
-      if (section.subsections && section.subsections[id]) {
-        const subsection = section.subsections[id];
-        return {
-          id,
-          text: subsection.title || id,
-          path: subsection.path || `/#${id}`,
-          parentId: sectionId,
-        };
-      }
-    }
-
-    // Fallback if not found
-    return { id, text: id, path: `/#${id}` };
-  };
-
   // Simplified function to check if a dropdown should be highlighted
   const shouldHighlightDropdown = (dropdownItems) => {
     // On homepage, check if any dropdown item is the homepage section
@@ -78,7 +47,7 @@ const Header = ({ config }) => {
 
     // For other pages, check for direct path match in dropdown items
     for (const itemId of dropdownItems) {
-      const details = getSectionDetails(itemId);
+      const details = getSectionDetails(config.sections, itemId);
       if (details.path === location.pathname) {
         return true;
       }
@@ -89,7 +58,7 @@ const Header = ({ config }) => {
 
   // Simple function to check if a nav item is active
   const isNavItemActive = (itemId) => {
-    const details = getSectionDetails(itemId);
+    const details = getSectionDetails(config.sections, itemId);
 
     // Simple path match
     if (details.path === location.pathname) {
@@ -205,10 +174,10 @@ const Header = ({ config }) => {
               // Process the navigation item
               const item =
                 typeof navItem === 'string'
-                  ? { id: navItem, ...getSectionDetails(navItem) }
+                  ? { id: navItem, ...getSectionDetails(config.sections, navItem) }
                   : {
                       id: navItem.id,
-                      ...getSectionDetails(navItem.id),
+                      ...getSectionDetails(config.sections, navItem.id),
                       dropdown: navItem.dropdown,
                       items: navItem.items,
                     };
@@ -234,7 +203,7 @@ const Header = ({ config }) => {
                       {openDropdown === item.id && (
                         <ul className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-header text-header py-1 z-10">
                           {(item.items || []).map((subItemId) => {
-                            const subItem = getSectionDetails(subItemId);
+                            const subItem = getSectionDetails(config.sections, subItemId);
                             const isActive = isNavItemActive(subItemId);
 
                             return (
@@ -275,7 +244,7 @@ const Header = ({ config }) => {
 
 Header.propTypes = {
   config: PropTypes.shape({
-    sections: PropTypes.object.isRequired,
+    sections: PropTypes.array.isRequired,
     researcherName: PropTypes.string.isRequired,
     navigation: PropTypes.shape({
       mainItems: PropTypes.arrayOf(

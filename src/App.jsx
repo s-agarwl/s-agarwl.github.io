@@ -19,11 +19,10 @@ function App({ config }) {
     const routeData = [];
 
     // Go through all section configs and find those with paths
-    for (const [id, sectionConfig] of Object.entries(config.sections)) {
+    for (const sectionConfig of config.sections) {
       if (sectionConfig.path && sectionConfig.path !== '/') {
         // Normalize the section config to ensure it has all required properties
         routeData.push({
-          id,
           // Ensure section has a path
           path: sectionConfig.path,
           // Add the detail path for sections with dataSource
@@ -143,7 +142,7 @@ function App({ config }) {
 App.propTypes = {
   config: PropTypes.shape({
     researcherName: PropTypes.string.isRequired,
-    sections: PropTypes.object.isRequired,
+    sections: PropTypes.array.isRequired,
     navigation: PropTypes.shape({
       mainItems: PropTypes.array,
     }),

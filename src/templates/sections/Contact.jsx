@@ -96,6 +96,17 @@ const Contact = ({ content, sectionId, parentId, config }) => {
             const label = labelMap[key] || key;
             const url = getLinkUrl(key);
 
+            console.log(
+              'Contact link:',
+              key,
+              'Icon:',
+              !!Icon,
+              'URL:',
+              url,
+              'showIcons:',
+              showIcons,
+            );
+
             return Icon && url && url !== '#' ? (
               <a
                 key={key}
