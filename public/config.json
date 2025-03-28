@@ -71,7 +71,7 @@
           "order": 2,
           "title": "Education",
           "content": {
-            "title": "Educational Background",
+            "title": "Education",
             "iconType": "education",
             "items": [
               {
@@ -215,7 +215,7 @@
       "sectionHeading": "Publications",
       "template": "listOfItems",
       "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.",
-      "dataSource": "/pubs.bib",
+      "dataSource": "/data/pubs.bib",
       "dataType": "bibtex",
       "display": {
         "list": {
@@ -329,7 +329,7 @@
       "sectionHeading": "Projects",
       "template": "listOfItems",
       "description": "Explore my projects and work",
-      "dataSource": "/projects.json",
+      "dataSource": "/data/projects.json",
       "content": "Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities.",
       "display": {
         "list": {
@@ -403,7 +403,7 @@
       "sectionHeading": "Talks",
       "template": "listOfItems",
       "description": "Presentations and speaking engagements",
-      "dataSource": "/talks.json",
+      "dataSource": "/data/talks.json",
       "content": "Browse my conference presentations, workshops, and invited talks on various topics related to my research and professional interests.",
       "display": {
         "list": {
@@ -486,7 +486,7 @@
       "sectionHeading": "Teaching",
       "template": "listOfItems",
       "description": "Courses and educational activities",
-      "dataSource": "/teaching.json",
+      "dataSource": "/data/teaching.json",
       "content": "Discover the courses I've taught, educational resources I've developed, and my approach to teaching various subjects in computer science and related fields.",
       "display": {
         "list": {
@@ -573,7 +573,7 @@
       "sectionHeading": "Blog",
       "template": "listOfItems",
       "description": "Articles and thoughts",
-      "dataSource": "/blog.json",
+      "dataSource": "/data/blog.json",
       "content": "Read my thoughts, tutorials, and insights on technology, research, and professional development in this collection of articles and essays.",
       "display": {
         "list": {
@@ -663,5 +663,14 @@
         }
       }
     }
-  ]
+  ],
+  "site": {
+    "title": "Shivam Agarwal's Website - Data and AI Expert",
+    "description": "This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.",
+    "baseUrl": "https://s-agarwl.github.io",
+    "googleAnalyticsId": "G-8CMNGL0EH7",
+    "keywords": "academic, research, publications, papers, scholarly work",
+    "author": "Shivam Agarwal",
+    "googleSiteVerification": "L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc"
+  }
 }

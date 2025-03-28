@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Section from '../../components/Section';
+import Section from '/src/components/Section';
 
 /**
  * Basic text template for displaying text content

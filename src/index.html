@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="{{site.baseUrl}}/logo.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
@@ -11,6 +11,16 @@
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
       (function (l) {
         if (l.search[1] === '/') {
           var decoded = l.search
@@ -76,8 +86,7 @@
     </script>
     <!-- End Specific Hash URL Redirects -->
 
-    <title>{{seoTitle}}</title>
-    <meta name="description" content="{{seoDescription}}" />
+    <meta name="description" content="{{site.description}}" />
     <meta name="keywords" content="{{site.keywords}}" />
     <meta name="author" content="{{site.author}}" />
     <meta name="robots" content="index, follow" />
@@ -86,24 +95,22 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{canonicalUrl}}" />
-    <meta property="og:title" content="{{seoTitle}}" />
-    <meta property="og:description" content="{{seoDescription}}" />
+    <meta property="og:url" content="{{site.baseUrl}}/" />
+    <meta property="og:title" content="{{site.title}}" />
+    <meta property="og:description" content="{{site.description}}" />
     <meta property="og:image" content="{{site.baseUrl}}/logo.svg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="{{canonicalUrl}}" />
-    <meta property="twitter:title" content="{{seoTitle}}" />
-    <meta property="twitter:description" content="{{seoDescription}}" />
+    <meta property="twitter:url" content="{{site.baseUrl}}/" />
+    <meta property="twitter:title" content="{{site.title}}" />
+    <meta property="twitter:description" content="{{site.description}}" />
     <meta property="twitter:image" content="{{site.baseUrl}}/logo.svg" />
 
-    <!-- Google Analytics -->
     {{googleAnalytics}}
   </head>
   <body>
     <div id="root"></div>
-
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="{{site.baseUrl}}/src/main.jsx"></script>
   </body>
 </html>

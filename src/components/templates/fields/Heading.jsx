@@ -19,7 +19,7 @@ const Heading = ({
 
     // If we have a specific style variant string, use it directly
     if (typeof styleVariant === 'string') {
-      console.log('Direct string variant:', styleVariant);
+      // console.log('Direct string variant:', styleVariant);
       return styleVariant;
     }
 
@@ -27,7 +27,7 @@ const Heading = ({
     if (styleVariant && typeof styleVariant === 'object') {
       // Direct level property (for backward compatibility)
       if (styleVariant[level]) {
-        console.log('Direct level property:', styleVariant[level]);
+        // console.log('Direct level property:', styleVariant[level]);
         return styleVariant[level];
       }
 
@@ -37,16 +37,16 @@ const Heading = ({
         styleVariant.variants[viewType] &&
         styleVariant.variants[viewType][level]
       ) {
-        console.log(
-          `Found variant for viewType=${viewType}, level=${level}:`,
-          styleVariant.variants[viewType][level],
-        );
+        // console.log(
+        //   `Found variant for viewType=${viewType}, level=${level}:`,
+        //   styleVariant.variants[viewType][level],
+        // );
         return styleVariant.variants[viewType][level];
       }
 
       // Check for level in defaults
       if (styleVariant.defaults && styleVariant.defaults[level]) {
-        console.log('Found default for level:', styleVariant.defaults[level]);
+        // console.log('Found default for level:', styleVariant.defaults[level]);
         return styleVariant.defaults[level];
       }
     }

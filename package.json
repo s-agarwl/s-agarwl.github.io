@@ -8,10 +8,12 @@
     "build": "vite build && npm run generate-static && npm run generate-sitemap",
     "generate-static": "node scripts/generate-static-pages.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
+    "generate-seo-texts": "node scripts/generate-seo-texts.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "serve": "npm run build && serve -s dist"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",

@@ -164,8 +164,41 @@ function App({ config }) {
         const prerenderedData = JSON.parse(publicationDataElement.textContent);
         if (prerenderedData.entry && prerenderedData.config) {
           // We're on a publication page with prerendered data
+          console.log('Found prerendered data:', prerenderedData);
+
+          // Get the section ID from the entry or config
+          const sectionId =
+            prerenderedData.entry.contentType || prerenderedData.entry.sectionId || 'publications';
+
+          // Create a new contentData object that includes this entry
+          setContentData((prevData) => {
+            const newData = { ...prevData };
+
+            // Initialize the section if it doesn't exist
+            if (!newData[sectionId]) {
+              newData[sectionId] = {};
+            }
+
+            // Format depends on whether we're dealing with an object or array
+            if (Array.isArray(newData[sectionId])) {
+              // If it's an array, ensure we don't add duplicates
+              const exists = newData[sectionId].some(
+                (item) => item.id === prerenderedData.entry.id,
+              );
+              if (!exists) {
+                newData[sectionId] = [...newData[sectionId], prerenderedData.entry];
+              }
+            } else {
+              // If it's an object map, add/update the entry by ID
+              newData[sectionId][prerenderedData.entry.id] = prerenderedData.entry;
+            }
+
+            console.log('Updated contentData with prerendered entry:', newData);
+            return newData;
+          });
+
           setIsLoading(false);
-          setShorturlsLoaded(true); // Consider shorturls loaded if we have prerendered data
+          setShorturlsLoaded(true);
           return;
         }
       } catch (e) {
@@ -250,6 +283,15 @@ function App({ config }) {
                 />
               ))}
 
+              {/* Add duplicate routes with trailing slashes for main section paths */}
+              {routes.map((section) => (
+                <Route
+                  key={`${section.id}-slash`}
+                  path={`${section.path}/`}
+                  element={renderSectionComponent(section)}
+                />
+              ))}
+
               {/* Dynamically create routes for all content detail pages */}
               {routes
                 .filter((section) => section.detailPath)
@@ -261,9 +303,28 @@ function App({ config }) {
                   />
                 ))}
 
+              {/* Add duplicate routes with trailing slashes */}
+              {routes
+                .filter((section) => section.detailPath)
+                .map((section) => (
+                  <Route
+                    key={`${section.id}-detail-slash`}
+                    path={`${section.detailPath}/`}
+                    element={<ContentDetails section={section} config={config} />}
+                  />
+                ))}
+
               {/* Short URL redirect route - only add when shorturls are loaded */}
               {shorturlsLoaded && (
                 <Route path="/:shorturl" element={<ShortUrlRedirect shorturlMap={shorturlMap} />} />
+              )}
+
+              {/* Short URL redirect route with trailing slash */}
+              {shorturlsLoaded && (
+                <Route
+                  path="/:shorturl/"
+                  element={<ShortUrlRedirect shorturlMap={shorturlMap} />}
+                />
               )}
 
               {/* 404 route */}

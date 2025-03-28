@@ -6,9 +6,9 @@ After beginning my career as a Systems Engineer at Infosys, I pivoted toward the
 
 ## Research Evolution
 
-My research journey demonstrates a consistent theme: making complex data understandable. Starting with "NodeTrix-Multiplex" for visualizing community structures in networks, I progressively tackled more complex challenges in dynamic data visualization. My work on "Set Streams" and "Layered Set Intersection Graphs" introduced novel ways to visualize changing group memberships over time.
+My research journey demonstrates a consistent theme: making complex data understandable. Starting with ["NodeTrix-Multiplex"](/publications/Agarwal2017Nodetrix) for visualizing community structures in networks, I progressively tackled more complex challenges in dynamic data visualization. My work on ["Set Streams"](/setstreams) and ["Layered Set Intersection Graphs"](/dynamicsets) introduced novel ways to visualize changing group memberships over time.
 
-A significant focus of my work has been visualizing AI behavior. Projects like "Bombalytics" and my analysis of multi-agent scheduling behaviors in the Flatland competition showcase my ability to develop visualization techniques that help understand how AI agents interact, compete, and collaborate.
+A significant focus of my work has been visualizing AI behavior. Projects like ["Bombalytics"](/bombalytics) and my analysis of multi-agent scheduling behaviors in the Flatland competition showcase my ability to develop visualization techniques that help understand how AI agents interact, compete, and collaborate [(1)][1] [(2)][2].
 
 ## Award-Winning Innovations
 
@@ -19,3 +19,6 @@ My research has been recognized with several prestigious awards. I'm particularl
 Today, while exploring the path ahead, I remain committed to bridging the gap between advanced technology and human understanding, creating tools that empower people to derive actionable insights from complex data.
 
 My academic background, coupled with practical experience across various domains, has equipped me with a unique perspective on how data visualization and AI can be leveraged to solve complex problems. I'm excited about the future possibilities in this rapidly evolving field.
+
+[1]: fv
+[2]: /publications/Agarwal2022Visualizing
