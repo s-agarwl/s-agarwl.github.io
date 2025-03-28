@@ -158,6 +158,36 @@ const Documentation = () => {
 }`}
             </pre>
           </div>
+
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <h3 className="text-xl font-bold mb-3">article</h3>
+            <p className="mb-3 text-gray-600">
+              Long-form article with markdown content, banner image, and optional animation.
+            </p>
+            <h4 className="font-semibold mb-2">Content Structure:</h4>
+            <pre className="bg-gray-100 p-3 rounded text-sm overflow-auto">
+              {`{
+  "title": "Article Title",
+  "resourceDir": "/section-id/", // Directory where resources are stored
+  "markdownFile": "content.md", // Name of the markdown file
+  "banner": {
+    "image": "banner.jpg", // Banner image filename
+    "title": "Banner Title", // Optional banner title
+    "subtitle": "Banner Subtitle", // Optional banner subtitle
+    "showTitle": true // Whether to display the title on the banner
+  },
+  "animation": {
+    "enabled": true, // Whether to show the animation
+    "prefix": "I am ", // Prefix text before animation
+    "phrases": ["a researcher", "a developer", "passionate about data"] // Phrases to animate
+  }
+}`}
+            </pre>
+            <p className="mt-3 text-gray-600">
+              The article template reads markdown content from a file and renders it as an article.
+              All resources should be placed in a directory with the same name as the section ID.
+            </p>
+          </div>
         </div>
       </section>
 

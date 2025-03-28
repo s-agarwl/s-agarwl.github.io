@@ -11,6 +11,7 @@ const TemplateRegistry = {
   carousel: React.lazy(() => import('./sections/Carousel')),
   contact: React.lazy(() => import('./sections/Contact')),
   awards: React.lazy(() => import('./sections/Grid')),
+  article: React.lazy(() => import('./sections/Article')),
 
   // You can add more templates here as they are created
 };

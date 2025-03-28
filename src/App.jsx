@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import PropTypes from 'prop-types';
 import Documentation from './components/pageSections/Documentation';
-import MyStoryComponent from './components/pageSections/MyStoryComponent';
 import { GenericContentPage, ContentDetails } from './components/GenericContentPage';
 import HomeSections from './components/HomeSections';
 import DynamicSectionRenderer from './components/DynamicSectionRenderer';
@@ -67,9 +66,7 @@ function App({ config }) {
   // Helper function to render the appropriate component for a section
   const renderSectionComponent = (section) => {
     // Special handling for known custom components
-    if (section.id === 'MyStory') {
-      return <MyStoryComponent config={config} />;
-    } else if (section.id === 'Documentation') {
+    if (section.id === 'Documentation') {
       return <Documentation />;
     }
 

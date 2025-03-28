@@ -15,7 +15,7 @@
       "Talks",
       "Teaching",
       "Blog",
-      "MyStory"
+      "my-story"
     ]
   },
   "links": {
@@ -44,7 +44,7 @@
   "bibtexPath": "",
   "profilePhotoPath": "/profile-photo.png",
   "abstractPreviewLength": 10,
-  "descriptionPreviewLength": 20,
+  "descriptionPreviewLength": 10,
   "sections": [
     {
       "id": "Profile",
@@ -639,9 +639,33 @@
       }
     },
     {
-      "id": "MyStory",
+      "id": "my-story",
       "path": "/my-story",
-      "title": "My Story"
+      "title": "My Story",
+      "sectionHeading": "My Story",
+      "template": "article",
+      "content": {
+        "title": "Who am I?",
+        "resourceDir": "/my-story/",
+        "markdownFile": "content.md",
+        "banner": {
+          "image": "banner.png",
+          "title": "My Research Journey",
+          "subtitle": "The path that led me here",
+          "showTitle": false
+        },
+        "animation": {
+          "enabled": true,
+          "prefix": "I am ",
+          "phrases": [
+            "a systems engineer?",
+            "a full stack developer?",
+            "a data scientist?",
+            "<other fancy titles?>",
+            " a human who is passionate about data and AI. And this is my story."
+          ]
+        }
+      }
     },
     {
       "id": "Help",
