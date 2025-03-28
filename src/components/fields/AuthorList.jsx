@@ -5,6 +5,7 @@ const AuthorList = ({
   value,
   label,
   config,
+  researcherName,
   className = '',
   styleVariant,
   viewType = 'detail',
@@ -12,7 +13,8 @@ const AuthorList = ({
   if (!value) return null;
 
   const authors = Array.isArray(value) ? value : value.split(' and ');
-  const researcherName = config?.researcherName || '';
+  // Use the explicitly passed researcherName first, then fall back to config.researcherName
+  const researcherNameToUse = researcherName || config?.researcherName || '';
 
   // Get the appropriate class name
   const getClassName = () => {
@@ -30,7 +32,7 @@ const AuthorList = ({
   return (
     <p className={listClass}>
       {label && <b>{label}: </b>}
-      {renderAuthors(authors, researcherName)}
+      {renderAuthors(authors, researcherNameToUse)}
     </p>
   );
 };
@@ -39,6 +41,7 @@ AuthorList.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   label: PropTypes.string,
   config: PropTypes.object,
+  researcherName: PropTypes.string,
   className: PropTypes.string,
   styleVariant: PropTypes.string,
   viewType: PropTypes.oneOf(['list', 'card', 'detail']),

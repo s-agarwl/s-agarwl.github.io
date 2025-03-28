@@ -64,15 +64,27 @@ const GenericCard = ({ item, contentType, config }) => {
             viewType="card"
           />
 
-          {contentTypeConfig.metadata?.map((field, index) => (
-            <FieldRenderer
-              key={index}
-              component="Text"
-              label={field.label}
-              value={item[field.key]}
-              viewType="card"
-            />
-          ))}
+          {contentTypeConfig.metadata?.map((field, index) =>
+            field.key === 'authors' ? (
+              <FieldRenderer
+                key={index}
+                component="AuthorList"
+                label={field.label}
+                value={item[field.key]}
+                researcherName={config.researcherName}
+                config={config}
+                viewType="card"
+              />
+            ) : (
+              <FieldRenderer
+                key={index}
+                component="Text"
+                label={field.label}
+                value={item[field.key]}
+                viewType="card"
+              />
+            ),
+          )}
 
           {contentTypeConfig.links && contentType.toLowerCase() === 'publications' && (
             <PublicationLinks entryTags={item} showText={false} />
