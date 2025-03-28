@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { removeLatexBraces } from '../../utils/authorUtils';
+import { removeLatexBraces } from '/src/utils/authorUtils';
 
 const Heading = ({
   value,

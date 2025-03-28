@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { removeLatexBraces } from '../utils/authorUtils.jsx';
 import PublicationLinks from './PublicationLinks.jsx';
-import FieldRenderer from './fields/FieldRenderer';
+import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 
 const GenericCard = ({ item, contentType, config }) => {
@@ -19,7 +19,15 @@ const GenericCard = ({ item, contentType, config }) => {
   const handleCardClick = (e) => {
     // Prevent navigation if the user was dragging
     if (e.target.closest('.cursor-grabbing')) return;
-    navigate(`/${contentType}/${item.id}`);
+    // Use the section path from config instead of contentType directly
+    if (section && section.path) {
+      // Remove leading slash if present to avoid double slashes
+      const basePath = section.path.endsWith('/') ? section.path.substring(0, -1) : section.path;
+      navigate(`${basePath}/${item.id}`);
+    } else {
+      // Fallback to lowercase contentType if section path is not available
+      navigate(`/${contentType.toLowerCase()}/${item.id}`);
+    }
   };
 
   // Use the configuration from config.json if available, otherwise use fallback

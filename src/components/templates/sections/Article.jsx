@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
-import Section from '../../components/Section';
-import TypedAnimation from '../../components/TypedAnimation';
+import Section from '/src/components/Section';
+import TypedAnimation from '/src/components/TypedAnimation';
 
 /**
  * Article template for displaying long-form content with optional banner and animation

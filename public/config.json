@@ -662,11 +662,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "Help",
-      "path": "/help",
-      "title": "Help"
     }
   ]
 }

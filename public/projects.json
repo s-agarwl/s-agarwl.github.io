@@ -14,7 +14,8 @@
       "Demo": "https://example.com/dashboard-demo",
       "Documentation": "https://example.com/dashboard-docs"
     },
-    "awards": "Best Demo Award"
+    "awards": "Best Demo Award",
+    "shorturl": "proj1"
   },
   {
     "id": "project-2",

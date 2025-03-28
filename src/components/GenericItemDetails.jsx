@@ -7,7 +7,7 @@ import '../styles/markdown.css';
 import ReactPlayer from 'react-player';
 import { generateBibTexEntry, copyBibTexToClipboard } from '../utils/bibTexUtils';
 import { removeLatexBraces } from '../utils/authorUtils.jsx';
-import FieldRenderer from './fields/FieldRenderer';
+import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 
 const GenericItemDetails = ({ item, contentType, config }) => {

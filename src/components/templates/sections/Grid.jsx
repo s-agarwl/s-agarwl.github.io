@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Section from '../../components/Section';
+import Section from '/src/components/Section';
 import { Link } from 'react-router-dom';
 import { FaTrophy, FaMedal, FaAward, FaStar } from 'react-icons/fa';
 

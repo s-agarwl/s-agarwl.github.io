@@ -8,9 +8,9 @@ import Image from './Image';
 import ExpandableMarkdown from './ExpandableMarkdown';
 import Section from './Section';
 import LinkButtons from './LinkButtons';
-import PublicationLinks from '../PublicationLinks';
+import PublicationLinks from '/src/components/PublicationLinks';
 import Markdown from './Markdown';
-import componentStyles from '../../styles/componentStyles';
+import componentStyles from '/src/styles/componentStyles';
 
 // eslint-disable-next-line no-unused-vars
 const FieldRenderer = ({

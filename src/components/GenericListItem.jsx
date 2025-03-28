@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import FieldRenderer from './fields/FieldRenderer';
+import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 
 const GenericListItem = ({ item, contentType, config }) => {
@@ -13,9 +13,17 @@ const GenericListItem = ({ item, contentType, config }) => {
   const listConfig = section?.display?.list;
 
   const handleItemClick = (e) => {
-    // Prevent navigation if the click was on a link
-    if (e.target.closest('a')) return;
-    navigate(`/${contentType}/${item.id}`);
+    // Prevent navigation if the user was dragging
+    if (e.target.closest('.cursor-grabbing')) return;
+    // Use the section path from config instead of contentType directly
+    if (section && section.path) {
+      // Remove leading slash if present to avoid double slashes
+      const basePath = section.path.endsWith('/') ? section.path.substring(0, -1) : section.path;
+      navigate(`${basePath}/${item.id}`);
+    } else {
+      // Fallback to lowercase contentType if section path is not available
+      navigate(`/${contentType.toLowerCase()}/${item.id}`);
+    }
   };
 
   const renderContent = () => {

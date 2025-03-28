@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { renderAuthors } from '../../utils/authorUtils';
+import { renderAuthors } from '/src/utils/authorUtils';
 
 const AuthorList = ({
   value,

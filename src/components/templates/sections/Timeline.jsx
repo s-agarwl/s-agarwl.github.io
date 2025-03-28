@@ -1,6 +1,6 @@
 import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import Section from '../../components/Section';
+import Section from '/src/components/Section';
 
 /**
  * Timeline template for displaying chronological content like education or work experience

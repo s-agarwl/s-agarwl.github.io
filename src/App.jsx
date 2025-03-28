@@ -4,14 +4,18 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import PropTypes from 'prop-types';
-import Documentation from './components/pageSections/Documentation';
+import Documentation from './components/Documentation';
 import { GenericContentPage, ContentDetails } from './components/GenericContentPage';
 import PageWithSubSections from './components/PageWithSubSections';
 import DynamicSectionRenderer from './components/DynamicSectionRenderer';
+import ShortUrlRedirect from './components/ShortUrlRedirect';
+import convertBibtexToJson from './utils/bibtexToJson';
 
 function App({ config }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [contentData, setContentData] = useState({});
+  const [shorturlsLoaded, setShorturlsLoaded] = useState(false);
 
   // Extract sections that have paths defined (for routing)
   const routes = useMemo(() => {
@@ -35,6 +39,123 @@ function App({ config }) {
     return routeData;
   }, [config.sections]);
 
+  // Load data for sections with dataSources to build short URL mapping
+  useEffect(() => {
+    const fetchContentData = async () => {
+      try {
+        const newContentData = {};
+
+        // Find sections with dataSources
+        const sectionsWithData = config.sections.filter((section) => section.dataSource);
+
+        // Early exit if no data sources
+        if (sectionsWithData.length === 0) {
+          console.log('No sections with dataSource found');
+          setShorturlsLoaded(true);
+          setIsLoading(false);
+          return;
+        }
+
+        // Track promises for all data fetches
+        const fetchPromises = [];
+
+        for (const section of sectionsWithData) {
+          const fetchPromise = fetch(section.dataSource)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`Failed to fetch data for ${section.id}: ${response.statusText}`);
+              }
+
+              if (section.dataType === 'bibtex') {
+                return response.text().then((bibtexText) => {
+                  console.log(
+                    `Loaded bibtex data for ${section.id}, size: ${bibtexText.length} chars`,
+                  );
+                  // Use the existing bibtexToJson utility
+                  const parsedEntries = convertBibtexToJson(bibtexText);
+
+                  // Create a map of entries by ID for easier lookup
+                  const entriesById = {};
+                  parsedEntries.forEach((entry) => {
+                    entriesById[entry.id] = entry;
+                  });
+
+                  // Store the parsed data
+                  newContentData[section.id] = entriesById;
+
+                  console.log(`Parsed ${parsedEntries.length} bibtex entries`);
+                });
+              } else {
+                return response.json().then((jsonData) => {
+                  console.log(
+                    `Loaded JSON data for ${section.id}, entries: ${Array.isArray(jsonData) ? jsonData.length : 'object'}`,
+                  );
+                  newContentData[section.id] = jsonData;
+                });
+              }
+            })
+            .catch((err) => {
+              console.error(`Error loading data for ${section.id}:`, err);
+            });
+
+          fetchPromises.push(fetchPromise);
+        }
+
+        // Wait for all data to be fetched
+        await Promise.all(fetchPromises);
+
+        // Set the loaded data
+        setContentData(newContentData);
+        setShorturlsLoaded(true);
+        setIsLoading(false);
+      } catch (err) {
+        console.error('Error loading content data:', err);
+        setError(`Failed to load data: ${err.message}`);
+        setIsLoading(false);
+      }
+    };
+
+    fetchContentData();
+  }, [config.sections]);
+
+  // Create a mapping of short URLs to their full content paths
+  const shorturlMap = useMemo(() => {
+    const mapping = {};
+
+    // For each section with content data
+    Object.entries(contentData).forEach(([sectionId, sectionData]) => {
+      const section = config.sections.find((s) => s.id === sectionId);
+      if (!section || !section.path) return;
+
+      const basePath = section.path.startsWith('/') ? section.path : `/${section.path}`;
+
+      // Handle different data types
+      if (Array.isArray(sectionData)) {
+        // For JSON array data
+        sectionData.forEach((item) => {
+          if (item.shorturl) {
+            mapping[item.shorturl] = `${basePath}/${item.id}`;
+          }
+        });
+      } else if (typeof sectionData === 'object') {
+        // For JSON object data or parsed bibtex data
+        Object.values(sectionData).forEach((item) => {
+          if (item.shorturl) {
+            mapping[item.shorturl] = `${basePath}/${item.id}`;
+          }
+        });
+      }
+    });
+
+    console.log('Short URL mapping created:', mapping);
+    return mapping;
+  }, [contentData, config.sections]);
+
+  // Print shorturlMap type and content for debugging
+  console.log('App - shorturlMap type:', typeof shorturlMap);
+  console.log('App - shorturlMap has entries:', shorturlMap && Object.keys(shorturlMap).length > 0);
+
+  // Check for prerendered data
   useEffect(() => {
     // Check if we have prerendered publication data
     const publicationDataElement = document.getElementById('publication-data');
@@ -44,6 +165,7 @@ function App({ config }) {
         if (prerenderedData.entry && prerenderedData.config) {
           // We're on a publication page with prerendered data
           setIsLoading(false);
+          setShorturlsLoaded(true); // Consider shorturls loaded if we have prerendered data
           return;
         }
       } catch (e) {
@@ -51,16 +173,30 @@ function App({ config }) {
         setError(`Failed to parse prerendered data: ${e.message}`);
       }
     }
-
-    setIsLoading(false);
   }, []);
 
+  // Show loading state for the entire app
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="text-xl mb-4">Loading...</div>
+          <div className="text-sm text-gray-600">Initializing application...</div>
+        </div>
+      </div>
+    );
   }
 
+  // Show error state if there's an error
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="text-xl mb-4 text-red-600">Error</div>
+          <div className="text-sm text-gray-800">{error}</div>
+        </div>
+      </div>
+    );
   }
 
   // Helper function to render the appropriate component for a section
@@ -124,6 +260,11 @@ function App({ config }) {
                     element={<ContentDetails section={section} config={config} />}
                   />
                 ))}
+
+              {/* Short URL redirect route - only add when shorturls are loaded */}
+              {shorturlsLoaded && (
+                <Route path="/:shorturl" element={<ShortUrlRedirect shorturlMap={shorturlMap} />} />
+              )}
 
               {/* 404 route */}
               <Route path="*" element={<NotFound config={config} />} />

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { getTemplate, templateExists } from '../templates/registry';
+import { getTemplate, templateExists } from './templates/registry';
 import SubsectionsRenderer from './SubsectionsRenderer';
 
 /**

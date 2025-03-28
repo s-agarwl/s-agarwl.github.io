@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Section from '../../components/Section';
+import Section from '/src/components/Section';
 import Slider from 'react-slick';
-import GenericCard from '../../components/GenericCard';
+import GenericCard from '/src/components/GenericCard';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
-import convertBibtexToJson from '../../utils/bibtexToJson';
+import convertBibtexToJson from '/src/utils/bibtexToJson';
 
 // Import CSS files for react-slick
 import 'slick-carousel/slick/slick.css';
