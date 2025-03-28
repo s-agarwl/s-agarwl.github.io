@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Section from '../../components/Section';
 import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
+import GenericCard from '../../components/GenericCard';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import convertBibtexToJson from '../../utils/bibtexToJson';
 
 // Import CSS files for react-slick
 import 'slick-carousel/slick/slick.css';
@@ -15,15 +16,22 @@ import 'slick-carousel/slick/slick-theme.css';
  * Expected content structure:
  * {
  *   title: string,               // Section title
- *   itemsType: string,           // Type of items (publication, project, etc.)
- *   citationKeys: [string],      // Array of citation keys (for publications)
- *   itemIds: [string],           // Array of item IDs (for other content types)
+ *   items: [                     // Array of items to display
+ *     {
+ *       type: string,            // Content type (publication, project, etc.)
+ *       id: string,              // ID of the item
+ *     }
+ *   ],
+ *   // Legacy support
+ *   itemsType: string,           // Type of items (for backward compatibility)
+ *   citationKeys: [string],      // Array of citation keys (for backward compatibility)
+ *   itemIds: [string],           // Array of item IDs (for backward compatibility)
  *   showDots: boolean,           // Whether to show dots navigation
  *   showArrows: boolean,         // Whether to show arrow navigation
  *   itemsPerPage: number         // Number of items to show per page
  * }
  */
-const Carousel = ({ content, sectionId, parentId }) => {
+const Carousel = ({ content, sectionId, parentId, config }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,35 +39,122 @@ const Carousel = ({ content, sectionId, parentId }) => {
   // Generate a unique id that includes the parent section if applicable
   const uniqueId = parentId ? `${parentId}-${sectionId}` : sectionId;
 
-  // Fetch items based on content type and IDs
+  // Fetch items based on content configuration
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        // This is a placeholder for actual data fetching logic
-        // In a real implementation, this would fetch data based on the itemsType and IDs
+        let itemsToFetch = [];
 
-        // For now, just create placeholder items
-        const placeholderItems = (content.citationKeys || content.itemIds || []).map(
-          (id, index) => ({
-            id,
-            title: `Item ${index + 1}`,
-            description: 'Item description goes here',
-            image: 'https://via.placeholder.com/300x200',
-            link: `/${content.itemsType}/${id}`,
-          }),
-        );
+        // Check if using the new items format
+        if (Array.isArray(content.items) && content.items.length > 0) {
+          // New format with mixed content types
+          itemsToFetch = content.items;
+        } else if (Array.isArray(content.ids) && content.ids.length > 0) {
+          // Support for ids array that might be used instead of items
+          itemsToFetch = content.ids;
+        } else if (content.itemsType) {
+          // Legacy format with single content type
+          const ids = content.citationKeys || content.itemIds || [];
+          itemsToFetch = ids.map((id) => ({ type: content.itemsType, id }));
+        } else {
+          throw new Error('No items specified in carousel configuration');
+        }
 
-        setItems(placeholderItems);
+        if (itemsToFetch.length === 0) {
+          setItems([]);
+          setLoading(false);
+          return;
+        }
+
+        // Group items by type for efficient fetching
+        const itemsByType = itemsToFetch.reduce((acc, item) => {
+          // Don't lowercase the type - use it exactly as provided
+          const type = item.type;
+          if (!acc[type]) acc[type] = [];
+          acc[type].push(item.id);
+          return acc;
+        }, {});
+
+        const loadedItems = [];
+
+        // Fetch data for each content type
+        for (const [type, ids] of Object.entries(itemsByType)) {
+          // Find the section that contains the data source for this type
+          const sections = config.sections || [];
+
+          // First try exact match (this should be the common case if config is correct)
+          let matchingSection = sections.find(
+            (section) =>
+              section.id === type && section.template === 'listOfItems' && section.dataSource,
+          );
+
+          // If no exact match, try case-insensitive and singular/plural variants as fallbacks
+          if (!matchingSection) {
+            const typeLower = type.toLowerCase();
+            matchingSection = sections.find(
+              (section) =>
+                (section.id.toLowerCase() === typeLower ||
+                  section.id.toLowerCase() === typeLower.replace(/s$/, '')) && // Try without trailing 's'
+                section.template === 'listOfItems' &&
+                section.dataSource,
+            );
+          }
+
+          if (!matchingSection) {
+            console.warn(
+              `No section found with id ${type} and template listOfItems. Skipping these items.`,
+            );
+            continue;
+          }
+
+          // Fetch the data
+          const response = await fetch(matchingSection.dataSource);
+          if (!response.ok) {
+            console.warn(
+              `Failed to fetch data for ${type}: ${response.statusText}. Skipping these items.`,
+            );
+            continue;
+          }
+
+          // Parse the data based on data type
+          let typeItems = [];
+          if (matchingSection.dataType === 'bibtex') {
+            const bibtexData = await response.text();
+            typeItems = convertBibtexToJson(bibtexData);
+          } else {
+            typeItems = await response.json();
+          }
+
+          // Filter items by ID and add content type
+          const filteredItems = typeItems
+            .filter((item) => ids.includes(item.id))
+            .map((item) => ({ ...item, contentType: type }));
+
+          loadedItems.push(...filteredItems);
+        }
+
+        // Sort items to match the original order in the config
+        const itemsMap = new Map(loadedItems.map((item) => [item.id, item]));
+        const orderedItems = itemsToFetch.map(({ id }) => itemsMap.get(id)).filter(Boolean); // Remove any undefined items
+
+        setItems(orderedItems);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching carousel items:', err);
-        setError('Failed to load items');
+        setError(err.message);
         setLoading(false);
       }
     };
 
     fetchItems();
-  }, [content.citationKeys, content.itemIds, content.itemsType]);
+  }, [
+    content.items,
+    content.ids,
+    content.citationKeys,
+    content.itemIds,
+    content.itemsType,
+    config.sections,
+  ]);
 
   // Custom arrow components
   const NextArrow = ({ onClick }) => (
@@ -150,27 +245,8 @@ const Carousel = ({ content, sectionId, parentId }) => {
       <div className="w-full px-8">
         <Slider {...settings}>
           {items.map((item) => (
-            <div key={item.id} className="px-2">
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                {item.image && (
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                )}
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{item.description}</p>
-                  {item.link && (
-                    <Link to={item.link} className="text-blue-500 hover:text-blue-700 font-medium">
-                      Learn more
-                    </Link>
-                  )}
-                </div>
-              </div>
+            <div key={`${item.contentType}-${item.id}`} className="px-2">
+              <GenericCard item={item} contentType={item.contentType} config={config} />
             </div>
           ))}
         </Slider>
@@ -182,15 +258,28 @@ const Carousel = ({ content, sectionId, parentId }) => {
 Carousel.propTypes = {
   content: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    itemsType: PropTypes.string,
-    citationKeys: PropTypes.arrayOf(PropTypes.string),
-    itemIds: PropTypes.arrayOf(PropTypes.string),
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+      }),
+    ),
+    ids: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+      }),
+    ),
+    itemsType: PropTypes.string, // Legacy support
+    citationKeys: PropTypes.arrayOf(PropTypes.string), // Legacy support
+    itemIds: PropTypes.arrayOf(PropTypes.string), // Legacy support
     showDots: PropTypes.bool,
     showArrows: PropTypes.bool,
     itemsPerPage: PropTypes.number,
   }).isRequired,
   sectionId: PropTypes.string,
   parentId: PropTypes.string,
+  config: PropTypes.object,
 };
 
 export default Carousel;

@@ -6,7 +6,7 @@ import NotFound from './components/NotFound';
 import PropTypes from 'prop-types';
 import Documentation from './components/pageSections/Documentation';
 import { GenericContentPage, ContentDetails } from './components/GenericContentPage';
-import HomeSections from './components/HomeSections';
+import PageWithSubSections from './components/PageWithSubSections';
 import DynamicSectionRenderer from './components/DynamicSectionRenderer';
 
 function App({ config }) {
@@ -103,7 +103,7 @@ function App({ config }) {
           <div className="container mx-auto px-4 py-8 max-w-6xl">
             <Routes>
               {/* Home page route */}
-              <Route path="/" element={<HomeSections config={config} />} />
+              <Route path="/" element={<PageWithSubSections config={config} />} />
 
               {/* Dynamically create routes for sections that have defined paths */}
               {routes.map((section) => (

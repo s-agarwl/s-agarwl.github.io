@@ -183,15 +183,11 @@
           "title": "Featured Works",
           "content": {
             "title": "Featured",
-            "itemsType": "publication",
-            "citationKeys": [
-              "Agarwal2023Dissertation",
-              "Agarwal2020Bombalytics",
-              "Agarwal2020SetStreams",
-              "Agarwal2020Visualizing",
-              "Agarwal2020Design",
-              "Agarwal2020VisualizingSets",
-              "Agarwal2022Spatio"
+            "ids": [
+              { "type": "Publications", "id": "Agarwal2023Dissertation" },
+              { "type": "Publications", "id": "Agarwal2020Bombalytics" },
+              { "type": "Publications", "id": "Agarwal2020VisualizingSets" },
+              { "type": "Publications", "id": "Agarwal2022Spatio" }
             ]
           }
         },
