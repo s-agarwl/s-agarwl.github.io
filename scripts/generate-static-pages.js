@@ -778,6 +778,12 @@ async function createContentHtmlFile(item, templateHtml, config, shortenedTextsD
       seoDescription: description,
       canonicalUrl: `${config.site.baseUrl}${itemPath}`,
       googleAnalytics: generateGoogleAnalytics(config.site.googleAnalyticsId),
+      publicationDOI:
+        contentType.toLowerCase() === 'publications' && item.entryTags?.doi
+          ? item.entryTags.doi
+          : contentType.toLowerCase() === 'publications' && item.doi
+            ? item.doi
+            : '',
     });
 
     // Create DOM from processed HTML template
@@ -1028,6 +1034,7 @@ async function generateStaticPages() {
       seoDescription: config.site.description,
       canonicalUrl: config.site.baseUrl,
       googleAnalytics: generateGoogleAnalytics(config.site.googleAnalyticsId),
+      publicationDOI: '', // Empty for main page
     });
 
     // Create DOM for the main index page and update meta tags
@@ -1307,6 +1314,25 @@ function renderPrerenderContent(contentDiv, item, document, contentType) {
     authorsP.appendChild(authorsStrong);
     authorsP.appendChild(document.createTextNode(authors));
     metadataDiv.appendChild(authorsP);
+  }
+
+  // DOI
+  const doi = item.doi || (item.entryTags && item.entryTags.doi);
+  if (doi && (contentType.toLowerCase() === 'publications' || contentType === 'Publications')) {
+    const doiP = document.createElement('p');
+    const doiStrong = document.createElement('strong');
+    doiStrong.textContent = 'DOI: ';
+    doiP.appendChild(doiStrong);
+
+    // Create a clickable DOI link
+    const doiLink = document.createElement('a');
+    doiLink.href = `https://doi.org/${doi}`;
+    doiLink.textContent = doi;
+    doiLink.target = '_blank';
+    doiLink.rel = 'noopener noreferrer';
+
+    doiP.appendChild(doiLink);
+    metadataDiv.appendChild(doiP);
   }
 
   // Abstract

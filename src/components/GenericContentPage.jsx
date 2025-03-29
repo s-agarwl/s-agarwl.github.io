@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import GenericCard from './GenericCard';
 import GenericListItem from './GenericListItem';
 import GenericItemDetails from './GenericItemDetails';
@@ -166,6 +167,7 @@ const GenericContentPage = ({ config, section }) => {
 };
 
 const ContentDetails = ({ config, section }) => {
+  const { id } = useParams();
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -176,9 +178,6 @@ const ContentDetails = ({ config, section }) => {
         if (!section.dataSource) {
           throw new Error(`Section ${section.id} does not have a dataSource defined`);
         }
-
-        // Get the item ID from the URL
-        const itemId = window.location.pathname.split('/').pop();
 
         // Fetch the data
         const response = await fetch(section.dataSource);
@@ -196,10 +195,10 @@ const ContentDetails = ({ config, section }) => {
           data = await response.json();
         }
 
-        const foundItem = data.find((i) => i.id === itemId);
+        const foundItem = data.find((i) => i.id === id);
 
         if (!foundItem) {
-          throw new Error(`Item with ID ${itemId} not found`);
+          throw new Error(`Item with ID ${id} not found`);
         }
         setItem(foundItem);
       } catch (err) {
@@ -210,7 +209,7 @@ const ContentDetails = ({ config, section }) => {
     };
 
     fetchContent();
-  }, [section]);
+  }, [section, id]);
 
   if (isLoading) {
     return <div>Loading...</div>;

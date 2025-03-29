@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import process from 'process';
 import convertBibtexToJson from '../src/utils/bibtexToJson.js';
 import { processContentItem } from '../src/utils/textOptimization.js';
 
@@ -44,51 +45,6 @@ function writeJsonFile(filePath, data) {
   }
 }
 
-// Load configurations
-const config = JSON.parse(fs.readFileSync(path.join(seoDir, 'config.json'), 'utf8'));
-
-// Process BibTeX entries with error handling
-function processBibtexEntries(filePath) {
-  try {
-    if (!fs.existsSync(filePath)) {
-      console.warn(`BibTeX file not found: ${filePath}`);
-      return [];
-    }
-
-    const bibtexData = fs.readFileSync(filePath, 'utf8');
-    const entries = convertBibtexToJson(bibtexData);
-
-    if (!Array.isArray(entries)) {
-      throw new Error('Invalid BibTeX data format');
-    }
-
-    return entries.map((entry) => processContentItem(entry, 'publication', config));
-  } catch (error) {
-    console.error(`Error processing BibTeX file ${filePath}:`, error.message);
-    return [];
-  }
-}
-
-// Process JSON content with error handling
-function processJsonContent(filePath, type) {
-  try {
-    if (!fs.existsSync(filePath)) {
-      console.warn(`JSON file not found: ${filePath}`);
-      return [];
-    }
-
-    const data = readJsonFile(filePath);
-    if (!Array.isArray(data)) {
-      throw new Error(`Invalid JSON data format in ${filePath}`);
-    }
-
-    return data.map((item) => processContentItem(item, type, config));
-  } catch (error) {
-    console.error(`Error processing JSON file ${filePath}:`, error.message);
-    return [];
-  }
-}
-
 // Main function to process all content
 export async function generateSeoTexts() {
   try {
@@ -96,11 +52,14 @@ export async function generateSeoTexts() {
 
     // Load configurations with error handling
     const configPath = path.join(seoDir, 'config.json');
-    const config = readJsonFile(configPath);
+    const seoConfig = readJsonFile(configPath);
 
-    if (!config || !config.fallback) {
+    if (!seoConfig || !seoConfig.fallback) {
       throw new Error('Invalid config.json: missing required fields');
     }
+
+    // Load main website config to get sections
+    const websiteConfig = readJsonFile(path.join(publicDir, 'config.json'));
 
     const shortenedTexts = {
       items: {},
@@ -110,55 +69,76 @@ export async function generateSeoTexts() {
       },
     };
 
-    // Process publications
-    console.log('Processing publications...');
-    const publications = processBibtexEntries(path.join(publicDir, 'data/pubs.bib'));
-    publications.forEach((pub) => {
-      if (pub && pub.id) {
-        shortenedTexts.items[`publications/${pub.id}`] = pub;
-      }
-    });
-    console.log(`Processed ${publications.length} publications`);
+    // Process BibTeX entries with error handling
+    function processBibtexEntries(filePath) {
+      try {
+        if (!fs.existsSync(filePath)) {
+          console.warn(`BibTeX file not found: ${filePath}`);
+          return [];
+        }
 
-    // Process projects
-    console.log('Processing projects...');
-    const projects = processJsonContent(path.join(publicDir, 'data/projects.json'), 'project');
-    projects.forEach((proj) => {
-      if (proj && proj.id) {
-        shortenedTexts.items[`projects/${proj.id}`] = proj;
-      }
-    });
-    console.log(`Processed ${projects.length} projects`);
+        const bibtexData = fs.readFileSync(filePath, 'utf8');
+        const entries = convertBibtexToJson(bibtexData);
 
-    // Process talks
-    console.log('Processing talks...');
-    const talks = processJsonContent(path.join(publicDir, 'data/talks.json'), 'talk');
-    talks.forEach((talk) => {
-      if (talk && talk.id) {
-        shortenedTexts.items[`talks/${talk.id}`] = talk;
-      }
-    });
-    console.log(`Processed ${talks.length} talks`);
+        if (!Array.isArray(entries)) {
+          throw new Error('Invalid BibTeX data format');
+        }
 
-    // Process blog posts
-    console.log('Processing blog posts...');
-    const blogPosts = processJsonContent(path.join(publicDir, 'data/blog.json'), 'blog');
-    blogPosts.forEach((post) => {
-      if (post && post.id) {
-        shortenedTexts.items[`blog/${post.id}`] = post;
+        return entries.map((entry) => processContentItem(entry, 'publication', seoConfig));
+      } catch (error) {
+        console.error(`Error processing BibTeX file ${filePath}:`, error.message);
+        return [];
       }
-    });
-    console.log(`Processed ${blogPosts.length} blog posts`);
+    }
 
-    // Process teaching content
-    console.log('Processing teaching content...');
-    const teaching = processJsonContent(path.join(publicDir, 'data/teaching.json'), 'teaching');
-    teaching.forEach((item) => {
-      if (item && item.id) {
-        shortenedTexts.items[`teaching/${item.id}`] = item;
+    // Process JSON content with error handling
+    function processJsonContent(filePath, type) {
+      try {
+        if (!fs.existsSync(filePath)) {
+          console.warn(`JSON file not found: ${filePath}`);
+          return [];
+        }
+
+        const data = readJsonFile(filePath);
+        if (!Array.isArray(data)) {
+          throw new Error(`Invalid JSON data format in ${filePath}`);
+        }
+
+        return data.map((item) => processContentItem(item, type, seoConfig));
+      } catch (error) {
+        console.error(`Error processing JSON file ${filePath}:`, error.message);
+        return [];
       }
-    });
-    console.log(`Processed ${teaching.length} teaching items`);
+    }
+
+    // Dynamically process all sections that have dataSource defined
+    const contentSections = websiteConfig.sections.filter((section) => section.dataSource);
+
+    for (const section of contentSections) {
+      const pathKey = section.path.replace(/^\//, ''); // Remove leading slash
+      const contentType = pathKey.toLowerCase(); // Match existing type naming
+      const dataPath = path.join(publicDir, section.dataSource.replace(/^\//, ''));
+
+      console.log(`Processing ${section.title || section.id}...`);
+
+      // Process based on dataType
+      let items = [];
+      if (section.dataType === 'bibtex') {
+        items = processBibtexEntries(dataPath);
+      } else {
+        // Default to JSON processing
+        items = processJsonContent(dataPath, contentType);
+      }
+
+      // Store the processed items
+      items.forEach((item) => {
+        if (item && item.id) {
+          shortenedTexts.items[`${pathKey}/${item.id}`] = item;
+        }
+      });
+
+      console.log(`Processed ${items.length} ${section.title || section.id} items`);
+    }
 
     // Save the results
     const outputPath = path.join(seoDir, 'shortened-texts.json');

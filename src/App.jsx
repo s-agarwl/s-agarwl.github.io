@@ -304,7 +304,7 @@ function App({ config }) {
                 ))}
 
               {/* Add duplicate routes with trailing slashes */}
-              {routes
+              {/* {routes
                 .filter((section) => section.detailPath)
                 .map((section) => (
                   <Route
@@ -312,7 +312,7 @@ function App({ config }) {
                     path={`${section.detailPath}/`}
                     element={<ContentDetails section={section} config={config} />}
                   />
-                ))}
+                ))} */}
 
               {/* Short URL redirect route - only add when shorturls are loaded */}
               {shorturlsLoaded && (
