@@ -1,0 +1,464 @@
+{
+  "items": {
+    "publications/Agarwal2020Bombalytics": {
+      "id": "Agarwal2020Bombalytics",
+      "type": "publication",
+      "title": {
+        "original": "Bombalytics: Visualization of Competition and Collaboration Strategies of Players in a Bomb Laying Game",
+        "fallback": "Bombalytics: Visualization of Competition and Collaborati..."
+      },
+      "description": {
+        "original": "Competition and collaboration form complex interaction patterns between the agents and objects involved. Only by understanding these interaction patterns, we can reveal the strategies the participating parties applied. In this paper, we study such competition and collaboration behavior for a computer game. Serving as a testbed for artificial intelligence, the multiplayer bomb laying game Pommerman provides a rich source of advanced behavior of computer agents. We propose a visualization approach that shows an overview of multiple games, with a detailed timeline-based visualization for exploring the specifics of each game. Since an analyst can only fully understand the data when considering the direct and indirect interactions between agents, we suggest various visual encodings of these interactions. Based on feedback from expert users and an application example, we demonstrate that the approach helps identify central competition strategies and provides insights on collaboration.",
+        "fallback": "Competition and collaboration form complex interaction patterns between the agents and objects involved."
+      }
+    },
+    "publications/Agarwal2020SetStreams": {
+      "id": "Agarwal2020SetStreams",
+      "type": "publication",
+      "title": {
+        "original": "{Set Streams}: Visual Exploration of Dynamic Overlapping Sets",
+        "fallback": "{Set Streams}: Visual Exploration of Dynamic Overlapping ..."
+      },
+      "description": {
+        "original": "In many applications, membership of set elements changes over time. Since each element can be present in multiple sets, the sets also overlap. As a result, it becomes challenging to visualize the temporal change in set membership of elements across several timesteps while showing individual set intersections. We propose Set Streams, a visualization technique that represents changing set structures on a timeline as branching and merging streams. The streams encode the changing membership of elements with set intersections. A query-based selection mechanism supports a flexible comparison of selected groups of elements across the temporal evolution. The main timeline view is complemented with additional panels to provide details about the elements. While the proposed visualization is an application-independent visualization technique for dynamic sets, we demonstrate its effectiveness and applicability through three diverse application examples and expert feedback.",
+        "fallback": "In many applications, membership of set elements changes over time. Since each element can be present in multiple sets, the sets also overlap."
+      }
+    },
+    "publications/Krause2023Visually": {
+      "id": "Krause2023Visually",
+      "type": "publication",
+      "title": {
+        "original": "Visually Abstracting Event Sequences as Double Trees Enriched with Category-Based Comparison",
+        "fallback": "Visually Abstracting Event Sequences as Double Trees Enri..."
+      },
+      "description": {
+        "original": "Abstract Event sequence visualization aids analysts in many domains to better understand and infer new insights from event data. Analysing behaviour before or after a certain event of interest is a common task in many scenarios. In this paper, we introduce, formally define, and position double trees as a domain-agnostic tree visualization approach for this task. The visualization shows the sequences that led to the event of interest as a tree on the left, and those that followed on the right. Moreover, our approach enables users to create selections based on event attributes to interactively compare the events and sequences along colour-coded categories. We integrate the double tree and category-based comparison into a user interface for event sequence analysis. In three application examples, we show a diverse set of scenarios, covering short and long time spans, non-spatial and spatial events, human and artificial actors, to demonstrate the general applicability of the approach.",
+        "fallback": "Abstract Event sequence visualization aids analysts in many domains to better understand and infer new insights from event data."
+      }
+    },
+    "publications/Liebers2023Viscomet": {
+      "id": "Liebers2023Viscomet",
+      "type": "publication",
+      "title": {
+        "original": "{VisCoMET:} Visually Analyzing Team Collaboration in Medical Emergency Trainings",
+        "fallback": "{VisCoMET:} Visually Analyzing Team Collaboration in Medi..."
+      },
+      "description": {
+        "original": "Handling emergencies requires efficient and effective collaboration of medical professionals. To analyze their performance, in an application study, we have developed VisCoMET, a visual analytics approach displaying interactions of healthcare personnel in a triage training of a mass casualty incident. The application scenario stems from social interaction research, where the collaboration of teams is studied from different perspectives. We integrate recorded annotations from multiple sources, such as recorded videos of the sessions, transcribed communication, and eye-tracking information. For each session, an information-rich timeline visualizes events across these different channels, specifically highlighting interactions between the team members. We provide algorithmic support to identify frequent event patterns and to search for user-defined event sequences. Comparing different teams, an overview visualization aggregates each training session in a visual glyph as a node, connected to similar sessions through edges. An application example shows the usage of the approach in the comparative analysis of triage training sessions, where multiple teams encountered the same scene, and highlights discovered insights. The approach was evaluated through feedback from visualization and social interaction experts. The results show that the approach supports reflecting on teams performance by exploratory analysis of collaboration behavior while particularly enabling the comparison of triage training sessions.",
+        "fallback": "Handling emergencies requires efficient and effective collaboration of medical professionals."
+      }
+    },
+    "publications/Agarwal2017Nodetrix": {
+      "id": "Agarwal2017Nodetrix",
+      "type": "publication",
+      "title": {
+        "original": "{NodeTrix-Multiplex}: Visual Analytics of Multiplex Small World Networks",
+        "fallback": "{NodeTrix-Multiplex}: Visual Analytics of Multiplex Small..."
+      },
+      "description": {
+        "original": "Analyzing multiplex small world networks (SWNs) using community detection (CD) is a challenging task. We propose the use of visual analytics to probe and extract communities in such networks, where one of the layers defines the network topology and exhibits small-world property. Our novel visual analytics framework, NodeTrix-Multiplex (NTM), for visual exploration of multiplex SWNs, integrates focus+context network visualization, and analysis of community detection results, within the focus. We propose a heterogeneous data model, which composites multiple layers for the focus and context and thus, enables finding communities across layers. We perform a case-study on a co-authorship (collaboration) network, with a functional layer obtained from the author-topic similarity graph. We also perform an expert user evaluation of the tool, developed using NTM.",
+        "fallback": "Analyzing multiplex small world networks (SWNs) using community detection (CD) is a challenging task."
+      }
+    },
+    "publications/Nair2017Nodetrix": {
+      "id": "Nair2017Nodetrix",
+      "type": "publication",
+      "title": {
+        "original": "{NodeTrix-CommunityHierarchy}: Techniques for Finding Hierarchical Communities for Visual Analytics of Small-world Networks",
+        "fallback": "{NodeTrix-CommunityHierarchy}: Techniques for Finding Hie..."
+      },
+      "description": {
+        "original": "While there are several visualizations of the small world networks (SWN), how does one find an appropriate set of visualizations and data analytic processes in a data science workflow? Hierarchical communities in SWN aid in managing and understanding the complex network better. To enable a visual analytics workflow to probe and uncover hierarchical communities, we propose to use both the network data and metadata (e.g. node and link attributes). Hence, we propose to use the network topology and node-similarity graph using metadata, for knowledge discovery. For the construction of a four-level hierarchy, we detect communities on both the network and the similarity graph, by using specific community detection at specific hierarchical level. We enable the flexibility of finding non-overlapping or overlapping communities, as leaf nodes, by using spectral clustering. We propose NodeTrix-CommunityHierarchy (NTCH), a set of visual analytic techniques for hierarchy construction, visual explo ration and quantitative analysis of community detection results. We extend NodeTrix-Multiplex framework (Agarwal et al., 2017), which is for visual analytics of multilayer SWN, to probe hierarchical communities. We propose novel visualizations of overlapping and non-overlapping communities, which are integrated into the framework. We show preliminary results of our case-study of using NTCH on co-authorship networks.",
+        "fallback": ""
+      }
+    },
+    "publications/Lukose2018Design": {
+      "id": "Lukose2018Design",
+      "type": "publication",
+      "title": {
+        "original": "Design Study for Creating {Pathfinder}: A Visualization Tool for Generating Software Test Plans using Model based Testing",
+        "fallback": "Design Study for Creating {Pathfinder}: A Visualization T..."
+      },
+      "description": {
+        "original": "Model Based Testing (MBT) is a popularly used software testing technique in the software industry. However, there still exists a gap between the awareness of benefits of MBT and its adoption in the industry, specifically in the Computer Aided Design (CAD) or Computer Aided Engineering (CAE) domains. This can be predominantly attributed to the learning curve of using many of the existing MBT tools. To address this gap in the CAD/CAE industry, we propose Pathfinder - an MBT tool, with a Graphical User Interface (GUI), for guiding a software tester in generating test plans for a system-under-test (SUT). The goal of using Pathfinder is for obtaining consistency and reproducibility in the generated test plans across a team of software testers. Our tool introduces a novel representation of the SUT as a High-level Model (HLM), and the use of graph visualization for test plan generation from the HLM. We have designed the GUI to be intuitive for the tester to generate test plans and select re levant tests, which precedes the test execution done outside of our tool. Here, we discuss the design decisions we adopted towards creating Pathfinder, and demonstrates its usage with two case studies.",
+        "fallback": "Model Based Testing (MBT) is a popularly used software testing technique in the software industry."
+      }
+    },
+    "publications/Sreevalsan2017Collaborative": {
+      "id": "Sreevalsan2017Collaborative",
+      "type": "publication",
+      "title": {
+        "original": "Collaborative Design of Visual Analytic Techniques for Survey Data for Community-based Research in Public Health",
+        "fallback": "Collaborative Design of Visual Analytic Techniques for Su..."
+      },
+      "description": {
+        "original": "Visual analytics is widely adopted in iterative data science/analytic workflows where the human-in-the-loop uses the visualizations to make sense of the data. We are interested in the in-depth analysis of the surveys conducted for studying the effectiveness of public health programs, for which we propose the use of visual analytics. Here, a collaboration between researchers in public health and visualization has led to co-creation of workflows enabling visual analytic techniques for subject-centric raw data from the surveys. We build an appropriate data model which feeds into our proposed visualization techniques. We present a prototype implementation of our tool, SurveyVis, and demonstrate the usage of our tool in analyzing a public health program deployed in India.",
+        "fallback": ""
+      }
+    },
+    "publications/Agarwal2018Computer": {
+      "id": "Agarwal2018Computer",
+      "type": "publication",
+      "title": {
+        "original": "Computer-supported Interactive Assignment of Keywords for Literature Collections",
+        "fallback": "Computer-supported Interactive Assignment of Keywords for..."
+      },
+      "description": {
+        "original": "A curated literature collection on a specific topic helps researchers to find relevant articles quickly. Assigning multiple keywords to each article is one of the techniques to structure such a collection. But it is challenging to assign all the keywords consistently without any gaps or ambiguities. We propose to support the user with a machine learning technique that suggests keywords for articles in a literature collection browser. We provide visual explanations to make the keyword suggestions transparent. The suggestions are based on previous keyword assignments. The machine learning technique learns on the fly from the interactive assignments of the user. We seamlessly integrate the proposed technique in an existing literature collection browser and investigate various usage scenarios through an early prototype.",
+        "fallback": "A curated literature collection on a specific topic helps researchers to find relevant articles quickly."
+      }
+    },
+    "publications/Agarwal2020Visualizing": {
+      "id": "Agarwal2020Visualizing",
+      "type": "publication",
+      "title": {
+        "original": "Visualizing {AI} Playtesting Data of 2D Side-scrolling Games",
+        "fallback": "Visualizing {AI} Playtesting Data of 2D Side-scrolling Games"
+      },
+      "description": {
+        "original": "Human playtesting is a useful step in the game development process, but involves high economic costs and is time-consuming. While playtesting through artificial intelligence is gaining attention, it is challenging to analyze the collected data. We address the challenge by proposing visualizations to derive insights about level design in 2D side-scrolling games. To focus on the navigation behavior in the level design, we study the trajectories of computer agents trained using artificial intelligence. We demonstrate the effectiveness of our approach by implementing a web-based prototype and presenting the insights gained from the visualizations for the game Sonic the Hedgehog 2. We highlight lessons learned and directions to customize the approach for other analysis goals of playtesting.",
+        "fallback": "Human playtesting is a useful step in the game development process, but involves high economic costs and is time-consuming."
+      }
+    },
+    "publications/Agarwal2020Design": {
+      "id": "Agarwal2020Design",
+      "type": "publication",
+      "title": {
+        "original": "A Design and Application Space for Visualizing User Sessions of Virtual and Mixed Reality Environments",
+        "fallback": "A Design and Application Space for Visualizing User Sessi..."
+      },
+      "description": {
+        "original": "Virtual and mixed reality environments gain complexity due to the inclusion of multiple users and physical objects. A core challenge for developers and researchers while analyzing sessions from such environments lies in understanding the interaction between entities. Additionally, the raw data recorded from such sessions is difficult to analyze due to the simultaneous temporal and spatial changes of multiple entities. However, similar data has already been visualized in other areas of application. We analyze which aspects of these related visualizations can be leveraged for analyzing user sessions in virtual and mixed reality environments and describe a design and application space for such visualizations. First, we examine what information is typically generated in interactive virtual and mixed reality applications and how it can be analyzed through such visualizations. Next, we study visualizations from related research fields and derive seven visualization categories. These categories act as building blocks of the design space, which can be combined into specific visualization systems. We also discuss the application space for these visualizations in debugging and evaluation scenarios. We present two application examples that showcase how one can visualize virtual and mixed reality user sessions and derive useful insights from them.",
+        "fallback": "Virtual and mixed reality environments gain complexity due to the inclusion of multiple users and physical objects."
+      }
+    },
+    "publications/Agarwal2020VisualizingSets": {
+      "id": "Agarwal2020VisualizingSets",
+      "type": "publication",
+      "title": {
+        "original": "Visualizing Sets and Changes in Membership Using Layered Set Intersection Graphs",
+        "fallback": "Visualizing Sets and Changes in Membership Using Layered ..."
+      },
+      "description": {
+        "original": "Challenges in set visualization include representing overlaps among sets, changes in their membership, and details of constituent elements. We present a visualization technique that addresses these challenges. The approach uses set intersection graphs that explicitly visualize each set intersection as a rectangular node and elements as circles inside them. We represent the graph as a layered node-link diagram using colors to indicate the sets. The layers reflect different levels of intersections, from the base sets in the lowest layer to potentially the intersection of all sets in the highest layer. We provide different perspectives to show temporal changes in set membership. Graphs for individual, two, and all timesteps are visualized in static, diff, and aggregated views. Together with linked views and filters, the technique supports the detailed exploration of dynamic set data. We demonstrate the effectiveness of the proposed approach by discussing two application examples. The submitted supplemental material contains a video showing proposed interactions in the implementation and the prototype itself.",
+        "fallback": "Challenges in set visualization include representing overlaps among sets, changes in their membership, and details of constituent elements."
+      }
+    },
+    "publications/Agarwal2020How": {
+      "id": "Agarwal2020How",
+      "type": "publication",
+      "title": {
+        "original": "How Visualization PhD Students Cope with Paper Rejections",
+        "fallback": "How Visualization PhD Students Cope with Paper Rejections"
+      },
+      "description": {
+        "original": "We conducted a questionnaire study aimed towards PhD students in the field of visualization research to understand how they cope with paper rejections. We collected responses from 24 participants and performed a qualitative analysis of the data in relation to the provided support by collaborators, resubmission strategies, handling multiple rejects, and personal impression of the reviews. The results indicate that the PhD students in the visualization community generally cope well with the negative reviews and, with experience, learn how to act accordingly to improve and resubmit their work. Our results reveal the main coping strategies that can be applied for constructively handling rejected visualization papers. The most prominent strategies include: discussing reviews with collaborators and making a resubmission plan, doing a major revision to improve the work, shortening the work, and seeing rejection as a positive learning experience.",
+        "fallback": ""
+      }
+    },
+    "publications/Krause2021Visual": {
+      "id": "Krause2021Visual",
+      "type": "publication",
+      "title": {
+        "original": "Visual Comparison of Multi-label Classification Results",
+        "fallback": "Visual Comparison of Multi-label Classification Results"
+      },
+      "description": {
+        "original": "In multi-label classification, we do not only want to analyze individual data items but also the relationships between the assigned labels. Employing different sources and algorithms, the label assignments differ. We need to understand these differences to identify shared and conflicting assignments. We propose a visualization technique that addresses these challenges. In graphs, we present the labels for any classification result as nodes and the pairwise overlaps of labels as links between them. These graphs are juxtaposed for the different results and can be diffed graphically. Clustering techniques are used to further analyze similarities between labels or classification results, respectively. We demonstrate our prototype in two application examples from the machine learning domain.",
+        "fallback": "In multi-label classification, we do not only want to analyze individual data items but also the relationships between the assigned labels."
+      }
+    },
+    "publications/Latif2021Visually": {
+      "id": "Latif2021Visually",
+      "type": "publication",
+      "title": {
+        "original": "Visually Connecting Historical Figures Through Event Knowledge Graphs",
+        "fallback": "Visually Connecting Historical Figures Through Event Know..."
+      },
+      "description": {
+        "original": "Knowledge graphs store information about historical figures and their relationships indirectly through shared events. We developed a visualization system, VisKonnect, for analyzing the intertwined lives of historical figures based on the events they participated in. A user's query is parsed for identifying named entities, and related data is retrieved from an event knowledge graph. While a short textual answer to the query is generated using the GPT-3 language model, various linked visualizations provide context, display additional information related to the query, and allow exploration.",
+        "fallback": "Knowledge graphs store information about historical figures and their relationships indirectly through shared events."
+      }
+    },
+    "publications/Laurent2021Flatland": {
+      "id": "Laurent2021Flatland",
+      "type": "publication",
+      "title": {
+        "original": "Flatland Competition 2020: {MAPF} and {MARL} for Efficient Train Coordination on a Grid World",
+        "fallback": "Flatland Competition 2020: {MAPF} and {MARL} for Efficien..."
+      },
+      "description": {
+        "original": "The Flatland competition aimed at finding novel approaches to solve the vehicle re-scheduling problem (VRSP). The VRSP is concerned with scheduling trips in traffic networks and the re-scheduling of vehicles when disruptions occur, for example the breakdown of a vehicle. While solving the VRSP in various settings has been an active area in operations research (OR) for decades, the ever-growing complexity of modern railway networks makes dynamic real-time scheduling of traffic virtually impossible. Recently, multi-agent reinforcement learning (MARL) has successfully tackled challenging tasks where many agents need to be coordinated, such as multiplayer video games. However, the coordination of hundreds of agents in a real-life setting like a railway network remains challenging and the Flatland environment used for the competition models these real-world properties in a simplified manner. Submissions had to bring as many trains (agents) to their target stations in as little time as possible. While the best submissions were in the OR category, participants found many promising MARL approaches. Using both centralized and decentralized learning based approaches, top submissions used graph representations of the environment to construct tree-based observations. Further, different coordination mechanisms were implemented, such as communication and prioritization between agents. This paper presents the competition setup, four outstanding solutions to the competition, and a cross-comparison between them.\t",
+        "fallback": "The Flatland competition aimed at finding novel approaches to solve the vehicle re-scheduling problem (VRSP)."
+      }
+    },
+    "publications/Agarwal2022Spatio": {
+      "id": "Agarwal2022Spatio",
+      "type": "publication",
+      "title": {
+        "original": "Spatio-temporal Analysis of Multi-agent Scheduling Behaviors on Fixed-track Networks",
+        "fallback": "Spatio-temporal Analysis of Multi-agent Scheduling Behavi..."
+      },
+      "description": {
+        "original": "Multi-agent systems require coordination among the agents to solve a given task. For movement on fixed-track networks, traditional scheduling algorithms have dominated so far, but the interest in autonomous and intelligent agents is growing as they promise to react to unexpected and exceptional situations more robustly. In this paper, we study data from the Flatland 2020 NeurIPS Competition, where trains move through a virtual rail network. We developed a timeline-based visualization that provides an overview of all train movements in a simulated episode, clearly hinting at different phases, non-optimal routes, and issues such as deadlocks. This view is complemented with a map view and a graph view, interactively linked through highlighting and synchronous animation. Defining regions of interest in the map builds an analysis graph for detailed inspection. A comparison mode allows contrasting two different episodes regarding the same rail network across all views. We have conducted this application study in close collaboration with the Flatland community. Identified analysis goals stem from interviews with key persons of the community, while the approach itself was developed in two iterations based on feedback from experts with diverse backgrounds. This feedback, together with an analysis of the winning submissions from the competition, confirms that the initial analysis goals can be answered.",
+        "fallback": "Multi-agent systems require coordination among the agents to solve a given task."
+      }
+    },
+    "publications/Agarwal2022CiteVis": {
+      "id": "Agarwal2022CiteVis",
+      "type": "publication",
+      "title": {
+        "original": "{CiteVis}: Visual Analysis of Overlapping Citation Intents as Dynamic Sets",
+        "fallback": "{CiteVis}: Visual Analysis of Overlapping Citation Intent..."
+      },
+      "description": {
+        "original": "A scientific article can be cited with different intents over several years. The citation intents can be inferred by classifying the citation text into different categories. With multiple citations to the same article, the citation intent categories overlap, making their analysis more challenging. We model the categories as dynamic sets and propose an approach to visualize temporal citation trends of an article across overlapping citation intents. The approach supports comparison between the citation trends of two seed articles of interest. The implemented prototype supports searching and selecting seed articles from a Semantic Scholar dataset.",
+        "fallback": "A scientific article can be cited with different intents over several years."
+      }
+    },
+    "publications/Agarwal2022Visualizing": {
+      "id": "Agarwal2022Visualizing",
+      "type": "publication",
+      "title": {
+        "original": "Visualizing the Evolution of Multi-agent Game-playing Behaviors",
+        "fallback": "Visualizing the Evolution of Multi-agent Game-playing Beh..."
+      },
+      "description": {
+        "original": "Analyzing the training evolution of AI agents in a multi-agent environment helps to understand changes in learned behaviors, as well as the sequence in which they are learned. We train an existing Pommerman team from scratch and, at regular intervals, let it battle against another top-performing team. We define thirteen game-specific behaviors and compute their occurrences in 600 matches. To investigate the evolution of these behaviors, we propose a visualization approach and showcase its usefulness in an application example.",
+        "fallback": ""
+      }
+    },
+    "publications/Agarwal2023Visualizing": {
+      "id": "Agarwal2023Visualizing",
+      "type": "publication",
+      "title": {
+        "original": "Visualizing Element Interactions in Dynamic Overlapping Sets",
+        "fallback": "Visualizing Element Interactions in Dynamic Overlapping Sets"
+      },
+      "description": {
+        "original": "Elements---the members in sets---may change their memberships over time. Moreover, elements also directly interact with each other, indicating an explicit connection between them. Visualizing both together becomes challenging. Using an existing dynamic set visualization as a basis, we propose an approach to encode the interactions of elements together with changing memberships in sets. We showcase the value in visually analyzing both aspects of elements together through two application examples. The first example shows the evolution of business portfolio and interactions (e.g., acquisitions and partnerships) among companies. A second example analyzes the dynamic collaborative interactions among researchers in computer science.",
+        "fallback": "Elements---the members in sets---may change their memberships over time."
+      }
+    },
+    "publications/Liebers2023CohExplore": {
+      "id": "Liebers2023CohExplore",
+      "type": "publication",
+      "title": {
+        "original": "{CohExplore: Visually Supporting Students in Exploring Text Cohesion}",
+        "fallback": "{CohExplore: Visually Supporting Students in Exploring Te..."
+      },
+      "description": {
+        "original": "A cohesive text allows readers to follow the described ideas and events. Exploring cohesion in text might aid students enhancing their academic writing. We introduce CohExplore, which promotes exploring and reflecting on cohesion of a given text by visualizing computed cohesion-related metrics on an overview and detailed level. Detected topics are color-coded, semantic similarity is shown via lines, while connectives and co-references in a paragraph are encoded using text decoration. Demonstrating the system, we share insights about a student-authored text.",
+        "fallback": "A cohesive text allows readers to follow the described ideas and events."
+      }
+    },
+    "publications/Pron2024Comparative": {
+      "id": "Pron2024Comparative",
+      "type": "publication",
+      "title": {
+        "original": "Comparative Analysis of Timeline-based Visualizations for Dynamic Overlapping Sets",
+        "fallback": "Comparative Analysis of Timeline-based Visualizations for..."
+      },
+      "description": {
+        "original": "Timeline-based set visualizations provide an overview of how overlapping categorical data evolves. We study three different visualization techniques of such type and made minor modifications to visualize the same data in a two-fold comparison. First, we contrast their encodings and interactions through a conceptual analysis. Second, in a user study with 28 participants, we evaluate their performance regarding different analysis tasks for dynamic sets and record user feedback along various dimensions.",
+        "fallback": "Timeline-based set visualizations provide an overview of how overlapping categorical data evolves."
+      }
+    },
+    "publications/Agarwal2023Dissertation": {
+      "id": "Agarwal2023Dissertation",
+      "type": "publication",
+      "title": {
+        "original": "Exploring Complex Group Dynamics: Visual Analysis of Overlapping Groups and Interactions Over Time",
+        "fallback": "Exploring Complex Group Dynamics: Visual Analysis of Over..."
+      },
+      "description": {
+        "original": "Analyzing group dynamics is crucial to understand the behaviors of members in groups. The analysis could help answer important questions: How does the relationship between group members change over time? What is the effect of an action of a member on others? How do group members coordinate their efforts to achieve a goal? What are the overall changes in group behaviors over time? This thesis proposes novel techniques for visually exploring group dynamics, thereby aiding in answering such questions. The proposed techniques apply to diverse scenarios, as demonstrated through application examples. This work focuses on the two characteristic features of group dynamics. First, since members can belong to multiple groups simultaneously, it results in overlaps between groups. We propose two novel visualizations to analyze dynamic memberships in overlapping groups. Their effectiveness is demonstrated by insights from application examples, e.g., authors evolving research interests, classification models performance in their training process, and developer contributions in software repositories. Second, the interactions among group members. A design and application space is proposed to explore user behaviors from mixed reality sessions. Three visualizations are presented to investigate collaborative and competitive interactions among members. The studied scenarios include humans interacting in mixed reality and autonomous agents collaborating and competing in simulated environments. We propose an example of an integrated visual representation to show dynamic memberships in overlapping groups and entity interactions. The thesis discusses the future possibilities in encoding enriched interactions and describes a few works in progress. Finally, the thesis summarizes the contributions, highlights the limitations of the proposed visualizations, and presents a brief outlook toward the future.",
+        "fallback": "Analyzing group dynamics is crucial to understand the behaviors of members in groups."
+      }
+    },
+    "projects/project-1": {
+      "id": "project-1",
+      "type": "projects",
+      "title": {
+        "original": "Interactive Data Visualization Dashboard",
+        "fallback": "Interactive Data Visualization Dashboard"
+      },
+      "description": {
+        "original": "Developed an interactive web-based dashboard for visualizing complex multi-dimensional datasets. The tool provides intuitive exploration capabilities including filtering, clustering, and pattern detection.\n\nUsers can upload their own datasets in various formats and gain insights through customizable visualizations. The project received positive feedback from both academic and industry users.",
+        "fallback": "Developed an interactive web-based dashboard for visualizing complex multi-dimensional datasets."
+      }
+    },
+    "projects/project-2": {
+      "id": "project-2",
+      "type": "projects",
+      "title": {
+        "original": "Machine Learning for Time Series Analysis",
+        "fallback": "Machine Learning for Time Series Analysis"
+      },
+      "description": {
+        "original": "Implemented a suite of machine learning models for time series forecasting with applications in financial markets. The project includes models for anomaly detection, trend prediction, and volatility estimation.\n\nThe system has been deployed in a production environment and has demonstrated a 15% improvement in prediction accuracy compared to traditional statistical methods.",
+        "fallback": "Implemented a suite of machine learning models for time series forecasting with applications in financial markets."
+      }
+    },
+    "projects/project-3": {
+      "id": "project-3",
+      "type": "projects",
+      "title": {
+        "original": "Natural Language Processing for Document Analysis",
+        "fallback": "Natural Language Processing for Document Analysis"
+      },
+      "description": {
+        "original": "Building an advanced NLP system for automated document understanding and information extraction. The project focuses on identifying key information from unstructured text documents like contracts, reports, and research papers.\n\nCurrent development includes fine-tuning large language models for domain-specific tasks and creating a user-friendly interface for document processing workflows.",
+        "fallback": "Building an advanced NLP system for automated document understanding and information extraction."
+      }
+    },
+    "projects/project-4": {
+      "id": "project-4",
+      "type": "projects",
+      "title": {
+        "original": "IoT Monitoring System",
+        "fallback": "IoT Monitoring System"
+      },
+      "description": {
+        "original": "Designed and implemented a scalable IoT monitoring system for environmental tracking in smart buildings. The system collects data from various sensors including temperature, humidity, air quality, and occupancy.\n\nA real-time dashboard provides visualization and alerting capabilities. The system was deployed across three buildings and has been operational for over two years with 99.9% uptime.",
+        "fallback": "Designed and implemented a scalable IoT monitoring system for environmental tracking in smart buildings."
+      }
+    },
+    "projects/project-5": {
+      "id": "project-5",
+      "type": "projects",
+      "title": {
+        "original": "Blockchain for Supply Chain Tracking",
+        "fallback": "Blockchain for Supply Chain Tracking"
+      },
+      "description": {
+        "original": "Implemented a blockchain-based solution for transparent supply chain tracking and verification. The system provides immutable records of product journey from manufacturer to consumer.\n\nThe project includes smart contracts for automated verification and a user-friendly web interface for all stakeholders. A successful pilot was conducted with three manufacturing companies.",
+        "fallback": "Implemented a blockchain-based solution for transparent supply chain tracking and verification."
+      }
+    },
+    "talks/talk-1": {
+      "id": "talk-1",
+      "type": "talks",
+      "title": {
+        "original": "Visual Analytics for Understanding AI Behavior",
+        "fallback": "Visual Analytics for Understanding AI Behavior"
+      },
+      "description": {
+        "original": "Presented a novel approach to visualizing and diagnosing the behavior of complex AI systems. The talk introduced interactive visualization techniques that help researchers and practitioners understand model decisions, identify failure cases, and improve AI performance.\n\nThe presentation included case studies from reinforcement learning applications and demonstrated how visual analytics can bridge the gap between AI experts and domain specialists.",
+        "fallback": "Presented a novel approach to visualizing and diagnosing the behavior of complex AI systems."
+      }
+    },
+    "talks/talk-2": {
+      "id": "talk-2",
+      "type": "talks",
+      "title": {
+        "original": "The Future of Human-AI Collaboration",
+        "fallback": "The Future of Human-AI Collaboration"
+      },
+      "description": {
+        "original": "Delivered a keynote address exploring the evolving landscape of human-AI collaboration. The talk examined how AI systems can be designed to complement human capabilities rather than replace them, with a focus on creating synergistic workflows.\n\nTopics included mixed-initiative interfaces, explainable AI, and trust-building mechanisms in collaborative systems. The presentation concluded with a vision for the future of work in an AI-enhanced world.",
+        "fallback": "Delivered a keynote address exploring the evolving landscape of human-AI collaboration."
+      }
+    },
+    "talks/talk-3": {
+      "id": "talk-3",
+      "type": "talks",
+      "title": {
+        "original": "Data Visualization Techniques for Complex Networks",
+        "fallback": "Data Visualization Techniques for Complex Networks"
+      },
+      "description": {
+        "original": "Conducted a hands-on workshop on advanced techniques for visualizing complex network data. Participants learned practical approaches to handling large-scale networks, interactive exploration methods, and effective visual encodings for different types of network analysis tasks.\n\nThe workshop included live coding demonstrations and interactive exercises using modern visualization libraries. Attendees gained experience with real-world network datasets from social media, citation networks, and biological systems.",
+        "fallback": "Conducted a hands-on workshop on advanced techniques for visualizing complex network data."
+      }
+    },
+    "talks/talk-4": {
+      "id": "talk-4",
+      "type": "talks",
+      "title": {
+        "original": "Ethical Considerations in AI Development",
+        "fallback": "Ethical Considerations in AI Development"
+      },
+      "description": {
+        "original": "Participated in a panel discussion on ethical challenges and responsibilities in AI development. The conversation covered topics including algorithmic bias, privacy concerns, transparency requirements, and the need for inclusive AI design practices.\n\nAs a panelist, I shared insights from research on making AI systems more interpretable and accountable, and discussed practical frameworks for integrating ethical considerations throughout the AI development lifecycle.",
+        "fallback": "Participated in a panel discussion on ethical challenges and responsibilities in AI development."
+      }
+    },
+    "talks/talk-5": {
+      "id": "talk-5",
+      "type": "talks",
+      "title": {
+        "original": "Interactive Machine Learning: Merging Human and Algorithmic Intelligence",
+        "fallback": "Interactive Machine Learning: Merging Human and Algorithm..."
+      },
+      "description": {
+        "original": "Presented research on interactive machine learning systems that effectively combine human expertise with algorithmic capabilities. The talk showcased novel interfaces that allow users to interactively train, refine, and collaborate with machine learning models.\n\nCase studies included an interactive labeling system for image classification and a collaborative text analysis platform. The presentation demonstrated how these approaches lead to more accurate models and better user experiences compared to fully automated approaches.",
+        "fallback": "Presented research on interactive machine learning systems that effectively combine human expertise with algorithmic capabilities."
+      }
+    },
+    "blog/blog-1": {
+      "id": "blog-1",
+      "type": "blog",
+      "title": {
+        "original": "Visualizing Complex AI Behavior: Lessons from Multi-Agent Systems",
+        "fallback": "Visualizing Complex AI Behavior: Lessons from Multi-Agent..."
+      },
+      "description": {
+        "original": "In this article, I share insights from my research on visualizing the behavior of complex AI systems, particularly in multi-agent environments. Understanding how AI agents interact, cooperate, and compete is crucial for developing more robust and reliable systems.\n\nI discuss the challenges of interpreting AI behavior and present visualization techniques that have proven effective in our research. The article includes examples from reinforcement learning scenarios and practical tips for implementing your own visualization tools.",
+        "fallback": "In this article, I share insights from my research on visualizing the behavior of complex AI systems, particularly in multi-agent environments."
+      }
+    },
+    "blog/blog-2": {
+      "id": "blog-2",
+      "type": "blog",
+      "title": {
+        "original": "A Practical Guide to Explainable AI",
+        "fallback": "A Practical Guide to Explainable AI"
+      },
+      "description": {
+        "original": "Explainable AI (XAI) has emerged as a critical field as AI systems become more complex and widespread. In this guide, I provide a practical overview of XAI techniques that practitioners can apply today.\n\nCovering both model-agnostic and model-specific approaches, this article walks through the why, what, and how of making AI systems more interpretable and transparent. I share code snippets, visualization techniques, and real-world examples from my experience implementing XAI in various domains.",
+        "fallback": "Explainable AI (XAI) has emerged as a critical field as AI systems become more complex and widespread."
+      }
+    },
+    "blog/blog-3": {
+      "id": "blog-3",
+      "type": "blog",
+      "title": {
+        "original": "Interactive Data Visualization: Best Practices and Pitfalls",
+        "fallback": "Interactive Data Visualization: Best Practices and Pitfalls"
+      },
+      "description": {
+        "original": "Creating effective interactive data visualizations requires balancing design principles, technical considerations, and user needs. In this post, I share lessons learned from years of developing visualization systems for complex data.\n\nI cover common pitfalls to avoid, design patterns that work well for different types of data, and techniques for optimizing performance with large datasets. The article includes practical examples and recommendations for visualization libraries and frameworks.",
+        "fallback": "Creating effective interactive data visualizations requires balancing design principles, technical considerations, and user needs."
+      }
+    },
+    "blog/blog-4": {
+      "id": "blog-4",
+      "type": "blog",
+      "title": {
+        "original": "The Ethics of AI: From Principles to Practice",
+        "fallback": "The Ethics of AI: From Principles to Practice"
+      },
+      "description": {
+        "original": "Ethical considerations in AI development have moved from academic discussions to practical imperatives. This post examines how to translate broad ethical principles into concrete practices in AI system development.\n\nI explore approaches to addressing bias, ensuring transparency, protecting privacy, and designing for human values. Drawing from both research and industry experience, I offer a framework for ethical AI development that teams can implement in their workflows.",
+        "fallback": "Ethical considerations in AI development have moved from academic discussions to practical imperatives."
+      }
+    },
+    "blog/blog-5": {
+      "id": "blog-5",
+      "type": "blog",
+      "title": {
+        "original": "From Academia to Industry: Navigating the Transition as a Computer Science PhD",
+        "fallback": "From Academia to Industry: Navigating the Transition as a..."
+      },
+      "description": {
+        "original": "Many computer science PhDs eventually transition from academic research to industry roles. In this personal account, I share my experience making this transition and offer advice for others considering a similar path.\n\nI discuss the differences in work culture, how to translate academic skills to industry contexts, and strategies for finding industry roles that leverage specialized research expertise. This post combines personal reflections with practical guidance for researchers contemplating their next career move.",
+        "fallback": "Many computer science PhDs eventually transition from academic research to industry roles."
+      }
+    }
+  },
+  "metadata": {
+    "generatedAt": "2025-03-29T04:51:52.903Z",
+    "version": "1.0"
+  }
+}

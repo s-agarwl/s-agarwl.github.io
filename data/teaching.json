@@ -1,0 +1,78 @@
+[
+  {
+    "id": "teaching-1",
+    "title": "Data Visualization and Visual Analytics",
+    "course": "CS4850",
+    "level": "Graduate",
+    "semester": "Fall 2022",
+    "institution": "University of Bamberg",
+    "location": "Bamberg, Germany",
+    "description": "Taught a graduate-level course on data visualization principles and visual analytics techniques. The course covered fundamental concepts of visual perception, visualization design, and interactive systems for data exploration.\n\nStudents completed projects applying visualization techniques to real-world datasets. Topics included network visualization, time series visualization, multidimensional data representation, and evaluation methods for visualization systems.",
+    "image": "https://via.placeholder.com/800x450?text=Data+Visualization+Course",
+    "links": {
+      "Course Materials": "https://example.com/dataviz-materials",
+      "Student Projects": "https://example.com/dataviz-projects"
+    }
+  },
+  {
+    "id": "teaching-2",
+    "title": "Introduction to Machine Learning",
+    "course": "CS3150",
+    "level": "Undergraduate",
+    "semester": "Spring 2023",
+    "institution": "University of Bamberg",
+    "location": "Bamberg, Germany",
+    "description": "Developed and delivered an undergraduate course introducing students to machine learning fundamentals. The course balanced theoretical foundations with practical implementation skills.\n\nTopics included supervised and unsupervised learning, model evaluation, feature engineering, and ethical considerations in ML applications. Weekly labs provided hands-on experience with Python, scikit-learn, and TensorFlow.",
+    "image": "https://via.placeholder.com/800x450?text=Intro+to+ML",
+    "links": {
+      "Syllabus": "https://example.com/ml-syllabus.pdf",
+      "Assignments": "https://github.com/example/ml-assignments"
+    }
+  },
+  {
+    "id": "teaching-3",
+    "title": "Human-Computer Interaction",
+    "course": "CS2550",
+    "level": "Undergraduate",
+    "semester": "Fall 2021",
+    "institution": "University of Duisburg-Essen",
+    "location": "Duisburg, Germany",
+    "description": "Taught an undergraduate course on principles and practices of human-computer interaction. The course covered user-centered design methodologies, usability testing, interface design patterns, and prototyping techniques.\n\nStudents worked in teams to design and evaluate interactive systems, applying HCI principles to create more usable and accessible interfaces. The course included guest lectures from industry practitioners and a final design showcase.",
+    "image": "https://via.placeholder.com/800x450?text=HCI+Course",
+    "links": {
+      "Course Website": "https://example.com/hci-course",
+      "Design Guidelines": "https://example.com/hci-guidelines.pdf"
+    }
+  },
+  {
+    "id": "teaching-4",
+    "title": "Advanced Topics in Data Science",
+    "course": "CS5200",
+    "level": "Graduate",
+    "semester": "Spring 2022",
+    "institution": "University of Duisburg-Essen",
+    "location": "Duisburg, Germany",
+    "description": "Led a seminar course exploring cutting-edge research in data science. Students read and discussed recent academic papers, analyzed state-of-the-art techniques, and presented their findings to the class.\n\nTopics included deep learning architectures, reinforcement learning applications, explainable AI, and ethical issues in data science. Students also completed a research project investigating an advanced topic of their choice.",
+    "image": "https://via.placeholder.com/800x450?text=Advanced+Data+Science",
+    "links": {
+      "Reading List": "https://example.com/datasci-readings.pdf",
+      "Research Projects": "https://example.com/datasci-projects"
+    },
+    "awards": "Teaching Excellence Award"
+  },
+  {
+    "id": "teaching-5",
+    "title": "Programming for Data Analysis",
+    "course": "CS2100",
+    "level": "Undergraduate",
+    "semester": "Fall 2020",
+    "institution": "University of Duisburg-Essen",
+    "location": "Duisburg, Germany",
+    "description": "Designed and taught an introductory programming course focused on data analysis applications. The course introduced programming concepts using Python with an emphasis on data manipulation, analysis, and visualization.\n\nStudents learned to work with libraries such as NumPy, Pandas, and Matplotlib to solve real-world data problems. The course included weekly programming assignments and a final project analyzing a dataset of the student's choice.",
+    "image": "https://via.placeholder.com/800x450?text=Programming+Data+Analysis",
+    "links": {
+      "Course Notes": "https://example.com/python-notes.pdf",
+      "Sample Code": "https://github.com/example/python-data-examples"
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "seo-optimizer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "SEO text optimization tool for personal website",
+  "main": "optimize-seo.js",
+  "scripts": {
+    "start": "node optimize-seo.js"
+  },
+  "dependencies": {
+    "bibtex-parse-js": "^0.0.6"
+  }
+}

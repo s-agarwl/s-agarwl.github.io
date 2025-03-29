@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- Specific Hash URL Redirects -->
+    <script type="text/javascript">
+      (function () {
+        // Map of specific hash URLs to their clean URL destinations
+        var hashRedirectMap = {
+          '#/publications': '/publications',
+          '#/publications/': '/publications/', // Handle trailing slash version
+          '#/publication/': '/publication/', // This will be a prefix match for publication URLs
+          // '#/docs': '/docs',
+          // Add more specific redirects as needed
+        };
+
+        // Get the current hash
+        var hash = window.location.hash;
+        console.log('Current hash:', hash); // Debug log
+
+        // Check if this hash is in our redirect map
+        if (hash) {
+          // First check for exact matches
+          if (hashRedirectMap[hash]) {
+            console.log('Exact match found, redirecting to:', hashRedirectMap[hash]); // Debug log
+            window.location.replace(window.location.origin + hashRedirectMap[hash]);
+          }
+          // Then check for prefix matches (for dynamic routes like publications)
+          else {
+            var matchFound = false;
+            for (var prefix in hashRedirectMap) {
+              if (hash.startsWith(prefix) && prefix.endsWith('/')) {
+                var cleanPrefix = hashRedirectMap[prefix];
+                var suffix = hash.substring(prefix.length);
+                var redirectUrl = window.location.origin + cleanPrefix + suffix;
+                console.log('Prefix match found, redirecting to:', redirectUrl); // Debug log
+                window.location.replace(redirectUrl);
+                matchFound = true;
+                break;
+              }
+            }
+
+            // If no match found but starts with #/, use the path directly
+            if (!matchFound && hash.startsWith('#/')) {
+              var cleanPath = hash.substring(1); // Remove the # character
+              console.log('No match found, using direct path:', cleanPath); // Debug log
+              window.location.replace(window.location.origin + cleanPath);
+            }
+          }
+        }
+      })();
+    </script>
+    <!-- End Specific Hash URL Redirects -->
+
+    <title>Shivam Agarwal's Website - Data and AI Expert</title>
+    <meta name="description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta name="keywords" content="academic, research, publications, papers, scholarly work">
+    <meta name="author" content="Shivam Agarwal">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google-site-verification" content="L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://s-agarwl.github.io/publications/Krause2021Visual">
+    <meta property="og:title" content="Shivam Agarwal's Website - Data and AI Expert">
+    <meta property="og:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="og:image" content="https://s-agarwl.github.io/logo.svg">
+
+    <!-- Publication-specific metadata -->
+    <meta name="citation_doi" content="doi:10.2312/vmv.20211367">
+    <meta name="DC.identifier" content="doi:doi:10.2312/vmv.20211367">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://s-agarwl.github.io/publications/Krause2021Visual">
+    <meta property="twitter:title" content="Shivam Agarwal's Website - Data and AI Expert">
+    <meta property="twitter:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="twitter:image" content="https://s-agarwl.github.io/logo.svg">
+
+    <!-- Google Analytics -->
+    
+    <!-- Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8CMNGL0EH7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-8CMNGL0EH7', {
+        custom_map: {
+          dimension1: 'paper_title',
+          dimension2: 'paper_authors',
+          dimension3: 'paper_year',
+        },
+      });
+    </script>
+  
+    <script type="module" crossorigin="" src="/assets/index-Dr91oyh6.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-CEF85yBi.css">
+  <link rel="canonical" href="https://s-agarwl.github.io/publications/Krause2021Visual"><meta property="DC.language" content="en"><script id="publication-data" type="application/json">{"entry":{"citationKey":"Krause2021Visual","entryType":"inproceedings","entryTags":{"type":"Full Paper","author":"Cedric Krause, Shivam Agarwal, Mohammad Ghoniem, and Fabian Beck","title":"Visual Comparison of Multi-label Classification Results","booktitle":"Vision, Modeling, and Visualization","doi":"doi:10.2312/vmv.20211367","year":"2021","paperurl":"/publications/Krause2021Visual/Krause2021Visual.pdf","abstract":"In multi-label classification, we do not only want to analyze individual data items but also the relationships between the assigned labels. Employing different sources and algorithms, the label assignments differ. We need to understand these differences to identify shared and conflicting assignments. We propose a visualization technique that addresses these challenges. In graphs, we present the labels for any classification result as nodes and the pairwise overlaps of labels as links between them. These graphs are juxtaposed for the different results and can be diffed graphically. Clustering techniques are used to further analyze similarities between labels or classification results, respectively. We demonstrate our prototype in two application examples from the machine learning domain.","image":"/publications/Krause2021Visual/Krause2021Visual.PNG","video":"https://www.youtube.com/watch?v=Jut9xVr3jsk","keywords":"Multi-label Classification, Comparative Analysis"},"contentType":"Publications","sectionPath":"/publications"},"config":{"site":{"title":"Shivam Agarwal's Website - Data and AI Expert","description":"This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.","baseUrl":"https://s-agarwl.github.io","googleAnalyticsId":"G-8CMNGL0EH7","keywords":"academic, research, publications, papers, scholarly work","author":"Shivam Agarwal","googleSiteVerification":"L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc"},"sections":[{"id":"Profile","title":"Profile","path":"/"},{"id":"Publications","title":"Publications","path":"/publications","dataSource":"/data/pubs.bib","dataType":"bibtex"},{"id":"Projects","title":"Projects","path":"/projects","dataSource":"/data/projects.json"},{"id":"Talks","title":"Talks","path":"/talks","dataSource":"/data/talks.json"},{"id":"Teaching","title":"Teaching","path":"/teaching","dataSource":"/data/teaching.json"},{"id":"Blog","title":"Blog","path":"/blog","dataSource":"/data/blog.json"},{"id":"my-story","title":"My Story","path":"/my-story"}]},"sectionConfig":{"id":"Publications","path":"/publications","title":"Publications","sectionHeading":"Publications","template":"listOfItems","description":"Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.","dataSource":"/data/pubs.bib","dataType":"bibtex","display":{"list":{"fields":[{"field":"title","component":"Heading"},{"field":"authors","component":"AuthorList","label":"Authors"},{"field":"venue","component":"Text","format":"{journal|booktitle}, {year}","variant":"venueList"},{"field":"keywords","component":"Tags"},{"field":"awards","component":"Award"}],"showImage":true},"card":{"fields":[{"field":"title","typeOfField":"Heading","options":{"level":3}},{"field":"links","typeOfField":"PublicationLinks","options":{"showText":true}},{"field":"authors","typeOfField":"AuthorList","label":"Authors"},{"field":"year","typeOfField":"Text","label":"Year"},{"field":"venue","typeOfField":"Text","format":"{journal|booktitle}, {year}","variant":"venueList"},{"field":"abstract","typeOfField":"ExpandableMarkdown","options":{"limit":"abstractPreviewLength  "},"label":"Abstract"},{"field":"keywords","typeOfField":"Tags"},{"field":"awards","typeOfField":"Award"}],"showImage":true},"detail":{"fields":[{"field":"title","component":"Heading","options":{"level":1}},{"field":"image","component":"Image","condition":"image"},{"field":"awards","component":"Award","condition":"awards"},{"field":"authors","component":"AuthorList","label":"Authors"},{"field":"year","component":"Text","label":"Year"},{"field":"journal","component":"Text","label":"Journal","condition":"journal"},{"field":"booktitle","component":"Text","label":"Conference","condition":"booktitle"},{"field":"links","component":"PublicationLinks","options":{"showText":true}},{"field":"abstract","component":"ExpandableMarkdown","heading":"Abstract","options":{"truncate":30},"condition":"abstract"},{"field":"keywords","component":"Tags","heading":"Keywords","condition":"keywords"}],"actions":[{"type":"BibTeX","condition":"entryType"},{"type":"Video","condition":"links.video"}]}}}}</script></head>
+  <body>
+    <div id="prerendered-content"><h1>Visual Comparison of Multi-label Classification Results</h1><div class="metadata"><p><strong>Year: </strong>2021</p><p><strong>Conference: </strong>Vision, Modeling, and Visualization</p><p><strong>Authors: </strong>Cedric Krause, Shivam Agarwal, Mohammad Ghoniem, and Fabian Beck</p><p><strong>DOI: </strong><a href="https://doi.org/doi:10.2312/vmv.20211367" target="_blank" rel="noopener noreferrer">doi:10.2312/vmv.20211367</a></p></div><h3>Abstract</h3><div class="markdown-content">In multi-label classification, we do not only want to analyze individual data items but also the relationships between the assigned labels. Employing different sources and algorithms, the label assignments differ. We need to understand these differences to identify shared and conflicting assignments. We propose a visualization technique that addresses these challenges. In graphs, we present the labels for any classification result as nodes and the pairwise overlaps of labels as links between them. These graphs are juxtaposed for the different results and can be diffed graphically. Clustering techniques are used to further analyze similarities between labels or classification results, respectively. We demonstrate our prototype in two application examples from the machine learning domain.</div><h3>Keywords</h3><div class="tags"><span class="tag">Multi-label Classification</span> <span class="tag">Comparative Analysis</span> </div><h2>Citation</h2><pre><code class="language-bibtex">@inproceedings{Krause2021Visual,
+  author     = {Cedric Krause, Shivam Agarwal, Mohammad Ghoniem, and Fabian Beck},
+  title      = {Visual Comparison of Multi-label Classification Results},
+  booktitle  = {Vision, Modeling, and Visualization},
+  year       = {2021},
+  doi        = {doi:10.2312/vmv.20211367},
+  paperurl   = {/publications/Krause2021Visual/Krause2021Visual.pdf},
+  abstract   = {In multi-label classification, we do not only want to analyze individual data items but also the relationships between the assigned labels. Employing different sources and algorithms, the label assignments differ. We need to understand these differences to identify shared and conflicting assignments. We propose a visualization technique that addresses these challenges. In graphs, we present the labels for any classification result as nodes and the pairwise overlaps of labels as links between them. These graphs are juxtaposed for the different results and can be diffed graphically. Clustering techniques are used to further analyze similarities between labels or classification results, respectively. We demonstrate our prototype in two application examples from the machine learning domain.},
+  keywords   = {Multi-label Classification, Comparative Analysis}
+}</code></pre></div><div id="root"></div>
+
+  
+
+</body></html>

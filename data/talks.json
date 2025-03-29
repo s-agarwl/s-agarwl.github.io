@@ -1,0 +1,86 @@
+[
+  {
+    "id": "talk-1",
+    "title": "Visual Analytics for Understanding AI Behavior",
+    "authors": "Shivam Agarwal",
+    "date": "2023-09-15",
+    "venue": "International Conference on Visual Analytics",
+    "location": "Berlin, Germany",
+    "talkType": "Conference Presentation",
+    "duration": "30 minutes",
+    "description": "Presented a novel approach to visualizing and diagnosing the behavior of complex AI systems. The talk introduced interactive visualization techniques that help researchers and practitioners understand model decisions, identify failure cases, and improve AI performance.\n\nThe presentation included case studies from reinforcement learning applications and demonstrated how visual analytics can bridge the gap between AI experts and domain specialists.",
+    "image": "",
+    "links": {
+      "Slides": "https://example.com/slides-visual-analytics.pdf",
+      "Video": "https://example.com/talk-video",
+      "Related Paper": "https://example.com/visual-analytics-paper.pdf"
+    },
+    "markdownContent": "/talks/talk-1/content.md"
+  },
+  {
+    "id": "talk-2",
+    "title": "The Future of Human-AI Collaboration",
+    "authors": "Shivam Agarwal",
+    "date": "2022-11-28",
+    "venue": "AI Summit",
+    "location": "Singapore",
+    "talkType": "Keynote",
+    "duration": "45 minutes",
+    "description": "Delivered a keynote address exploring the evolving landscape of human-AI collaboration. The talk examined how AI systems can be designed to complement human capabilities rather than replace them, with a focus on creating synergistic workflows.\n\nTopics included mixed-initiative interfaces, explainable AI, and trust-building mechanisms in collaborative systems. The presentation concluded with a vision for the future of work in an AI-enhanced world.",
+    "image": "https://via.placeholder.com/800x450?text=Human-AI+Collaboration",
+    "links": {
+      "Slides": "https://example.com/slides-collaboration.pdf"
+    },
+    "awards": "Best Speaker Award",
+    "markdownContent": "public/talks/talk-2/content.md"
+  },
+
+  {
+    "id": "talk-3",
+    "title": "Data Visualization Techniques for Complex Networks",
+    "authors": "Shivam Agarwal, Jane Smith",
+    "date": "2022-06-10",
+    "venue": "Data Visualization Workshop",
+    "location": "Online",
+    "talkType": "Workshop",
+    "duration": "2 hours",
+    "description": "Conducted a hands-on workshop on advanced techniques for visualizing complex network data. Participants learned practical approaches to handling large-scale networks, interactive exploration methods, and effective visual encodings for different types of network analysis tasks.\n\nThe workshop included live coding demonstrations and interactive exercises using modern visualization libraries. Attendees gained experience with real-world network datasets from social media, citation networks, and biological systems.",
+    "image": "https://via.placeholder.com/800x450?text=Network+Visualization+Workshop",
+    "links": {
+      "Materials": "https://github.com/example/network-vis-workshop",
+      "Recording": "https://example.com/workshop-recording"
+    }
+  },
+  {
+    "id": "talk-4",
+    "title": "Ethical Considerations in AI Development",
+    "authors": "Shivam Agarwal",
+    "date": "2023-03-22",
+    "venue": "Tech Ethics Forum",
+    "location": "Stockholm, Sweden",
+    "talkType": "Panel Discussion",
+    "duration": "60 minutes",
+    "description": "Participated in a panel discussion on ethical challenges and responsibilities in AI development. The conversation covered topics including algorithmic bias, privacy concerns, transparency requirements, and the need for inclusive AI design practices.\n\nAs a panelist, I shared insights from research on making AI systems more interpretable and accountable, and discussed practical frameworks for integrating ethical considerations throughout the AI development lifecycle.",
+    "image": "https://via.placeholder.com/800x450?text=AI+Ethics+Panel",
+    "links": {
+      "Event Page": "https://example.com/ethics-forum",
+      "Discussion Summary": "https://example.com/panel-summary.pdf"
+    }
+  },
+  {
+    "id": "talk-5",
+    "title": "Interactive Machine Learning: Merging Human and Algorithmic Intelligence",
+    "authors": "Shivam Agarwal, Robert Johnson",
+    "date": "2021-10-05",
+    "venue": "Human-Computer Interaction Symposium",
+    "location": "Toronto, Canada",
+    "talkType": "Research Presentation",
+    "duration": "25 minutes",
+    "description": "Presented research on interactive machine learning systems that effectively combine human expertise with algorithmic capabilities. The talk showcased novel interfaces that allow users to interactively train, refine, and collaborate with machine learning models.\n\nCase studies included an interactive labeling system for image classification and a collaborative text analysis platform. The presentation demonstrated how these approaches lead to more accurate models and better user experiences compared to fully automated approaches.",
+    "image": "https://via.placeholder.com/800x450?text=Interactive+ML",
+    "links": {
+      "Paper": "https://example.com/interactive-ml-paper.pdf",
+      "Demo": "https://example.com/interactive-ml-demo"
+    }
+  }
+]

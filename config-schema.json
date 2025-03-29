@@ -1,0 +1,640 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Academic Portfolio Website Configuration",
+  "description": "Configuration schema for the academic portfolio website",
+  "type": "object",
+  "required": ["researcherName", "theme", "baseUrl", "navigation", "sections", "site"],
+  "properties": {
+    "researcherName": {
+      "type": "string",
+      "description": "The name of the researcher or portfolio owner"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Contact email address"
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["light", "dark"],
+      "description": "The default color theme for the website"
+    },
+    "baseUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The base URL where the site will be hosted"
+    },
+    "navigation": {
+      "type": "object",
+      "required": ["mainItems"],
+      "description": "Navigation configuration for the website",
+      "properties": {
+        "mainItems": {
+          "type": "array",
+          "description": "Main navigation items to display in the header",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Simple navigation item ID that references a section"
+              },
+              {
+                "type": "object",
+                "required": ["id", "dropdown", "items"],
+                "description": "Dropdown navigation menu configuration",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Identifier for the dropdown"
+                  },
+                  "dropdown": {
+                    "type": "boolean",
+                    "description": "Whether this is a dropdown menu (should be true)"
+                  },
+                  "items": {
+                    "type": "array",
+                    "description": "Subsection IDs to include in the dropdown",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "tagSets": {
+      "type": "object",
+      "description": "Defines sets of tags with colors and labels for consistent styling",
+      "additionalProperties": {
+        "type": "object",
+        "description": "A set of tags with defined styling",
+        "additionalProperties": {
+          "type": "object",
+          "required": ["label", "color"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "description": "Display label for the tag"
+            },
+            "color": {
+              "type": "string",
+              "description": "Color name or hex code for the tag background"
+            },
+            "textColor": {
+              "type": "string",
+              "description": "Optional text color (defaults to white or black based on background)"
+            },
+            "icon": {
+              "type": "string",
+              "description": "Optional icon name to display with the tag"
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "projectStatus": {
+            "completed": { "label": "Completed", "color": "green" },
+            "ongoing": { "label": "Ongoing", "color": "blue" },
+            "planned": { "label": "Planned", "color": "amber" }
+          },
+          "degreeLevel": {
+            "bachelor": { "label": "Bachelor", "color": "purple" },
+            "master": { "label": "Master", "color": "indigo" },
+            "phd": { "label": "PhD", "color": "red" }
+          }
+        }
+      ]
+    },
+    "links": {
+      "type": "object",
+      "description": "Social and professional links",
+      "additionalProperties": {
+        "type": "string",
+        "format": "uri"
+      },
+      "properties": {
+        "googleScholar": {
+          "type": "string",
+          "format": "uri",
+          "description": "Google Scholar profile URL"
+        },
+        "linkedin": {
+          "type": "string",
+          "format": "uri",
+          "description": "LinkedIn profile URL"
+        },
+        "github": {
+          "type": "string",
+          "format": "uri",
+          "description": "GitHub profile URL"
+        },
+        "orcid": {
+          "type": "string",
+          "format": "uri",
+          "description": "ORCID profile URL"
+        },
+        "researchGate": {
+          "type": "string",
+          "format": "uri",
+          "description": "ResearchGate profile URL"
+        },
+        "twitter": {
+          "type": "string",
+          "format": "uri",
+          "description": "Twitter/X profile URL"
+        }
+      }
+    },
+    "bibtexPath": {
+      "type": "string",
+      "description": "Path to default BibTeX file for publications (if not specified in a section)"
+    },
+    "profilePhotoPath": {
+      "type": "string",
+      "description": "Path to profile photo"
+    },
+    "abstractPreviewLength": {
+      "type": "integer",
+      "description": "Number of lines to show in abstract previews before truncating"
+    },
+    "descriptionPreviewLength": {
+      "type": "integer",
+      "description": "Number of lines to show in description previews before truncating"
+    },
+    "sections": {
+      "type": "array",
+      "description": "Website sections configuration",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "title", "sectionHeading"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the section"
+          },
+          "path": {
+            "type": "string",
+            "description": "URL path for the section"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title displayed in browser tab"
+          },
+          "sectionHeading": {
+            "type": "string",
+            "description": "Heading displayed on the section page"
+          },
+          "hideSection": {
+            "type": "boolean",
+            "description": "If true, section will be hidden from navigation but still accessible via URL"
+          },
+          "template": {
+            "type": "string",
+            "enum": [
+              "listOfItems",
+              "article",
+              "text-with-image",
+              "timeline",
+              "grid",
+              "carousel",
+              "contact"
+            ],
+            "description": "Template to use for rendering the section"
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief description of the section content"
+          },
+          "dataSource": {
+            "type": "string",
+            "description": "Path to data source file (JSON, BibTeX, etc.)"
+          },
+          "dataType": {
+            "type": "string",
+            "enum": ["bibtex", "json"],
+            "description": "Type of data source file"
+          },
+          "content": {
+            "description": "Content configuration for the section",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Text content for simple sections"
+              },
+              {
+                "type": "object",
+                "description": "Complex content configuration for templates",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Content title"
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "description": "Content subtitle"
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "HTML/Markdown content"
+                  },
+                  "image": {
+                    "type": "string",
+                    "description": "Path to image"
+                  },
+                  "imageShape": {
+                    "type": "string",
+                    "enum": ["circle", "square", "rounded"],
+                    "description": "Shape of the image"
+                  },
+                  "iconType": {
+                    "type": "string",
+                    "enum": ["education", "work", "project", "award"],
+                    "description": "Icon type for timeline items"
+                  },
+                  "items": {
+                    "type": "array",
+                    "description": "Array of items for timeline, grid, etc.",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "columns": {
+                    "type": "integer",
+                    "description": "Number of columns for grid layouts"
+                  },
+                  "ids": {
+                    "type": "array",
+                    "description": "References to items from other sections (for carousel)",
+                    "items": {
+                      "type": "object",
+                      "required": ["type", "id"],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Section type of the referenced item"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the referenced item"
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "array",
+                    "description": "Social links to display in contact section",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "useIcons": {
+                    "type": "boolean",
+                    "description": "Whether to display icons for links"
+                  },
+                  "useLabels": {
+                    "type": "boolean",
+                    "description": "Whether to display labels for links"
+                  },
+                  "layout": {
+                    "type": "string",
+                    "enum": ["horizontal", "vertical"],
+                    "description": "Layout direction"
+                  },
+                  "resourceDir": {
+                    "type": "string",
+                    "description": "Directory containing resources for article"
+                  },
+                  "markdownFile": {
+                    "type": "string",
+                    "description": "Path to markdown file for article content"
+                  },
+                  "banner": {
+                    "type": "object",
+                    "description": "Banner configuration for article",
+                    "properties": {
+                      "image": {
+                        "type": "string",
+                        "description": "Path to banner image"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Banner title"
+                      },
+                      "subtitle": {
+                        "type": "string",
+                        "description": "Banner subtitle"
+                      },
+                      "showTitle": {
+                        "type": "boolean",
+                        "description": "Whether to display the title on the banner"
+                      }
+                    }
+                  },
+                  "animation": {
+                    "type": "object",
+                    "description": "Text animation configuration",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean",
+                        "description": "Whether animation is enabled"
+                      },
+                      "prefix": {
+                        "type": "string",
+                        "description": "Static text before animated text"
+                      },
+                      "phrases": {
+                        "type": "array",
+                        "description": "Phrases to animate through",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "subsections": {
+            "type": "array",
+            "description": "Subsections configuration (for Profile section)",
+            "items": {
+              "type": "object",
+              "required": ["id", "template", "order", "title", "content"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for the subsection"
+                },
+                "template": {
+                  "type": "string",
+                  "enum": ["text-with-image", "timeline", "grid", "carousel", "contact"],
+                  "description": "Template to use for rendering the subsection"
+                },
+                "order": {
+                  "type": "integer",
+                  "description": "Display order of the subsection"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of the subsection"
+                },
+                "content": {
+                  "type": "object",
+                  "description": "Content configuration for the subsection"
+                }
+              }
+            }
+          },
+          "display": {
+            "type": "object",
+            "description": "Display configuration for listOfItems template",
+            "properties": {
+              "list": {
+                "type": "object",
+                "description": "List view configuration",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "description": "Fields to display in list view",
+                    "items": {
+                      "type": "object",
+                      "required": ["field", "typeOfField"],
+                      "properties": {
+                        "field": {
+                          "type": "string",
+                          "description": "Data field to display"
+                        },
+                        "typeOfField": {
+                          "type": "string",
+                          "enum": [
+                            "Heading",
+                            "Text",
+                            "AuthorList",
+                            "Tags",
+                            "Award",
+                            "Image",
+                            "ExpandableMarkdown",
+                            "Section",
+                            "LinkButtons",
+                            "PublicationLinks",
+                            "Markdown"
+                          ],
+                          "description": "Component type to use for rendering the field"
+                        },
+                        "tagSet": {
+                          "type": "string",
+                          "description": "For Tags component: identifier of the tag set to use for styling"
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Label to display for the field"
+                        },
+                        "options": {
+                          "type": "object",
+                          "description": "Component-specific options"
+                        },
+                        "format": {
+                          "type": "string",
+                          "description": "Format string for displaying the field"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "Component variant to use"
+                        },
+                        "condition": {
+                          "type": "string",
+                          "description": "Condition for displaying the field"
+                        },
+                        "heading": {
+                          "type": "string",
+                          "description": "Heading to display above the field"
+                        }
+                      }
+                    }
+                  },
+                  "showImage": {
+                    "type": "boolean",
+                    "description": "Whether to display images in list view"
+                  }
+                }
+              },
+              "card": {
+                "type": "object",
+                "description": "Card view configuration",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "description": "Fields to display in card view",
+                    "items": {
+                      "type": "object",
+                      "required": ["field", "typeOfField"],
+                      "properties": {
+                        "field": {
+                          "type": "string",
+                          "description": "Data field to display"
+                        },
+                        "typeOfField": {
+                          "type": "string",
+                          "enum": [
+                            "Heading",
+                            "Text",
+                            "AuthorList",
+                            "Tags",
+                            "Award",
+                            "Image",
+                            "ExpandableMarkdown",
+                            "Section",
+                            "LinkButtons",
+                            "PublicationLinks",
+                            "Markdown"
+                          ],
+                          "description": "Component type to use for rendering the field"
+                        },
+                        "tagSet": {
+                          "type": "string",
+                          "description": "For Tags component: identifier of the tag set to use for styling"
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Label to display for the field"
+                        },
+                        "options": {
+                          "type": "object",
+                          "description": "Component-specific options"
+                        },
+                        "condition": {
+                          "type": "string",
+                          "description": "Condition for displaying the field"
+                        },
+                        "heading": {
+                          "type": "string",
+                          "description": "Heading to display above the field"
+                        }
+                      }
+                    }
+                  },
+                  "showImage": {
+                    "type": "boolean",
+                    "description": "Whether to display images in card view"
+                  }
+                }
+              },
+              "detail": {
+                "type": "object",
+                "description": "Detail view configuration",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "description": "Fields to display in detail view",
+                    "items": {
+                      "type": "object",
+                      "required": ["field", "typeOfField"],
+                      "properties": {
+                        "field": {
+                          "type": "string",
+                          "description": "Data field to display"
+                        },
+                        "typeOfField": {
+                          "type": "string",
+                          "enum": [
+                            "Heading",
+                            "Text",
+                            "AuthorList",
+                            "Tags",
+                            "Award",
+                            "Image",
+                            "ExpandableMarkdown",
+                            "Section",
+                            "LinkButtons",
+                            "PublicationLinks",
+                            "Markdown"
+                          ],
+                          "description": "Component type to use for rendering the field"
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Label to display for the field"
+                        },
+                        "options": {
+                          "type": "object",
+                          "description": "Component-specific options"
+                        },
+                        "condition": {
+                          "type": "string",
+                          "description": "Condition for displaying the field"
+                        },
+                        "heading": {
+                          "type": "string",
+                          "description": "Heading to display above the field"
+                        }
+                      }
+                    }
+                  },
+                  "actions": {
+                    "type": "array",
+                    "description": "Action buttons to display in detail view",
+                    "items": {
+                      "type": "object",
+                      "required": ["type"],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Action type"
+                        },
+                        "condition": {
+                          "type": "string",
+                          "description": "Condition for displaying the action"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "site": {
+      "type": "object",
+      "description": "Global site configuration",
+      "required": ["title", "description", "baseUrl"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Site title for SEO"
+        },
+        "description": {
+          "type": "string",
+          "description": "Site description for SEO"
+        },
+        "baseUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Base URL for the site (should match top-level baseUrl)"
+        },
+        "googleAnalyticsId": {
+          "type": "string",
+          "description": "Google Analytics ID for tracking"
+        },
+        "keywords": {
+          "type": "string",
+          "description": "SEO keywords"
+        },
+        "author": {
+          "type": "string",
+          "description": "Site author for SEO (should match researcherName)"
+        },
+        "googleSiteVerification": {
+          "type": "string",
+          "description": "Google site verification code"
+        }
+      }
+    }
+  }
+}

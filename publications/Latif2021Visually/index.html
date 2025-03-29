@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- Specific Hash URL Redirects -->
+    <script type="text/javascript">
+      (function () {
+        // Map of specific hash URLs to their clean URL destinations
+        var hashRedirectMap = {
+          '#/publications': '/publications',
+          '#/publications/': '/publications/', // Handle trailing slash version
+          '#/publication/': '/publication/', // This will be a prefix match for publication URLs
+          // '#/docs': '/docs',
+          // Add more specific redirects as needed
+        };
+
+        // Get the current hash
+        var hash = window.location.hash;
+        console.log('Current hash:', hash); // Debug log
+
+        // Check if this hash is in our redirect map
+        if (hash) {
+          // First check for exact matches
+          if (hashRedirectMap[hash]) {
+            console.log('Exact match found, redirecting to:', hashRedirectMap[hash]); // Debug log
+            window.location.replace(window.location.origin + hashRedirectMap[hash]);
+          }
+          // Then check for prefix matches (for dynamic routes like publications)
+          else {
+            var matchFound = false;
+            for (var prefix in hashRedirectMap) {
+              if (hash.startsWith(prefix) && prefix.endsWith('/')) {
+                var cleanPrefix = hashRedirectMap[prefix];
+                var suffix = hash.substring(prefix.length);
+                var redirectUrl = window.location.origin + cleanPrefix + suffix;
+                console.log('Prefix match found, redirecting to:', redirectUrl); // Debug log
+                window.location.replace(redirectUrl);
+                matchFound = true;
+                break;
+              }
+            }
+
+            // If no match found but starts with #/, use the path directly
+            if (!matchFound && hash.startsWith('#/')) {
+              var cleanPath = hash.substring(1); // Remove the # character
+              console.log('No match found, using direct path:', cleanPath); // Debug log
+              window.location.replace(window.location.origin + cleanPath);
+            }
+          }
+        }
+      })();
+    </script>
+    <!-- End Specific Hash URL Redirects -->
+
+    <title>Shivam Agarwal's Website - Data and AI Expert</title>
+    <meta name="description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta name="keywords" content="academic, research, publications, papers, scholarly work">
+    <meta name="author" content="Shivam Agarwal">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google-site-verification" content="L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://s-agarwl.github.io/publications/Latif2021Visually">
+    <meta property="og:title" content="Shivam Agarwal's Website - Data and AI Expert">
+    <meta property="og:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="og:image" content="https://s-agarwl.github.io/logo.svg">
+
+    <!-- Publication-specific metadata -->
+    <meta name="citation_doi" content="10.1109/VIS49827.2021.9623313">
+    <meta name="DC.identifier" content="doi:10.1109/VIS49827.2021.9623313">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://s-agarwl.github.io/publications/Latif2021Visually">
+    <meta property="twitter:title" content="Shivam Agarwal's Website - Data and AI Expert">
+    <meta property="twitter:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="twitter:image" content="https://s-agarwl.github.io/logo.svg">
+
+    <!-- Google Analytics -->
+    
+    <!-- Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8CMNGL0EH7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-8CMNGL0EH7', {
+        custom_map: {
+          dimension1: 'paper_title',
+          dimension2: 'paper_authors',
+          dimension3: 'paper_year',
+        },
+      });
+    </script>
+  
+    <script type="module" crossorigin="" src="/assets/index-Dr91oyh6.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-CEF85yBi.css">
+  <link rel="canonical" href="https://s-agarwl.github.io/publications/Latif2021Visually"><meta property="DC.language" content="en"><script id="publication-data" type="application/json">{"entry":{"citationKey":"Latif2021Visually","entryType":"inproceedings","entryTags":{"type":"Short Paper","author":"Shahid Latif, Shivam Agarwal, Simon Gottschalk, Carina Chrosch, Felix Feit, Johannes Jahn, Tobias Braun, Yannick Christian Tchenko, Elena Demidova, and Fabian Beck","title":"Visually Connecting Historical Figures Through Event Knowledge Graphs","booktitle":"IEEE VIS","doi":"10.1109/VIS49827.2021.9623313","pages":"156-160","publisher":"IEEE","year":"2021","paperurl":"/publications/Latif2021Visually/Latif2021Visually.pdf","abstract":"Knowledge graphs store information about historical figures and their relationships indirectly through shared events. We developed a visualization system, VisKonnect, for analyzing the intertwined lives of historical figures based on the events they participated in. A user's query is parsed for identifying named entities, and related data is retrieved from an event knowledge graph. While a short textual answer to the query is generated using the GPT-3 language model, various linked visualizations provide context, display additional information related to the query, and allow exploration.","image":"/publications/Latif2021Visually/Latif2021Visually.PNG","video":"https://www.youtube.com/watch?v=FG69qFHicYE","keywords":"Event Knowledge Graphs, Temporal Analysis"},"contentType":"Publications","sectionPath":"/publications"},"config":{"site":{"title":"Shivam Agarwal's Website - Data and AI Expert","description":"This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.","baseUrl":"https://s-agarwl.github.io","googleAnalyticsId":"G-8CMNGL0EH7","keywords":"academic, research, publications, papers, scholarly work","author":"Shivam Agarwal","googleSiteVerification":"L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc"},"sections":[{"id":"Profile","title":"Profile","path":"/"},{"id":"Publications","title":"Publications","path":"/publications","dataSource":"/data/pubs.bib","dataType":"bibtex"},{"id":"Projects","title":"Projects","path":"/projects","dataSource":"/data/projects.json"},{"id":"Talks","title":"Talks","path":"/talks","dataSource":"/data/talks.json"},{"id":"Teaching","title":"Teaching","path":"/teaching","dataSource":"/data/teaching.json"},{"id":"Blog","title":"Blog","path":"/blog","dataSource":"/data/blog.json"},{"id":"my-story","title":"My Story","path":"/my-story"}]},"sectionConfig":{"id":"Publications","path":"/publications","title":"Publications","sectionHeading":"Publications","template":"listOfItems","description":"Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.","dataSource":"/data/pubs.bib","dataType":"bibtex","display":{"list":{"fields":[{"field":"title","component":"Heading"},{"field":"authors","component":"AuthorList","label":"Authors"},{"field":"venue","component":"Text","format":"{journal|booktitle}, {year}","variant":"venueList"},{"field":"keywords","component":"Tags"},{"field":"awards","component":"Award"}],"showImage":true},"card":{"fields":[{"field":"title","typeOfField":"Heading","options":{"level":3}},{"field":"links","typeOfField":"PublicationLinks","options":{"showText":true}},{"field":"authors","typeOfField":"AuthorList","label":"Authors"},{"field":"year","typeOfField":"Text","label":"Year"},{"field":"venue","typeOfField":"Text","format":"{journal|booktitle}, {year}","variant":"venueList"},{"field":"abstract","typeOfField":"ExpandableMarkdown","options":{"limit":"abstractPreviewLength  "},"label":"Abstract"},{"field":"keywords","typeOfField":"Tags"},{"field":"awards","typeOfField":"Award"}],"showImage":true},"detail":{"fields":[{"field":"title","component":"Heading","options":{"level":1}},{"field":"image","component":"Image","condition":"image"},{"field":"awards","component":"Award","condition":"awards"},{"field":"authors","component":"AuthorList","label":"Authors"},{"field":"year","component":"Text","label":"Year"},{"field":"journal","component":"Text","label":"Journal","condition":"journal"},{"field":"booktitle","component":"Text","label":"Conference","condition":"booktitle"},{"field":"links","component":"PublicationLinks","options":{"showText":true}},{"field":"abstract","component":"ExpandableMarkdown","heading":"Abstract","options":{"truncate":30},"condition":"abstract"},{"field":"keywords","component":"Tags","heading":"Keywords","condition":"keywords"}],"actions":[{"type":"BibTeX","condition":"entryType"},{"type":"Video","condition":"links.video"}]}}}}</script></head>
+  <body>
+    <div id="prerendered-content"><h1>Visually Connecting Historical Figures Through Event Knowledge Graphs</h1><div class="metadata"><p><strong>Year: </strong>2021</p><p><strong>Conference: </strong>IEEE VIS</p><p><strong>Authors: </strong>Shahid Latif, Shivam Agarwal, Simon Gottschalk, Carina Chrosch, Felix Feit, Johannes Jahn, Tobias Braun, Yannick Christian Tchenko, Elena Demidova, and Fabian Beck</p><p><strong>DOI: </strong><a href="https://doi.org/10.1109/VIS49827.2021.9623313" target="_blank" rel="noopener noreferrer">10.1109/VIS49827.2021.9623313</a></p></div><h3>Abstract</h3><div class="markdown-content">Knowledge graphs store information about historical figures and their relationships indirectly through shared events. We developed a visualization system, VisKonnect, for analyzing the intertwined lives of historical figures based on the events they participated in. A user's query is parsed for identifying named entities, and related data is retrieved from an event knowledge graph. While a short textual answer to the query is generated using the GPT-3 language model, various linked visualizations provide context, display additional information related to the query, and allow exploration.</div><h3>Keywords</h3><div class="tags"><span class="tag">Event Knowledge Graphs</span> <span class="tag">Temporal Analysis</span> </div><h2>Citation</h2><pre><code class="language-bibtex">@inproceedings{Latif2021Visually,
+  author     = {Shahid Latif, Shivam Agarwal, Simon Gottschalk, Carina Chrosch, Felix Feit, Johannes Jahn, Tobias Braun, Yannick Christian Tchenko, Elena Demidova, and Fabian Beck},
+  title      = {Visually Connecting Historical Figures Through Event Knowledge Graphs},
+  booktitle  = {IEEE VIS},
+  pages      = {156-160},
+  year       = {2021},
+  publisher  = {IEEE},
+  doi        = {10.1109/VIS49827.2021.9623313},
+  paperurl   = {/publications/Latif2021Visually/Latif2021Visually.pdf},
+  abstract   = {Knowledge graphs store information about historical figures and their relationships indirectly through shared events. We developed a visualization system, VisKonnect, for analyzing the intertwined lives of historical figures based on the events they participated in. A user's query is parsed for identifying named entities, and related data is retrieved from an event knowledge graph. While a short textual answer to the query is generated using the GPT-3 language model, various linked visualizations provide context, display additional information related to the query, and allow exploration.},
+  keywords   = {Event Knowledge Graphs, Temporal Analysis}
+}</code></pre></div><div id="root"></div>
+
+  
+
+</body></html>

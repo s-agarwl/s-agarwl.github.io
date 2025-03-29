@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- Specific Hash URL Redirects -->
+    <script type="text/javascript">
+      (function () {
+        // Map of specific hash URLs to their clean URL destinations
+        var hashRedirectMap = {
+          '#/publications': '/publications',
+          '#/publications/': '/publications/', // Handle trailing slash version
+          '#/publication/': '/publication/', // This will be a prefix match for publication URLs
+          // '#/docs': '/docs',
+          // Add more specific redirects as needed
+        };
+
+        // Get the current hash
+        var hash = window.location.hash;
+        console.log('Current hash:', hash); // Debug log
+
+        // Check if this hash is in our redirect map
+        if (hash) {
+          // First check for exact matches
+          if (hashRedirectMap[hash]) {
+            console.log('Exact match found, redirecting to:', hashRedirectMap[hash]); // Debug log
+            window.location.replace(window.location.origin + hashRedirectMap[hash]);
+          }
+          // Then check for prefix matches (for dynamic routes like publications)
+          else {
+            var matchFound = false;
+            for (var prefix in hashRedirectMap) {
+              if (hash.startsWith(prefix) && prefix.endsWith('/')) {
+                var cleanPrefix = hashRedirectMap[prefix];
+                var suffix = hash.substring(prefix.length);
+                var redirectUrl = window.location.origin + cleanPrefix + suffix;
+                console.log('Prefix match found, redirecting to:', redirectUrl); // Debug log
+                window.location.replace(redirectUrl);
+                matchFound = true;
+                break;
+              }
+            }
+
+            // If no match found but starts with #/, use the path directly
+            if (!matchFound && hash.startsWith('#/')) {
+              var cleanPath = hash.substring(1); // Remove the # character
+              console.log('No match found, using direct path:', cleanPath); // Debug log
+              window.location.replace(window.location.origin + cleanPath);
+            }
+          }
+        }
+      })();
+    </script>
+    <!-- End Specific Hash URL Redirects -->
+
+    <title>Category Extended Parallel Coordinates Plot</title>
+    <meta name="description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta name="keywords" content="academic, research, publications, papers, scholarly work">
+    <meta name="author" content="Shivam Agarwal">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google-site-verification" content="L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://s-agarwl.github.io/projects/project-cxpcp">
+    <meta property="og:title" content="Category Extended Parallel Coordinates Plot">
+    <meta property="og:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="og:image" content="https://s-agarwl.github.io/logo.svg">
+
+    <!-- Publication-specific metadata -->
+    <meta name="citation_doi" content="{{publicationDOI}}">
+    <meta name="DC.identifier" content="doi:{{publicationDOI}}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://s-agarwl.github.io/projects/project-cxpcp">
+    <meta property="twitter:title" content="Category Extended Parallel Coordinates Plot">
+    <meta property="twitter:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="twitter:image" content="https://s-agarwl.github.io/logo.svg">
+
+    <!-- Google Analytics -->
+    
+    <!-- Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8CMNGL0EH7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-8CMNGL0EH7', {
+        custom_map: {
+          dimension1: 'paper_title',
+          dimension2: 'paper_authors',
+          dimension3: 'paper_year',
+        },
+      });
+    </script>
+  
+    <script type="module" crossorigin="" src="/assets/index-Dr91oyh6.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-CEF85yBi.css">
+  <link rel="canonical" href="https://s-agarwl.github.io/projects/project-cxpcp"><meta property="DC.language" content="en"><script id="publication-data" type="application/json">{"entry":{"id":"project-cxpcp","title":"Category Extended Parallel Coordinates Plot","year":"2025","status":"Ongoing","technologies":"React, D3.js","collaborators":"","description":"Category Extended Parallel Coordinates Plot (CXPCP) is a visualization technique that allows users to explore and analyze high-dimensional data with categorical variables in a single plot. It extends the traditional parallel coordinates plot by adding a category axis, enabling users to visualize and compare data across different (overlapping)categories.","image":"","links":{},"awards":"","contentType":"Projects","sectionPath":"/projects"},"config":{"site":{"title":"Shivam Agarwal's Website - Data and AI Expert","description":"This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.","baseUrl":"https://s-agarwl.github.io","googleAnalyticsId":"G-8CMNGL0EH7","keywords":"academic, research, publications, papers, scholarly work","author":"Shivam Agarwal","googleSiteVerification":"L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc"},"sections":[{"id":"Profile","title":"Profile","path":"/"},{"id":"Publications","title":"Publications","path":"/publications","dataSource":"/data/pubs.bib","dataType":"bibtex"},{"id":"Projects","title":"Projects","path":"/projects","dataSource":"/data/projects.json"},{"id":"Talks","title":"Talks","path":"/talks","dataSource":"/data/talks.json"},{"id":"Teaching","title":"Teaching","path":"/teaching","dataSource":"/data/teaching.json"},{"id":"Blog","title":"Blog","path":"/blog","dataSource":"/data/blog.json"},{"id":"my-story","title":"My Story","path":"/my-story"}]},"sectionConfig":{"id":"Projects","path":"/projects","title":"Projects","sectionHeading":"Projects","template":"listOfItems","description":"Explore my projects and work","dataSource":"/data/projects.json","content":"Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities.","display":{"list":{"fields":[{"field":"status","typeOfField":"Tags","tagSet":"status"},{"field":"title","typeOfField":"Heading"},{"field":"description","typeOfField":"Text"},{"field":"technologies","typeOfField":"Tags","condition":"technologies"}],"showImage":false},"card":{"fields":[{"field":"status","typeOfField":"Tags","label":"Status","tagSet":"status"},{"field":"title","typeOfField":"Heading","options":{"level":3}},{"field":"year","typeOfField":"Text","label":"Year"},{"field":"description","typeOfField":"ExpandableMarkdown","options":{"limit":"descriptionPreviewLength"}},{"field":"technologies","typeOfField":"Tags","condition":"technologies"}],"showImage":true},"detail":{"fields":[{"field":"title","typeOfField":"Heading","options":{"level":1}},{"field":"status","typeOfField":"Tags","tagSet":"status"},{"field":"image","typeOfField":"Image"},{"field":"awards","typeOfField":"Award"},{"field":"year","typeOfField":"Text","label":"Year"},{"field":"description","typeOfField":"ExpandableMarkdown","heading":"Description","options":{"truncate":30}},{"field":"collaborators","typeOfField":"Text","heading":"Collaborators"},{"field":"technologies","typeOfField":"Tags","heading":"Technologies"},{"field":"links","typeOfField":"LinkButtons","heading":"Links","condition":"links"}]}}}}</script></head>
+  <body>
+    <div id="prerendered-content"><h1>Category Extended Parallel Coordinates Plot</h1><div class="metadata"><p><strong>Year: </strong>2025</p></div></div><div id="root"></div>
+
+  
+
+</body></html>

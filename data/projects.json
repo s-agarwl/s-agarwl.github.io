@@ -1,0 +1,28 @@
+[
+  {
+    "id": "project-cxpcp",
+    "title": "Category Extended Parallel Coordinates Plot",
+    "year": "2025",
+    "status": "Ongoing",
+    "technologies": "React, D3.js",
+    "collaborators": "",
+    "description": "Category Extended Parallel Coordinates Plot (CXPCP) is a visualization technique that allows users to explore and analyze high-dimensional data with categorical variables in a single plot. It extends the traditional parallel coordinates plot by adding a category axis, enabling users to visualize and compare data across different (overlapping)categories.",
+    "image": "",
+    "links": {},
+    "awards": ""
+  },
+  {
+    "id": "project-incois",
+    "title": "Ocean Explorer: A Visualization Tool for Meteorologists",
+    "year": "2016",
+    "status": "Completed",
+    "technologies": "Qt, C++, OpenGL",
+    "collaborators": "GVCL (IIITB), INCOIS",
+    "description": "Developed a desktop application for the Indian Meteorological Department (IMD) to visualize and analyze meteorological data from devices deployed in the Indian Ocean region. The application provides a user-friendly interface for exploring multivariate time series data with rich interactions.",
+    "image": "/projects/project-incois/images/oceanvis.png",
+    "links": {
+      "Videos": "https://youtube.com/playlist?list=PLBOI7IXgWyiT7epExNPSmmDygRGtZB6p5&si=ZDHFLu4QsTarP87a"
+    },
+    "markdownContent": "/projects/project-incois/content.md"
+  }
+]
