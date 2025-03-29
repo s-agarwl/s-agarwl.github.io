@@ -171,6 +171,12 @@ const Header = ({ config }) => {
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0 cursor-pointer">
             {mainNavItems.map((navItem) => {
+              // Skip navigation items that point to hidden sections
+              if (typeof navItem === 'string') {
+                const section = config.sections.find((s) => s.id === navItem);
+                if (section?.hideSection) return null;
+              }
+
               // Process the navigation item
               const item =
                 typeof navItem === 'string'
@@ -181,6 +187,21 @@ const Header = ({ config }) => {
                       dropdown: navItem.dropdown,
                       items: navItem.items,
                     };
+
+              // Skip dropdown items that have all hidden subsections
+              if (item.dropdown && item.items) {
+                // Filter out hidden items from the dropdown
+                const visibleItems = item.items.filter((subItemId) => {
+                  const section = config.sections.find((s) => s.id === subItemId);
+                  return !section?.hideSection;
+                });
+
+                // Skip rendering this dropdown if all items are hidden
+                if (visibleItems.length === 0) return null;
+
+                // Update the items array to only include visible items
+                item.items = visibleItems;
+              }
 
               // For dropdown, check if it should be highlighted
               const isDropdownHighlighted =
@@ -205,6 +226,9 @@ const Header = ({ config }) => {
                           {(item.items || []).map((subItemId) => {
                             const subItem = getSectionDetails(config.sections, subItemId);
                             const isActive = isNavItemActive(subItemId);
+
+                            // Skip hidden subsections
+                            if (subItem.isHidden) return null;
 
                             return (
                               <li key={subItemId}>

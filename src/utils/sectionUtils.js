@@ -43,6 +43,16 @@ export const getSectionDetails = (sections, id) => {
   // Check if it's a main section
   const section = findSectionById(sections, id);
   if (section) {
+    // Check if section is hidden
+    if (section.hideSection) {
+      return {
+        id,
+        text: section.title || section.sectionHeading || id,
+        path: '/', // Redirect to home if section is hidden
+        isHidden: true,
+      };
+    }
+
     return {
       id,
       text: section.title || section.sectionHeading || id,
@@ -54,6 +64,18 @@ export const getSectionDetails = (sections, id) => {
   const subsectionInfo = findSubsectionById(sections, id);
   if (subsectionInfo) {
     const { subsection, parentSection } = subsectionInfo;
+
+    // Check if parent section is hidden
+    if (parentSection.hideSection) {
+      return {
+        id,
+        text: subsection.title || id,
+        path: '/', // Redirect to home if parent section is hidden
+        parentId: parentSection.id,
+        isHidden: true,
+      };
+    }
+
     return {
       id,
       text: subsection.title || id,

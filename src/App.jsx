@@ -23,7 +23,7 @@ function App({ config }) {
 
     // Go through all section configs and find those with paths
     for (const sectionConfig of config.sections) {
-      if (sectionConfig.path && sectionConfig.path !== '/') {
+      if (sectionConfig.path && sectionConfig.path !== '/' && !sectionConfig.hideSection) {
         // Normalize the section config to ensure it has all required properties
         routeData.push({
           // Ensure section has a path
@@ -46,7 +46,9 @@ function App({ config }) {
         const newContentData = {};
 
         // Find sections with dataSources
-        const sectionsWithData = config.sections.filter((section) => section.dataSource);
+        const sectionsWithData = config.sections.filter(
+          (section) => section.dataSource && !section.hideSection,
+        );
 
         // Early exit if no data sources
         if (sectionsWithData.length === 0) {
@@ -316,14 +318,17 @@ function App({ config }) {
 
               {/* Short URL redirect route - only add when shorturls are loaded */}
               {shorturlsLoaded && (
-                <Route path="/:shorturl" element={<ShortUrlRedirect shorturlMap={shorturlMap} />} />
+                <Route
+                  path="/:shorturl"
+                  element={<ShortUrlRedirect shorturlMap={shorturlMap} config={config} />}
+                />
               )}
 
               {/* Short URL redirect route with trailing slash */}
               {shorturlsLoaded && (
                 <Route
                   path="/:shorturl/"
-                  element={<ShortUrlRedirect shorturlMap={shorturlMap} />}
+                  element={<ShortUrlRedirect shorturlMap={shorturlMap} config={config} />}
                 />
               )}
 

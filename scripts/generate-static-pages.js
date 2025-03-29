@@ -1394,7 +1394,9 @@ async function processAllContent(config) {
     const content = {};
 
     // Process content sections
-    const contentSections = config.sections.filter((section) => section.dataSource);
+    const contentSections = config.sections.filter(
+      (section) => section.dataSource && !section.hideSection,
+    );
     console.log(`Found ${contentSections.length} content sections with data sources`);
 
     // Process each section

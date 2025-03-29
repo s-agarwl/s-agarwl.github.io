@@ -112,7 +112,9 @@ export async function generateSeoTexts() {
     }
 
     // Dynamically process all sections that have dataSource defined
-    const contentSections = websiteConfig.sections.filter((section) => section.dataSource);
+    const contentSections = websiteConfig.sections.filter(
+      (section) => section.dataSource && !section.hideSection,
+    );
 
     for (const section of contentSections) {
       const pathKey = section.path.replace(/^\//, ''); // Remove leading slash

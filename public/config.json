@@ -481,6 +481,7 @@
     },
     {
       "id": "Teaching",
+      "hideSection": true,
       "path": "/teaching",
       "title": "Teaching",
       "sectionHeading": "Teaching",
