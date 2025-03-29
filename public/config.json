@@ -11,19 +11,7 @@
     }
   },
   "navigation": {
-    "mainItems": [
-      {
-        "id": "profile",
-        "dropdown": true,
-        "items": ["about", "education", "workExperience", "awards", "featuredWorks", "contact"]
-      },
-      "publications",
-      "projects",
-      "talks",
-      "teaching",
-      "blog",
-      "my-story"
-    ]
+    "mainItems": ["profile", "publications", "projects", "talks", "teaching", "blog", "my-story"]
   },
   "links": {
     "googleScholar": "https://scholar.google.com/citations?user=9-ma8xIAAAAJ",
