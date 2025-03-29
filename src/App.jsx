@@ -9,6 +9,7 @@ import { GenericContentPage, ContentDetails } from './components/GenericContentP
 import PageWithSubSections from './components/PageWithSubSections';
 import DynamicSectionRenderer from './components/DynamicSectionRenderer';
 import ShortUrlRedirect from './components/ShortUrlRedirect';
+import ScrollToTop from './components/ScrollToTop';
 import convertBibtexToJson from './utils/bibtexToJson';
 
 function App({ config }) {
@@ -268,6 +269,7 @@ function App({ config }) {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="App flex flex-col min-h-screen">
         <Header config={config} />
         <main className="flex-grow pt-16">
