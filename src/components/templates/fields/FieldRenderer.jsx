@@ -21,6 +21,7 @@ const FieldRenderer = ({
   item = {},
   globalConfig = {},
   viewType = 'detail',
+  typeOfField,
   component,
   ...otherProps
 }) => {
@@ -137,7 +138,8 @@ const FieldRenderer = ({
   };
 
   // Determine which component to render
-  const componentToRender = isComponentMode ? component : config.component;
+  const componentToRender =
+    typeOfField || component || (isComponentMode ? null : config?.typeOfField || config?.component);
 
   // Get component level if it's a heading
   const level =
@@ -170,6 +172,21 @@ const FieldRenderer = ({
   // Ensure heading is passed if specified
   if (!isComponentMode && config.heading) {
     componentProps.heading = config.heading;
+  }
+
+  // Pass tagSet to Tags component
+  if (componentToRender === 'Tags') {
+    // When in component mode (direct usage), use the tagSet from props
+    if (isComponentMode) {
+      componentProps.tagSet = otherProps.tagSet;
+    }
+    // When in field config mode, get tagSet from field config
+    else if (!isComponentMode && config.tagSet) {
+      componentProps.tagSet = config.tagSet;
+    }
+
+    // Always ensure the global config is passed to access tagSets
+    componentProps.config = globalConfig;
   }
 
   // Apply proper styling based on component type and viewType
@@ -228,6 +245,7 @@ FieldRenderer.propTypes = {
   item: PropTypes.object,
   globalConfig: PropTypes.object,
   viewType: PropTypes.oneOf(['list', 'card', 'detail']),
+  typeOfField: PropTypes.string,
   component: PropTypes.string,
 };
 

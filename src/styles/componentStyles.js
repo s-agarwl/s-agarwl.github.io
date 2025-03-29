@@ -18,15 +18,15 @@ const componentStyles = {
     variants: {
       // Card view styles
       card: {
-        3: 'text-lg font-semibold text-gray-800 mb-2 mt-0',
+        3: 'text-lg font-semibold text-gray-800 mb-2 mt-0 text-center',
       },
       // List view styles - more compact with different color
       list: {
-        3: 'text-base font-semibold text-gray-800 mb-0.5 mt-0',
+        1: 'text-base font-semibold text-gray-800 mb-0.5 mt-0',
       },
       // Detail view styles
       detail: {
-        1: 'text-3xl font-bold text-gray-900 mb-6',
+        1: 'text-3xl font-bold text-gray-900 mb-2 mt-0 text-center',
         2: 'text-2xl font-semibold text-gray-800 mb-4',
         3: 'text-xl font-semibold text-gray-800 mb-3',
       },
@@ -57,7 +57,7 @@ const componentStyles = {
       default: 'flex flex-wrap gap-2 mb-4',
       card: 'flex flex-wrap gap-2 mt-4',
       list: 'flex flex-wrap gap-2 mt-2 mb-0',
-      detail: 'flex flex-wrap gap-2 mb-4',
+      detail: 'flex flex-wrap gap-2 mb-2',
     },
     // Individual tag styles
     tag: {

@@ -3,6 +3,13 @@
   "email": "shivamworking@gmail.com",
   "theme": "light",
   "baseUrl": "https://s-agarwl.github.io",
+  "tagSets": {
+    "status": {
+      "Completed": { "label": "Completed", "color": "green" },
+      "Ongoing": { "label": "Ongoing", "color": "blue" },
+      "Planned": { "label": "Planned", "color": "amber" }
+    }
+  },
   "navigation": {
     "mainItems": [
       {
@@ -334,90 +341,110 @@
         "list": {
           "fields": [
             {
+              "field": "status",
+              "typeOfField": "Tags",
+              "tagSet": "status"
+            },
+            {
               "field": "title",
-              "component": "Heading"
+              "typeOfField": "Heading"
             },
             {
               "field": "description",
-              "component": "Text"
+              "typeOfField": "Text"
             },
+
+            {
+              "field": "technologies",
+              "typeOfField": "Tags",
+              "condition": "technologies"
+            }
+          ],
+          "showImage": false
+        },
+        "card": {
+          "fields": [
             {
               "field": "status",
-              "component": "Tags"
+              "typeOfField": "Tags",
+              "label": "Status",
+              "tagSet": "status"
+            },
+            {
+              "field": "title",
+              "typeOfField": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "year",
+              "typeOfField": "Text",
+              "label": "Year"
+            },
+
+            {
+              "field": "description",
+              "typeOfField": "ExpandableMarkdown",
+              "options": { "limit": "descriptionPreviewLength" }
             },
             {
               "field": "technologies",
-              "component": "Tags",
+              "typeOfField": "Tags",
               "condition": "technologies"
             }
           ],
           "showImage": true
         },
-        "card": {
-          "metadata": [
-            { "key": "year", "label": "Year" },
-            { "key": "status", "label": "Status" }
-          ],
-          "description": { "key": "description", "limit": "descriptionPreviewLength" },
-          "tags": "technologies",
-          "award": null
-        },
         "detail": {
           "fields": [
             {
               "field": "title",
-              "component": "Heading",
+              "typeOfField": "Heading",
               "options": { "level": 1 }
             },
             {
-              "field": "image",
-              "component": "Image",
-              "condition": "image"
+              "field": "status",
+              "typeOfField": "Tags",
+              "tagSet": "status"
             },
             {
+              "field": "image",
+              "typeOfField": "Image"
+            },
+
+            {
               "field": "awards",
-              "component": "Award",
-              "condition": "awards"
+              "typeOfField": "Award"
             },
             {
               "field": "authors",
-              "component": "AuthorList",
+              "typeOfField": "AuthorList",
               "label": "Authors"
             },
             {
               "field": "year",
-              "component": "Text",
+              "typeOfField": "Text",
               "label": "Year"
-            },
-            {
-              "field": "description",
-              "component": "ExpandableMarkdown",
-              "heading": "Description",
-              "options": { "truncate": 30 },
-              "condition": "description"
             },
 
             {
-              "field": "status",
-              "component": "Section",
-              "heading": "Status",
-              "condition": "status"
+              "field": "description",
+              "typeOfField": "ExpandableMarkdown",
+              "heading": "Description",
+              "options": { "truncate": 30 }
             },
             {
               "field": "technologies",
-              "component": "Tags",
-              "heading": "Technologies",
-              "condition": "technologies"
+              "typeOfField": "Tags",
+              "heading": "Technologies"
             },
             {
               "field": "collaborators",
-              "component": "Text",
-              "heading": "Collaborators",
-              "condition": "collaborators"
+              "typeOfField": "Text",
+              "heading": "Collaborators"
             },
             {
               "field": "links",
-              "component": "LinkButtons",
+              "typeOfField": "LinkButtons",
               "heading": "Links",
               "condition": "links"
             }

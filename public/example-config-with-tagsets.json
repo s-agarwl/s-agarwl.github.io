@@ -1,0 +1,101 @@
+{
+  "tagSets": {
+    "projectStatus": {
+      "completed": { "label": "Completed", "color": "green" },
+      "ongoing": { "label": "Ongoing", "color": "blue" },
+      "planned": { "label": "Planned", "color": "amber" }
+    },
+    "degreeLevel": {
+      "bachelor": { "label": "Bachelor", "color": "purple" },
+      "master": { "label": "Master", "color": "indigo" },
+      "phd": { "label": "PhD", "color": "red" }
+    },
+    "technologies": {
+      "react": { "label": "React", "color": "cyan" },
+      "python": { "label": "Python", "color": "blue" },
+      "javascript": { "label": "JavaScript", "color": "yellow" },
+      "d3": { "label": "D3.js", "color": "orange" },
+      "ai": { "label": "AI", "color": "green" },
+      "visualization": { "label": "Visualization", "color": "teal" }
+    }
+  },
+  "sections": [
+    {
+      "id": "Projects",
+      "path": "/projects",
+      "title": "Projects",
+      "sectionHeading": "Projects",
+      "template": "listOfItems",
+      "description": "Explore my projects and work",
+      "dataSource": "/data/projects.json",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading"
+            },
+            {
+              "field": "description",
+              "component": "Text"
+            },
+            {
+              "field": "status",
+              "component": "Tags",
+              "tagSet": "projectStatus"
+            },
+            {
+              "field": "technologies",
+              "component": "Tags",
+              "tagSet": "technologies",
+              "condition": "technologies"
+            }
+          ],
+          "showImage": true
+        },
+        "card": {
+          "metadata": [{ "key": "year", "label": "Year" }],
+          "description": { "key": "description", "limit": "descriptionPreviewLength" },
+          "tags": "technologies",
+          "tagSet": "technologies",
+          "award": null
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "component": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "image",
+              "component": "Image",
+              "condition": "image"
+            },
+            {
+              "field": "status",
+              "component": "Tags",
+              "heading": "Status",
+              "tagSet": "projectStatus",
+              "condition": "status"
+            },
+            {
+              "field": "description",
+              "component": "ExpandableMarkdown",
+              "heading": "Description",
+              "options": { "truncate": 30 },
+              "condition": "description"
+            },
+            {
+              "field": "technologies",
+              "component": "Tags",
+              "heading": "Technologies",
+              "tagSet": "technologies",
+              "condition": "technologies"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     "title": "Category Extended Parallel Coordinates Plot",
     "authors": "Shivam Agarwal",
     "year": "2025",
-    "status": "In progress ...",
+    "status": "Ongoing",
     "technologies": "React, D3.js",
     "collaborators": "Shivam Agarwal, Madhav Poddar, Fabian Beck",
     "description": "Category Extended Parallel Coordinates Plot (CXPCP) is a visualization technique that allows users to explore and analyze high-dimensional data with categorical variables in a single plot. It extends the traditional parallel coordinates plot by adding a category axis, enabling users to visualize and compare data across different (overlapping)categories.",
