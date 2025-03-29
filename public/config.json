@@ -254,14 +254,49 @@
           "showImage": true
         },
         "card": {
-          "metadata": [
-            { "key": "authors", "label": "Authors" },
-            { "key": "year", "label": "Year" }
+          "fields": [
+            {
+              "field": "title",
+              "typeOfField": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "links",
+              "typeOfField": "PublicationLinks",
+              "options": { "showText": true }
+            },
+            {
+              "field": "authors",
+              "typeOfField": "AuthorList",
+              "label": "Authors"
+            },
+            {
+              "field": "year",
+              "typeOfField": "Text",
+              "label": "Year"
+            },
+            {
+              "field": "venue",
+              "typeOfField": "Text",
+              "format": "{journal|booktitle}, {year}",
+              "variant": "venueList"
+            },
+            {
+              "field": "abstract",
+              "typeOfField": "ExpandableMarkdown",
+              "options": { "limit": "abstractPreviewLength  " },
+              "label": "Abstract"
+            },
+            {
+              "field": "keywords",
+              "typeOfField": "Tags"
+            },
+            {
+              "field": "awards",
+              "typeOfField": "Award"
+            }
           ],
-          "description": { "key": "abstract", "limit": "abstractPreviewLength" },
-          "tags": "keywords",
-          "award": "awards",
-          "links": true
+          "showImage": true
         },
         "detail": {
           "fields": [
@@ -415,11 +450,7 @@
               "field": "awards",
               "typeOfField": "Award"
             },
-            {
-              "field": "authors",
-              "typeOfField": "AuthorList",
-              "label": "Authors"
-            },
+
             {
               "field": "year",
               "typeOfField": "Text",
@@ -433,15 +464,16 @@
               "options": { "truncate": 30 }
             },
             {
-              "field": "technologies",
-              "typeOfField": "Tags",
-              "heading": "Technologies"
-            },
-            {
               "field": "collaborators",
               "typeOfField": "Text",
               "heading": "Collaborators"
             },
+            {
+              "field": "technologies",
+              "typeOfField": "Tags",
+              "heading": "Technologies"
+            },
+
             {
               "field": "links",
               "typeOfField": "LinkButtons",

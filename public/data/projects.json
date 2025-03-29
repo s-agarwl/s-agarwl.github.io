@@ -2,24 +2,18 @@
   {
     "id": "project-cxpcp",
     "title": "Category Extended Parallel Coordinates Plot",
-    "authors": "Shivam Agarwal",
     "year": "2025",
     "status": "Ongoing",
     "technologies": "React, D3.js",
-    "collaborators": "Shivam Agarwal, Madhav Poddar, Fabian Beck",
+    "collaborators": "",
     "description": "Category Extended Parallel Coordinates Plot (CXPCP) is a visualization technique that allows users to explore and analyze high-dimensional data with categorical variables in a single plot. It extends the traditional parallel coordinates plot by adding a category axis, enabling users to visualize and compare data across different (overlapping)categories.",
     "image": "",
-    "links": {
-      "GitHub": "",
-      "Demo": "",
-      "Documentation": ""
-    },
+    "links": {},
     "awards": ""
   },
   {
     "id": "project-incois",
-    "title": "Ocean Explorer: A User-Friendly Tool for Meteorologists",
-    "authors": "Shivam Agarwal",
+    "title": "Ocean Explorer: A Visualization Tool for Meteorologists",
     "year": "2016",
     "status": "Completed",
     "technologies": "Qt, C++, OpenGL",

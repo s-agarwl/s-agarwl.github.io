@@ -28,7 +28,7 @@ const PublicationLinks = ({ entryTags, showText = false }) => {
   };
 
   return (
-    <div className="flex justify-center space-x-4" onClick={handleLinkClick}>
+    <div className="flex justify-center space-x-4 mb-2" onClick={handleLinkClick}>
       {entryTags.doi && (
         <LinkItem
           href={`https://doi.org/${entryTags.doi}`}
