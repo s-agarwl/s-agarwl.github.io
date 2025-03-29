@@ -159,7 +159,7 @@ const componentStyles = {
     // Button styles
     button: {
       default:
-        'inline-flex items-center px-3 py-1 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-900',
+        'text-blue-600 hover:text-blue-800 inline-flex items-center bg-blue-50 hover:bg-blue-100 rounded px-3 py-1',
     },
   },
 };

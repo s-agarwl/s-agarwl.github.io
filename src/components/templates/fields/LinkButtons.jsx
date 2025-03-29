@@ -8,8 +8,7 @@ const LinkButtons = ({ value, heading, className = '', styleVariant, viewType = 
     // Container class
     let containerClass = 'mb-4';
     // Button class
-    let buttonClass =
-      'text-blue-600 hover:text-blue-800 inline-flex items-center bg-blue-50 hover:bg-blue-100 rounded px-3 py-1';
+    let buttonClass = '';
 
     // Apply different defaults based on viewType
     if (viewType === 'list') {
@@ -20,15 +19,18 @@ const LinkButtons = ({ value, heading, className = '', styleVariant, viewType = 
       containerClass = 'mb-1';
       buttonClass =
         'text-blue-600 hover:text-blue-800 inline-flex items-center bg-blue-50 hover:bg-blue-100 rounded px-2 py-0.5 text-sm';
+    } else if (viewType === 'detail') {
+      containerClass = 'mb-4';
+      buttonClass = '';
     }
 
     // If styleVariant is provided
     if (styleVariant) {
       if (typeof styleVariant === 'object') {
-        containerClass = styleVariant.container || containerClass;
+        // containerClass = styleVariant.container || containerClass;
         buttonClass = styleVariant.button || buttonClass;
       } else if (typeof styleVariant === 'string') {
-        containerClass = styleVariant;
+        // containerClass = styleVariant;
       }
     }
 

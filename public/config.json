@@ -222,8 +222,7 @@
           "fields": [
             {
               "field": "title",
-              "component": "Heading",
-              "options": { "level": 3 }
+              "component": "Heading"
             },
             {
               "field": "authors",
@@ -336,12 +335,15 @@
           "fields": [
             {
               "field": "title",
-              "component": "Heading",
-              "options": { "level": 3 }
+              "component": "Heading"
             },
             {
               "field": "description",
               "component": "Text"
+            },
+            {
+              "field": "status",
+              "component": "Tags"
             },
             {
               "field": "technologies",
@@ -352,7 +354,10 @@
           "showImage": true
         },
         "card": {
-          "metadata": [],
+          "metadata": [
+            { "key": "year", "label": "Year" },
+            { "key": "status", "label": "Status" }
+          ],
           "description": { "key": "description", "limit": "descriptionPreviewLength" },
           "tags": "technologies",
           "award": null
@@ -365,9 +370,33 @@
               "options": { "level": 1 }
             },
             {
-              "field": "description",
-              "component": "Text"
+              "field": "image",
+              "component": "Image",
+              "condition": "image"
             },
+            {
+              "field": "awards",
+              "component": "Award",
+              "condition": "awards"
+            },
+            {
+              "field": "authors",
+              "component": "AuthorList",
+              "label": "Authors"
+            },
+            {
+              "field": "year",
+              "component": "Text",
+              "label": "Year"
+            },
+            {
+              "field": "description",
+              "component": "ExpandableMarkdown",
+              "heading": "Description",
+              "options": { "truncate": 30 },
+              "condition": "description"
+            },
+
             {
               "field": "status",
               "component": "Section",
@@ -398,6 +427,7 @@
     },
     {
       "id": "Talks",
+      "hideSection": true,
       "path": "/talks",
       "title": "Talks",
       "sectionHeading": "Talks",
@@ -569,6 +599,7 @@
     },
     {
       "id": "Blog",
+      "hideSection": true,
       "path": "/blog",
       "title": "Blog",
       "sectionHeading": "Blog",
