@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { ArrowLeftIcon, ShareIcon } from '@heroicons/react/24/solid';
 import ReactMarkdown from 'react-markdown';
 import '../styles/markdown.css';
-import ReactPlayer from 'react-player';
 import { generateBibTexEntry, copyBibTexToClipboard } from '../utils/bibTexUtils';
 import { removeLatexBraces } from '../utils/authorUtils.jsx';
 import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
 import ShareModal from './ShareModal';
+import VideoPlayer from './VideoPlayer';
 
 const GenericItemDetails = ({ item, contentType, config }) => {
   const navigate = useNavigate();
@@ -190,8 +190,10 @@ const GenericItemDetails = ({ item, contentType, config }) => {
               return (
                 item.links?.video && (
                   <div key={index} className="mb-4 mt-4">
-                    <div className="flex justify-center items-center">
-                      <ReactPlayer url={item.links.video} controls />
+                    <div className="flex justify-center items-center w-full">
+                      <div className="w-full max-w-2xl mx-auto">
+                        <VideoPlayer url={item.links.video} aspectRatio="16:9" />
+                      </div>
                     </div>
                   </div>
                 )
