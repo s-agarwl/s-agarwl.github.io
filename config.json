@@ -329,13 +329,13 @@
             {
               "field": "abstract",
               "typeOfField": "ExpandableMarkdown",
-              "heading": "Abstract",
+              "label": "Abstract",
               "options": { "limit": 30 }
             },
             {
               "field": "keywords",
               "typeOfField": "Tags",
-              "heading": "Keywords"
+              "label": "Keywords"
             }
           ],
           "actions": [
@@ -435,31 +435,28 @@
               "typeOfField": "Text",
               "label": "Year"
             },
+
             {
-              "field": "journal",
-              "typeOfField": "Text",
-              "label": "Journal"
-            },
-            {
-              "field": "booktitle",
-              "typeOfField": "Text",
-              "label": "Conference"
-            },
-            {
-              "field": "links",
-              "typeOfField": "PublicationLinks",
-              "options": { "showText": true }
-            },
-            {
-              "field": "abstract",
+              "field": "description",
               "typeOfField": "ExpandableMarkdown",
-              "heading": "Abstract",
+              "label": "Description",
               "options": { "limit": 30 }
             },
             {
-              "field": "keywords",
+              "field": "collaborators",
+              "typeOfField": "Text",
+              "label": "Collaborators"
+            },
+            {
+              "field": "technologies",
               "typeOfField": "Tags",
-              "heading": "Keywords"
+              "label": "Technologies"
+            },
+            {
+              "field": "links",
+              "typeOfField": "LinkButtons",
+              "label": "Links",
+              "condition": "links"
             }
           ]
         }
