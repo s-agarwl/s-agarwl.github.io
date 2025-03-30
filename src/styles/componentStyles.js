@@ -46,8 +46,9 @@ const componentStyles = {
       metadata: 'text-sm text-gray-500 mb-1',
       caption: 'text-xs text-gray-500 mb-1',
       // Venue text styling with italics
-      italics_list: 'text-sm text-gray-600 italic mb-0.5',
-      italics_detail: 'text-base text-gray-700 italic mb-2',
+      italics_list: 'text-sm text-gray-600 italic',
+      italics_card: 'text-sm text-gray-600 italic',
+      italics_detail: 'text-base text-gray-700 italic',
     },
     // Label styles matching content styling with font-bold
     label: {
