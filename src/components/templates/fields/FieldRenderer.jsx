@@ -25,28 +25,23 @@ const FieldRenderer = ({
   component,
   ...otherProps
 }) => {
-  // If component is directly specified, we're in component mode rather than field/config mode
-  const isComponentMode = !!component;
+  // Determine component mode - either direct component usage or via field config
+  const isComponentMode =
+    typeof component === 'string' && !config?.typeOfField && !config?.component;
 
-  if (!value && !config.renderEmpty && config.condition) {
-    return null;
-  }
-
-  // Handle conditional rendering (only in field/config mode)
-  if (!isComponentMode && config.condition) {
-    const conditions = config.condition.split('|');
-    const meetsCriteria = conditions.some((condition) => {
-      const path = condition.split('.');
-      let conditionValue = item;
-      for (const key of path) {
-        if (!conditionValue || !conditionValue[key]) return false;
-        conditionValue = conditionValue[key];
-      }
-      return true;
-    });
-
-    if (!meetsCriteria) return null;
-  }
+  // Utility function to resolve option values that might be references to global config
+  const resolveOptionValue = (optionValue) => {
+    // If the value is a string and exists in globalConfig, resolve it
+    if (
+      typeof optionValue === 'string' &&
+      globalConfig &&
+      globalConfig[optionValue] !== undefined
+    ) {
+      return globalConfig[optionValue];
+    }
+    // Otherwise return the original value
+    return optionValue;
+  };
 
   // Handle formatting (only in field/config mode)
   if (!isComponentMode && config.format && typeof config.format === 'string') {
@@ -72,7 +67,7 @@ const FieldRenderer = ({
     value = formatted;
   }
 
-  // Get component style based on component type, view and variant
+  // Get component style based on component name and view type
   const getComponentStyle = (componentName, level) => {
     const styles = componentStyles[componentName];
     if (!styles) return null;
@@ -149,43 +144,44 @@ const FieldRenderer = ({
         : config.options?.level
       : undefined;
 
-  // Prepare props for the component
-  const componentProps = isComponentMode
-    ? {
-        value,
-        viewType,
-        ...otherProps,
+  // Prepare base props for the component
+  const componentProps = {
+    value,
+    viewType,
+    ...(isComponentMode ? otherProps : {}),
+  };
+
+  // When in field config mode, add standardized props from the config
+  if (!isComponentMode && config) {
+    // Add direct properties from config that should be passed to components
+    const directProps = ['options', 'label', 'heading', 'tagSet'];
+    directProps.forEach((prop) => {
+      if (config[prop] !== undefined) {
+        componentProps[prop] = config[prop];
       }
-    : {
-        value,
-        item,
-        config: globalConfig,
-        viewType,
-        ...config.options,
-      };
+    });
 
-  // Ensure label is passed if specified
-  if (!isComponentMode && config.label) {
-    componentProps.label = config.label;
-  }
+    // Add options as individual props if they exist, resolving any references to global config
+    if (config.options) {
+      // Make a copy to avoid modifying the original
+      const resolvedOptions = { ...config.options };
 
-  // Ensure heading is passed if specified
-  if (!isComponentMode && config.heading) {
-    componentProps.heading = config.heading;
-  }
+      // Resolve any string references to global config
+      Object.keys(resolvedOptions).forEach((key) => {
+        resolvedOptions[key] = resolveOptionValue(resolvedOptions[key]);
+      });
 
-  // Pass tagSet to Tags component
-  if (componentToRender === 'Tags') {
-    // When in component mode (direct usage), use the tagSet from props
-    if (isComponentMode) {
-      componentProps.tagSet = otherProps.tagSet;
-    }
-    // When in field config mode, get tagSet from field config
-    else if (!isComponentMode && config.tagSet) {
-      componentProps.tagSet = config.tagSet;
+      // Add resolved options to component props
+      Object.assign(componentProps, resolvedOptions);
+
+      // Special handling for limit/wordLimit to maintain backward compatibility
+      if (resolvedOptions.limit !== undefined) {
+        componentProps.wordLimit = resolvedOptions.limit;
+      }
     }
 
-    // Always ensure the global config is passed to access tagSets
+    // Add item and global config
+    componentProps.item = item;
     componentProps.config = globalConfig;
   }
 
@@ -201,12 +197,8 @@ const FieldRenderer = ({
   }
 
   // For debugging
-  if (componentToRender === 'Heading' && viewType === 'list') {
-    console.log('Rendering list Heading with props:', {
-      level,
-      styleVariant: componentProps.styleVariant,
-      viewType,
-    });
+  if (componentToRender === 'Tags' && componentProps.heading) {
+    console.log('Rendering Tags with heading:', componentProps.heading);
   }
 
   // Render the appropriate component based on the component type
@@ -230,7 +222,7 @@ const FieldRenderer = ({
     case 'LinkButtons':
       return <LinkButtons {...componentProps} />;
     case 'PublicationLinks':
-      return <PublicationLinks entryTags={item} showText={config.options?.showText} />;
+      return <PublicationLinks entryTags={item} showText={componentProps.showText} />;
     case 'Markdown':
       return <Markdown {...componentProps} />;
     default:

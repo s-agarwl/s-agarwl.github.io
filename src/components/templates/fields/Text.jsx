@@ -21,8 +21,8 @@ const Text = ({ value, label, className = '', styleVariant, viewType = 'detail' 
 
   if (label) {
     return (
-      <p className={textClass}>
-        <b>{label}:</b> {cleanValue}
+      <p>
+        <b>{label}:</b> <span className={textClass}>{cleanValue}</span>
       </p>
     );
   }

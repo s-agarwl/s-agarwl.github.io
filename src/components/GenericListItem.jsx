@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
+import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
 
 const GenericListItem = ({ item, contentType, config }) => {
   const navigate = useNavigate();
@@ -24,31 +25,6 @@ const GenericListItem = ({ item, contentType, config }) => {
       // Fallback to lowercase contentType if section path is not available
       navigate(`/${contentType.toLowerCase()}/${item.id}`);
     }
-  };
-
-  // Check if a field should be displayed based on condition
-  const shouldRenderField = (fieldConfig) => {
-    if (!fieldConfig.condition) return true;
-
-    // Handle OR conditions
-    if (fieldConfig.condition.includes('|')) {
-      const conditions = fieldConfig.condition.split('|');
-      return conditions.some((condition) => !!item[condition.trim()]);
-    }
-
-    // Handle nested path
-    if (fieldConfig.condition.includes('.')) {
-      const path = fieldConfig.condition.split('.');
-      let value = item;
-      for (const segment of path) {
-        if (!value || !value[segment]) return false;
-        value = value[segment];
-      }
-      return !!value;
-    }
-
-    // Simple field check
-    return !!item[fieldConfig.condition];
   };
 
   // Convert component to typeOfField for backward compatibility
@@ -82,18 +58,20 @@ const GenericListItem = ({ item, contentType, config }) => {
     return (
       <>
         {listFields.map((fieldConfig, index) => {
-          // Skip fields that don't meet their condition
-          if (!shouldRenderField(fieldConfig)) return null;
+          // Get the field value using utility function
+          const fieldValue = getFieldValue(item, fieldConfig.field);
 
+          // Skip fields that don't have meaningful values
+          if (!fieldHasValue(fieldValue)) return null;
+
+          // Note: FieldRenderer will extract and utilize properties like 'heading', 'label',
+          // 'typeOfField', 'tagSet', etc. from the fieldConfig object
           return (
             <FieldRenderer
               key={index}
               component={fieldConfig.typeOfField} // For backward compatibility
               field={fieldConfig.field}
-              value={item[fieldConfig.field]}
-              label={fieldConfig.label}
-              tagSet={fieldConfig.tagSet}
-              options={fieldConfig.options}
+              value={fieldValue}
               config={fieldConfig}
               item={item}
               globalConfig={config}

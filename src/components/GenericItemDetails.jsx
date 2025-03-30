@@ -9,6 +9,7 @@ import { generateBibTexEntry, copyBibTexToClipboard } from '../utils/bibTexUtils
 import { removeLatexBraces } from '../utils/authorUtils.jsx';
 import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
+import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
 
 const GenericItemDetails = ({ item, contentType, config }) => {
   const navigate = useNavigate();
@@ -83,31 +84,6 @@ const GenericItemDetails = ({ item, contentType, config }) => {
     }
   };
 
-  // Check if a field should be displayed based on condition
-  const shouldRenderField = (fieldConfig) => {
-    if (!fieldConfig.condition) return true;
-
-    // Handle OR conditions
-    if (fieldConfig.condition.includes('|')) {
-      const conditions = fieldConfig.condition.split('|');
-      return conditions.some((condition) => !!item[condition.trim()]);
-    }
-
-    // Handle nested path
-    if (fieldConfig.condition.includes('.')) {
-      const path = fieldConfig.condition.split('.');
-      let value = item;
-      for (const segment of path) {
-        if (!value || !value[segment]) return false;
-        value = value[segment];
-      }
-      return !!value;
-    }
-
-    // Simple field check
-    return !!item[fieldConfig.condition];
-  };
-
   // Convert component to typeOfField for backward compatibility
   const getUpdatedFields = () => {
     if (!displayConfig || !displayConfig.fields) {
@@ -136,37 +112,39 @@ const GenericItemDetails = ({ item, contentType, config }) => {
     return (
       <>
         {detailFields.map((fieldConfig, index) => {
-          // Skip fields that don't meet their condition
-          if (!shouldRenderField(fieldConfig)) return null;
+          // Get the field value using utility function
+          const fieldValue = getFieldValue(item, fieldConfig.field);
 
+          // Skip fields that don't have meaningful values
+          if (!fieldHasValue(fieldValue)) return null;
+
+          // Note: FieldRenderer will extract and utilize properties like 'heading', 'label',
+          // 'typeOfField', 'tagSet', etc. from the fieldConfig object
           return (
             <FieldRenderer
               key={index}
               component={fieldConfig.typeOfField} // For backward compatibility
               field={fieldConfig.field}
-              value={item[fieldConfig.field]}
-              label={fieldConfig.label}
-              tagSet={fieldConfig.tagSet}
-              options={fieldConfig.options}
+              value={fieldValue}
               config={fieldConfig}
               item={item}
               globalConfig={config}
               viewType="detail"
+              researcherName={
+                fieldConfig.typeOfField === 'AuthorList' ? config.researcherName : undefined
+              }
             />
           );
         })}
 
         {/* Handle special actions */}
         {displayConfig.actions?.map((action, index) => {
-          // Check if the action should be displayed
-          if (action.condition) {
-            const path = action.condition.split('.');
-            let conditionValue = item;
-            for (const key of path) {
-              if (!conditionValue || !conditionValue[key]) return null;
-              conditionValue = conditionValue[key];
-            }
-          }
+          // For actions, check if the condition path has a value
+          const actionShouldDisplay = action.condition
+            ? fieldHasValue(getFieldValue(item, action.condition))
+            : true;
+
+          if (!actionShouldDisplay) return null;
 
           switch (action.type) {
             case 'BibTeX':

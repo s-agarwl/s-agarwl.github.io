@@ -11,7 +11,7 @@
     }
   },
   "navigation": {
-    "mainItems": ["profile", "publications", "projects", "talks", "teaching", "blog", "my-story"]
+    "mainItems": ["profile", "publications", "projects", "my-story"]
   },
   "links": {
     "googleScholar": "https://scholar.google.com/citations?user=9-ma8xIAAAAJ",
@@ -38,8 +38,6 @@
   },
   "bibtexPath": "",
   "profilePhotoPath": "/profile-photo.png",
-  "abstractPreviewLength": 10,
-  "descriptionPreviewLength": 10,
   "sections": [
     {
       "id": "profile",
@@ -217,26 +215,31 @@
           "fields": [
             {
               "field": "title",
-              "component": "Heading"
+              "typeOfField": "Heading"
             },
             {
               "field": "authors",
-              "component": "AuthorList",
+              "typeOfField": "AuthorList",
               "label": "Authors"
             },
             {
-              "field": "venue",
-              "component": "Text",
-              "format": "{journal|booktitle}, {year}",
-              "variant": "venueList"
+              "field": "journal",
+              "typeOfField": "Text",
+              "label": "Venue",
+              "variant": "italics_list"
+            },
+            {
+              "field": "booktitle",
+              "typeOfField": "Text",
+              "variant": "italics_list"
             },
             {
               "field": "keywords",
-              "component": "Tags"
+              "typeOfField": "Tags"
             },
             {
               "field": "awards",
-              "component": "Award"
+              "typeOfField": "Award"
             }
           ],
           "showImage": true
@@ -263,16 +266,11 @@
               "typeOfField": "Text",
               "label": "Year"
             },
-            {
-              "field": "venue",
-              "typeOfField": "Text",
-              "format": "{journal|booktitle}, {year}",
-              "variant": "venueList"
-            },
+
             {
               "field": "abstract",
               "typeOfField": "ExpandableMarkdown",
-              "options": { "limit": "abstractPreviewLength  " },
+              "options": { "limit": 10 },
               "label": "Abstract"
             },
             {
@@ -290,58 +288,54 @@
           "fields": [
             {
               "field": "title",
-              "component": "Heading",
+              "typeOfField": "Heading",
               "options": { "level": 1 }
             },
             {
               "field": "image",
-              "component": "Image",
-              "condition": "image"
+              "typeOfField": "Image"
             },
             {
               "field": "awards",
-              "component": "Award",
-              "condition": "awards"
+              "typeOfField": "Award"
             },
             {
               "field": "authors",
-              "component": "AuthorList",
+              "typeOfField": "AuthorList",
               "label": "Authors"
             },
             {
               "field": "year",
-              "component": "Text",
+              "typeOfField": "Text",
               "label": "Year"
             },
             {
               "field": "journal",
-              "component": "Text",
-              "label": "Journal",
-              "condition": "journal"
+              "typeOfField": "Text",
+              "label": "Venue",
+              "variant": "italics_detail"
             },
             {
               "field": "booktitle",
-              "component": "Text",
-              "label": "Conference",
-              "condition": "booktitle"
+              "typeOfField": "Text",
+              "label": "Venue",
+              "variant": "italics_detail"
             },
             {
               "field": "links",
-              "component": "PublicationLinks",
+              "typeOfField": "PublicationLinks",
               "options": { "showText": true }
             },
             {
               "field": "abstract",
-              "component": "ExpandableMarkdown",
+              "typeOfField": "ExpandableMarkdown",
               "heading": "Abstract",
-              "options": { "truncate": 30 },
-              "condition": "abstract"
+              "options": { "limit": 30 }
             },
             {
               "field": "keywords",
-              "component": "Tags",
-              "heading": "Keywords",
-              "condition": "keywords"
+              "typeOfField": "Tags",
+              "heading": "Keywords"
             }
           ],
           "actions": [
@@ -357,9 +351,8 @@
       "title": "Projects",
       "sectionHeading": "Projects",
       "template": "listOfItems",
-      "description": "Explore my projects and work",
+      "description": "Explore my projects and creative work. From prototypes to software applications, this section showcases my technical skills and problem-solving abilities.",
       "dataSource": "/data/projects.json",
-      "content": "Explore my projects and creative work. From research prototypes to software applications, this section showcases my technical skills and problem-solving abilities.",
       "display": {
         "list": {
           "fields": [
@@ -376,11 +369,9 @@
               "field": "description",
               "typeOfField": "Text"
             },
-
             {
               "field": "technologies",
-              "typeOfField": "Tags",
-              "condition": "technologies"
+              "typeOfField": "Tags"
             }
           ],
           "showImage": false
@@ -390,7 +381,6 @@
             {
               "field": "status",
               "typeOfField": "Tags",
-              "label": "Status",
               "tagSet": "status"
             },
             {
@@ -403,16 +393,14 @@
               "typeOfField": "Text",
               "label": "Year"
             },
-
             {
               "field": "description",
               "typeOfField": "ExpandableMarkdown",
-              "options": { "limit": "descriptionPreviewLength" }
+              "options": { "limit": 10 }
             },
             {
               "field": "technologies",
-              "typeOfField": "Tags",
-              "condition": "technologies"
+              "typeOfField": "Tags"
             }
           ],
           "showImage": true
@@ -433,281 +421,45 @@
               "field": "image",
               "typeOfField": "Image"
             },
-
             {
               "field": "awards",
               "typeOfField": "Award"
             },
-
+            {
+              "field": "authors",
+              "typeOfField": "AuthorList",
+              "label": "Authors"
+            },
             {
               "field": "year",
               "typeOfField": "Text",
               "label": "Year"
             },
-
             {
-              "field": "description",
-              "typeOfField": "ExpandableMarkdown",
-              "heading": "Description",
-              "options": { "truncate": 30 }
-            },
-            {
-              "field": "collaborators",
+              "field": "journal",
               "typeOfField": "Text",
-              "heading": "Collaborators"
+              "label": "Journal"
             },
             {
-              "field": "technologies",
+              "field": "booktitle",
+              "typeOfField": "Text",
+              "label": "Conference"
+            },
+            {
+              "field": "links",
+              "typeOfField": "PublicationLinks",
+              "options": { "showText": true }
+            },
+            {
+              "field": "abstract",
+              "typeOfField": "ExpandableMarkdown",
+              "heading": "Abstract",
+              "options": { "limit": 30 }
+            },
+            {
+              "field": "keywords",
               "typeOfField": "Tags",
-              "heading": "Technologies"
-            },
-
-            {
-              "field": "links",
-              "typeOfField": "LinkButtons",
-              "heading": "Links",
-              "condition": "links"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "talks",
-      "hideSection": true,
-      "path": "/talks",
-      "title": "Talks",
-      "sectionHeading": "Talks",
-      "template": "listOfItems",
-      "description": "Presentations and speaking engagements",
-      "dataSource": "/data/talks.json",
-      "content": "Browse my conference presentations, workshops, and invited talks on various topics related to my research and professional interests.",
-      "display": {
-        "list": {
-          "fields": [
-            {
-              "field": "title",
-              "component": "Heading",
-              "options": { "level": 3 }
-            },
-            {
-              "field": "description",
-              "component": "Text"
-            },
-            {
-              "field": "venue",
-              "component": "Text",
-              "format": "{venue}, {date}",
-              "variant": "venueList"
-            }
-          ],
-          "showImage": true
-        },
-        "card": {
-          "metadata": [
-            { "key": "date", "label": "Date" },
-            { "key": "venue", "label": "Venue" }
-          ],
-          "description": { "key": "description", "limit": "descriptionPreviewLength" },
-          "tags": null,
-          "award": null
-        },
-        "detail": {
-          "fields": [
-            {
-              "field": "title",
-              "component": "Heading",
-              "options": { "level": 1 }
-            },
-            {
-              "field": "description",
-              "component": "Text"
-            },
-            {
-              "field": "date",
-              "component": "Text",
-              "label": "Date"
-            },
-            {
-              "field": "venue",
-              "component": "Text",
-              "label": "Venue",
-              "condition": "venue"
-            },
-            {
-              "field": "talkType",
-              "component": "Text",
-              "label": "Type",
-              "condition": "talkType"
-            },
-            {
-              "field": "duration",
-              "component": "Text",
-              "label": "Duration",
-              "condition": "duration"
-            },
-            {
-              "field": "links",
-              "component": "LinkButtons",
-              "heading": "Links",
-              "condition": "links"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "teaching",
-      "hideSection": true,
-      "path": "/teaching",
-      "title": "Teaching",
-      "sectionHeading": "Teaching",
-      "template": "listOfItems",
-      "description": "Courses and educational activities",
-      "dataSource": "/data/teaching.json",
-      "content": "Discover the courses I've taught, educational resources I've developed, and my approach to teaching various subjects in computer science and related fields.",
-      "display": {
-        "list": {
-          "fields": [
-            {
-              "field": "title",
-              "component": "Heading",
-              "options": { "level": 3 }
-            },
-            {
-              "field": "description",
-              "component": "Text"
-            },
-            {
-              "field": "institution",
-              "component": "Text",
-              "format": "{institution}, {period}"
-            }
-          ],
-          "showImage": true
-        },
-        "card": {
-          "metadata": [
-            { "key": "institution", "label": "Institution" },
-            { "key": "period", "label": "Period" }
-          ],
-          "description": { "key": "description", "limit": "descriptionPreviewLength" },
-          "tags": null,
-          "award": null
-        },
-        "detail": {
-          "fields": [
-            {
-              "field": "title",
-              "component": "Heading",
-              "options": { "level": 1 }
-            },
-            {
-              "field": "description",
-              "component": "Text"
-            },
-            {
-              "field": "institution",
-              "component": "Text",
-              "label": "Institution"
-            },
-            {
-              "field": "period",
-              "component": "Text",
-              "label": "Period"
-            },
-            {
-              "field": "course",
-              "component": "Text",
-              "label": "Course",
-              "condition": "course"
-            },
-            {
-              "field": "semester",
-              "component": "Text",
-              "label": "Semester",
-              "condition": "semester"
-            },
-            {
-              "field": "level",
-              "component": "Text",
-              "label": "Level",
-              "condition": "level"
-            },
-            {
-              "field": "links",
-              "component": "LinkButtons",
-              "heading": "Links",
-              "condition": "links"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "blog",
-      "hideSection": true,
-      "path": "/blog",
-      "title": "Blog",
-      "sectionHeading": "Blog",
-      "template": "listOfItems",
-      "description": "Articles and thoughts",
-      "dataSource": "/data/blog.json",
-      "content": "Read my thoughts, tutorials, and insights on technology, research, and professional development in this collection of articles and essays.",
-      "display": {
-        "list": {
-          "fields": [
-            {
-              "field": "title",
-              "component": "Heading",
-              "options": { "level": 3 }
-            },
-            {
-              "field": "description",
-              "component": "Text"
-            },
-            {
-              "field": "date",
-              "component": "Text"
-            },
-            {
-              "field": "tags",
-              "component": "Tags",
-              "condition": "tags"
-            }
-          ],
-          "showImage": true
-        },
-        "card": {
-          "metadata": [{ "key": "date", "label": "Date" }],
-          "description": { "key": "description", "limit": "descriptionPreviewLength" },
-          "tags": "tags",
-          "award": null
-        },
-        "detail": {
-          "fields": [
-            {
-              "field": "title",
-              "component": "Heading",
-              "options": { "level": 1 }
-            },
-            {
-              "field": "description",
-              "component": "Text"
-            },
-            {
-              "field": "date",
-              "component": "Text"
-            },
-            {
-              "field": "tags",
-              "component": "Tags",
-              "condition": "tags"
-            },
-            {
-              "field": "content",
-              "component": "Markdown",
-              "condition": "content"
+              "heading": "Keywords"
             }
           ]
         }

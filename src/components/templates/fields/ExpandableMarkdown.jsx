@@ -70,7 +70,7 @@ const ExpandableMarkdown = ({
     <div className={containerClass}>
       {heading && <h3 className="text-lg font-medium mb-1">{heading}</h3>}
       {label && <span className="font-semibold">{label}: </span>}
-      <div className="flex flex-wrap items-end">
+      <div className="inline items-end">
         {/* <div className="prose" style={{ marginBottom: 0 }}>
           <ReactMarkdown>{displayText}</ReactMarkdown>
         </div> */}

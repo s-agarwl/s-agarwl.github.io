@@ -46,7 +46,8 @@ const componentStyles = {
       metadata: 'text-sm text-gray-500 mb-1',
       caption: 'text-xs text-gray-500 mb-1',
       // Venue text styling with italics
-      venueList: 'text-sm text-gray-600 italic mb-0.5',
+      italics_list: 'text-sm text-gray-600 italic mb-0.5',
+      italics_detail: 'text-base text-gray-700 italic mb-2',
     },
   },
 
@@ -55,7 +56,7 @@ const componentStyles = {
     // Container styles
     container: {
       default: 'flex flex-wrap gap-2 mb-4',
-      card: 'flex flex-wrap gap-2 mt-4',
+      card: 'flex flex-wrap gap-2 mt-2 mb-2',
       list: 'flex flex-wrap gap-2 mt-2 mb-0',
       detail: 'flex flex-wrap gap-2 mb-2',
     },
