@@ -10,13 +10,14 @@ import { removeLatexBraces } from '../utils/authorUtils.jsx';
 import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
+import ShareModal from './ShareModal';
 
 const GenericItemDetails = ({ item, contentType, config }) => {
   const navigate = useNavigate();
-  const [copied, setCopied] = useState(false);
   const [markdownContent, setMarkdownContent] = useState('');
   const [showBibTeX, setShowBibTeX] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   // Find the section by contentType
   const section = findSectionById(config.sections, contentType);
@@ -61,11 +62,8 @@ const GenericItemDetails = ({ item, contentType, config }) => {
     );
   }
 
-  const handleCopyLink = () => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleShareClick = () => {
+    setIsShareModalOpen(true);
   };
 
   // Generate BibTeX only for publications
@@ -218,18 +216,20 @@ const GenericItemDetails = ({ item, contentType, config }) => {
         </button>
 
         <button
-          onClick={handleCopyLink}
-          className="flex items-center text-gray-600 hover:text-gray-900 relative"
+          onClick={handleShareClick}
+          className="flex items-center text-gray-600 hover:text-gray-900"
         >
           <ShareIcon className="h-5 w-5 mr-1" />
           <span>Share</span>
-          {copied && (
-            <span className="absolute top-full right-0 mt-1 bg-gray-800 text-white text-xs py-1 px-2 rounded">
-              Link copied!
-            </span>
-          )}
         </button>
       </div>
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        url={window.location.href}
+      />
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden p-6">{renderContent()}</div>
 
