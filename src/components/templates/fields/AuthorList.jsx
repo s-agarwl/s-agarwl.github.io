@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { renderAuthors } from '/src/utils/authorUtils';
+import componentStyles from '/src/styles/componentStyles';
 
 const AuthorList = ({
   value,
@@ -27,11 +28,19 @@ const AuthorList = ({
     return 'text-theme-light mb-4 text-sm'; // Default for detail view
   };
 
+  // Get the appropriate label class name
+  const getLabelClassName = () => {
+    if (viewType === 'list') return componentStyles.AuthorList.label.list;
+    if (viewType === 'card') return componentStyles.AuthorList.label.card;
+    return componentStyles.AuthorList.label.detail; // Default for detail view
+  };
+
   const listClass = getClassName();
+  const labelClass = getLabelClassName();
 
   return (
     <p className={listClass}>
-      {label && <b>{label}: </b>}
+      {label && <span className={labelClass}>{label}: </span>}
       {renderAuthors(authors, researcherNameToUse)}
     </p>
   );

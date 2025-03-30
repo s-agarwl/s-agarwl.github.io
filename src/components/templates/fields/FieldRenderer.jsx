@@ -154,7 +154,7 @@ const FieldRenderer = ({
   // When in field config mode, add standardized props from the config
   if (!isComponentMode && config) {
     // Add direct properties from config that should be passed to components
-    const directProps = ['options', 'label', 'heading', 'tagSet'];
+    const directProps = ['options', 'label', 'tagSet'];
     directProps.forEach((prop) => {
       if (config[prop] !== undefined) {
         componentProps[prop] = config[prop];
@@ -194,11 +194,6 @@ const FieldRenderer = ({
   // Keep className if explicitly specified (from either mode)
   if (!isComponentMode && config.className) {
     componentProps.className = config.className;
-  }
-
-  // For debugging
-  if (componentToRender === 'Tags' && componentProps.heading) {
-    console.log('Rendering Tags with heading:', componentProps.heading);
   }
 
   // Render the appropriate component based on the component type

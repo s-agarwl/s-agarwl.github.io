@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import componentStyles from '/src/styles/componentStyles';
 
 const ExpandableMarkdown = ({
   value,
@@ -7,7 +8,6 @@ const ExpandableMarkdown = ({
   wordLimit = 30,
   isExpanded,
   setIsExpanded,
-  heading,
   className = '',
   styleVariant,
   viewType = 'detail',
@@ -35,16 +35,20 @@ const ExpandableMarkdown = ({
     // Default styles based on viewType
     let containerClass;
     let buttonClass = 'text-blue-500 hover:text-blue-700 ml-3 inline-flex';
+    let labelClass = componentStyles.ExpandableMarkdown.label.default;
 
     // Apply different defaults based on viewType
     if (viewType === 'list') {
       containerClass = 'prose prose-sm max-w-none mb-0.5';
+      labelClass = componentStyles.ExpandableMarkdown.label.list;
       // Use smaller word limit for list view
       wordLimit = Math.min(wordLimit, 15);
     } else if (viewType === 'card') {
       containerClass = 'prose prose-sm max-w-none mb-1';
+      labelClass = componentStyles.ExpandableMarkdown.label.card;
     } else {
       containerClass = 'prose prose-sm max-w-none'; // Default for detail
+      labelClass = componentStyles.ExpandableMarkdown.label.detail;
     }
 
     // If explicit className is provided, use it for container
@@ -61,15 +65,14 @@ const ExpandableMarkdown = ({
       }
     }
 
-    return { containerClass, buttonClass };
+    return { containerClass, buttonClass, labelClass };
   };
 
-  const { containerClass, buttonClass } = getStyles();
+  const { containerClass, buttonClass, labelClass } = getStyles();
 
   return (
     <div className={containerClass}>
-      {heading && <h3 className="text-lg font-medium mb-1">{heading}</h3>}
-      {label && <span className="font-semibold">{label}: </span>}
+      {label && <span className={labelClass}>{label}: </span>}
       <div className="inline items-end">
         {/* <div className="prose" style={{ marginBottom: 0 }}>
           <ReactMarkdown>{displayText}</ReactMarkdown>
@@ -97,7 +100,6 @@ ExpandableMarkdown.propTypes = {
   wordLimit: PropTypes.number,
   isExpanded: PropTypes.bool,
   setIsExpanded: PropTypes.func,
-  heading: PropTypes.string,
   className: PropTypes.string,
   viewType: PropTypes.oneOf(['list', 'card', 'detail']),
   styleVariant: PropTypes.oneOfType([

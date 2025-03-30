@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import componentStyles from '/src/styles/componentStyles';
 
-const LinkButtons = ({ value, heading, className = '', styleVariant, viewType = 'detail' }) => {
+const LinkButtons = ({ value, label, className = '', styleVariant, viewType = 'detail' }) => {
   if (!value || Object.keys(value).length === 0) return null;
 
   // Get appropriate classes based on viewType and styleVariant
@@ -9,19 +10,24 @@ const LinkButtons = ({ value, heading, className = '', styleVariant, viewType = 
     let containerClass = 'mb-4';
     // Button class
     let buttonClass = '';
+    // Label class
+    let labelClass = componentStyles.LinkButtons.label.default;
 
     // Apply different defaults based on viewType
     if (viewType === 'list') {
       containerClass = 'mb-0.5';
       buttonClass =
         'text-blue-600 hover:text-blue-800 inline-flex items-center bg-blue-50 hover:bg-blue-100 rounded px-2 py-0.5 text-xs';
+      labelClass = componentStyles.LinkButtons.label.list;
     } else if (viewType === 'card') {
       containerClass = 'mb-1';
       buttonClass =
         'text-blue-600 hover:text-blue-800 inline-flex items-center bg-blue-50 hover:bg-blue-100 rounded px-2 py-0.5 text-sm';
+      labelClass = componentStyles.LinkButtons.label.card;
     } else if (viewType === 'detail') {
       containerClass = 'mb-4';
       buttonClass = '';
+      labelClass = componentStyles.LinkButtons.label.detail;
     }
 
     // If styleVariant is provided
@@ -34,22 +40,14 @@ const LinkButtons = ({ value, heading, className = '', styleVariant, viewType = 
       }
     }
 
-    return { containerClass, buttonClass };
+    return { containerClass, buttonClass, labelClass };
   };
 
-  const { containerClass, buttonClass } = getStyles();
+  const { containerClass, buttonClass, labelClass } = getStyles();
 
   return (
     <div className={containerClass}>
-      {heading && (
-        <h2
-          className={
-            viewType === 'detail' ? 'text-xl font-semibold mb-2' : 'text-lg font-medium mb-1'
-          }
-        >
-          {heading}
-        </h2>
-      )}
+      {label && <h2 className={labelClass}>{label}</h2>}
       <div className={`flex flex-wrap gap-2 ${className}`}>
         {Object.entries(value).map(([key, url]) => (
           <a key={key} href={url} target="_blank" rel="noopener noreferrer" className={buttonClass}>
@@ -63,7 +61,7 @@ const LinkButtons = ({ value, heading, className = '', styleVariant, viewType = 
 
 LinkButtons.propTypes = {
   value: PropTypes.object,
-  heading: PropTypes.string,
+  label: PropTypes.string,
   className: PropTypes.string,
   styleVariant: PropTypes.oneOfType([
     PropTypes.string,

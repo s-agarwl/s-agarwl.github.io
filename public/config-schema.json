@@ -449,10 +449,6 @@
                         "condition": {
                           "type": "string",
                           "description": "Condition for displaying the field"
-                        },
-                        "heading": {
-                          "type": "string",
-                          "description": "Heading to display above the field"
                         }
                       }
                     }
@@ -510,10 +506,6 @@
                         "condition": {
                           "type": "string",
                           "description": "Condition for displaying the field"
-                        },
-                        "heading": {
-                          "type": "string",
-                          "description": "Heading to display above the field"
                         }
                       }
                     }
@@ -567,10 +559,6 @@
                         "condition": {
                           "type": "string",
                           "description": "Condition for displaying the field"
-                        },
-                        "heading": {
-                          "type": "string",
-                          "description": "Heading to display above the field"
                         }
                       }
                     }

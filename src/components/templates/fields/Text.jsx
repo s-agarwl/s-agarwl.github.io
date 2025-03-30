@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { removeLatexBraces } from '/src/utils/authorUtils';
+import componentStyles from '/src/styles/componentStyles';
 
 const Text = ({ value, label, className = '', styleVariant, viewType = 'detail' }) => {
   if (!value) return null;
@@ -17,12 +18,20 @@ const Text = ({ value, label, className = '', styleVariant, viewType = 'detail' 
     return 'text-theme-light mb-4'; // Default for detail view
   };
 
+  // Get the appropriate label class name
+  const getLabelClassName = () => {
+    if (viewType === 'list') return componentStyles.Text.label.list;
+    if (viewType === 'card') return componentStyles.Text.label.card;
+    return componentStyles.Text.label.detail; // Default for detail view
+  };
+
   const textClass = getClassName();
+  const labelClass = getLabelClassName();
 
   if (label) {
     return (
-      <p>
-        <b>{label}:</b> <span className={textClass}>{cleanValue}</span>
+      <p className={textClass}>
+        <span className={labelClass}>{label}:</span> {cleanValue}
       </p>
     );
   }

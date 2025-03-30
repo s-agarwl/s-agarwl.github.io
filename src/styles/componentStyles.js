@@ -49,6 +49,13 @@ const componentStyles = {
       italics_list: 'text-sm text-gray-600 italic mb-0.5',
       italics_detail: 'text-base text-gray-700 italic mb-2',
     },
+    // Label styles matching content styling with font-bold
+    label: {
+      default: 'text-base font-bold text-gray-700',
+      card: 'text-sm font-bold text-gray-600',
+      list: 'text-sm font-bold text-gray-600',
+      detail: 'text-base font-bold text-gray-700',
+    },
   },
 
   // Tags component styles
@@ -67,6 +74,13 @@ const componentStyles = {
       list: 'px-2 py-0.5 bg-gray-100 text-gray-700 rounded-md text-xs',
       detail: 'px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs',
     },
+    // Label styles matching the appropriate text styling for each view
+    label: {
+      default: 'text-base font-bold text-gray-700 mr-2',
+      card: 'text-sm font-bold text-gray-600 mr-2',
+      list: 'text-sm font-bold text-gray-600 mr-2',
+      detail: 'text-base font-bold text-gray-700 mr-2',
+    },
   },
 
   // Award component styles
@@ -80,6 +94,13 @@ const componentStyles = {
       list: 'inline-flex items-center text-white bg-blue-600 rounded-md px-2 py-0.5 opacity-90 my-0.5 mt-1 text-xs',
       detail:
         'inline-flex items-center text-white bg-blue-600 rounded-md px-4 py-1 opacity-90 mb-4 text-sm',
+    },
+    // Label styles
+    label: {
+      default: 'text-base font-bold text-gray-700 mr-2',
+      card: 'text-sm font-bold text-gray-600 mr-2',
+      list: 'text-sm font-bold text-gray-600 mr-2',
+      detail: 'text-base font-bold text-gray-700 mr-2',
     },
   },
 
@@ -99,6 +120,13 @@ const componentStyles = {
       list: 'w-full h-full object-cover',
       detail: 'w-full max-w-2xl mx-auto rounded-lg shadow-md',
     },
+    // Label styles
+    label: {
+      default: 'text-base font-bold text-gray-700 block mb-2',
+      card: 'text-sm font-bold text-gray-600 block mb-1',
+      list: 'text-sm font-bold text-gray-600 block mb-1',
+      detail: 'text-base font-bold text-gray-700 block mb-2',
+    },
   },
 
   // AuthorList component styles
@@ -111,6 +139,13 @@ const componentStyles = {
       list: 'text-sm text-gray-600 mb-0.5',
       detail: 'text-base text-gray-700 mb-3',
     },
+    // Label styles
+    label: {
+      default: 'text-base font-bold text-gray-700 mr-2',
+      card: 'text-sm font-bold text-gray-600 mr-2',
+      list: 'text-sm font-bold text-gray-600 mr-2',
+      detail: 'text-base font-bold text-gray-700 mr-2',
+    },
   },
 
   // ExpandableMarkdown component styles
@@ -118,13 +153,20 @@ const componentStyles = {
     // Container styles
     container: {
       default: 'prose prose-sm max-w-none',
-      card: 'text-sm text-gray-700 mt-2',
+      card: 'text-sm text-gray-600 mt-2',
       list: 'text-sm text-gray-700 mt-1',
       detail: 'prose prose-sm max-w-none my-4',
     },
     // Button styles
     button: {
       default: 'text-blue-500 hover:text-blue-700 ml-2',
+    },
+    // Label styles
+    label: {
+      default: 'text-base font-bold text-gray-700 mr-2',
+      card: 'text-sm font-bold text-gray-600 mr-2',
+      list: 'text-sm font-bold text-gray-700 mr-2',
+      detail: 'text-base font-bold text-gray-700 mr-2',
     },
   },
 
@@ -136,6 +178,13 @@ const componentStyles = {
       list: 'prose-xs mt-1',
       detail: 'prose prose-sm max-w-none my-4',
     },
+    // Label styles
+    label: {
+      default: 'text-base font-bold text-gray-700 block mb-2',
+      card: 'text-sm font-bold text-gray-600 block mb-1',
+      list: 'text-sm font-bold text-gray-600 block mb-1',
+      detail: 'text-base font-bold text-gray-700 block mb-2',
+    },
   },
 
   // Section component styles
@@ -145,6 +194,13 @@ const componentStyles = {
       card: 'mb-4',
       list: 'mb-4',
       detail: 'mb-8',
+    },
+    // Label styles (used as section headers)
+    label: {
+      default: 'text-xl font-semibold text-gray-800 mb-2',
+      card: 'text-lg font-semibold text-gray-800 mb-2',
+      list: 'text-base font-semibold text-gray-800 mb-1',
+      detail: 'text-xl font-semibold text-gray-800 mb-3',
     },
   },
 
@@ -161,6 +217,13 @@ const componentStyles = {
     button: {
       default:
         'text-blue-600 hover:text-blue-800 inline-flex items-center bg-blue-50 hover:bg-blue-100 rounded px-3 py-1',
+    },
+    // Label styles
+    label: {
+      default: 'text-base font-bold text-gray-700 block mb-2',
+      card: 'text-lg font-semibold text-gray-800 mb-1',
+      list: 'text-base font-semibold text-gray-800 mb-1',
+      detail: 'text-xl font-semibold text-gray-800 mb-2',
     },
   },
 };

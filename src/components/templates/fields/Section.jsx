@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import componentStyles from '/src/styles/componentStyles';
 
-const Section = ({ value, heading, className = '', viewType = 'detail', styleVariant }) => {
+const Section = ({ value, label, className = '', viewType = 'detail', styleVariant }) => {
   if (!value) return null;
 
   // Get appropriate class name based on viewType
@@ -14,11 +15,19 @@ const Section = ({ value, heading, className = '', viewType = 'detail', styleVar
     return 'mb-4'; // default for detail view
   };
 
+  // Get the appropriate label class
+  const getLabelClass = () => {
+    if (viewType === 'list') return componentStyles.Section.label.list;
+    if (viewType === 'card') return componentStyles.Section.label.card;
+    return componentStyles.Section.label.detail; // Default for detail view
+  };
+
   const containerClass = getContainerClass();
+  const labelClass = getLabelClass();
 
   return (
     <div className={containerClass}>
-      <h3 className="text-lg font-medium mb-1">{heading}</h3>
+      <h3 className={labelClass}>{label}</h3>
       <p>{value}</p>
     </div>
   );
@@ -26,7 +35,7 @@ const Section = ({ value, heading, className = '', viewType = 'detail', styleVar
 
 Section.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  heading: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   className: PropTypes.string,
   styleVariant: PropTypes.string,
   viewType: PropTypes.oneOf(['list', 'card', 'detail']),

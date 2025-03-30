@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import componentStyles from '/src/styles/componentStyles';
 
 const Tags = ({
   value,
-  heading,
+  label,
   className = '',
   styleVariant,
   viewType = 'detail',
@@ -72,14 +73,19 @@ const Tags = ({
     // Container style
     let containerClass = 'flex flex-wrap gap-2 mb-2'; // Default
     let tagClass = 'px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs'; // Default
+    let labelClass = componentStyles.Tags.label.default; // Default label style
 
     // Apply view-specific default styles if no explicit styles provided
     if (viewType === 'list') {
       containerClass = 'flex flex-wrap gap-1 mb-0.5';
       tagClass = 'px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs';
+      labelClass = componentStyles.Tags.label.list;
     } else if (viewType === 'card') {
       containerClass = 'flex flex-wrap gap-1.5 mb-1';
       tagClass = 'px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-xs';
+      labelClass = componentStyles.Tags.label.card;
+    } else if (viewType === 'detail') {
+      labelClass = componentStyles.Tags.label.detail;
     }
 
     // If explicit className is passed, it overrides container style
@@ -96,10 +102,10 @@ const Tags = ({
       }
     }
 
-    return { containerClass, tagClass };
+    return { containerClass, tagClass, labelClass };
   };
 
-  const { containerClass, tagClass } = getStyles();
+  const { containerClass, tagClass, labelClass } = getStyles();
 
   // Helper to get the styled tag class based on tag configuration
   const getTagClass = (tag) => {
@@ -119,34 +125,43 @@ const Tags = ({
     return result;
   };
 
+  const renderTagContent = () => (
+    <div className={containerClass}>
+      {tags.map((tag, index) => {
+        const tagConfig = getTagConfig(tag);
+        const displayText = tagConfig && tagConfig.label ? tagConfig.label : tag;
+
+        return (
+          <span
+            key={index}
+            className={getTagClass(tag)}
+            title={
+              tagSet && !tagConfig ? `Tag '${tag}' not found in tagSet '${tagSet}'` : undefined
+            }
+          >
+            {displayText}
+          </span>
+        );
+      })}
+    </div>
+  );
+
   return (
     <div className={viewType === 'detail' ? 'mb-4' : 'mb-0'}>
-      {heading && <h3 className="text-lg font-medium mb-1">{heading}</h3>}
-      <div className={containerClass}>
-        {tags.map((tag, index) => {
-          const tagConfig = getTagConfig(tag);
-          const displayText = tagConfig && tagConfig.label ? tagConfig.label : tag;
-
-          return (
-            <span
-              key={index}
-              className={getTagClass(tag)}
-              title={
-                tagSet && !tagConfig ? `Tag '${tag}' not found in tagSet '${tagSet}'` : undefined
-              }
-            >
-              {displayText}
-            </span>
-          );
-        })}
-      </div>
+      {label ? (
+        <div>
+          <span className={labelClass}>{label}:</span> {renderTagContent()}
+        </div>
+      ) : (
+        renderTagContent()
+      )}
     </div>
   );
 };
 
 Tags.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.object]),
-  heading: PropTypes.string,
+  label: PropTypes.string,
   className: PropTypes.string,
   viewType: PropTypes.oneOf(['list', 'card', 'detail']),
   styleVariant: PropTypes.oneOfType([

@@ -480,11 +480,10 @@ Each field in the `fields` array is configured with these properties:
 | ------------- | --------------------------------------------------- | ------------------------------- |
 | `field`       | The data field name to display                      | `"title"`, `"description"`      |
 | `typeOfField` | The component type to use for rendering             | `"Heading"`, `"Text"`, `"Tags"` |
-| `label`       | Optional label to display with the field            | `"Authors"`, `"Year"`           |
+| `label`       | Label text to display with or above the field       | `"Authors"`, `"Abstract"`       |
 | `tagSet`      | For Tags: reference to tag set configuration        | `"status"`, `"keywords"`        |
 | `options`     | Component-specific configuration options            | `{ "level": 3, "limit": 30 }`   |
 | `condition`   | When to display this field (based on data presence) | `"abstract"`, `"links.video"`   |
-| `heading`     | Optional heading text to display above the field    | `"Abstract"`, `"Technologies"`  |
 
 ### Field Types
 
@@ -512,7 +511,7 @@ The `condition` property determines when a field should be displayed:
 {
   "field": "abstract",
   "typeOfField": "ExpandableMarkdown",
-  "heading": "Abstract",
+  "label": "Abstract",
   "condition": "abstract"
 }
 ```
