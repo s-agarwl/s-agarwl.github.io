@@ -4,7 +4,7 @@ import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
 
-const GenericListItem = ({ item, contentType, config }) => {
+const GenericListItem = ({ item, contentType, config, selectedKeywords = [] }) => {
   const navigate = useNavigate();
 
   // Find the section by contentType
@@ -64,6 +64,17 @@ const GenericListItem = ({ item, contentType, config }) => {
           // Skip fields that don't have meaningful values
           if (!fieldHasValue(fieldValue)) return null;
 
+          // Pass selectedKeywords to tag fields
+          const additionalProps = fieldConfig.typeOfField === 'Tags' ? { selectedKeywords } : {};
+
+          // Debug log if this is a Tags field
+          if (fieldConfig.typeOfField === 'Tags') {
+            console.log('GenericListItem - Passing to Tags component:', {
+              field: fieldConfig.field,
+              selectedKeywords,
+            });
+          }
+
           // Note: FieldRenderer will extract and utilize properties like 'heading', 'label',
           // 'typeOfField', 'tagSet', etc. from the fieldConfig object
           return (
@@ -76,6 +87,7 @@ const GenericListItem = ({ item, contentType, config }) => {
               item={item}
               globalConfig={config}
               viewType="list"
+              {...additionalProps}
             />
           );
         })}
@@ -111,6 +123,7 @@ GenericListItem.propTypes = {
   item: PropTypes.object.isRequired,
   contentType: PropTypes.string.isRequired,
   config: PropTypes.object.isRequired,
+  selectedKeywords: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default GenericListItem;

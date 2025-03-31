@@ -213,9 +213,24 @@
       "title": "Publications",
       "sectionHeading": "Publications",
       "template": "listOfItems",
-      "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for unraveling complex datasets, visual analytics, and advancing AI understanding.",
+      "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for <b>unraveling complex datasets</b>, <b>visual analytics</b>, and <b>advancing AI understanding</b>.",
       "dataSource": "/data/pubs.bib",
       "dataType": "bibtex",
+      "overviewVisualization": {
+        "type": "KeywordCloud",
+        "enabled": true,
+        "sourceFields": [
+          {
+            "field": "keywords",
+            "label": "Research Topics"
+          }
+        ],
+        "fontSizes": {
+          "min": 11,
+          "max": 22
+        },
+        "maxVisibleKeywords": 15
+      },
       "display": {
         "list": {
           "fields": [
@@ -358,6 +373,16 @@
       "template": "listOfItems",
       "description": "Explore my projects and creative work. From prototypes to software applications, this section showcases my technical skills and problem-solving abilities.",
       "dataSource": "/data/projects.json",
+      "overviewVisualization": {
+        "type": "KeywordCloud",
+        "enabled": false,
+        "sourceFields": [
+          {
+            "field": "technologies",
+            "label": "Technologies"
+          }
+        ]
+      },
       "display": {
         "list": {
           "fields": [
@@ -475,6 +500,30 @@
       "template": "listOfItems",
       "description": "This section highlights my role in guiding and developing the next generation of researchers and professionals. Over the years, I have mentored students and young professionals in various capacities. My experiences in mentoring has equipped me with crucial skill of <b>leadership</b>, <b>coaching</b>, <b>emotional intelligence</b>, and <b>project + people management</b>. <br/>The duration of each mentorship varies from <b>3 months (Bachelor's)</b> to <b>6 months (Master's)</b>.",
       "dataSource": "/mentorship/mentorship.json",
+      "overviewVisualization": {
+        "type": "KeywordCloud",
+        "enabled": true,
+        "sourceFields": [
+          {
+            "field": "keywords",
+            "label": "Topics"
+          },
+          {
+            "field": "type",
+            "label": "Type"
+          },
+          {
+            "field": "program",
+            "label": "Degree Program",
+            "tagSet": "program"
+          }
+        ],
+        "fontSizes": {
+          "min": 11,
+          "max": 22
+        },
+        "maxVisibleKeywords": 15
+      },
       "display": {
         "list": {
           "fields": [

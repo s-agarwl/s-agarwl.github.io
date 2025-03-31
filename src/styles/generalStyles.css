@@ -1,1 +1,50 @@
 /* General styles can be added here */
+
+/* Keyword Cloud Styles */
+.keyword-cloud-container {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.keyword-cloud-item {
+  transition: all 0.1s ease;
+  background-color: #f8f8f8;
+  margin: 1px;
+  line-height: 1.1;
+  border-radius: 4px;
+}
+
+.keyword-cloud-item:hover {
+  background-color: #eee;
+}
+
+.keyword-cloud-item-active {
+  font-weight: 700;
+}
+
+.keyword-cloud-item sub {
+  font-size: 9px;
+  color: #777;
+  margin-left: 1px;
+}
+
+/* Override styles for Tags component when used in keyword cloud */
+.keyword-cloud-tags .flex {
+  gap: 0.25rem;
+  margin: 0;
+}
+
+.keyword-cloud-tags span {
+  margin: 1px;
+  line-height: 1.1;
+}
+
+/* Remove default margins from Tags component within keyword cloud */
+.keyword-cloud-tags > div {
+  margin: 0 !important;
+}
+
+.selectedKeywords {
+  font-weight: 700;
+}

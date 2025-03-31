@@ -6,7 +6,7 @@ import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
 import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
 
-const GenericCard = ({ item, contentType, config }) => {
+const GenericCard = ({ item, contentType, config, selectedKeywords = [] }) => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -58,6 +58,17 @@ const GenericCard = ({ item, contentType, config }) => {
             ) : null;
           }
 
+          // Pass selectedKeywords to tag fields
+          const additionalProps = fieldConfig.typeOfField === 'Tags' ? { selectedKeywords } : {};
+
+          // Debug log if this is a Tags field
+          if (fieldConfig.typeOfField === 'Tags') {
+            console.log('GenericCard - Passing to Tags component:', {
+              field: fieldConfig.field,
+              selectedKeywords,
+            });
+          }
+
           // Render all fields in the order they appear in configuration
           return (
             <FieldRenderer
@@ -73,6 +84,7 @@ const GenericCard = ({ item, contentType, config }) => {
               researcherName={
                 fieldConfig.typeOfField === 'AuthorList' ? config.researcherName : undefined
               }
+              {...additionalProps}
             />
           );
         })}
@@ -85,6 +97,7 @@ GenericCard.propTypes = {
   item: PropTypes.object.isRequired,
   contentType: PropTypes.string.isRequired,
   config: PropTypes.object.isRequired,
+  selectedKeywords: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default GenericCard;

@@ -5,6 +5,7 @@ import GenericCard from './GenericCard';
 import GenericListItem from './GenericListItem';
 import GenericItemDetails from './GenericItemDetails';
 import ContentControls from './ContentControls';
+import KeywordCloud from './KeywordCloud';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fuse from 'fuse.js';
 import convertBibtexToJson from '../utils/bibtexToJson';
@@ -18,6 +19,7 @@ const GenericContentPage = ({ config, section }) => {
   const [viewMode, setViewMode] = useState(() => {
     return localStorage.getItem('contentViewMode') || 'grid';
   });
+  const [selectedKeywords, setSelectedKeywords] = useState([]);
 
   // Update localStorage when viewMode changes
   useEffect(() => {
@@ -87,14 +89,80 @@ const GenericContentPage = ({ config, section }) => {
     return new Fuse(items, options);
   }, [items]);
 
-  const filteredItems = useMemo(() => {
+  // Get filtered items based on search term
+  const searchFilteredItems = useMemo(() => {
     if (!searchTerm) return items;
     return fuse.search(searchTerm).map((r) => r.item);
   }, [items, searchTerm, fuse]);
 
-  const clearSearch = () => {
-    setSearchTerm('');
+  // Calculate how many selected keywords match the item
+  const getKeywordMatchScore = (item, keywords) => {
+    if (!item || !keywords || keywords.length === 0) return 0;
+
+    let score = 0;
+    const fieldConfigs = Array.isArray(section.overviewVisualization?.sourceFields)
+      ? section.overviewVisualization?.sourceFields
+      : [];
+
+    // Extract field names from sourceFields based on structure
+    const fields =
+      fieldConfigs.length > 0 && typeof fieldConfigs[0] === 'object'
+        ? fieldConfigs.map((fc) => fc.field)
+        : fieldConfigs.length > 0
+          ? fieldConfigs // Handle case where it's still an array of strings
+          : ['keywords']; // Default fallback
+
+    fields.forEach((field) => {
+      if (item[field]) {
+        const itemKeywords = Array.isArray(item[field])
+          ? item[field]
+          : typeof item[field] === 'string'
+            ? item[field].split(',').map((k) => k.trim())
+            : [item[field]];
+
+        keywords.forEach((keyword) => {
+          if (itemKeywords.some((k) => k.toLowerCase() === keyword.toLowerCase())) {
+            score += 1;
+          }
+        });
+      }
+    });
+
+    return score;
   };
+
+  // Calculate keyword matches and sort items based on selected keywords
+  const filteredItems = useMemo(() => {
+    if (selectedKeywords.length === 0) return searchFilteredItems;
+
+    return [...searchFilteredItems].sort((a, b) => {
+      const scoreA = getKeywordMatchScore(a, selectedKeywords);
+      const scoreB = getKeywordMatchScore(b, selectedKeywords);
+      return scoreB - scoreA; // Sort by highest score first
+    });
+  }, [searchFilteredItems, selectedKeywords, section]);
+
+  const handleKeywordClick = (keyword) => {
+    if (keyword === '__clear_all__') {
+      setSelectedKeywords([]);
+      return;
+    }
+
+    setSelectedKeywords((prev) => {
+      const newKeywords = prev.includes(keyword)
+        ? prev.filter((k) => k !== keyword)
+        : [...prev, keyword];
+
+      // Debug logs
+      console.log('Selected Keywords Updated:', newKeywords);
+      return newKeywords;
+    });
+  };
+
+  // Check if keyword cloud should be displayed
+  const showKeywordCloud =
+    section.overviewVisualization?.type === 'KeywordCloud' &&
+    section.overviewVisualization?.enabled === true;
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -121,11 +189,35 @@ const GenericContentPage = ({ config, section }) => {
         {items.length}
       </p>
 
+      {/* Keyword Cloud Visualization */}
+      {showKeywordCloud && (
+        <div className="mb-6">
+          <KeywordCloud
+            items={items}
+            sourceFields={
+              // Convert old sourceFields format to new object format
+              Array.isArray(section.overviewVisualization.sourceFields) &&
+              typeof section.overviewVisualization.sourceFields[0] === 'string'
+                ? section.overviewVisualization.sourceFields.map((field) => ({
+                    field,
+                    label: section.overviewVisualization.sourceFieldLabels?.[field] || field,
+                    tagSet: section.overviewVisualization.sourceFieldTagSets?.[field] || null,
+                  }))
+                : section.overviewVisualization.sourceFields
+            }
+            selectedKeywords={selectedKeywords}
+            onKeywordClick={handleKeywordClick}
+            section={section}
+            globalConfig={config}
+          />
+        </div>
+      )}
+
       <ContentControls
         contentType={section.id}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
-        onClearSearch={clearSearch}
+        onClearSearch={() => setSearchTerm('')}
         viewMode={viewMode}
         onViewModeChange={setViewMode}
       />
@@ -142,7 +234,12 @@ const GenericContentPage = ({ config, section }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <Component item={item} contentType={section.id} config={config} />
+                <Component
+                  item={item}
+                  contentType={section.id}
+                  config={config}
+                  selectedKeywords={selectedKeywords}
+                />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -159,7 +256,12 @@ const GenericContentPage = ({ config, section }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <Component item={item} contentType={section.id} config={config} />
+                <Component
+                  item={item}
+                  contentType={section.id}
+                  config={config}
+                  selectedKeywords={selectedKeywords}
+                />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -238,6 +340,27 @@ GenericContentPage.propTypes = {
     description: PropTypes.string,
     dataSource: PropTypes.string.isRequired,
     dataType: PropTypes.oneOf(['json', 'bibtex']),
+    overviewVisualization: PropTypes.shape({
+      type: PropTypes.string,
+      enabled: PropTypes.bool,
+      sourceFields: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.string),
+        PropTypes.arrayOf(
+          PropTypes.shape({
+            field: PropTypes.string.isRequired,
+            label: PropTypes.string,
+            tagSet: PropTypes.string,
+          }),
+        ),
+      ]),
+      sourceFieldLabels: PropTypes.object,
+      sourceFieldTagSets: PropTypes.object,
+      fontSizes: PropTypes.shape({
+        min: PropTypes.number,
+        max: PropTypes.number,
+      }),
+      maxVisibleKeywords: PropTypes.number,
+    }),
   }).isRequired,
 };
 

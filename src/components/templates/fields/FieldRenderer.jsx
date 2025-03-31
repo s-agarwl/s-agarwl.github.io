@@ -205,7 +205,12 @@ const FieldRenderer = ({
     case 'AuthorList':
       return <AuthorList {...componentProps} />;
     case 'Tags':
-      return <Tags {...componentProps} />;
+      // Debug log to check if selectedKeywords is passed
+      console.log('FieldRenderer - Tags component receiving props:', {
+        ...componentProps,
+        selectedKeywords: otherProps.selectedKeywords,
+      });
+      return <Tags {...componentProps} {...otherProps} />;
     case 'Award':
       return <Award {...componentProps} />;
     case 'Image':
