@@ -7,11 +7,17 @@
     "status": {
       "Completed": { "label": "Completed", "color": "green" },
       "Ongoing": { "label": "Ongoing", "color": "blue" },
-      "Planned": { "label": "Planned", "color": "amber" }
+      "Planned": { "label": "Planned", "color": "amber" },
+      "Incomplete": { "label": "Incomplete", "color": "red" }
+    },
+    "program": {
+      "Bachelor": { "label": "Bachelor's degree program", "color": "purple" },
+      "Master": { "label": "Master's degree program", "color": "teal" },
+      "PhD": { "label": "PhD", "color": "red" }
     }
   },
   "navigation": {
-    "mainItems": ["profile", "publications", "projects", "my-story"]
+    "mainItems": ["profile", "publications", "projects", "mentorships", "my-story"]
   },
   "links": {
     "googleScholar": "https://scholar.google.com/citations?user=9-ma8xIAAAAJ",
@@ -225,7 +231,6 @@
             {
               "field": "journal",
               "typeOfField": "Text",
-              "label": "Venue",
               "variant": "italics_list"
             },
             {
@@ -451,6 +456,157 @@
               "field": "technologies",
               "typeOfField": "Tags",
               "label": "Technologies"
+            },
+            {
+              "field": "links",
+              "typeOfField": "LinkButtons",
+              "label": "Links",
+              "condition": "links"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mentorships",
+      "path": "/mentorships",
+      "title": "Mentorships",
+      "sectionHeading": "Mentorships",
+      "template": "listOfItems",
+      "description": "This section highlights my role in guiding and developing the next generation of researchers and professionals. Over the years, I have mentored students and young professionals in various capacities. My experiences in mentoring has equipped me with crucial skill of <b>leadership</b>, <b>coaching</b>, <b>emotional intelligence</b>, and <b>project + people management</b>. <br/>The duration of each mentorship varies from <b>3 months (Bachelor's)</b> to <b>6 months (Master's)</b>.",
+      "dataSource": "/mentorship/mentorship.json",
+      "display": {
+        "list": {
+          "fields": [
+            {
+              "field": "status",
+              "typeOfField": "Tags",
+              "tagSet": "status"
+            },
+            {
+              "field": "program",
+              "typeOfField": "Tags",
+              "tagSet": "program"
+            },
+            {
+              "field": "title",
+              "typeOfField": "Heading"
+            },
+            {
+              "field": "description",
+              "typeOfField": "ExpandableMarkdown",
+              "options": { "limit": 10 }
+            },
+            {
+              "field": "keywords",
+              "typeOfField": "Tags",
+              "label": "Keywords"
+            },
+            {
+              "field": "type",
+              "typeOfField": "Tags",
+              "label": "Type"
+            }
+          ],
+          "showImage": false
+        },
+        "card": {
+          "fields": [
+            {
+              "field": "status",
+              "typeOfField": "Tags",
+              "tagSet": "status"
+            },
+            {
+              "field": "program",
+              "typeOfField": "Tags",
+              "tagSet": "program"
+            },
+            {
+              "field": "title",
+              "typeOfField": "Heading",
+              "options": { "level": 3 }
+            },
+            {
+              "field": "year",
+              "typeOfField": "Text",
+              "label": "Year"
+            },
+            {
+              "field": "description",
+              "typeOfField": "ExpandableMarkdown",
+              "options": { "limit": 10 }
+            },
+            {
+              "field": "keywords",
+              "typeOfField": "Tags",
+              "label": "Keywords"
+            },
+            {
+              "field": "type",
+              "typeOfField": "Tags",
+              "label": "Type"
+            }
+          ],
+          "showImage": true
+        },
+        "detail": {
+          "fields": [
+            {
+              "field": "title",
+              "typeOfField": "Heading",
+              "options": { "level": 1 }
+            },
+            {
+              "field": "status",
+              "typeOfField": "Tags",
+              "tagSet": "status"
+            },
+            {
+              "field": "program",
+              "typeOfField": "Tags",
+              "tagSet": "program"
+            },
+            {
+              "field": "image",
+              "typeOfField": "Image"
+            },
+            {
+              "field": "awards",
+              "typeOfField": "Award"
+            },
+            {
+              "field": "year",
+              "typeOfField": "Text",
+              "label": "Year"
+            },
+            {
+              "field": "at",
+              "typeOfField": "Text",
+              "label": "Mentorship Provided at"
+            },
+            {
+              "field": "co-mentors",
+              "typeOfField": "Text",
+              "label": "Co-mentors"
+            },
+
+            {
+              "field": "description",
+              "typeOfField": "ExpandableMarkdown",
+              "label": "Description",
+              "options": { "limit": 30 }
+            },
+
+            {
+              "field": "keywords",
+              "typeOfField": "Tags",
+              "label": "Keywords"
+            },
+            {
+              "field": "type",
+              "typeOfField": "Tags",
+              "label": "Type"
             },
             {
               "field": "links",

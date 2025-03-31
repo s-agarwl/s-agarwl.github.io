@@ -147,7 +147,9 @@ const Tags = ({
   );
 
   return (
-    <div className={viewType === 'detail' ? 'mb-4' : 'mb-0'}>
+    <div
+      className={`mr-1 ${viewType === 'detail' ? 'mb-4' : 'mb-0'} ${tagSet ? 'inline mr-1' : ''}`}
+    >
       {label ? (
         <div>
           <span className={labelClass}>{label}:</span> {renderTagContent()}

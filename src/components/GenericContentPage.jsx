@@ -111,7 +111,10 @@ const GenericContentPage = ({ config, section }) => {
       <h1 className="text-3xl font-bold mb-4">
         {section.title || section.sectionHeading || section.id}
       </h1>
-      <p className="text-gray-600 mb-8">{section.description || ''}</p>
+      <div
+        className="text-gray-900 mb-8"
+        dangerouslySetInnerHTML={{ __html: section.description || '' }}
+      ></div>
 
       <p>
         <span className="font-bold">Total: </span>

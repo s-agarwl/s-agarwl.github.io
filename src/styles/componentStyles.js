@@ -64,22 +64,22 @@ const componentStyles = {
     // Container styles
     container: {
       default: 'flex flex-wrap gap-2 mb-4',
-      card: 'flex flex-wrap gap-2 mt-2 mb-2',
-      list: 'flex flex-wrap gap-2 mt-2 mb-0',
-      detail: 'flex flex-wrap gap-2 mb-2',
+      card: 'gap-2 mt-2 mb-2 inline',
+      list: 'gap-2 mt-2 mb-0 inline',
+      detail: 'gap-2 mb-4 inline',
     },
     // Individual tag styles
     tag: {
       default: 'px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs',
-      card: 'px-2 py-1 bg-gray-100 text-gray-900 rounded-md text-xs',
-      list: 'px-2 py-0.5 bg-gray-100 text-gray-700 rounded-md text-xs',
-      detail: 'px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs',
+      card: 'px-2 py-1 mr-1 bg-gray-100 text-gray-900 rounded-md text-xs',
+      list: 'px-2 py-0.5 mr-1 bg-gray-100 text-gray-700 rounded-md text-xs',
+      detail: 'px-3 py-1 mr-1 bg-gray-100 text-gray-700 rounded-md text-xs',
     },
     // Label styles matching the appropriate text styling for each view
     label: {
       default: 'text-base font-bold text-gray-700 mr-2',
-      card: 'text-sm font-bold text-gray-600 mr-2',
-      list: 'text-sm font-bold text-gray-600 mr-2',
+      card: 'text-xs font-bold text-gray-600 mr-2',
+      list: 'text-xs font-bold text-gray-600 mr-2',
       detail: 'text-base font-bold text-gray-700 mr-2',
     },
   },
@@ -112,7 +112,7 @@ const componentStyles = {
       default: 'mb-1',
       card: 'relative h-48 overflow-hidden',
       list: 'relative h-20 w-20 overflow-hidden rounded-md',
-      detail: 'mb-6',
+      detail: 'mb-4 mt-4',
     },
     // Image styles
     image: {
