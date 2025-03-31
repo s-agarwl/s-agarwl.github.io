@@ -26,6 +26,11 @@ const GenericContentPage = ({ config, section }) => {
     localStorage.setItem('contentViewMode', viewMode);
   }, [viewMode]);
 
+  // Reset selected keywords when navigating between sections
+  useEffect(() => {
+    setSelectedKeywords([]);
+  }, [section.id]);
+
   useEffect(() => {
     const fetchContent = async () => {
       try {
