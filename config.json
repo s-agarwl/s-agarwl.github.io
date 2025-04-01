@@ -285,8 +285,9 @@
               "variant": "italics_list"
             },
             {
-              "field": "keywords",
-              "typeOfField": "Tags"
+              "field": "application_domain",
+              "typeOfField": "Tags",
+              "label": "Application Domain"
             },
             {
               "field": "awards",
@@ -325,8 +326,9 @@
               "label": "Abstract"
             },
             {
-              "field": "keywords",
-              "typeOfField": "Tags"
+              "field": "application_domain",
+              "typeOfField": "Tags",
+              "label": "Application Domain"
             },
             {
               "field": "awards",
@@ -384,9 +386,19 @@
               "options": { "limit": 30 }
             },
             {
-              "field": "keywords",
+              "field": "data_type",
               "typeOfField": "Tags",
-              "label": "Keywords"
+              "label": "Data Type"
+            },
+            {
+              "field": "application_domain",
+              "typeOfField": "Tags",
+              "label": "Application Domain"
+            },
+            {
+              "field": "visualization_type",
+              "typeOfField": "Tags",
+              "label": "Visualization Type"
             }
           ],
           "actions": [
