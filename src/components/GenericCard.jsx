@@ -68,14 +68,6 @@ const GenericCard = ({ item, contentType, config, selectedKeywords = [] }) => {
           // Pass selectedKeywords to tag fields
           const additionalProps = fieldConfig.typeOfField === 'Tags' ? { selectedKeywords } : {};
 
-          // Debug log if this is a Tags field
-          if (fieldConfig.typeOfField === 'Tags') {
-            console.log('GenericCard - Passing to Tags component:', {
-              field: fieldConfig.field,
-              selectedKeywords,
-            });
-          }
-
           // Render all fields in the order they appear in configuration
           return (
             <FieldRenderer

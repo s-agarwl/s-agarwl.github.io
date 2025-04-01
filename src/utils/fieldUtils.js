@@ -96,6 +96,5 @@ export const itemContainsSelectedKeywords = (
   });
 
   const result = sourceFieldsMatch;
-  console.log('Item contains keywords result:', result);
   return result;
 };

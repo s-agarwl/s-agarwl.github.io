@@ -136,7 +136,7 @@
                 "title": "Systems Engineer",
                 "subtitle": "Infosys Ltd.",
                 "location": "India",
-                "period": "July 2011 – June 2012",
+                "period": "July 2011 – June 2013",
                 "description": "Automated the account opening application process of a bank using Java and IBM Websphere, and developed a Java script for error log compilation and pattern recognition."
               }
             ]
@@ -182,11 +182,11 @@
           "title": "Featured Works",
           "content": {
             "title": "Featured",
-            "ids": [
-              { "type": "Publications", "id": "Agarwal2023Dissertation" },
-              { "type": "Publications", "id": "Agarwal2020Bombalytics" },
-              { "type": "Publications", "id": "Agarwal2020VisualizingSets" },
-              { "type": "Publications", "id": "Agarwal2022Spatio" }
+            "items": [
+              { "sectionId": "publications", "itemId": "Agarwal2023Dissertation" },
+              { "sectionId": "publications", "itemId": "Agarwal2020Bombalytics" },
+              { "sectionId": "publications", "itemId": "Agarwal2020VisualizingSets" },
+              { "sectionId": "publications", "itemId": "Agarwal2022Spatio" }
             ]
           }
         },
@@ -216,13 +216,44 @@
       "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for <b>unraveling complex datasets</b>, <b>visual analytics</b>, and <b>advancing AI understanding</b>.",
       "dataSource": "/data/pubs.bib",
       "dataType": "bibtex",
+      "bibtexFieldConfig": {
+        "arrayFields": [
+          "keywords",
+          "data_type",
+          "application_domain",
+          "analysis_focus",
+          "visualization_type",
+          "test"
+        ],
+        "arraySeparator": ",",
+        "dateFields": ["year", "date"],
+        "linkFields": [
+          "url",
+          "paperurl",
+          "slides",
+          "video",
+          "supplementary",
+          "demo",
+          "github",
+          "poster"
+        ],
+        "additionalCitationFields": []
+      },
       "overviewVisualization": {
         "type": "KeywordCloud",
         "enabled": true,
         "sourceFields": [
           {
-            "field": "keywords",
-            "label": "Research Topics"
+            "field": "data_type",
+            "label": "Data Type"
+          },
+          {
+            "field": "application_domain",
+            "label": "Application Domain"
+          },
+          {
+            "field": "visualization_type",
+            "label": "Visualization Type"
           }
         ],
         "fontSizes": {
@@ -375,7 +406,7 @@
       "dataSource": "/data/projects.json",
       "overviewVisualization": {
         "type": "KeywordCloud",
-        "enabled": false,
+        "enabled": true,
         "sourceFields": [
           {
             "field": "technologies",

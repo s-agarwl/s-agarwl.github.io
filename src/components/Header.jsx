@@ -108,7 +108,7 @@ const Header = ({ config }) => {
   return (
     <header className="bg-header text-header p-4 fixed top-0 left-0 right-0 z-50">
       {/* Add GitHub Ribbon on the left with GitHub colors */}
-      <a
+      {/* <a
         href="https://github.com/s-agarwl/easyPortfolioBuilder"
         className="github-corner"
         aria-label="View source on GitHub"
@@ -146,7 +146,7 @@ const Header = ({ config }) => {
         .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
         @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}
         @media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
-      `}</style>
+      `}</style> */}
 
       <div className="container mx-auto flex justify-between items-center">
         <HashLink

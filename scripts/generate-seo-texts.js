@@ -78,7 +78,10 @@ export async function generateSeoTexts() {
         }
 
         const bibtexData = fs.readFileSync(filePath, 'utf8');
-        const entries = convertBibtexToJson(bibtexData);
+        const entries = convertBibtexToJson(
+          bibtexData,
+          websiteConfig.sections.find((s) => s.dataType === 'bibtex')?.bibtexFieldConfig,
+        );
 
         if (!Array.isArray(entries)) {
           throw new Error('Invalid BibTeX data format');

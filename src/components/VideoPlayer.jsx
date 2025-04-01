@@ -94,7 +94,6 @@ const VideoPlayer = ({ url, aspectRatio = '16:9' }) => {
   const playerDimensions = calculatePlayerDimensions();
 
   const handleReady = () => {
-    console.log(`Video player ready for ${url}`);
     setIsPlayerReady(true);
     setHasError(false);
     setErrorMessage('');

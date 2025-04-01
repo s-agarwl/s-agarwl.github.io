@@ -71,11 +71,8 @@ function App({ config }) {
 
               if (section.dataType === 'bibtex') {
                 return response.text().then((bibtexText) => {
-                  console.log(
-                    `Loaded bibtex data for ${section.id}, size: ${bibtexText.length} chars`,
-                  );
-                  // Use the existing bibtexToJson utility
-                  const parsedEntries = convertBibtexToJson(bibtexText);
+                  // Use the existing bibtexToJson utility with section-specific config
+                  const parsedEntries = convertBibtexToJson(bibtexText, section.bibtexFieldConfig);
 
                   // Create a map of entries by ID for easier lookup
                   const entriesById = {};
@@ -150,13 +147,8 @@ function App({ config }) {
       }
     });
 
-    console.log('Short URL mapping created:', mapping);
     return mapping;
   }, [contentData, config.sections]);
-
-  // Print shorturlMap type and content for debugging
-  console.log('App - shorturlMap type:', typeof shorturlMap);
-  console.log('App - shorturlMap has entries:', shorturlMap && Object.keys(shorturlMap).length > 0);
 
   // Check for prerendered data
   useEffect(() => {
@@ -166,9 +158,6 @@ function App({ config }) {
       try {
         const prerenderedData = JSON.parse(publicationDataElement.textContent);
         if (prerenderedData.entry && prerenderedData.config) {
-          // We're on a publication page with prerendered data
-          console.log('Found prerendered data:', prerenderedData);
-
           // Get the section ID from the entry or config
           const sectionId =
             prerenderedData.entry.contentType || prerenderedData.entry.sectionId || 'publications';
@@ -196,7 +185,6 @@ function App({ config }) {
               newData[sectionId][prerenderedData.entry.id] = prerenderedData.entry;
             }
 
-            console.log('Updated contentData with prerendered entry:', newData);
             return newData;
           });
 

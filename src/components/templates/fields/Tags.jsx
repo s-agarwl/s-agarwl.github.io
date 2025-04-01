@@ -71,16 +71,10 @@ const Tags = ({
       result = applyTagColors(result, tagConfig);
     }
 
-    // Debug log to see what's being compared
-    console.log('Tag:', tag);
-    console.log('Selected Keywords:', selectedKeywords);
-
     // Check if the tag is in the selected keywords (case-insensitive)
     const isSelected = selectedKeywords.some(
       (keyword) => keyword.toLowerCase() === tag.toLowerCase(),
     );
-
-    console.log('Is Selected?', isSelected);
 
     // Add highlighted border class if tag is in selectedKeywords
     if (isSelected) {

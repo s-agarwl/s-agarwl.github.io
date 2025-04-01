@@ -69,11 +69,14 @@ const GenericItemDetails = ({ item, contentType, config }) => {
   // Generate BibTeX only for publications
   const bibTexEntry =
     contentType.toLowerCase() === 'publications' && item
-      ? generateBibTexEntry({
-          entryType: item.entryType,
-          citationKey: item.citationKey,
-          entryTags: item.bibtex,
-        })
+      ? generateBibTexEntry(
+          {
+            entryType: item.entryType,
+            citationKey: item.citationKey,
+            entryTags: item.bibtex,
+          },
+          section,
+        )
       : '';
 
   const copyBibTeX = () => {

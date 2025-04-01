@@ -74,7 +74,6 @@ const FieldRenderer = ({
 
     // If a specific variant is specified in the config, use that directly
     if (!isComponentMode && config.variant && styles.variants && styles.variants[config.variant]) {
-      console.log(`Using specific variant ${config.variant} for ${componentName}`);
       return styles.variants[config.variant];
     }
 
@@ -90,7 +89,6 @@ const FieldRenderer = ({
       level &&
       styles.variants?.list?.[level]
     ) {
-      console.log(`Direct style extract for Heading level ${level} in list view`);
       return styles.variants.list[level];
     }
 
@@ -205,11 +203,6 @@ const FieldRenderer = ({
     case 'AuthorList':
       return <AuthorList {...componentProps} />;
     case 'Tags':
-      // Debug log to check if selectedKeywords is passed
-      console.log('FieldRenderer - Tags component receiving props:', {
-        ...componentProps,
-        selectedKeywords: otherProps.selectedKeywords,
-      });
       return <Tags {...componentProps} {...otherProps} />;
     case 'Award':
       return <Award {...componentProps} />;

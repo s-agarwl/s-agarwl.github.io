@@ -48,7 +48,7 @@ const GenericContentPage = ({ config, section }) => {
         if (section.dataType === 'bibtex') {
           // Handle BibTeX data
           const bibtexData = await response.text();
-          data = convertBibtexToJson(bibtexData);
+          data = convertBibtexToJson(bibtexData, section.bibtexFieldConfig);
         } else {
           // Handle JSON data
           data = await response.json();
@@ -158,8 +158,6 @@ const GenericContentPage = ({ config, section }) => {
         ? prev.filter((k) => k !== keyword)
         : [...prev, keyword];
 
-      // Debug logs
-      console.log('Selected Keywords Updated:', newKeywords);
       return newKeywords;
     });
   };
@@ -302,7 +300,7 @@ const ContentDetails = ({ config, section }) => {
         if (section.dataType === 'bibtex') {
           // Handle BibTeX data
           const bibtexData = await response.text();
-          data = convertBibtexToJson(bibtexData);
+          data = convertBibtexToJson(bibtexData, section.bibtexFieldConfig);
         } else {
           // Handle JSON data
           data = await response.json();

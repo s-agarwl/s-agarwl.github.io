@@ -70,7 +70,10 @@ function generateFallbackText(text, type) {
 // Process BibTeX entries
 function processBibtexEntries(filePath) {
   const bibtexData = fs.readFileSync(filePath, 'utf8');
-  const entries = convertBibtexToJson(bibtexData);
+  const entries = convertBibtexToJson(
+    bibtexData,
+    config.sections.find((s) => s.dataType === 'bibtex')?.bibtexFieldConfig,
+  );
 
   return entries.map((entry) => processContentItem(entry, 'publication', config));
 }

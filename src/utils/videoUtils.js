@@ -98,9 +98,6 @@ export const getVideoSourceName = (url) => {
 export const normalizeVideoUrl = (url) => {
   if (!url) return '';
 
-  // Log original URL for debugging
-  console.log('Normalizing URL:', url);
-
   try {
     // Convert YouTube short URLs
     if (url.includes('youtu.be/')) {
@@ -120,7 +117,6 @@ export const normalizeVideoUrl = (url) => {
         const videoId = urlObj.searchParams.get('v');
         if (videoId) {
           const normalizedUrl = `https://www.youtube.com/watch?v=${videoId}`;
-          console.log('Normalized YouTube watch URL to:', normalizedUrl);
           return normalizedUrl;
         }
       }
@@ -131,7 +127,6 @@ export const normalizeVideoUrl = (url) => {
         if (matches && matches[1]) {
           const videoId = matches[1];
           const normalizedUrl = `https://www.youtube.com/watch?v=${videoId}`;
-          console.log('Normalized YouTube embed URL to:', normalizedUrl);
           return normalizedUrl;
         }
       }
@@ -142,7 +137,6 @@ export const normalizeVideoUrl = (url) => {
       const vimeoId = url.match(/vimeo\.com\/([0-9]+)/);
       if (vimeoId && vimeoId[1]) {
         const normalizedUrl = `https://vimeo.com/${vimeoId[1]}`;
-        console.log('Normalized Vimeo URL to:', normalizedUrl);
         return normalizedUrl;
       }
     }
@@ -150,7 +144,7 @@ export const normalizeVideoUrl = (url) => {
     // Return original URL if no normalization was applied
     return url;
   } catch (error) {
-    console.error('Error normalizing URL:', error);
+    console.error('Error normalizing video URL:', error);
     return url; // Return original URL in case of error
   }
 };

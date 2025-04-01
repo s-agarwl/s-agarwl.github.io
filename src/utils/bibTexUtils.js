@@ -5,30 +5,15 @@
 /**
  * Generate a BibTeX entry from a publication entry
  * @param {Object} entry - The publication entry object
+ * @param {Object} config - Optional configuration with additionalCitationFields
  * @returns {string} - Formatted BibTeX entry
  */
-export const generateBibTexEntry = (entry) => {
+export const generateBibTexEntry = (entry, config = {}) => {
   if (!entry) return '';
 
   let bibEntry = `@${entry.entryType}{${entry.citationKey},\n`;
 
-  // Fields to exclude from BibTeX output (non-standard or website-specific fields)
-  const excludedFields = [
-    'image', // Visual element, not relevant for citation
-    'video', // Visual element, not relevant for citation
-    'paperurl', // Website-specific URL
-    'shorturl', // Website-specific redirect
-    'demo', // Demo URL
-    'poster', // Poster URL
-    'slides', // Slides URL
-    'github', // GitHub URL
-    'type', // Internal classification
-    'abstract',
-    'markdownContent',
-    'supplementary',
-  ];
-
-  // Standard BibTeX field order (common fields first, then alphabetical)
+  // Standard BibTeX fields in preferred order
   const standardFieldOrder = [
     'author',
     'title',
@@ -47,29 +32,45 @@ export const generateBibTexEntry = (entry) => {
     'abstract',
   ];
 
-  // Collect all valid fields
+  // Additional fields to include from configuration
+  const additionalFields = config?.bibtexFieldConfig?.additionalCitationFields || [];
+
+  // Collect valid fields - only include standard fields and additional fields
   const validFields = {};
   Object.entries(entry.entryTags).forEach(([key, value]) => {
-    if (!excludedFields.includes(key)) {
+    // Include if it's a standard field or specified in additionalCitationFields
+    if (standardFieldOrder.includes(key) || additionalFields.includes(key)) {
       validFields[key] = value;
     }
   });
 
-  // Sort fields according to standard order
+  // Sort fields according to standard order + additional fields
   const sortedFields = Object.keys(validFields).sort((a, b) => {
     const indexA = standardFieldOrder.indexOf(a);
     const indexB = standardFieldOrder.indexOf(b);
 
-    // If both fields are in the standard order list
+    // Both fields are standard fields
     if (indexA >= 0 && indexB >= 0) {
       return indexA - indexB;
     }
 
-    // If only one field is in the standard order list
+    // Only a is standard
     if (indexA >= 0) return -1;
+
+    // Only b is standard
     if (indexB >= 0) return 1;
 
-    // If neither field is in the standard order list, sort alphabetically
+    // Both are non-standard, but a is in additionalFields
+    if (additionalFields.includes(a) && !additionalFields.includes(b)) {
+      return -1;
+    }
+
+    // Both are non-standard, but b is in additionalFields
+    if (!additionalFields.includes(a) && additionalFields.includes(b)) {
+      return 1;
+    }
+
+    // Both are in additionalFields or neither is, sort alphabetically
     return a.localeCompare(b);
   });
 
@@ -97,15 +98,6 @@ export const generateEnhancedBibTexEntry = (entry) => {
 
   let bibEntry = `@${entry.entryType}{${entry.citationKey},\n`;
 
-  // Fields to exclude from BibTeX output (only exclude purely visual or website-specific fields)
-  const excludedFields = [
-    'image', // Visual element, not relevant for citation
-    'video', // Visual element, not relevant for citation
-    'blogpost', // Website-specific content
-    'shorturl', // Website-specific redirect
-    'type', // Internal classification
-  ];
-
   // Enhanced field order (standard fields first, then resource links, then others)
   const enhancedFieldOrder = [
     'author',
@@ -130,10 +122,10 @@ export const generateEnhancedBibTexEntry = (entry) => {
     'abstract',
   ];
 
-  // Collect all valid fields
+  // Collect valid fields - only include fields defined in enhancedFieldOrder
   const validFields = {};
   Object.entries(entry.entryTags).forEach(([key, value]) => {
-    if (!excludedFields.includes(key)) {
+    if (enhancedFieldOrder.includes(key)) {
       validFields[key] = value;
     }
   });
@@ -147,10 +139,6 @@ export const generateEnhancedBibTexEntry = (entry) => {
     if (indexA >= 0 && indexB >= 0) {
       return indexA - indexB;
     }
-
-    // If only one field is in the enhanced order list
-    if (indexA >= 0) return -1;
-    if (indexB >= 0) return 1;
 
     // If neither field is in the enhanced order list, sort alphabetically
     return a.localeCompare(b);

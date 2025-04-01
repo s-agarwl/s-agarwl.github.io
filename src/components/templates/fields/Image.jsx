@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import ImageViewerModal from '../../ImageViewerModal';
 
 const Image = ({ value, alt, className = '', styleVariant, viewType = 'detail' }) => {
+  const [showModal, setShowModal] = useState(false);
+
   if (!value) return null;
 
   const getImageClasses = () => {
@@ -37,10 +42,39 @@ const Image = ({ value, alt, className = '', styleVariant, viewType = 'detail' }
 
   const { containerClass, imageClass } = getImageClasses();
 
+  // Only add click-to-zoom functionality in detail view
+  const isZoomable = viewType === 'detail';
+
+  const handleImageClick = () => {
+    if (isZoomable) {
+      setShowModal(true);
+    }
+  };
+
   return (
-    <div className={containerClass}>
-      <img src={value} alt={alt || 'Image'} className={imageClass} />
-    </div>
+    <>
+      <div className={containerClass}>
+        <div
+          className={`relative ${isZoomable ? 'group cursor-pointer' : ''}`}
+          onClick={isZoomable ? handleImageClick : undefined}
+        >
+          <img src={value} alt={alt || 'Image'} className={imageClass} />
+          {isZoomable && (
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <MagnifyingGlassIcon className="h-8 w-8 text-white drop-shadow-lg" />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Full-screen image modal */}
+      <ImageViewerModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        imageUrl={value}
+        alt={alt}
+      />
+    </>
   );
 };
 

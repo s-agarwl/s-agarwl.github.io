@@ -18,14 +18,10 @@ import 'slick-carousel/slick/slick-theme.css';
  *   title: string,               // Section title
  *   items: [                     // Array of items to display
  *     {
- *       type: string,            // Content type (publication, project, etc.)
- *       id: string,              // ID of the item
+ *       sectionId: string,       // ID of the section containing the item
+ *       itemId: string,          // ID of the item
  *     }
  *   ],
- *   // Legacy support
- *   itemsType: string,           // Type of items (for backward compatibility)
- *   citationKeys: [string],      // Array of citation keys (for backward compatibility)
- *   itemIds: [string],           // Array of item IDs (for backward compatibility)
  *   showDots: boolean,           // Whether to show dots navigation
  *   showArrows: boolean,         // Whether to show arrow navigation
  *   itemsPerPage: number         // Number of items to show per page
@@ -45,17 +41,9 @@ const Carousel = ({ content, sectionId, parentId, config }) => {
       try {
         let itemsToFetch = [];
 
-        // Check if using the new items format
+        // Check if items are specified
         if (Array.isArray(content.items) && content.items.length > 0) {
-          // New format with mixed content types
           itemsToFetch = content.items;
-        } else if (Array.isArray(content.ids) && content.ids.length > 0) {
-          // Support for ids array that might be used instead of items
-          itemsToFetch = content.ids;
-        } else if (content.itemsType) {
-          // Legacy format with single content type
-          const ids = content.citationKeys || content.itemIds || [];
-          itemsToFetch = ids.map((id) => ({ type: content.itemsType, id }));
         } else {
           throw new Error('No items specified in carousel configuration');
         }
@@ -66,44 +54,26 @@ const Carousel = ({ content, sectionId, parentId, config }) => {
           return;
         }
 
-        // Group items by type for efficient fetching
-        const itemsByType = itemsToFetch.reduce((acc, item) => {
-          // Don't lowercase the type - use it exactly as provided
-          const type = item.type;
-          if (!acc[type]) acc[type] = [];
-          acc[type].push(item.id);
+        // Group items by section for efficient fetching
+        const itemsBySection = itemsToFetch.reduce((acc, item) => {
+          const sectionId = item.sectionId;
+          if (!acc[sectionId]) acc[sectionId] = [];
+          acc[sectionId].push(item.itemId);
           return acc;
         }, {});
 
         const loadedItems = [];
 
-        // Fetch data for each content type
-        for (const [type, ids] of Object.entries(itemsByType)) {
-          // Find the section that contains the data source for this type
+        // Fetch data for each section
+        for (const [sectionId, itemIds] of Object.entries(itemsBySection)) {
+          // Find the section configuration
           const sections = config.sections || [];
-
-          // First try exact match (this should be the common case if config is correct)
-          let matchingSection = sections.find(
-            (section) =>
-              section.id === type && section.template === 'listOfItems' && section.dataSource,
+          const matchingSection = sections.find(
+            (section) => section.id === sectionId && section.dataSource,
           );
 
-          // If no exact match, try case-insensitive and singular/plural variants as fallbacks
           if (!matchingSection) {
-            const typeLower = type.toLowerCase();
-            matchingSection = sections.find(
-              (section) =>
-                (section.id.toLowerCase() === typeLower ||
-                  section.id.toLowerCase() === typeLower.replace(/s$/, '')) && // Try without trailing 's'
-                section.template === 'listOfItems' &&
-                section.dataSource,
-            );
-          }
-
-          if (!matchingSection) {
-            console.warn(
-              `No section found with id ${type} and template listOfItems. Skipping these items.`,
-            );
+            console.warn(`No section found with id ${sectionId}. Skipping these items.`);
             continue;
           }
 
@@ -111,31 +81,31 @@ const Carousel = ({ content, sectionId, parentId, config }) => {
           const response = await fetch(matchingSection.dataSource);
           if (!response.ok) {
             console.warn(
-              `Failed to fetch data for ${type}: ${response.statusText}. Skipping these items.`,
+              `Failed to fetch data for ${sectionId}: ${response.statusText}. Skipping these items.`,
             );
             continue;
           }
 
           // Parse the data based on data type
-          let typeItems = [];
+          let sectionItems = [];
           if (matchingSection.dataType === 'bibtex') {
             const bibtexData = await response.text();
-            typeItems = convertBibtexToJson(bibtexData);
+            sectionItems = convertBibtexToJson(bibtexData, matchingSection.bibtexFieldConfig);
           } else {
-            typeItems = await response.json();
+            sectionItems = await response.json();
           }
 
-          // Filter items by ID and add content type
-          const filteredItems = typeItems
-            .filter((item) => ids.includes(item.id))
-            .map((item) => ({ ...item, contentType: type }));
+          // Filter items by ID and add contentType
+          const filteredItems = sectionItems
+            .filter((item) => itemIds.includes(item.id))
+            .map((item) => ({ ...item, contentType: sectionId }));
 
           loadedItems.push(...filteredItems);
         }
 
         // Sort items to match the original order in the config
         const itemsMap = new Map(loadedItems.map((item) => [item.id, item]));
-        const orderedItems = itemsToFetch.map(({ id }) => itemsMap.get(id)).filter(Boolean); // Remove any undefined items
+        const orderedItems = itemsToFetch.map(({ itemId }) => itemsMap.get(itemId)).filter(Boolean); // Remove any undefined items
 
         setItems(orderedItems);
         setLoading(false);
@@ -147,14 +117,7 @@ const Carousel = ({ content, sectionId, parentId, config }) => {
     };
 
     fetchItems();
-  }, [
-    content.items,
-    content.ids,
-    content.citationKeys,
-    content.itemIds,
-    content.itemsType,
-    config.sections,
-  ]);
+  }, [content.items, config.sections]);
 
   // Custom arrow components
   const NextArrow = ({ onClick }) => (
@@ -260,19 +223,10 @@ Carousel.propTypes = {
     title: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        sectionId: PropTypes.string.isRequired,
+        itemId: PropTypes.string.isRequired,
       }),
-    ),
-    ids: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-      }),
-    ),
-    itemsType: PropTypes.string, // Legacy support
-    citationKeys: PropTypes.arrayOf(PropTypes.string), // Legacy support
-    itemIds: PropTypes.arrayOf(PropTypes.string), // Legacy support
+    ).isRequired,
     showDots: PropTypes.bool,
     showArrows: PropTypes.bool,
     itemsPerPage: PropTypes.number,
