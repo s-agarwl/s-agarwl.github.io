@@ -55,7 +55,7 @@ const Image = ({ value, alt, className = '', styleVariant, viewType = 'detail' }
     <>
       <div className={containerClass}>
         <div
-          className={`relative ${isZoomable ? 'group cursor-pointer' : ''}`}
+          className={`relative w-full h-full ${isZoomable ? 'group cursor-pointer' : ''}`}
           onClick={isZoomable ? handleImageClick : undefined}
         >
           <img src={value} alt={alt || 'Image'} className={imageClass} />
