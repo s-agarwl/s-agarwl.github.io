@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+    <!-- Specific Hash URL Redirects -->
+    <script type="text/javascript">
+      (function () {
+        // Map of specific hash URLs to their clean URL destinations
+        var hashRedirectMap = {
+          '#/publications': '/publications',
+          '#/publications/': '/publications/', // Handle trailing slash version
+          '#/publication/': '/publication/', // This will be a prefix match for publication URLs
+          // '#/docs': '/docs',
+          // Add more specific redirects as needed
+        };
+
+        // Get the current hash
+        var hash = window.location.hash;
+        console.log('Current hash:', hash); // Debug log
+
+        // Check if this hash is in our redirect map
+        if (hash) {
+          // First check for exact matches
+          if (hashRedirectMap[hash]) {
+            console.log('Exact match found, redirecting to:', hashRedirectMap[hash]); // Debug log
+            window.location.replace(window.location.origin + hashRedirectMap[hash]);
+          }
+          // Then check for prefix matches (for dynamic routes like publications)
+          else {
+            var matchFound = false;
+            for (var prefix in hashRedirectMap) {
+              if (hash.startsWith(prefix) && prefix.endsWith('/')) {
+                var cleanPrefix = hashRedirectMap[prefix];
+                var suffix = hash.substring(prefix.length);
+                var redirectUrl = window.location.origin + cleanPrefix + suffix;
+                console.log('Prefix match found, redirecting to:', redirectUrl); // Debug log
+                window.location.replace(redirectUrl);
+                matchFound = true;
+                break;
+              }
+            }
+
+            // If no match found but starts with #/, use the path directly
+            if (!matchFound && hash.startsWith('#/')) {
+              var cleanPath = hash.substring(1); // Remove the # character
+              console.log('No match found, using direct path:', cleanPath); // Debug log
+              window.location.replace(window.location.origin + cleanPath);
+            }
+          }
+        }
+      })();
+    </script>
+    <!-- End Specific Hash URL Redirects -->
+
+    <title>Visualizing Behavior of AI Players in Computer Games</title>
+    <meta name="description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta name="keywords" content="academic, research, publications, papers, scholarly work">
+    <meta name="author" content="Shivam Agarwal">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google-site-verification" content="L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://s-agarwl.github.io/mentorships/mentorship_2019Visualizing">
+    <meta property="og:title" content="Visualizing Behavior of AI Players in Computer Games">
+    <meta property="og:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="og:image" content="https://s-agarwl.github.io/mentorship/mentorship_2019Visualizing/cover.PNG">
+
+    <!-- Publication-specific metadata -->
+    <meta name="citation_doi" content="{{publicationDOI}}">
+    <meta name="DC.identifier" content="doi:{{publicationDOI}}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://s-agarwl.github.io/mentorships/mentorship_2019Visualizing">
+    <meta property="twitter:title" content="Visualizing Behavior of AI Players in Computer Games">
+    <meta property="twitter:description" content="This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.">
+    <meta property="twitter:image" content="https://s-agarwl.github.io/mentorship/mentorship_2019Visualizing/cover.PNG">
+
+    <!-- Google Analytics -->
+    
+    <!-- Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8CMNGL0EH7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-8CMNGL0EH7', {
+        custom_map: {
+          dimension1: 'paper_title',
+          dimension2: 'paper_authors',
+          dimension3: 'paper_year',
+        },
+      });
+    </script>
+  
+    <script type="module" crossorigin="" src="/assets/index-CRTSx0q8.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-Dd5h-51d.css">
+  <link rel="canonical" href="https://s-agarwl.github.io/mentorships/mentorship_2019Visualizing"><meta property="keywords" content="AI, Computer Games, Game analytics"><meta property="DC.subject" content="AI, Computer Games, Game analytics"><meta property="DC.language" content="en"><script id="publication-data" type="application/json">{"entry":{"id":"mentorship_2019Visualizing","title":"Visualizing Behavior of AI Players in Computer Games","year":"2019","description":"This thesis explores the concept of improving game designs by testing video games, specifically Sonic the Hedgehog. While testing video games is essential, it can be expensive and time-consuming when done by people. Instead, AI can be used to play the games, gathering valuable data. This data is too large to analyze manually, so it is summarized and visualized to make it understandable and improve the game design. This project builds on a previous bachelor project, creating a system to help visualize and understand how AI learns and evolves in games.","status":"","program":"Bachelor","type":"Thesis","keywords":"AI, Computer Games, Game analytics","co-mentors":"","at":"University of Duisburg-Essen, Germany","image":"/mentorship/mentorship_2019Visualizing/cover.PNG","links":{},"contentType":"mentorships","sectionPath":"/mentorships"},"config":{"site":{"title":"Shivam Agarwal's Website - Data and AI Expert","description":"This is the website of Shivam Agarwal showcasing the portfolio of his work in data and AI.","baseUrl":"https://s-agarwl.github.io","googleAnalyticsId":"G-8CMNGL0EH7","keywords":"academic, research, publications, papers, scholarly work","author":"Shivam Agarwal","googleSiteVerification":"L1QbO4CPLDpC06G3v_ZLEhlomt9fj0Vlj9DV_nCqGfc"},"sections":[{"id":"profile","title":"Profile","path":"/"},{"id":"publications","title":"Publications","path":"/publications","dataSource":"/data/pubs.bib","dataType":"bibtex"},{"id":"projects","title":"Projects","path":"/projects","dataSource":"/data/projects.json"},{"id":"mentorships","title":"Mentorships","path":"/mentorships","dataSource":"/mentorship/mentorship.json"},{"id":"my-story","title":"My Story","path":"/my-story"}]},"sectionConfig":{"id":"mentorships","path":"/mentorships","title":"Mentorships","sectionHeading":"Mentorships","template":"listOfItems","description":"This section underscores my role in nurturing the next generation of researchers and professionals. I have mentored students and young professionals, gaining essential skills in <b>leadership</b>, <b>coaching</b>, <b>emotional intelligence</b>, and <b>project and people management</b>. My mentorships, lasting from three (Bachelor's) to six months (Master's), often involved enriching <b>cross-cultural experiences</b>, from which I have learned immensely.","dataSource":"/mentorship/mentorship.json","overviewVisualization":{"type":"KeywordCloud","enabled":true,"sourceFields":[{"field":"program","label":"Degree Program","tagSet":"program"},{"field":"type","label":"Type"},{"field":"keywords","label":"Topics"}],"fontSizes":{"min":13,"max":22},"maxVisibleKeywords":20},"display":{"list":{"fields":[{"field":"status","typeOfField":"Tags","tagSet":"status"},{"field":"program","typeOfField":"Tags","tagSet":"program"},{"field":"title","typeOfField":"Heading"},{"field":"description","typeOfField":"ExpandableMarkdown","options":{"limit":10}},{"field":"keywords","typeOfField":"Tags","label":"Keywords"},{"field":"type","typeOfField":"Tags","label":"Type"}],"showImage":false},"card":{"fields":[{"field":"status","typeOfField":"Tags","tagSet":"status"},{"field":"program","typeOfField":"Tags","tagSet":"program"},{"field":"title","typeOfField":"Heading","options":{"level":3}},{"field":"year","typeOfField":"Text","label":"Year"},{"field":"description","typeOfField":"ExpandableMarkdown","options":{"limit":10}},{"field":"keywords","typeOfField":"Tags","label":"Keywords"},{"field":"type","typeOfField":"Tags","label":"Type"}],"showImage":true},"detail":{"fields":[{"field":"title","typeOfField":"Heading","options":{"level":1}},{"field":"status","typeOfField":"Tags","tagSet":"status"},{"field":"program","typeOfField":"Tags","tagSet":"program"},{"field":"image","typeOfField":"Image"},{"field":"awards","typeOfField":"Award"},{"field":"year","typeOfField":"Text","label":"Year"},{"field":"at","typeOfField":"Text","label":"I provided mentorship at"},{"field":"co-mentors","typeOfField":"Text","label":"Co-mentors"},{"field":"description","typeOfField":"ExpandableMarkdown","label":"Description","options":{"limit":30}},{"field":"keywords","typeOfField":"Tags","label":"Keywords"},{"field":"type","typeOfField":"Tags","label":"Type"},{"field":"links","typeOfField":"LinkButtons","label":"Links","condition":"links"}]}}}}</script></head>
+  <body>
+    <div id="prerendered-content"><h1>Visualizing Behavior of AI Players in Computer Games</h1><div class="image-container"><img src="/mentorship/mentorship_2019Visualizing/cover.PNG" alt="Visualizing Behavior of AI Players in Computer Games"></div><div class="metadata"><p><strong>Year: </strong>2019</p></div><h3>Keywords</h3><div class="tags"><span class="tag">AI</span> <span class="tag">Computer Games</span> <span class="tag">Game analytics</span> </div></div><div id="root"></div>
+
+  
+
+</body></html>
