@@ -244,16 +244,16 @@
         "enabled": true,
         "sourceFields": [
           {
-            "field": "data_type",
-            "label": "Data Type"
-          },
-          {
             "field": "application_domain",
             "label": "Application Domain"
           },
           {
             "field": "visualization_type",
             "label": "Visualization Type"
+          },
+          {
+            "field": "data_type",
+            "label": "Data Type"
           }
         ],
         "fontSizes": {
@@ -288,6 +288,16 @@
               "field": "application_domain",
               "typeOfField": "Tags",
               "label": "Application Domain"
+            },
+            {
+              "field": "visualization_type",
+              "typeOfField": "Tags",
+              "label": "Visualization Type"
+            },
+            {
+              "field": "data_type",
+              "typeOfField": "Tags",
+              "label": "Data Type"
             },
             {
               "field": "awards",
@@ -329,6 +339,16 @@
               "field": "application_domain",
               "typeOfField": "Tags",
               "label": "Application Domain"
+            },
+            {
+              "field": "visualization_type",
+              "typeOfField": "Tags",
+              "label": "Visualization Type"
+            },
+            {
+              "field": "data_type",
+              "typeOfField": "Tags",
+              "label": "Data Type"
             },
             {
               "field": "awards",
@@ -385,11 +405,7 @@
               "label": "Abstract",
               "options": { "limit": 30 }
             },
-            {
-              "field": "data_type",
-              "typeOfField": "Tags",
-              "label": "Data Type"
-            },
+
             {
               "field": "application_domain",
               "typeOfField": "Tags",
@@ -399,6 +415,11 @@
               "field": "visualization_type",
               "typeOfField": "Tags",
               "label": "Visualization Type"
+            },
+            {
+              "field": "data_type",
+              "typeOfField": "Tags",
+              "label": "Data Type"
             }
           ],
           "actions": [

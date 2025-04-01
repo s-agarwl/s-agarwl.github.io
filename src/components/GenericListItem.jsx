@@ -70,14 +70,6 @@ const GenericListItem = ({ item, contentType, config, selectedKeywords = [] }) =
           // Pass selectedKeywords to tag fields
           const additionalProps = fieldConfig.typeOfField === 'Tags' ? { selectedKeywords } : {};
 
-          // Debug log if this is a Tags field
-          if (fieldConfig.typeOfField === 'Tags') {
-            console.log('GenericListItem - Passing to Tags component:', {
-              field: fieldConfig.field,
-              selectedKeywords,
-            });
-          }
-
           // Note: FieldRenderer will extract and utilize properties like 'heading', 'label',
           // 'typeOfField', 'tagSet', etc. from the fieldConfig object
           return (

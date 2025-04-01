@@ -57,3 +57,20 @@
   /* position: relative; */
   /* z-index: 1; */
 }
+
+/* Subtle zoom effect on card image hover */
+.generic-card .card-image-container {
+  overflow: hidden; /* Ensure image stays within container */
+}
+
+.generic-card .card-image-container img {
+  transition: transform 0.3s ease-in-out;
+  display: block; /* Avoid potential extra space below image */
+  width: 100%; /* Ensure image tries to fill container */
+  height: 100%; /* Ensure image tries to fill container */
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+.generic-card:hover .card-image-container img {
+  transform: scale(1.05); /* Zoom in slightly on hover */
+}

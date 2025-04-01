@@ -40,7 +40,7 @@ const GenericCard = ({ item, contentType, config, selectedKeywords = [] }) => {
   return (
     <div
       onClick={handleCardClick}
-      className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
+      className={`generic-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
         itemContainsSelectedKeywords(item, cardFields, selectedKeywords, sourceFields)
           ? 'highlighted-card'
           : ''
