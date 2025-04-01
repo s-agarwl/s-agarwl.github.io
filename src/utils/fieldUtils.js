@@ -51,3 +51,51 @@ export const getFieldValue = (item, fieldPath) => {
   // Simple field lookup
   return item[fieldPath];
 };
+
+/**
+ * Checks if an item contains any of the selected keywords in its tag fields
+ * @param {object} item - The data item
+ * @param {Array} fields - The fields configuration array
+ * @param {Array} selectedKeywords - The selected keywords to match against
+ * @param {Array} sourceSectionFields - The sourceFields from section configuration (optional)
+ * @returns {boolean} - Whether the item contains any selected keywords
+ */
+export const itemContainsSelectedKeywords = (
+  item,
+  fields,
+  selectedKeywords,
+  sourceSectionFields = [],
+) => {
+  // If no selected keywords, return false immediately
+  if (!selectedKeywords || selectedKeywords.length === 0) return false;
+
+  const sourceFieldsMatch = sourceSectionFields.some((fieldConfig) => {
+    const field = typeof fieldConfig === 'string' ? fieldConfig : fieldConfig.field;
+
+    if (!item[field]) return false;
+
+    // Extract keywords using the same logic as KeywordCloud component
+    const keywords = Array.isArray(item[field])
+      ? item[field]
+      : typeof item[field] === 'string'
+        ? item[field].split(',').map((k) => k.trim())
+        : [item[field]];
+
+    // Normalize for comparison
+    const normalizedKeywords = keywords.map((kw) =>
+      typeof kw === 'string' ? kw.toLowerCase().trim() : kw,
+    );
+
+    const normalizedSelectedKeywords = selectedKeywords.map((kw) =>
+      typeof kw === 'string' ? kw.toLowerCase().trim() : kw,
+    );
+
+    const hasMatch = normalizedKeywords.some((kw) => normalizedSelectedKeywords.includes(kw));
+
+    return hasMatch;
+  });
+
+  const result = sourceFieldsMatch;
+  console.log('Item contains keywords result:', result);
+  return result;
+};

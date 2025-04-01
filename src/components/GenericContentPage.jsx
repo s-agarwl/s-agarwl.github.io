@@ -250,7 +250,10 @@ const GenericContentPage = ({ config, section }) => {
           </AnimatePresence>
         </motion.div>
       ) : (
-        <motion.div layout className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <motion.div
+          layout
+          className="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col gap-2"
+        >
           <AnimatePresence>
             {filteredItems.map((item) => (
               <motion.div

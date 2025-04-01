@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
-import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
+import { fieldHasValue, getFieldValue, itemContainsSelectedKeywords } from '../utils/fieldUtils';
 
 const GenericListItem = ({ item, contentType, config, selectedKeywords = [] }) => {
   const navigate = useNavigate();
@@ -12,6 +12,9 @@ const GenericListItem = ({ item, contentType, config, selectedKeywords = [] }) =
 
   // Get list display configuration from config
   const listConfig = section?.display?.list;
+
+  // Get sourceFields from section configuration
+  const sourceFields = section?.overviewVisualization?.sourceFields || [];
 
   const handleItemClick = (e) => {
     // Prevent navigation if the user was dragging
@@ -98,7 +101,11 @@ const GenericListItem = ({ item, contentType, config, selectedKeywords = [] }) =
   return (
     <div
       onClick={handleItemClick}
-      className="border-b border-gray-200 py-2 px-3 hover:bg-gray-50 cursor-pointer"
+      className={`border-b border-gray-200 py-2 px-3 hover:bg-gray-50 cursor-pointer ${
+        itemContainsSelectedKeywords(item, listFields, selectedKeywords, sourceFields)
+          ? 'highlighted-list-item'
+          : ''
+      }`}
     >
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-1.5">

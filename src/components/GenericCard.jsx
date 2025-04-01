@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PublicationLinks from './PublicationLinks.jsx';
 import FieldRenderer from './templates/fields/FieldRenderer';
 import { findSectionById } from '../utils/sectionUtils';
-import { fieldHasValue, getFieldValue } from '../utils/fieldUtils';
+import { fieldHasValue, getFieldValue, itemContainsSelectedKeywords } from '../utils/fieldUtils';
 
 const GenericCard = ({ item, contentType, config, selectedKeywords = [] }) => {
   const navigate = useNavigate();
@@ -15,6 +15,9 @@ const GenericCard = ({ item, contentType, config, selectedKeywords = [] }) => {
 
   // Get card display configuration from config
   const cardConfig = section?.display?.card;
+
+  // Get sourceFields from section configuration
+  const sourceFields = section?.overviewVisualization?.sourceFields || [];
 
   const handleCardClick = (e) => {
     // Prevent navigation if the user was dragging
@@ -37,7 +40,11 @@ const GenericCard = ({ item, contentType, config, selectedKeywords = [] }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
+        itemContainsSelectedKeywords(item, cardFields, selectedKeywords, sourceFields)
+          ? 'highlighted-card'
+          : ''
+      }`}
     >
       {hasImage && (
         <FieldRenderer component="Image" value={item.image} alt={item.title} viewType="card" />

@@ -117,7 +117,7 @@ const KeywordCloud = ({
 
     // Add selected class if keyword is selected
     if (selectedKeywords.includes(keyword)) {
-      baseClasses += ' keyword-cloud-item-active';
+      baseClasses += ' selectedKeywords';
     }
 
     // Get tag configuration and apply color from tagSet if available
@@ -152,7 +152,7 @@ const KeywordCloud = ({
         </button>
       </div>
 
-      <div className="grid gap-1">
+      <div className="gap-1">
         {sourceFields.map((fieldConfig) => {
           const field = fieldConfig.field;
           const fieldData = keywordDataByField[field];
@@ -169,10 +169,10 @@ const KeywordCloud = ({
           const hasMore = fieldData.length > maxVisible;
 
           return (
-            <div key={field} className="mb-1">
-              <div className="flex  items-start">
+            <div key={field} className="mb-2 mt-2">
+              <div className="items-start">
                 <span className="text-sm font-bold text-gray-700 mr-1">{fieldLabel}:</span>
-                <div className="flex flex-wrap gap-1 items-center">
+                <div className="inline gap-1 items-center">
                   {visibleKeywords.map(({ keyword, count }) => {
                     const { className, style } = getTagStyle(fieldConfig, keyword, count);
 

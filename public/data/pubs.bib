@@ -104,7 +104,7 @@
 	author={Sreevalsan-Nair, Jaya and Agarwal, Shivam},
 	title={{NodeTrix-CommunityHierarchy}: Techniques for Finding Hierarchical Communities for Visual Analytics of Small-world Networks},
 	booktitle={12th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications - Volume 3: IVAPP, (VISIGRAPP 2017)},
-	abstract = {While there are several visualizations of the small world networks (SWN), how does one find an appropriate set of visualizations and data analytic processes in a data science workflow? Hierarchical communities in SWN aid in managing and understanding the complex network better. To enable a visual analytics workflow to probe and uncover hierarchical communities, we propose to use both the network data and metadata (e.g. node and link attributes). Hence, we propose to use the network topology and node-similarity graph using metadata, for knowledge discovery. For the construction of a four-level hierarchy, we detect communities on both the network and the similarity graph, by using specific community detection at specific hierarchical level. We enable the flexibility of finding non-overlapping or overlapping communities, as leaf nodes, by using spectral clustering. We propose NodeTrix-CommunityHierarchy (NTCH), a set of visual analytic techniques for hierarchy construction, visual explo ration and quantitative analysis of community detection results. We extend NodeTrix-Multiplex framework (Agarwal et al., 2017), which is for visual analytics of multilayer SWN, to probe hierarchical communities. We propose novel visualizations of overlapping and non-overlapping communities, which are integrated into the framework. We show preliminary results of our case-study of using NTCH on co-authorship networks.},
+    abstract = {While there are several visualizations of the small world networks (SWN), how does one find an appropriate set of visualizations and data analytic processes in a data science workflow? Hierarchical communities in SWN aid in managing and understanding the complex network better. To enable a visual analytics workflow to probe and uncover hierarchical communities, we propose to use both the network data and metadata (e.g. node and link attributes). Hence, we propose to use the network topology and node-similarity graph using metadata, for knowledge discovery. For the construction of a four-level hierarchy, we detect communities on both the network and the similarity graph, by using specific community detection at specific hierarchical level. We enable the flexibility of finding non-overlapping or overlapping communities, as leaf nodes, by using spectral clustering. We propose NodeTrix-CommunityHierarchy (NTCH), a set of visual analytic techniques for hierarchy construction, visual explo ration and quantitative analysis of community detection results. We extend NodeTrix-Multiplex framework (Agarwal et al., 2017), which is for visual analytics of multilayer SWN, to probe hierarchical communities. We propose novel visualizations of overlapping and non-overlapping communities, which are integrated into the framework. We show preliminary results of our case-study of using NTCH on co-authorship networks.},
     year={2017},
 	pages={140-151},
 	publisher={SciTePress},
@@ -184,14 +184,17 @@
 	year = {2020},
 	month = {sep},
 	author = {Agarwal, Shivam and Auda, Jonas and Schneegaß, Stefan and Beck, Fabian},
+	data_type = {Spatio-Temporal Data},
+    application_domain = {Virtual Reality, Mixed Reality},
+    analysis_focus = {User Behavior},
+    visualization_type = {Space-Time Cube},
 	paperurl = {/publications/Agarwal2020Design/Agarwal2020Design.pdf},
     video = {https://www.youtube.com/watch?v=hUenXnU5Adk},
     image = {/publications/Agarwal2020Design/Agarwal2020Design.PNG},
     demo = {https://vis-uni-bamberg.github.io/vr_mr_vis/},
     supplementary =  {https://osf.io/2hstc/},
     github = {https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/vr_mr_vis},
-    shorturl = {mrsessions},
-    keywords = {Virtual Reality, Mixed Reality}
+    shorturl = {mrsessions}
 }
 
 @inproceedings {Agarwal2020VisualizingSets,
@@ -204,6 +207,10 @@
 	year = {2020},
 	month = {sep},
 	author = {Agarwal, Shivam and Tkachev, Gleb and Wermelinger, Michel and Beck, Fabian},
+	data_type = {Dynamic Sets},
+    application_domain = {Membership Analysis},
+    analysis_focus = {Temporal Analysis},
+    visualization_type = {Layered Graph Visualization},
 	paperurl = {/publications/Agarwal2020VisualizingSets/Agarwal2020VisualizingSets.pdf},
     image = {/publications/Agarwal2020VisualizingSets/Agarwal2020VisualizingSets.PNG},
     demo = {https://vis-uni-bamberg.github.io/dsv/},
@@ -211,8 +218,7 @@
     video = {https://www.youtube.com/watch?v=hG_ioaZ2DEg},
     github = {https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/dsv},
     awards = {Best Paper Award at VMV},
-    shorturl = {dynamicsets},
-    keywords = {Set Analytics, Temporal Analysis}
+    shorturl = {dynamicsets}
 }
 
 @inproceedings {Agarwal2020How,
@@ -225,11 +231,14 @@
 	  doi={10.1109/FailFest51498.2020.00006},
 	abstract = {We conducted a questionnaire study aimed towards PhD students in the field of visualization research to understand how they cope with paper rejections. We collected responses from 24 participants and performed a qualitative analysis of the data in relation to the provided support by collaborators, resubmission strategies, handling multiple rejects, and personal impression of the reviews. The results indicate that the PhD students in the visualization community generally cope well with the negative reviews and, with experience, learn how to act accordingly to improve and resubmit their work. Our results reveal the main coping strategies that can be applied for constructively handling rejected visualization papers. The most prominent strategies include: discussing reviews with collaborators and making a resubmission plan, doing a major revision to improve the work, shortening the work, and seeing rejection as a positive learning experience.},
 	author = {Agarwal, Shivam and Latif, Shahid and Beck, Fabian},
+	data_type = {Survey Data},
+    application_domain = {Academic Research},
+    analysis_focus = {Behavioral Analysis},
+    visualization_type = {Qualitative Visualization},
 	paperurl = {/publications/Agarwal2020How/Agarwal2020How.pdf},
     video = {https://www.youtube.com/watch?v=YLQFBNQAEFI},
     image = {/publications/Agarwal2020How/Agarwal2020How.PNG},
-    supplementary =  {https://osf.io/vgj36/},
-    keywords = {Survey data visualization, PhD students, Paper rejections}
+    supplementary =  {https://osf.io/vgj36/}
 }
 
 @inproceedings {Krause2021Visual,
@@ -241,9 +250,12 @@
 	year = {2021},
 	paperurl = {/publications/Krause2021Visual/Krause2021Visual.pdf},
 	abstract = {In multi-label classification, we do not only want to analyze individual data items but also the relationships between the assigned labels. Employing different sources and algorithms, the label assignments differ. We need to understand these differences to identify shared and conflicting assignments. We propose a visualization technique that addresses these challenges. In graphs, we present the labels for any classification result as nodes and the pairwise overlaps of labels as links between them. These graphs are juxtaposed for the different results and can be diffed graphically. Clustering techniques are used to further analyze similarities between labels or classification results, respectively. We demonstrate our prototype in two application examples from the machine learning domain.},
+    data_type = {Multi-label Data},
+    application_domain = {Classification Systems},
+    analysis_focus = {Comparative Analysis},
+    visualization_type = {Node-link Diagram},
     image = {/publications/Krause2021Visual/Krause2021Visual.PNG},
-    video = {https://www.youtube.com/watch?v=Jut9xVr3jsk},
-    keywords = {Multi-label Classification, Comparative Analysis}
+    video = {https://www.youtube.com/watch?v=Jut9xVr3jsk}
 }
 
 @inproceedings {Latif2021Visually,
@@ -257,9 +269,12 @@
 	year = {2021},
 	paperurl = {/publications/Latif2021Visually/Latif2021Visually.pdf},
 	abstract = {Knowledge graphs store information about historical figures and their relationships indirectly through shared events. We developed a visualization system, VisKonnect, for analyzing the intertwined lives of historical figures based on the events they participated in. A user's query is parsed for identifying named entities, and related data is retrieved from an event knowledge graph. While a short textual answer to the query is generated using the GPT-3 language model, various linked visualizations provide context, display additional information related to the query, and allow exploration.},
+    data_type = {Knowledge Graphs},
+    application_domain = {Historical Data},
+    analysis_focus = {Temporal Analysis},
+    visualization_type = {Node-link Diagram},
     image = {/publications/Latif2021Visually/Latif2021Visually.PNG},
-    video = {https://www.youtube.com/watch?v=FG69qFHicYE},
-    keywords = {Event Knowledge Graphs, Temporal Analysis}
+    video = {https://www.youtube.com/watch?v=FG69qFHicYE}
 }
 
 @inproceedings{Laurent2021Flatland,
@@ -272,8 +287,11 @@
   series = 	 {Proceedings of Machine Learning Research},
   publisher =    {PMLR},
   abstract = 	 {The Flatland competition aimed at finding novel approaches to solve the vehicle re-scheduling problem (VRSP). The VRSP is concerned with scheduling trips in traffic networks and the re-scheduling of vehicles when disruptions occur, for example the breakdown of a vehicle. While solving the VRSP in various settings has been an active area in operations research (OR) for decades, the ever-growing complexity of modern railway networks makes dynamic real-time scheduling of traffic virtually impossible. Recently, multi-agent reinforcement learning (MARL) has successfully tackled challenging tasks where many agents need to be coordinated, such as multiplayer video games. However, the coordination of hundreds of agents in a real-life setting like a railway network remains challenging and the Flatland environment used for the competition models these real-world properties in a simplified manner. Submissions had to bring as many trains (agents) to their target stations in as little time as possible. While the best submissions were in the OR category, participants found many promising MARL approaches. Using both centralized and decentralized learning based approaches, top submissions used graph representations of the environment to construct tree-based observations. Further, different coordination mechanisms were implemented, such as communication and prioritization between agents. This paper presents the competition setup, four outstanding solutions to the competition, and a cross-comparison between them.	},
-  paperurl = {/publications/Laurent2021Flatland/Laurent2021Flatland.pdf},
-  keywords = {Multi-agent AI, Reinforcement Learning, Graph Representations}
+  data_type = {Graph Data},
+  application_domain = {Multi-agent Systems},
+  analysis_focus = {Reinforcement Learning},
+  visualization_type = {Network Visualization},
+  paperurl = {/publications/Laurent2021Flatland/Laurent2021Flatland.pdf}
 }
 
 @inproceedings{Agarwal2022Spatio,
@@ -286,7 +304,10 @@
     doi = {10.1109/PacificVis53943.2022.00011},
     pages={21-30},
     ISSN={2165-8773},
-    keywords = {eXplainable AI, User Study, Multi-agent AI},
+    data_type = {Spatio-Temporal Data},
+    application_domain = {Multi-agent Systems},
+    analysis_focus = {Temporal Analysis, eXplainable AI},
+    visualization_type = {Timeline Visualization, Map Visualization},
     paperurl = {/publications/Agarwal2022Spatio/Agarwal2022Spatio.pdf},
     image = {/publications/Agarwal2022Spatio/Agarwal2022Spatio.PNG},
     demo = {https://vis-uni-bamberg.github.io/fv/},
@@ -305,14 +326,17 @@
     title={{CiteVis}: Visual Analysis of Overlapping Citation Intents as Dynamic Sets}, 
     abstract={A scientific article can be cited with different intents over several years. The citation intents can be inferred by classifying the citation text into different categories. With multiple citations to the same article, the citation intent categories overlap, making their analysis more challenging. We model the categories as dynamic sets and propose an approach to visualize temporal citation trends of an article across overlapping citation intents. The approach supports comparison between the citation trends of two seed articles of interest. The implemented prototype supports searching and selecting seed articles from a Semantic Scholar dataset.},
     year={2022},
+    data_type = {Dynamic Sets},
+    application_domain = {Citation Analysis},
+    analysis_focus = {Temporal Analysis},
+    visualization_type = {Set Visualization},
     paperurl = {/publications/Agarwal2022CiteVis/Agarwal2022CiteVis.pdf},
     poster = {/publications/Agarwal2022CiteVis/Agarwal2022CiteVis_Poster.pdf},
     image = {/publications/Agarwal2022CiteVis/Agarwal2022CiteVis.PNG},
     demo = {https://vis-uni-bamberg.github.io/citevis/},
     video = {https://www.youtube.com/watch?v=NUtGWdCgTzM},
     github = {https://github.com/vis-uni-bamberg/vis-uni-bamberg.github.io/tree/main/citevis},
-    shorturl = {citevis},
-    keywords = {Dynamic Sets, Temporal Analysis}
+    shorturl = {citevis}
 }
 
 @inproceedings{Agarwal2022Visualizing,
@@ -322,6 +346,10 @@
     title={Visualizing the Evolution of Multi-agent Game-playing Behaviors}, 
     abstract={Analyzing the training evolution of AI agents in a multi-agent environment helps to understand changes in learned behaviors, as well as the sequence in which they are learned. We train an existing Pommerman team from scratch and, at regular intervals, let it battle against another top-performing team. We define thirteen game-specific behaviors and compute their occurrences in 600 matches. To investigate the evolution of these behaviors, we propose a visualization approach and showcase its usefulness in an application example.},
     year={2022},
+    data_type = {Event Sequences},
+    application_domain = {Game Analytics, Multi-agent Systems},
+    analysis_focus = {Temporal Analysis, Behavioral Analysis},
+    visualization_type = {Timeline Visualization},
     paperurl = {/publications/Agarwal2022Visualizing/Agarwal2022Visualizing.pdf},
     poster = {/publications/Agarwal2022Visualizing/Agarwal2022Visualizing_Poster.pdf},
     image = {/publications/Agarwal2022Visualizing/Agarwal2022Visualizing.png},
@@ -331,7 +359,6 @@
     ISBN = {978-3-03868-185-4},
     doi = {10.2312/evp.20221111},
     shorturl = {evolvingai},
-    keywords = {Multi-agent AI, Game Analytics, Temporal Analysis},
     markdownContent = {/publications/Agarwal2022Visualizing/Agarwal2022Visualizing.md}
 }
 
@@ -343,13 +370,16 @@
     year = {2023},
     ISBN = {978-3-03868-219-6},
     doi = {10.2312/evs.20231050},
+    data_type = {Dynamic Sets},
+    application_domain = {Element Interaction Analysis},
+    analysis_focus = {Group Dynamics, Temporal Analysis},
+    visualization_type = {Set Visualization},
     paperurl = {/publications/Agarwal2023Visualizing/Agarwal2023Visualizing.pdf},
     image = {/publications/Agarwal2023Visualizing/Agarwal2023Visualizing.PNG},
     github =  {https://github.com/s-agarwl/sets_interactions},
     demo = {https://setsinteractions.vercel.app/},
     video = {https://youtu.be/D8DQniBkwgY},
-    shorturl = {sets_interactions},
-    keywords = {Group Dynamics, Temporal Analysis, Set Analytics}
+    shorturl = {sets_interactions}
 }
 
 @inproceedings {Liebers2023CohExplore,
@@ -362,12 +392,15 @@
     publisher = {The Eurographics Association},
     ISBN = {978-3-03868-220-2},
     doi = {10.2312/evp.20231058},
+    data_type = {Text Data},
+    application_domain = {Text Analysis},
+    analysis_focus = {Cohesion Analysis},
+    visualization_type = {Text Annotation Visualization},
     paperurl = {/publications/Liebers2023CohExplore/Liebers2023CohExplore.pdf},
     poster = {/publications/Liebers2023CohExplore/Liebers2023CohExplore_Poster.pdf},
     image = {/publications/Liebers2023CohExplore/Liebers2023CohExplore.PNG},
     demo = {https://coh-explore.vercel.app/},
-    video = {https://diglib.eg.org/bitstreams/de44e508-7b3d-42e5-a7ad-93ffd6627a90/download},
-    keywords = {Text Cohesion}
+    video = {https://diglib.eg.org/bitstreams/de44e508-7b3d-42e5-a7ad-93ffd6627a90/download}
 }
 
 @inproceedings{Pron2024Comparative,
@@ -379,12 +412,16 @@
     publisher = {The Eurographics Association},
     ISBN = {978-3-03868-251-6},
     doi = {10.2312/evs.20241074},
-    keywords = {Usability Testing, Comparative Analysis, UX Research, Dynamic Sets},
+    data_type = {Dynamic Sets},
+    application_domain = {Usability Research},
+    analysis_focus = {Comparative Analysis, Usability Testing},
+    visualization_type = {Timeline-based Visualization},
     paperurl = {/publications/Pron2024Comparative/Pron2024Comparative.pdf},
     video = {https://www.youtube.com/watch?v=QxqrSmLa_9E},
     image = {/publications/Pron2024Comparative/Pron2024Comparative.png}
 }
-    @PhdThesis{Agarwal2023Dissertation,
+
+@PhdThesis{Agarwal2023Dissertation,
     author = 	{Agarwal, Shivam},
     journal = {PhD Dissertation},
     title = 	{Exploring Complex Group Dynamics: Visual Analysis of Overlapping Groups and Interactions Over Time},
@@ -392,10 +429,13 @@
     abstract = 	{Analyzing group dynamics is crucial to understand the behaviors of members in groups. The analysis could help answer important questions: How does the relationship between group members change over time? What is the effect of an action of a member on others? How do group members coordinate their efforts to achieve a goal? What are the overall changes in group behaviors over time? This thesis proposes novel techniques for visually exploring group dynamics, thereby aiding in answering such questions. The proposed techniques apply to diverse scenarios, as demonstrated through application examples. This work focuses on the two characteristic features of group dynamics. First, since members can belong to multiple groups simultaneously, it results in overlaps between groups. We propose two novel visualizations to analyze dynamic memberships in overlapping groups. Their effectiveness is demonstrated by insights from application examples, e.g., authors evolving research interests, classification models performance in their training process, and developer contributions in software repositories. Second, the interactions among group members. A design and application space is proposed to explore user behaviors from mixed reality sessions. Three visualizations are presented to investigate collaborative and competitive interactions among members. The studied scenarios include humans interacting in mixed reality and autonomous agents collaborating and competing in simulated environments. We propose an example of an integrated visual representation to show dynamic memberships in overlapping groups and entity interactions. The thesis discusses the future possibilities in encoding enriched interactions and describes a few works in progress. Finally, the thesis summarizes the contributions, highlights the limitations of the proposed visualizations, and presents a brief outlook toward the future.},
     doi = 	{10.17185/duepublico/81425},
     url = 	{https://doi.org/10.17185/duepublico/81425},
+    data_type = {Dynamic Sets, Event Sequences},
+    application_domain = {Multi-agent Systems},
+    analysis_focus = {Group Dynamics, Temporal Analysis, Behavioral Analytics, Collaboration Patterns},
+    visualization_type = {Multiple Visualization Types},
     paperurl = 	{/publications/Agarwal2023Dissertation/Agarwal2023Dissertation.pdf},
     slides = {/publications/Agarwal2023Dissertation/Agarwal2023Dissertation_Slides.pdf},
     image = {/publications/Agarwal2023Dissertation/Agarwal2023Dissertation.png},
     video = {https://www.youtube.com/watch?v=fV12Zylg9xM},
-    shorturl = {dissertation},
-    keywords = {Group Dynamics, Temporal Analysis, Behavioral Analytics, Collaboration Patterns}
+    shorturl = {dissertation}
 }

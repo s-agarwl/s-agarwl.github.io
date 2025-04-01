@@ -22,6 +22,10 @@
 .keyword-cloud-item-active {
   font-weight: 700;
 }
+.selectedKeywords {
+  font-weight: 700;
+  text-decoration: underline;
+}
 
 .keyword-cloud-item sub {
   font-size: 9px;
@@ -45,6 +49,11 @@
   margin: 0 !important;
 }
 
-.selectedKeywords {
-  font-weight: 700;
+/* Highlighted items containing selected keywords */
+.highlighted-list-item,
+.highlighted-card {
+  border: 1px solid rgb(69, 69, 69) !important;
+  box-shadow: 0 0 0 1px rgb(38, 38, 38, 0.5) !important;
+  /* position: relative; */
+  /* z-index: 1; */
 }
