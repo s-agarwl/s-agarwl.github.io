@@ -96,15 +96,16 @@
       },
       "examples": [
         {
-          "projectStatus": {
-            "completed": { "label": "Completed", "color": "green" },
-            "ongoing": { "label": "Ongoing", "color": "blue" },
-            "planned": { "label": "Planned", "color": "amber" }
+          "status": {
+            "Completed": { "label": "Completed", "color": "green" },
+            "Ongoing": { "label": "Ongoing", "color": "blue" },
+            "Planned": { "label": "Planned", "color": "amber" },
+            "Incomplete": { "label": "Incomplete", "color": "red" }
           },
-          "degreeLevel": {
-            "bachelor": { "label": "Bachelor", "color": "purple" },
-            "master": { "label": "Master", "color": "indigo" },
-            "phd": { "label": "PhD", "color": "red" }
+          "program": {
+            "Bachelor": { "label": "Bachelor's degree program", "color": "purple" },
+            "Master": { "label": "Master's degree program", "color": "teal" },
+            "PhD": { "label": "PhD", "color": "red" }
           }
         }
       ]
@@ -159,11 +160,13 @@
     },
     "abstractPreviewLength": {
       "type": "integer",
-      "description": "Number of lines to show in abstract previews before truncating"
+      "description": "Number of lines to show in abstract previews before truncating",
+      "default": 10
     },
     "descriptionPreviewLength": {
       "type": "integer",
-      "description": "Number of lines to show in description previews before truncating"
+      "description": "Number of lines to show in description previews before truncating",
+      "default": 10
     },
     "sections": {
       "type": "array",
@@ -217,6 +220,86 @@
             "type": "string",
             "enum": ["bibtex", "json"],
             "description": "Type of data source file"
+          },
+          "bibtexFieldConfig": {
+            "type": "object",
+            "description": "Configuration for parsing BibTeX files",
+            "properties": {
+              "arrayFields": {
+                "type": "array",
+                "description": "BibTeX fields that should be treated as arrays (split by separator)",
+                "items": { "type": "string" }
+              },
+              "arraySeparator": {
+                "type": "string",
+                "description": "Separator used for array fields",
+                "default": ","
+              },
+              "dateFields": {
+                "type": "array",
+                "description": "BibTeX fields that should be parsed as dates",
+                "items": { "type": "string" }
+              },
+              "linkFields": {
+                "type": "array",
+                "description": "BibTeX fields that represent URLs",
+                "items": { "type": "string" }
+              },
+              "additionalCitationFields": {
+                "type": "array",
+                "description": "Additional fields to include in the citation string",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          },
+          "overviewVisualization": {
+            "type": "object",
+            "description": "Configuration for the overview visualization (e.g., keyword cloud)",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["KeywordCloud"],
+                "description": "Type of visualization"
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Whether the visualization is enabled"
+              },
+              "sourceFields": {
+                "type": "array",
+                "description": "Fields to use as source data for the visualization",
+                "items": {
+                  "type": "object",
+                  "required": ["field", "label"],
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "description": "Data field name"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the field group"
+                    },
+                    "tagSet": {
+                      "type": "string",
+                      "description": "Optional tag set to use for retrieving labels/colors"
+                    }
+                  }
+                }
+              },
+              "fontSizes": {
+                "type": "object",
+                "properties": {
+                  "min": { "type": "integer" },
+                  "max": { "type": "integer" }
+                }
+              },
+              "maxVisibleKeywords": {
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false
           },
           "content": {
             "description": "Content configuration for the section",
@@ -436,7 +519,8 @@
                         },
                         "options": {
                           "type": "object",
-                          "description": "Component-specific options"
+                          "description": "Component-specific options (e.g., { 'level': 1 }, { 'limit': 10 })",
+                          "additionalProperties": true
                         },
                         "format": {
                           "type": "string",
@@ -444,11 +528,11 @@
                         },
                         "variant": {
                           "type": "string",
-                          "description": "Component variant to use"
+                          "description": "Component variant to use (e.g., 'italics_list', 'italics_detail' for Text)"
                         },
                         "condition": {
                           "type": "string",
-                          "description": "Condition for displaying the field"
+                          "description": "Condition for displaying the field (e.g., 'abstract', 'links.video', 'journal|booktitle')"
                         }
                       }
                     }
@@ -501,11 +585,12 @@
                         },
                         "options": {
                           "type": "object",
-                          "description": "Component-specific options"
+                          "description": "Component-specific options (e.g., { 'level': 1 }, { 'limit': 10 })",
+                          "additionalProperties": true
                         },
                         "condition": {
                           "type": "string",
-                          "description": "Condition for displaying the field"
+                          "description": "Condition for displaying the field (e.g., 'abstract', 'links.video', 'journal|booktitle')"
                         }
                       }
                     }
@@ -554,7 +639,12 @@
                         },
                         "options": {
                           "type": "object",
-                          "description": "Component-specific options"
+                          "description": "Component-specific options (e.g., { 'level': 1 }, { 'limit': 30 })",
+                          "additionalProperties": true
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "Component variant to use (e.g., 'italics_detail' for Text)"
                         },
                         "condition": {
                           "type": "string",
@@ -572,11 +662,11 @@
                       "properties": {
                         "type": {
                           "type": "string",
-                          "description": "Action type"
+                          "description": "Action type (e.g., 'BibTeX', 'Video')"
                         },
                         "condition": {
                           "type": "string",
-                          "description": "Condition for displaying the action"
+                          "description": "Condition for displaying the action (e.g., 'entryType', 'links.video')"
                         }
                       }
                     }
