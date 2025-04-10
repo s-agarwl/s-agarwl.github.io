@@ -1,1 +1,0 @@
-import{j as e}from"./index-DNl5wTNa.js";const m=({children:t,className:s,id:x})=>e.jsx("section",{id:x,className:`py-12 ${s} bg-theme text-theme`,children:e.jsx("div",{className:"container max-w-6xl mx-auto px-4",children:t})});export{m as S};

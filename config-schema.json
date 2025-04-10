@@ -150,14 +150,6 @@
         }
       }
     },
-    "bibtexPath": {
-      "type": "string",
-      "description": "Path to default BibTeX file for publications (if not specified in a section)"
-    },
-    "profilePhotoPath": {
-      "type": "string",
-      "description": "Path to profile photo"
-    },
     "abstractPreviewLength": {
       "type": "integer",
       "description": "Number of lines to show in abstract previews before truncating",
@@ -197,15 +189,7 @@
           },
           "template": {
             "type": "string",
-            "enum": [
-              "listOfItems",
-              "article",
-              "text-with-image",
-              "timeline",
-              "grid",
-              "carousel",
-              "contact"
-            ],
+            "enum": ["listOfItems", "subsections", "article"],
             "description": "Template to use for rendering the section"
           },
           "description": {
@@ -342,7 +326,19 @@
                     "type": "array",
                     "description": "Array of items for timeline, grid, etc.",
                     "items": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "title": { "type": "string" },
+                        "subtitle": { "type": "string" },
+                        "location": { "type": "string" },
+                        "period": { "type": "string" },
+                        "description": { "type": "string" },
+                        "details": { "type": "array", "items": { "type": "string" } },
+                        "icon": { "type": "string" },
+                        "link": { "type": "string", "format": "uri-reference" },
+                        "linkText": { "type": "string" }
+                      },
+                      "additionalProperties": true
                     }
                   },
                   "columns": {
@@ -386,10 +382,6 @@
                     "type": "string",
                     "enum": ["horizontal", "vertical"],
                     "description": "Layout direction"
-                  },
-                  "resourceDir": {
-                    "type": "string",
-                    "description": "Directory containing resources for article"
                   },
                   "markdownFile": {
                     "type": "string",
