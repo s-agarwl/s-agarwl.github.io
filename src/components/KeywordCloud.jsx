@@ -141,7 +141,7 @@ const KeywordCloud = ({
   return (
     <div className="keyword-cloud-container">
       <h4 className="text-lg font-bold text-gray-800 mb-0 text-center">
-        Overview via word-cloud (size is proportional to the keyword&apos;s frequency)
+        Overview via interactive word-cloud
       </h4>
       <div className="flex justify-end items-center mb-1">
         <button

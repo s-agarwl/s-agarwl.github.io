@@ -32,7 +32,7 @@
         "fallback": "Visually Abstracting Event Sequences as Double Trees Enri..."
       },
       "description": {
-        "original": "Abstract Event sequence visualization aids analysts in many domains to better understand and infer new insights from event data. Analysing behaviour before or after a certain event of interest is a common task in many scenarios. In this paper, we introduce, formally define, and position double trees as a domain-agnostic tree visualization approach for this task. The visualization shows the sequences that led to the event of interest as a tree on the left, and those that followed on the right. Moreover, our approach enables users to create selections based on event attributes to interactively compare the events and sequences along colour-coded categories. We integrate the double tree and category-based comparison into a user interface for event sequence analysis. In three application examples, we show a diverse set of scenarios, covering short and long time spans, non-spatial and spatial events, human and artificial actors, to demonstrate the general applicability of the approach.",
+        "original": "Abstract Event sequence visualization aids analysts in many domains to better understand and infer new insights from event data. Analysing behaviour before or after a certain event of interest is a common task in many scenarios. In this paper, we introduce, formally define, and position double trees as a domain-agnostic tree visualization approach for this task. The visualization shows the sequences that led to the event of interest as a tree on the left, and those that followed on the right. Moreover, our approach enables users to create selections based on event attributes to interactively compare the events and sequences along colour-coded categories. We integrate the double tree and category-based comparison into a user interface for event sequence analysis. In three application examples, we show a diverse set of scenarios, covering short and long time spans, non-spatial and spatial events, human and artificial actors, to demonstrate the general applicability of the approach.",
         "fallback": "Abstract Event sequence visualization aids analysts in many domains to better understand and infer new insights from event data."
       }
     },
@@ -276,189 +276,357 @@
         "fallback": "Analyzing group dynamics is crucial to understand the behaviors of members in groups."
       }
     },
-    "projects/project-1": {
-      "id": "project-1",
+    "projects/project-cxpcp": {
+      "id": "project-cxpcp",
       "type": "projects",
       "title": {
-        "original": "Interactive Data Visualization Dashboard",
-        "fallback": "Interactive Data Visualization Dashboard"
+        "original": "Category Extended Parallel Coordinates Plot",
+        "fallback": "Category Extended Parallel Coordinates Plot"
       },
       "description": {
-        "original": "Developed an interactive web-based dashboard for visualizing complex multi-dimensional datasets. The tool provides intuitive exploration capabilities including filtering, clustering, and pattern detection.\n\nUsers can upload their own datasets in various formats and gain insights through customizable visualizations. The project received positive feedback from both academic and industry users.",
-        "fallback": "Developed an interactive web-based dashboard for visualizing complex multi-dimensional datasets."
+        "original": "Category Extended Parallel Coordinates Plot (CXPCP) is a visualization technique that allows users to explore and analyze high-dimensional data with categorical variables in a single plot. It extends the traditional parallel coordinates plot by adding a category axis, enabling users to visualize and compare data across different (overlapping)categories.",
+        "fallback": ""
       }
     },
-    "projects/project-2": {
-      "id": "project-2",
+    "projects/project-incois": {
+      "id": "project-incois",
       "type": "projects",
       "title": {
-        "original": "Machine Learning for Time Series Analysis",
-        "fallback": "Machine Learning for Time Series Analysis"
+        "original": "Ocean Explorer: A Visualization Tool for Meteorologists",
+        "fallback": "Ocean Explorer: A Visualization Tool for Meteorologists"
       },
       "description": {
-        "original": "Implemented a suite of machine learning models for time series forecasting with applications in financial markets. The project includes models for anomaly detection, trend prediction, and volatility estimation.\n\nThe system has been deployed in a production environment and has demonstrated a 15% improvement in prediction accuracy compared to traditional statistical methods.",
-        "fallback": "Implemented a suite of machine learning models for time series forecasting with applications in financial markets."
+        "original": "Developed a desktop application for the Indian Meteorological Department (IMD) to visualize and analyze meteorological data from devices deployed in the Indian Ocean region. The application provides a user-friendly interface for exploring multivariate time series data with rich interactions.",
+        "fallback": ""
       }
     },
-    "projects/project-3": {
-      "id": "project-3",
-      "type": "projects",
+    "mentorships/mentorship_2018Visualizing": {
+      "id": "mentorship_2018Visualizing",
+      "type": "mentorships",
       "title": {
-        "original": "Natural Language Processing for Document Analysis",
-        "fallback": "Natural Language Processing for Document Analysis"
+        "original": "Visualizing Behavior of AI Players in Computer Games",
+        "fallback": "Visualizing Behavior of AI Players in Computer Games"
       },
       "description": {
-        "original": "Building an advanced NLP system for automated document understanding and information extraction. The project focuses on identifying key information from unstructured text documents like contracts, reports, and research papers.\n\nCurrent development includes fine-tuning large language models for domain-specific tasks and creating a user-friendly interface for document processing workflows.",
-        "fallback": "Building an advanced NLP system for automated document understanding and information extraction."
+        "original": "In this project, the student explored training and tracking the behavior of artificial intelligence (AI) of playing the computer game Super Mario World. The visualizations helped to track the evolving learning of AI models across generations (genetic algorithm used to train AI model) for a game stage and its generalization to other stages (see figure). This project laid the groundwork for a future bachelor thesis aimed at expanding these techniques for broader applications beyond video games.",
+        "fallback": ""
       }
     },
-    "projects/project-4": {
-      "id": "project-4",
-      "type": "projects",
+    "mentorships/mentorship_2019Visualizing": {
+      "id": "mentorship_2019Visualizing",
+      "type": "mentorships",
       "title": {
-        "original": "IoT Monitoring System",
-        "fallback": "IoT Monitoring System"
+        "original": "Visualizing Behavior of AI Players in Computer Games",
+        "fallback": "Visualizing Behavior of AI Players in Computer Games"
       },
       "description": {
-        "original": "Designed and implemented a scalable IoT monitoring system for environmental tracking in smart buildings. The system collects data from various sensors including temperature, humidity, air quality, and occupancy.\n\nA real-time dashboard provides visualization and alerting capabilities. The system was deployed across three buildings and has been operational for over two years with 99.9% uptime.",
-        "fallback": "Designed and implemented a scalable IoT monitoring system for environmental tracking in smart buildings."
+        "original": "This thesis explores the concept of improving game designs by testing video games, specifically Sonic the Hedgehog. While testing video games is essential, it can be expensive and time-consuming when done by people. Instead, AI can be used to play the games, gathering valuable data. This data is too large to analyze manually, so it is summarized and visualized to make it understandable and improve the game design. This project builds on a previous bachelor project, creating a system to help visualize and understand how AI learns and evolves in games.",
+        "fallback": "This thesis explores the concept of improving game designs by testing video games, specifically Sonic the Hedgehog."
       }
     },
-    "projects/project-5": {
-      "id": "project-5",
-      "type": "projects",
+    "mentorships/mentorship_2020Visual": {
+      "id": "mentorship_2020Visual",
+      "type": "mentorships",
       "title": {
-        "original": "Blockchain for Supply Chain Tracking",
-        "fallback": "Blockchain for Supply Chain Tracking"
+        "original": "Visual Comparison of Reinforcement Learning Algorithms based on their Performance",
+        "fallback": "Visual Comparison of Reinforcement Learning Algorithms ba..."
       },
       "description": {
-        "original": "Implemented a blockchain-based solution for transparent supply chain tracking and verification. The system provides immutable records of product journey from manufacturer to consumer.\n\nThe project includes smart contracts for automated verification and a user-friendly web interface for all stakeholders. A successful pilot was conducted with three manufacturing companies.",
-        "fallback": "Implemented a blockchain-based solution for transparent supply chain tracking and verification."
+        "original": "Most comparisons of reinforcement learning algorithms focus solely on reward outcomes, offering limited insights. This thesis demonstrated a more comprehensive approach of visualizing multiple performanceindicators using line graphs and parallel coordinates. This gave detailed insights into each algorithm's performance over time and the relationships between different indicators. Users can filter data to focus on specific aspects, reducing complexity. This method allows for a task-oriented comparison, offering valuable insights for practical applications, though it is specific to the task at hand.",
+        "fallback": "Most comparisons of reinforcement learning algorithms focus solely on reward outcomes, offering limited insights."
       }
     },
-    "talks/talk-1": {
-      "id": "talk-1",
-      "type": "talks",
+    "mentorships/mentorship_2020Visualization": {
+      "id": "mentorship_2020Visualization",
+      "type": "mentorships",
       "title": {
-        "original": "Visual Analytics for Understanding AI Behavior",
-        "fallback": "Visual Analytics for Understanding AI Behavior"
+        "original": "Visualization of Innovative Capacity in Regional Innovation Systems of Medical Devices for Cardiovascular Disease",
+        "fallback": "Visualization of Innovative Capacity in Regional Innovati..."
       },
       "description": {
-        "original": "Presented a novel approach to visualizing and diagnosing the behavior of complex AI systems. The talk introduced interactive visualization techniques that help researchers and practitioners understand model decisions, identify failure cases, and improve AI performance.\n\nThe presentation included case studies from reinforcement learning applications and demonstrated how visual analytics can bridge the gap between AI experts and domain specialists.",
-        "fallback": "Presented a novel approach to visualizing and diagnosing the behavior of complex AI systems."
+        "original": "This bachelor thesis proposed to explore the innovative capacity of regional systems in the medical device sector for cardiovascular disease. By applying established computer science visualization techniques, the project aimed to support health economics. In collaboration with a health economics research center, the thesis aimed to focus on identifying innovation hubs and their connections using data from PubMed. However, sadly the thesis was not completed due to the student's circumstances.",
+        "fallback": "This bachelor thesis proposed to explore the innovative capacity of regional systems in the medical device sector for cardiovascular disease."
       }
     },
-    "talks/talk-2": {
-      "id": "talk-2",
-      "type": "talks",
+    "mentorships/mentorship_2021Interactive": {
+      "id": "mentorship_2021Interactive",
+      "type": "mentorships",
       "title": {
-        "original": "The Future of Human-AI Collaboration",
-        "fallback": "The Future of Human-AI Collaboration"
+        "original": "Towards Interactive Data Comics",
+        "fallback": "Towards Interactive Data Comics"
       },
       "description": {
-        "original": "Delivered a keynote address exploring the evolving landscape of human-AI collaboration. The talk examined how AI systems can be designed to complement human capabilities rather than replace them, with a focus on creating synergistic workflows.\n\nTopics included mixed-initiative interfaces, explainable AI, and trust-building mechanisms in collaborative systems. The presentation concluded with a vision for the future of work in an AI-enhanced world.",
-        "fallback": "Delivered a keynote address exploring the evolving landscape of human-AI collaboration."
+        "original": "This thesis explored interactive storytelling with data in the popular format of comics. By incorporating multimedia and user-controlled features, the thesis aimed to make data stories more engaging and interesting. The interactions are demonstrated through three stories focusing on various aspects of the COVID-19 pandemic in Germany, encouraging readers to explore and understand the data more deeply.",
+        "fallback": "This thesis explored interactive storytelling with data in the popular format of comics."
       }
     },
-    "talks/talk-3": {
-      "id": "talk-3",
-      "type": "talks",
+    "mentorships/mentorship_2021EventSequences": {
+      "id": "mentorship_2021EventSequences",
+      "type": "mentorships",
       "title": {
-        "original": "Data Visualization Techniques for Complex Networks",
-        "fallback": "Data Visualization Techniques for Complex Networks"
+        "original": "Visual Comparison of Event Sequences and Supporting Hypotheses Generation for Emergency Training",
+        "fallback": "Visual Comparison of Event Sequences and Supporting Hypot..."
       },
       "description": {
-        "original": "Conducted a hands-on workshop on advanced techniques for visualizing complex network data. Participants learned practical approaches to handling large-scale networks, interactive exploration methods, and effective visual encodings for different types of network analysis tasks.\n\nThe workshop included live coding demonstrations and interactive exercises using modern visualization libraries. Attendees gained experience with real-world network datasets from social media, citation networks, and biological systems.",
-        "fallback": "Conducted a hands-on workshop on advanced techniques for visualizing complex network data."
+        "original": "This outstanding thesis introduced an innovative visual analytic system aimed at enhancing the triage process for accident victims. By analyzing sequences from triage training videos, the system supports experts in improving communication and teamwork. It includes a glyph-based graph and a timeline for visualizing and comparing training sessions, along with a pattern-finding algorithm for identifying communication patterns. Expert evaluations confirmed its effectiveness in data comparison and hypothesis generation. The system's adaptable design holds potential for broader applications in analyzing time-dependent event data.",
+        "fallback": "This outstanding thesis introduced an innovative visual analytic system aimed at enhancing the triage process for accident victims."
       }
     },
-    "talks/talk-4": {
-      "id": "talk-4",
-      "type": "talks",
+    "mentorships/mentorship_2021Visualizing": {
+      "id": "mentorship_2021Visualizing",
+      "type": "mentorships",
       "title": {
-        "original": "Ethical Considerations in AI Development",
-        "fallback": "Ethical Considerations in AI Development"
+        "original": "Visualizing Evolution of Collaboration among Organizations",
+        "fallback": "Visualizing Evolution of Collaboration among Organizations"
       },
       "description": {
-        "original": "Participated in a panel discussion on ethical challenges and responsibilities in AI development. The conversation covered topics including algorithmic bias, privacy concerns, transparency requirements, and the need for inclusive AI design practices.\n\nAs a panelist, I shared insights from research on making AI systems more interpretable and accountable, and discussed practical frameworks for integrating ethical considerations throughout the AI development lifecycle.",
-        "fallback": "Participated in a panel discussion on ethical challenges and responsibilities in AI development."
+        "original": "This thesis developed a visualization approach to explore and understand academic collaboration networks, which are crucial for scientific productivity. The approach uses time series, geospatial maps, and node-link graphs to represent collaborations between countries, research institutions, and universities. Interactive features allow users to explore different aspects of the data, enhancing clarity and insight. The work demonstrated valuable insights into the dynamics of academic collaboration over time.",
+        "fallback": ""
       }
     },
-    "talks/talk-5": {
-      "id": "talk-5",
-      "type": "talks",
+    "mentorships/mentorship_2021Visual": {
+      "id": "mentorship_2021Visual",
+      "type": "mentorships",
       "title": {
-        "original": "Interactive Machine Learning: Merging Human and Algorithmic Intelligence",
-        "fallback": "Interactive Machine Learning: Merging Human and Algorithm..."
+        "original": "Visualizing Game AI and Human Collaborative GamePlay Behavior",
+        "fallback": "Visualizing Game AI and Human Collaborative GamePlay Beha..."
       },
       "description": {
-        "original": "Presented research on interactive machine learning systems that effectively combine human expertise with algorithmic capabilities. The talk showcased novel interfaces that allow users to interactively train, refine, and collaborate with machine learning models.\n\nCase studies included an interactive labeling system for image classification and a collaborative text analysis platform. The presentation demonstrated how these approaches lead to more accurate models and better user experiences compared to fully automated approaches.",
-        "fallback": "Presented research on interactive machine learning systems that effectively combine human expertise with algorithmic capabilities."
+        "original": "Game AI research is expanding beyond creating agents that compete with professional players to developing AI that collaborates with humans. This shift presents challenges, as existing algorithms aren't designed for teamwork. Understanding which collaborative behaviors are learned and exhibited by AI can enhance its development, but discovering them remained a challenge. This thesis reviewed the related potential visualizations and proposed  new apptoach to analyze interactions between AI and human players. Using data from a game environment based on Overcooked, a tool was developed to successfully visualize AI and human teamwork via interactive visualizations, revealing unknown collabotion strategies and behaviors.",
+        "fallback": "Game AI research is expanding beyond creating agents that compete with professional players to developing AI that collaborates with humans."
       }
     },
-    "blog/blog-1": {
-      "id": "blog-1",
-      "type": "blog",
+    "mentorships/mentorship_2021Workshop": {
+      "id": "mentorship_2021Workshop",
+      "type": "mentorships",
       "title": {
-        "original": "Visualizing Complex AI Behavior: Lessons from Multi-Agent Systems",
-        "fallback": "Visualizing Complex AI Behavior: Lessons from Multi-Agent..."
+        "original": "Visually Analysing Spatio-Temporal Workshop Production Data through Dynamic Graphs",
+        "fallback": "Visually Analysing Spatio-Temporal Workshop Production Da..."
       },
       "description": {
-        "original": "In this article, I share insights from my research on visualizing the behavior of complex AI systems, particularly in multi-agent environments. Understanding how AI agents interact, cooperate, and compete is crucial for developing more robust and reliable systems.\n\nI discuss the challenges of interpreting AI behavior and present visualization techniques that have proven effective in our research. The article includes examples from reinforcement learning scenarios and practical tips for implementing your own visualization tools.",
-        "fallback": "In this article, I share insights from my research on visualizing the behavior of complex AI systems, particularly in multi-agent environments."
+        "original": "With the rise of geo-tracking in devices, vast amounts of location-based data are being generated. While computers can process this data, human insight is needed to interpret it meaningfully. This thesis presented a method to analyze and understand such data in a factory setting. Using movement data from pallets tracked with markers, a prototype visualization approach was developed and tested with experts. It integrates heatmap visualizations to highlight key areas and a dynamic graph to show movement patterns. Expert feedback confirmed that this approach effectively analyzes spatial and temporal data, helping identify important areas and movement patterns in production and storage. This understanding can improve machine operations and pallet handling, benefiting business operations.",
+        "fallback": "With the rise of geo-tracking in devices, vast amounts of location-based data are being generated."
       }
     },
-    "blog/blog-2": {
-      "id": "blog-2",
-      "type": "blog",
+    "mentorships/mentorship_2022Visually": {
+      "id": "mentorship_2022Visually",
+      "type": "mentorships",
       "title": {
-        "original": "A Practical Guide to Explainable AI",
-        "fallback": "A Practical Guide to Explainable AI"
+        "original": "Visually Exploring Team Communication and Gameplay Events in League of Legends",
+        "fallback": "Visually Exploring Team Communication and Gameplay Events..."
       },
       "description": {
-        "original": "Explainable AI (XAI) has emerged as a critical field as AI systems become more complex and widespread. In this guide, I provide a practical overview of XAI techniques that practitioners can apply today.\n\nCovering both model-agnostic and model-specific approaches, this article walks through the why, what, and how of making AI systems more interpretable and transparent. I share code snippets, visualization techniques, and real-world examples from my experience implementing XAI in various domains.",
-        "fallback": "Explainable AI (XAI) has emerged as a critical field as AI systems become more complex and widespread."
+        "original": "This project developed a prototype for the underexplored area of visually analyzing team communication. The work takes League of Legends as a case study. It features four components: a Scoreboard, Voice Activity Bar Chart, Terminology Word Cloud, and Event Timeline. These linked views allow users to explore and identify their strengths and weaknesses. The findings demonstrate that specific insights can be gained from individual matches, and the prototype offers potential for further development to enhance quantitative analysis.",
+        "fallback": "This project developed a prototype for the underexplored area of visually analyzing team communication."
       }
     },
-    "blog/blog-3": {
-      "id": "blog-3",
-      "type": "blog",
+    "mentorships/mentorship_2022Assisting": {
+      "id": "mentorship_2022Assisting",
+      "type": "mentorships",
       "title": {
-        "original": "Interactive Data Visualization: Best Practices and Pitfalls",
-        "fallback": "Interactive Data Visualization: Best Practices and Pitfalls"
+        "original": "Assisting the Creation of Data Comics with Knowledge Graphs",
+        "fallback": "Assisting the Creation of Data Comics with Knowledge Graphs"
       },
       "description": {
-        "original": "Creating effective interactive data visualizations requires balancing design principles, technical considerations, and user needs. In this post, I share lessons learned from years of developing visualization systems for complex data.\n\nI cover common pitfalls to avoid, design patterns that work well for different types of data, and techniques for optimizing performance with large datasets. The article includes practical examples and recommendations for visualization libraries and frameworks.",
-        "fallback": "Creating effective interactive data visualizations requires balancing design principles, technical considerations, and user needs."
+        "original": "This thesis explored an interesting concept of using Knowledge Graphs to create Data Comics, which are tools for visual storytelling with data. Creating Data Comics is typically complex, but the proposed framework simplifies this by streamlining data acquisition, formatting, and visualization. Its modular design allows for component reuse and integration with other tools. The 'Comic Templating' feature lets authors create an interactive Data Comic once and easily generate similar ones. By integrating Knowledge Graphs, users can explore the data behind a Data Comic and related information.",
+        "fallback": "This thesis explored an interesting concept of using Knowledge Graphs to create Data Comics, which are tools for visual storytelling with data."
       }
     },
-    "blog/blog-4": {
-      "id": "blog-4",
-      "type": "blog",
+    "mentorships/mentorship_2022Bomberland": {
+      "id": "mentorship_2022Bomberland",
+      "type": "mentorships",
       "title": {
-        "original": "The Ethics of AI: From Principles to Practice",
-        "fallback": "The Ethics of AI: From Principles to Practice"
+        "original": "Visual Analysis of AI Behavior in the Environment of Bomberland",
+        "fallback": "Visual Analysis of AI Behavior in the Environment of Bomb..."
       },
       "description": {
-        "original": "Ethical considerations in AI development have moved from academic discussions to practical imperatives. This post examines how to translate broad ethical principles into concrete practices in AI system development.\n\nI explore approaches to addressing bias, ensuring transparency, protecting privacy, and designing for human values. Drawing from both research and industry experience, I offer a framework for ethical AI development that teams can implement in their workflows.",
-        "fallback": "Ethical considerations in AI development have moved from academic discussions to practical imperatives."
+        "original": "This thesis explores how visual tools can help developers understand and improve AI behavior in games, using the Bomberland competition as a case study. By analyzing data from AI matches, the research aims to make it easier to compare strategies and identify areas for improvement. The thesis introduces a web-based tool that uses various visualizations to simplify complex data, making it accessible even to non-experts. Interviews with competition organizers provided valuable insights and data, which were used to design the visualizations. The tool allows users to analyze AI strategies in real-time, offering a new way to enhance AI development. Feedback from a survey of AI developers confirmed the tool's effectiveness, though it highlighted the need for further refinement. This work builds on previous research and sets the stage for future advancements in AI analysis.",
+        "fallback": ""
       }
     },
-    "blog/blog-5": {
-      "id": "blog-5",
-      "type": "blog",
+    "mentorships/mentorship_2023Gamified": {
+      "id": "mentorship_2023Gamified",
+      "type": "mentorships",
       "title": {
-        "original": "From Academia to Industry: Navigating the Transition as a Computer Science PhD",
-        "fallback": "From Academia to Industry: Navigating the Transition as a..."
+        "original": "Gamified visualizations to understand the concept of fairness and bias in machine learning",
+        "fallback": "Gamified visualizations to understand the concept of fair..."
       },
       "description": {
-        "original": "Many computer science PhDs eventually transition from academic research to industry roles. In this personal account, I share my experience making this transition and offer advice for others considering a similar path.\n\nI discuss the differences in work culture, how to translate academic skills to industry contexts, and strategies for finding industry roles that leverage specialized research expertise. This post combines personal reflections with practical guidance for researchers contemplating their next career move.",
-        "fallback": "Many computer science PhDs eventually transition from academic research to industry roles."
+        "original": "This thesis explores the use of gamified visualizations to help non-experts understand fairness and bias in machine learning. As AI technologies rapidly evolve, they pose challenges and risks, such as biased decision-making. The research addresses the gap in educational tools by creating interactive visualizations that incorporate game-like elements, making complex AI concepts more accessible. Prototypes were developed and tested, revealing both the potential and challenges of this approach. The work highlights the importance of educating the public to ensure AI benefits everyone, proposing gamified visualizations as a powerful tool for empowerment and understanding. This innovative approach aims to enhance transparency and engagement in AI literacy.",
+        "fallback": "This thesis explores the use of gamified visualizations to help non-experts understand fairness and bias in machine learning."
+      }
+    },
+    "mentorships/mentorship_2023Visual": {
+      "id": "mentorship_2023Visual",
+      "type": "mentorships",
+      "title": {
+        "original": "Visual Specification and Exploration of Rules to Generate  Game Levels with Wave Function Collapse Algorithm",
+        "fallback": "Visual Specification and Exploration of Rules to Generate..."
+      },
+      "description": {
+        "original": "In this innovative thesis, the student explored the use of the Wave Function Collapse algorithm to enhance game level design. This research introduced a web-based tool that visualizes the rules and restrictions of this algorithm, allowing designers to critically assess and refine level generation processes. By focusing on two-dimensional tile-based levels, the tool aids in understanding how different tiles interact, ensuring levels are both playable and engaging. The study also highlighted the importance of visualizing accessibility within levels, although it did not delve into player behavior. This work offers practical insights for game developers, emphasizing the potential of procedural content generation to create dynamic and varied gaming experiences.",
+        "fallback": "In this innovative thesis, the student explored the use of the Wave Function Collapse algorithm to enhance game level design."
+      }
+    },
+    "mentorships/mentorship_2023DataComics": {
+      "id": "mentorship_2023DataComics",
+      "type": "mentorships",
+      "title": {
+        "original": "Analyzing and Exploring the Design of Data Comics",
+        "fallback": "Analyzing and Exploring the Design of Data Comics"
+      },
+      "description": {
+        "original": "In a world overflowing with data, this thesis makes complex information more accessible through data comics. These comics blend the visual appeal of infographics with the narrative flow of comic strips, offering a novel way to present data step-by-step. The research involved analyzing 31 existing data comics to understand their design and exploring new visualization techniques to enhance them. By creating and evaluating five comic prototypes, the study provided insights into integrating complex data into engaging narratives. This work highlights the potential of data comics to improve public understanding and decision-making in an increasingly data-driven society.",
+        "fallback": "In a world overflowing with data, this thesis makes complex information more accessible through data comics."
+      }
+    },
+    "mentorships/mentorship_2023Diplomacy": {
+      "id": "mentorship_2023Diplomacy",
+      "type": "mentorships",
+      "title": {
+        "original": "Visual analysis of AI behavior in Diplomacy",
+        "fallback": "Visual analysis of AI behavior in Diplomacy"
+      },
+      "description": {
+        "original": "In a world increasingly influenced by Artificial Intelligence (AI), this thesis delves into the intriguing intersection of AI and the classic board game, Diplomacy. By examining AI behavior within this strategic game, the work uncovers valuable insights into game theory, social dynamics, and algorithmic progress. The study not only highlights the synergy between AI and human players but also emphasizes the timeless relevance of Diplomacy, akin to chess. The research addresses existing gaps in visualizing and analyzing the game, aiming to develop an application that enhances understanding of AI decision-making and improves gameplay strategies. This visualization offers practical benefits for players, coaches, and enthusiasts alike.",
+        "fallback": ""
+      }
+    },
+    "mentorships/mentorship_2023Poker": {
+      "id": "mentorship_2023Poker",
+      "type": "mentorships",
+      "title": {
+        "original": "Visual Analytics of Event Sequence Data in Poker",
+        "fallback": "Visual Analytics of Event Sequence Data in Poker"
+      },
+      "description": {
+        "original": "With online poker's popularity skyrocketing during the pandemic, this thesis tackles a crucial challenge: how to help players learn from their games more effectively. By analyzing the complex sequence of poker hands and player actions, the study introduces an innovative approach to reviewing gameplay. The research focuses on Texas Hold'em, where players can play 75-100 hands per hour, making traditional hand-by-hand analysis time-consuming. The work proposes a sequential perspective to visualize dynamic game processes, helping players better understand their decisions and improve their strategy.",
+        "fallback": ""
+      }
+    },
+    "mentorships/mentorship_2024EventSequences": {
+      "id": "mentorship_2024EventSequences",
+      "type": "mentorships",
+      "title": {
+        "original": "Visual Analysis and Interactive Clustering of Event Sequences",
+        "fallback": "Visual Analysis and Interactive Clustering of Event Seque..."
+      },
+      "description": {
+        "original": "In a bid to enhance e-commerce experiences, this thesis explores the use of interactive clustering to analyze customer journeys. By leveraging event sequence data, the study aims to improve understanding of user behavior on websites. The innovative approach combines various visualizations, to offer both an overview and detailed insights into customer interactions. This method allows for the identification of unusual patterns and enhances decision-making in marketing and user experience design. This work, conducted with data from a musical instrument retailer, highlights the potential of interactive clustering to reveal valuable customer insights, ultimately aiding in boosting sales and refining marketing strategies.",
+        "fallback": "In a bid to enhance e-commerce experiences, this thesis explores the use of interactive clustering to analyze customer journeys."
+      }
+    },
+    "mentorships/mentorship_2023Effectiveness": {
+      "id": "mentorship_2023Effectiveness",
+      "type": "mentorships",
+      "title": {
+        "original": "Effectiveness and Usability Towards Data-Driven Storytelling: A Comparison of Interactive Infographics and Data Comics",
+        "fallback": "Effectiveness and Usability Towards Data-Driven Storytell..."
+      },
+      "description": {
+        "original": "In an era where visual communication increasingly shapes public understanding, this master's thesis investigates the effectiveness of interactive data storytelling formats. It compares interactive infographics and data comics, two popular methods for presenting complex information to the general public. Building on previous research that found static data comics more effective than static infographics, the work explores whether these findings hold true for interactive versions. Through user studies and prototype development, the research examines both effectiveness and usability factors, including engagement, understanding, and user satisfaction. The findings aim to guide journalists and content creators in choosing the most effective format for their data-driven stories, particularly in online journalism where accessibility to diverse audiences is crucial.",
+        "fallback": ""
+      }
+    },
+    "mentorships/mentorship_2023DynamicSet": {
+      "id": "mentorship_2023DynamicSet",
+      "type": "mentorships",
+      "title": {
+        "original": "Dynamic Set Visualization: A User Study",
+        "fallback": "Dynamic Set Visualization: A User Study"
+      },
+      "description": {
+        "original": "Visualizing how groups change over time presents a unique challenge in data analysis. This thesis investigates three innovative approaches to visualizing dynamic sets: PAOHvis, TimeSets, and Set Streams. Through a comprehensive user study, the work evaluates how effectively these techniques help users understand evolving relationships between different groups. The findings aim to establish best practices for dynamic set visualization, identify key tasks that need support, and determine the strengths and limitations of current approaches. It revealed valuable insights for data analysts and visualization experts working with time-evolving data, offering practical guidance for choosing and designing dynamic set visualization techniques.",
+        "fallback": "Visualizing how groups change over time presents a unique challenge in data analysis."
+      }
+    },
+    "mentorships/mentorship_2023KNN": {
+      "id": "mentorship_2023KNN",
+      "type": "mentorships",
+      "title": {
+        "original": "K-Nearest-Neighbor learning application in Augmented Reality",
+        "fallback": "K-Nearest-Neighbor learning application in Augmented Reality"
+      },
+      "description": {
+        "original": "Machine learning's growing influence in everyday life has created an urgent need for accessible educational tools. This master's project introduces an innovative approach to teaching machine learning basics through an interactive Augmented Reality application for the HoloLens device. The application features a K-Nearest-Neighbor classifier that users can train and test in an immersive 3D environment. By combining playful techniques with visualizations, the work demonstrates how complex machine learning concepts can be made accessible to non-technical users. The project leverages the advantages of Augmented Reality technology to create an engaging learning experience, while addressing the challenges of implementing educational content in mixed reality environments.",
+        "fallback": "Machine learning's growing influence in everyday life has created an urgent need for accessible educational tools."
+      }
+    },
+    "mentorships/mentorship_2023Confusion": {
+      "id": "mentorship_2023Confusion",
+      "type": "mentorships",
+      "title": {
+        "original": "Visual Analysis and Comparison of the Confusion in Multi-Label Classifiers",
+        "fallback": "Visual Analysis and Comparison of the Confusion in Multi-..."
+      },
+      "description": {
+        "original": "With the explosion of digital data in recent years, the challenge of accurately categorizing information has become increasingly complex. This thesis tackles a specific challenge in machine learning: how to effectively compare and visualize the performance of different multi-label classifiers in a storytelling format. The work introduces an innovative approach that combines automatic detection of relevant confusion patterns with template-based text generation to create clear, understandable visualizations. By focusing on the interconnected nature of multi-label classifications, the thesis provides practical tools to better understand and compare classifier performance, ultimately leading to more informed model selection decisions.",
+        "fallback": "With the explosion of digital data in recent years, the challenge of accurately categorizing information has become increasingly complex."
+      }
+    },
+    "mentorships/mentorship_2024Sentiment": {
+      "id": "mentorship_2024Sentiment",
+      "type": "mentorships",
+      "title": {
+        "original": "Visual Exploration of Sentiment and Keywords from Social Media Posts",
+        "fallback": "Visual Exploration of Sentiment and Keywords from Social ..."
+      },
+      "description": {
+        "original": "Social media platforms have become powerful tools for understanding public opinion and trends, but analyzing their vast amounts of data presents significant challenges. This thesis introduces an innovative visual analytics tool that combines sentiment analysis and keyword extraction to make social media data more accessible and understandable. The work addresses a critical gap in existing tools, which often focus on geospatial data or topics while neglecting the rich textual content that reveals what people are saying and how they're saying it. By developing an intuitive interface that integrates multiple visualization techniques, the research enables users of varying expertise levels to explore and derive meaningful insights from social media discourse. The tool's design emphasizes three key aspects: data-appropriate visualizations, interactive exploration capabilities, and effective insight derivation.",
+        "fallback": ""
+      }
+    },
+    "mentorships/mentorship_2024Journalism": {
+      "id": "mentorship_2024Journalism",
+      "type": "mentorships",
+      "title": {
+        "original": "Exploring Interactive Data-Driven Storytelling in Local Journalism",
+        "fallback": "Exploring Interactive Data-Driven Storytelling in Local J..."
+      },
+      "description": {
+        "original": "Through analysis of 30 articles from six local media outlets, this thesis studies local journalism already incorporates data elements similar to national publications, but with a unique local focus. The research develops four innovative storytelling concepts: text-centric with visual extensions, visualization-centric with text support, time-based topic summaries, and map-based article organization. Expert interviews with journalists confirm the potential of data-driven storytelling in local contexts while highlighting resource constraints. This work provides actionable insights for modernizing local journalism through interactive data visualization, ensuring communities maintain access to professional, engaging local news in the digital age.",
+        "fallback": ""
+      }
+    },
+    "mentorships/mentorship_2024Personalization": {
+      "id": "mentorship_2024Personalization",
+      "type": "mentorships",
+      "title": {
+        "original": "Personalization in Interactive Data Comics",
+        "fallback": "Personalization in Interactive Data Comics"
+      },
+      "description": {
+        "original": "Imagine a world where data stories adapt to each reader's interests and experiences. This innovative thesis explores how personalization can transform interactive data comics into engaging, self-reflective experiences. It introduces a novel framework for creating personalized data stories that adapt to user characteristics and incorporate personal data, making complex information more relatable and memorable.",
+        "fallback": "Imagine a world where data stories adapt to each reader's interests and experiences."
+      }
+    },
+    "mentorships/mentorship_2024MixedReality": {
+      "id": "mentorship_2024MixedReality",
+      "type": "mentorships",
+      "title": {
+        "original": "Visualizing Player Movement and Events in Video Games through Space-Time Cubes in Mixed Reality",
+        "fallback": "Visualizing Player Movement and Events in Video Games thr..."
+      },
+      "description": {
+        "original": "Step into a world where game data comes alive in three dimensions. This exciting and innovative thesis introduces PomXR, an innovative Mixed Reality visualization tool that transforms how we understand player movements and game events. By combining spatial and temporal data in an immersive 3D environment, this research revolutionizes game analytics for both developers and players.",
+        "fallback": "Step into a world where game data comes alive in three dimensions."
+      }
+    },
+    "mentorships/mentorship_2025Onboarding": {
+      "id": "mentorship_2025Onboarding",
+      "type": "mentorships",
+      "title": {
+        "original": "Exploring The Onboarding To Dashboards With Data Comics",
+        "fallback": "Exploring The Onboarding To Dashboards With Data Comics"
+      },
+      "description": {
+        "original": "How do you understand a complex dashboard without any guidance? The thesis proposes exploring how the familiar format of comics can transform how we learn to use data dashboards. By combining the engaging narrative structure of comics with interactive data visualizations, this research introduces an innovative approach to making complex dashboards more accessible to non-expert users",
+        "fallback": "How do you understand a complex dashboard without any guidance?"
       }
     }
   },
   "metadata": {
-    "generatedAt": "2025-03-29T04:51:52.903Z",
+    "generatedAt": "2025-04-08T12:39:43.371Z",
     "version": "1.0"
   }
 }

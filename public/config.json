@@ -40,16 +40,16 @@
     "figshare": "",
     "mendeley": "",
     "zotero": "",
-    "impactStory": ""
+    "impactStory": "",
+    "medium": ""
   },
-  "bibtexPath": "",
-  "profilePhotoPath": "/profile-photo.png",
   "sections": [
     {
       "id": "profile",
       "path": "/",
       "title": "Profile",
       "sectionHeading": "Profile",
+      "template": "subsections",
       "subsections": [
         {
           "id": "about",
@@ -78,7 +78,7 @@
                 "subtitle": "University of Duisburg-Essen",
                 "location": "Germany",
                 "period": "June 2017 – Oct 2023",
-                "details": ["magna cum laude"]
+                "description": "magna cum laude"
               },
               {
                 "title": "Masters in Information Technology",
@@ -439,7 +439,7 @@
       "dataSource": "/data/projects.json",
       "overviewVisualization": {
         "type": "KeywordCloud",
-        "enabled": true,
+        "enabled": false,
         "sourceFields": [
           {
             "field": "technologies",
@@ -739,10 +739,9 @@
       "template": "article",
       "content": {
         "title": "Who am I?",
-        "resourceDir": "/my-story/",
-        "markdownFile": "content.md",
+        "markdownFile": "/my-story/content.md",
         "banner": {
-          "image": "banner.png",
+          "image": "/my-story/banner.png",
           "title": "My Research Journey",
           "subtitle": "The path that led me here",
           "showTitle": false

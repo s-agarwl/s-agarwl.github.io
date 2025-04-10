@@ -10,7 +10,7 @@ import TypedAnimation from '/src/components/TypedAnimation';
  * Expected content structure:
  * {
  *   title: string,              // Article title
- *   resourceDir: string,        // Directory where resources are stored (e.g., "/section-id/")
+
  *   markdownFile: string,       // Name of the markdown file (e.g., "content.md")
  *   banner: {
  *     image: string,            // Banner image filename
@@ -34,10 +34,9 @@ const Article = ({ content, sectionId, parentId, config }) => {
   const uniqueId = parentId ? `${parentId}-${sectionId}` : sectionId;
 
   // Determine resource paths
-  const resourceDir = content.resourceDir || `/${sectionId}/`;
   const markdownFile = content.markdownFile || 'content.md';
-  const markdownPath = `${resourceDir}${markdownFile}`;
-  const bannerImage = content.banner?.image ? `${resourceDir}${content.banner.image}` : null;
+  const markdownPath = `${markdownFile}`;
+  const bannerImage = content.banner?.image ? `${content.banner.image}` : null;
 
   useEffect(() => {
     // Function to fetch markdown content
@@ -145,7 +144,6 @@ const Article = ({ content, sectionId, parentId, config }) => {
 Article.propTypes = {
   content: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    resourceDir: PropTypes.string,
     markdownFile: PropTypes.string,
     banner: PropTypes.shape({
       image: PropTypes.string,
