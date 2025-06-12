@@ -109,7 +109,7 @@
                 "subtitle": "Utrecht University",
                 "location": "Netherlands",
                 "period": "May 2025 - Present",
-                "description": "Working on a cutting-edge research project on explaining deep learning based AI models for tabular data to e.g., to help medical professionals in their decision making."
+                "description": "Working on a cutting-edge research project on explaining deep learning based AI models for tabular data, e.g., to help medical professionals in their decision making."
               },
               {
                 "title": "Senior Software Developer",
@@ -217,7 +217,7 @@
     {
       "id": "publications",
       "path": "/publications",
-      "title": "Publications",
+      "title": "Research",
       "sectionHeading": "Publications",
       "template": "listOfItems",
       "description": "Explore the collection of my publications. From groundbreaking research to practical applications, they reflect my passion for <b>unraveling complex datasets</b>, <b>visual analytics</b>, and <b>advancing AI understanding</b>.",
